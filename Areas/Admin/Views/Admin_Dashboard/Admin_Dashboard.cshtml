@@ -1,0 +1,185 @@
+﻿@using IT_Asset.Areas.Admin.Models
+@model IEnumerable < Admin_dashB >
+
+<title>@ViewBag.Title = "Admin_Dashboard";</title>
+
+
+<div class="container-fluid" style="width:100%;  ">
+    <table style="width:100%">
+        <tr>
+            <td style="width:24%">
+                <div class="card w-100 shadow p-3 mb-5 bg-white rounded ">
+                    <table>
+                        <tr>
+                            <td class="card-title">
+                                Computers:
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Lodhi Road:
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Noida:
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Vender Office:
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td style="width:1%"></td>
+            <td style="width:24%">
+                <div class="card w-100 shadow p-3 mb-5 bg-white rounded">
+                    <table>
+                        <tr>
+                            <td>
+                                Laptop
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Lodhi Road
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Noida
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Vender Office
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td style="width:1%"></td>
+            <td style="width:24%">
+                <div class="card w-100 shadow p-3 mb-5 bg-white rounded">
+                    <table>
+                        <tr>
+                            <td>
+                                Printer/Scanner
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Lodhi Road
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Noida
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Vender Office
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td style="width:1%"></td>
+            <td style="width:24%">
+                <div class="card w-100 shadow p-3 mb-5 bg-white rounded">
+                    <table>
+                        <tr>
+                            <td>
+                                Other IT Assets
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Lodhi Road
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Noida
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Vender Office
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td style="width:1%"></td>
+        </tr>
+    </table>
+</div>
+
+
+    <div style=" align-content:center; width:100%" class="panel panel-default " >
+        <table class="table-bordered table-hover table-striped shadow p-3 mb-5 bg-white rounded  zui-table-rounded" style="width:100%">
+            <thead>
+                <tr style="background-color:dodgerblue">
+                    <td style="width:5%;">SL No </td>
+                    <td style="width:15%;">Item Type</td>
+                    <td style="width:15%;">Item Serial No</td>
+                    <td style="width:20%;">Issued To</td>
+                    <td style="width:15%;">Move From</td>
+                    <td style="width:15%;">Move To</td>
+                    <td style="width:15%;">Date</td>
+                </tr>
+               
+            </thead>
+            @foreach (var Item in Model) {
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>@Item.Item_Type</td>
+                    <td>@Item.Item_Sl_No</td>
+                    <td>@Item.Issued_To</td>
+                    <td>@Item.Move_From</td>
+                    <td>@Item.Move_To</td>
+                    <td>@Item.DateofMovement.Date.Date</td>
+                </tr>
+            </tbody>
+            }
+
+        </table>
+    </div>
+

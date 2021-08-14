@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewBag.Title = "Item_Movement";
+}
+@Model.
+
+<style type="text/css">
+    button {
+        background: #1AAB8A;
+        color: #fff;
+        border: none;
+        position: relative;
+        height: 25px;
+        font-size: 1em;
+        padding: 0 2em;
+        cursor: pointer;
+        transition: 800ms ease all;
+        outline: none;
+    }
+        button:hover {
+            background: #fff;
+            color: #1AAB8A;
+        }
+
+        button:before, button:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 2px;
+            width: 0;
+            background: #1AAB8A;
+            transition: 400ms ease all;
+        }
+
+        button:after {
+            right: inherit;
+            top: inherit;
+            left: 0;
+            bottom: 0;
+        }
+
+        button:hover:before, button:hover:after {
+            width: 100%;
+            transition: 800ms ease all;
+        }
+</style>
+
+
+@using (Html.BeginForm("Move_Items", "Move_Items", FormMethod.Post))
+{
+
+    <div style="width:100%; text-align:center; align-items: center; align-content:center" >
+
+        <table style="width:80%; ">
+            <tr>
+                <td style="width:25%; " align="left">
+                    Item Types
+                </td>
+                <td style="width:25%; " align="left">
+                    @Html.Label()
+                </td>
+                <td style="width:25%; " align="left">
+                    Serial No / Quantity
+                </td>
+                <td style="width:25%; " align="left">
+                    @Html.Label("txt_I_SL_No")
+                </td>
+            </tr>
+            <tr>
+                <td style="width:100%; " colspan="4" align="left">
+                    Presently Issued
+                </td>
+            </tr>
+            <tr>
+                <td style="width:50%; " colspan="2" align="left">
+                    Emp Code - Name / Department :
+                </td>
+
+                <td style="width:50%; " colspan="2" align="left">
+
+                    @Html.Label("txt_Ecode")
+
+                </td>
+            </tr>
+            <tr>
+                <td style="width:100%; " colspan="4" align="left">
+                    Item Owner Transfer
+                </td>
+            </tr>
+            <tr>
+                <td style="width:50%; " colspan="2" align="left">
+                    Emp Code - Name / Department :
+                </td>
+
+                <td style="width:50%; " colspan="2" align="left">
+
+                    @Html.TextBox("txt_Ecode")
+
+                </td>
+            </tr>
+          
+            <tr>
+                <td style="width:100%; " colspan="4" align="left">
+                    Item Location
+                </td>
+            </tr>
+            <tr>
+                <td style="width:25%; " align="left">
+                    Present Location
+                </td>
+                <td style="width:25%; " align="left">
+                    @Html.Label("txt_Move_FRM")
+                </td>
+                <td style="width:25%; " align="left">
+                    Change Location:
+                </td>
+                <td style="width:25%; " align="left">
+                    @Html.TextBox("txt_Move_To")
+                </td>
+            </tr>
+
+            <tr>
+                <td align="left" style="width:25%; "></td>
+                <td colspan="3" style="width:75%; " align="left">
+
+                    <button>Submit</button>
+
+                </td>
+
+
+
+            </tr>
+        </table>
+    </div>
+
+
+}
