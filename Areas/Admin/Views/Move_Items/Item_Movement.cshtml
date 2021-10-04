@@ -11,6 +11,7 @@
         border: none;
         position: relative;
         height: 25px;
+        width: 250px;
         font-size: 1em;
         padding: 0 2em;
         cursor: pointer;
@@ -47,28 +48,49 @@
 </style>
 
 
+
 @using (Html.BeginForm("Move_Items", "Move_Items", FormMethod.Post))
 {
+<body style="width:100%; text-align:center; align-items: center; align-content:center; " >
 
-    <div style="width:100%; text-align:center; align-items: center; align-content:center" >
 
-        <table style="width:80%; ">
+        <table style="width: 100%;  box-shadow: 5px 10px 18px #888888 ">
             <tr>
-                <td style="width:25%; " align="left">
-                    Item Types
-                </td>
-                <td style="width:25%; " align="left">
-                    @Html.Label()
-                </td>
-                <td style="width:25%; " align="left">
-                    Serial No / Quantity
-                </td>
-                <td style="width:25%; " align="left">
-                    @Html.Label("txt_I_SL_No")
-                </td>
+
+
+                <td style="width: 100%; " colspan="4" align="center">
+
+                  
+                    <table style="width: 100%;">
+                        <tr>
+                        <td style="width:16%; " align="left">
+                            Item Types
+                        </td>
+                        <td style="width: 22%; " align="left">
+                            @Html.TextBox("txt_IType")
+                        </td>
+                        <td style="width: 16%; " align="left">
+                            Serial No
+                        </td>
+                        <td style="width: 22%; " align="left">
+                            @Html.TextBox("txt_SLno")
+                        </td>
+
+                        <td style="width: 12%; " align="center">
+                            Quantity
+                        </td>
+                        <td style="width: 12%; " align="left">
+                            @Html.TextBox("txt_Qty")
+                        </td>
+                            
+                        </tr>
+                    </table>
+
+                 </td>
+
             </tr>
             <tr>
-                <td style="width:100%; " colspan="4" align="left">
+                <td style="width: 100%; background-color: deepskyblue " colspan="4" align="center">
                     Presently Issued
                 </td>
             </tr>
@@ -79,12 +101,12 @@
 
                 <td style="width:50%; " colspan="2" align="left">
 
-                    @Html.Label("txt_Ecode")
+                    @Html.Label("")
 
                 </td>
             </tr>
             <tr>
-                <td style="width:100%; " colspan="4" align="left">
+                <td style="width:100%;  background-color:deepskyblue  " colspan="4" align="center"  >
                     Item Owner Transfer
                 </td>
             </tr>
@@ -99,9 +121,9 @@
 
                 </td>
             </tr>
-          
+
             <tr>
-                <td style="width:100%; " colspan="4" align="left">
+                <td style="width: 100%; background-color: deepskyblue " colspan="4" align="center">
                     Item Location
                 </td>
             </tr>
@@ -110,7 +132,7 @@
                     Present Location
                 </td>
                 <td style="width:25%; " align="left">
-                    @Html.Label("txt_Move_FRM")
+                    @Html.Label("")
                 </td>
                 <td style="width:25%; " align="left">
                     Change Location:
@@ -122,17 +144,19 @@
 
             <tr>
                 <td align="left" style="width:25%; "></td>
-                <td colspan="3" style="width:75%; " align="left">
+                <td colspan="2" style="width: 50%; padding-top: 10px; padding-bottom: 5px" align="center">
 
                     <button>Submit</button>
 
                 </td>
-
+                <td align="left" style="width:25%; "></td>
 
 
             </tr>
         </table>
-    </div>
+    
 
+
+</body>
 
 }
