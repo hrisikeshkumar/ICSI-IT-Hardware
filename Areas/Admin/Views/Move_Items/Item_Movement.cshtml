@@ -54,15 +54,20 @@
 <body style="width:100%; text-align:center; align-items: center; align-content:center; " >
 
 
-        <table style="width: 100%;  box-shadow: 5px 10px 18px #888888 ">
-            <tr>
+    <table style="width: 100%;   box-shadow: 5px 10px 18px #888888 ">
+        <tr>
+            <td style="width: 100%; height:25px; background-color: deepskyblue " colspan="4" align="center">
+                IT Hardware Movement
+            </td>
+        </tr>
+        <tr style=" height: 50px; ">
 
 
-                <td style="width: 100%; " colspan="4" align="center">
+            <td style="width: 100%; " colspan="4" align="center">
 
-                  
-                    <table style="width: 100%;">
-                        <tr>
+
+                <table style="width: 100%; ">
+                    <tr>
                         <td style="width:16%; " align="left">
                             Item Types
                         </td>
@@ -82,78 +87,78 @@
                         <td style="width: 12%; " align="left">
                             @Html.TextBox("txt_Qty")
                         </td>
-                            
-                        </tr>
-                    </table>
 
-                 </td>
+                    </tr>
+                </table>
 
-            </tr>
-            <tr>
-                <td style="width: 100%; background-color: deepskyblue " colspan="4" align="center">
-                    Presently Issued
-                </td>
-            </tr>
-            <tr>
-                <td style="width:50%; " colspan="2" align="left">
-                    Emp Code - Name / Department :
-                </td>
+            </td>
 
-                <td style="width:50%; " colspan="2" align="left">
+        </tr>
+        <tr>
+            <td style="width: 100%; background-color: deepskyblue " colspan="4" align="center">
+                Presently Issued
+            </td>
+        </tr>
+        <tr style=" height: 50px; ">
+            <td style="width:25%; "  align="left">
+                Emp Code - Name / Department :
+            </td>
 
-                    @Html.Label("")
+            <td style="width:75%; " colspan="3" align="left">
 
-                </td>
-            </tr>
-            <tr>
-                <td style="width:100%;  background-color:deepskyblue  " colspan="4" align="center"  >
-                    Item Owner Transfer
-                </td>
-            </tr>
-            <tr>
-                <td style="width:50%; " colspan="2" align="left">
-                    Emp Code - Name / Department :
-                </td>
+                @Html.Label("")
 
-                <td style="width:50%; " colspan="2" align="left">
+            </td>
+        </tr>
+        <tr>
+            <td style="width:100%;  background-color:deepskyblue  " colspan="4" align="center">
+                Item Owner Transfer
+            </td>
+        </tr>
+        <tr style=" height: 50px; ">
+            <td style="width:25%; "  align="left">
+                Emp Code - Name / Department :
+            </td>
 
-                    @Html.TextBox("txt_Ecode")
+            <td style="width:75%; " colspan="3" align="left">
 
-                </td>
-            </tr>
+                @Html.TextBox("txt_Ecode")
 
-            <tr>
-                <td style="width: 100%; background-color: deepskyblue " colspan="4" align="center">
-                    Item Location
-                </td>
-            </tr>
-            <tr>
-                <td style="width:25%; " align="left">
-                    Present Location
-                </td>
-                <td style="width:25%; " align="left">
-                    @Html.Label("")
-                </td>
-                <td style="width:25%; " align="left">
-                    Change Location:
-                </td>
-                <td style="width:25%; " align="left">
-                    @Html.TextBox("txt_Move_To")
-                </td>
-            </tr>
+            </td>
+        </tr>
 
-            <tr>
-                <td align="left" style="width:25%; "></td>
-                <td colspan="2" style="width: 50%; padding-top: 10px; padding-bottom: 5px" align="center">
+        <tr>
+            <td style="width: 100%; background-color: deepskyblue " colspan="4" align="center">
+                Item Location
+            </td>
+        </tr>
+        <tr style=" height: 50px; ">
+            <td style="width:25%; " align="left">
+                Present Location
+            </td>
+            <td style="width:25%; " align="left">
+                @Html.Label("")
+            </td>
+            <td style="width:25%; " align="left">
+                Change Location:
+            </td>
+            <td style="width:25%; " align="left">
+                @Html.TextBox("txt_Move_To")
+            </td>
+        </tr>
 
-                    <button>Submit</button>
+        <tr style=" height: 50px; ">
+            <td align="left" style="width:25%; "></td>
+          
+            <td colspan="2" style="width: 50%; padding-top: 10px; padding-bottom: 5px" align="center">
+                <button>Submit</button>
+            </td>
+          
+            <td align="left" style="width:25%; "></td>
 
-                </td>
-                <td align="left" style="width:25%; "></td>
 
-
-            </tr>
-        </table>
+        </tr>
+    </table>
     
 
 
