@@ -122,7 +122,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\Admin_DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ComputerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LaptopController.cs" />
     <Compile Include="Areas\Admin\Controllers\Move_ItemsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OtherItemController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PrintScanController.cs" />
     <Compile Include="Areas\Admin\Models\Admin_dashB.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Log_InController.cs" />
@@ -181,6 +185,9 @@
     <Content Include="CSS\.DS_Store" />
     <Content Include="CSS\bootstrap\.DS_Store" />
     <Content Include="CSS\bootstrap\mixins\.DS_Store" />
+    <Content Include="Areas\Admin\Views\Computer\DesktopPC.cshtml" />
+    <Content Include="Areas\Admin\Views\PrintScan\PrinterView.cshtml" />
+    <Content Include="Areas\Admin\Views\Laptop\LaptopView.cshtml" />
     <None Include="Properties\PublishProfiles\IT-Hardware-Aug202120210911160036 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -211,6 +218,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\OtherItem\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
