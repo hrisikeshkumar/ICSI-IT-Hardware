@@ -147,11 +147,9 @@
                     <li class="has-child">
                         <span class="its-parent"> Computer </span>
                         <ul class="its-children">
-                            <li> <a href="#1">Desktop</a> </li>
-                            <li> <a href="#1"> Monitor </a> </li>
-                            <li> <a href="#1"> Laptop </a> </li>
-                            <li> <a href="#1"> KeyBoard </a> </li>
-                            <li> <a href="#1"> Mouse </a> </li>
+                            <li> <a href="@Url.Action("Details", null, new { area = string.Empty, controller = "Computer" }, Request.Url.Scheme)">Desktop</a> </li>
+                            <li> <a href="@Url.Action("Item_Movement", null, new { area = string.Empty, controller = "Move_Items" }, Request.Url.Scheme)"> Monitor </a> </li>
+                            <li> <a href="@Url.Action("Item_Movement", null, new { area = string.Empty, controller = "Move_Items" }, Request.Url.Scheme)"> Laptop </a> </li>    
                         </ul>
                     </li>
                     <li class="has-child">
@@ -170,6 +168,8 @@
                             </span>Other IT Assets
                         </span>
                         <ul class="its-children">
+                            <li> <a href="#1"> KeyBoard </a> </li>
+                            <li> <a href="#1"> Mouse </a> </li>
                             <li> <a href="#1"> Ups </a></li>
                             <li> <a href="#1"> Data Card </a></li>
                             <li> <a href="#1"> Web Cam </a></li>
