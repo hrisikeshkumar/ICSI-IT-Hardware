@@ -137,6 +137,8 @@
     <nav class="hs-navigation">
         <ul class="nav-links">
             <li><a href="/Admin/Admin_Dashboard/Admin_Dashboard"> <span class="icon"> <i class="zmdi zmdi-collection-item"></i> </span> Dash Board</a> </li>
+            <li><a href="@Url.Action("AssetMakeModel", null, new { area = "Admin", controller = "MasterData" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-collection-item"></i> </span> Master Data</a> </li>
+
             <li class="has-child">
                 <span class="its-parent">
                     <span class="icon">
@@ -149,7 +151,7 @@
                         <ul class="its-children">
                             <li> <a href="@Url.Action("Details", null, new { area = string.Empty, controller = "Computer" }, Request.Url.Scheme)">Desktop</a> </li>
                             <li> <a href="@Url.Action("Item_Movement", null, new { area = string.Empty, controller = "Move_Items" }, Request.Url.Scheme)"> Monitor </a> </li>
-                            <li> <a href="@Url.Action("Item_Movement", null, new { area = string.Empty, controller = "Move_Items" }, Request.Url.Scheme)"> Laptop </a> </li>    
+                            <li> <a href="@Url.Action("Item_Movement", null, new { area = string.Empty, controller = "Move_Items" }, Request.Url.Scheme)"> Laptop </a> </li>
                         </ul>
                     </li>
                     <li class="has-child">
@@ -182,7 +184,7 @@
 
                 </ul>
 
-            </li>  
+            </li>
             <li> <a href="@Url.Action("Item_Movement", null, new { area = string.Empty, controller = "Move_Items" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-compass"></i> </span> Items Movements</a>  </li>
             <li> <a href="#4"> <span class="icon"> <i class="zmdi zmdi-collection-video"></i> </span> Approval  </a>  </li>
             <li class="has-child">
@@ -197,6 +199,9 @@
 
                 </ul>
             </li>
+            <li> <a href="#4"> <span class="icon"> <i class="zmdi zmdi-collection-video"></i> </span> Network Scan </a>  </li>
+            <li> <a href="#4"> <span class="icon"> <i class="zmdi zmdi-collection-video"></i> </span> Get Assets Details </a>  </li>
+
             <!--//has-child-->
         </ul>
     </nav>

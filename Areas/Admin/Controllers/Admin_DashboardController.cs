@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace IT_Asset.Areas.Admin.Controllers
+namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 {
     public class Admin_DashboardController : Controller
     {

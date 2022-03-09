@@ -12,7 +12,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Item_Movement()
         {
-
+            
             return View("~/Areas/Admin/Views/Move_Items/Item_Movement.cshtml");
         }
 
