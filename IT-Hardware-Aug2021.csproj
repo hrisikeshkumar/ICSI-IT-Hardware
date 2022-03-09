@@ -159,6 +159,7 @@
     <Content Include="CSS\material-design-iconic-font.css" />
     <Content Include="CSS\material-design-iconic-font.min.css" />
     <Content Include="CSS\Menu_CSS1.css" />
+    <Content Include="CSS\Radio_button.css" />
     <Content Include="CSS\SearchBox\searchbox.css" />
     <Content Include="CSS\SearchBox\SearchBox_demo.css" />
     <Content Include="CSS\style.css" />
@@ -199,7 +200,6 @@
     <Content Include="Areas\Admin\Views\PrintScan\PrinterView.cshtml" />
     <Content Include="Areas\Admin\Views\Laptop\LaptopView.cshtml" />
     <Content Include="Areas\Admin\Views\Monitor\Monitor_List.cshtml" />
-    <Content Include="Areas\Admin\Views\Computer\Add_data.cshtml" />
     <Content Include="Areas\Admin\Views\Computer\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Computer\Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\Computer\Edit_Item.cshtml" />
