@@ -137,7 +137,10 @@
     <nav class="hs-navigation">
         <ul class="nav-links">
             <li><a href="/Admin/Admin_Dashboard/Admin_Dashboard"> <span class="icon"> <i class="zmdi zmdi-collection-item"></i> </span> Dash Board</a> </li>
-            <li><a href="@Url.Action("AssetMakeModel", null, new { area = "Admin", controller = "MasterData" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-collection-item"></i> </span> Master Data</a> </li>
+            
+            @*<li><a href="@Url.Action("AssetMakeModel", null, new { area = "Admin", controller = "MasterData" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-collection-item"></i> </span> Master Data</a> </li>*@
+
+            <li><a href="@Url.Action("Get_Master_Data", null, new { area = "Admin", controller = "MasterData" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-collection-item"></i> </span> Master Data</a> </li>
 
             <li class="has-child">
                 <span class="its-parent">

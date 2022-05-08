@@ -6,16 +6,13 @@ using System.Web.Mvc;
 using IT_Hardware_Aug2021.BusinessLayer;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
 
-
 namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 {
 
-    
     public class ComputerController : Controller
     {
 
         //static string Data_Transfer = string.Empty;
-
         // GET: Admin/Computer
 
         public ActionResult Details()

@@ -121,6 +121,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\BL_AssetMaster.cs" />
     <Compile Include="Areas\Admin\Controllers\Admin_DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\ComputerController.cs" />
     <Compile Include="Areas\Admin\Controllers\LaptopController.cs" />
@@ -132,7 +133,6 @@
     <Compile Include="Areas\Admin\Models\Admin_dashB.cs" />
     <Compile Include="Areas\Admin\Models\DesktopPC.cs" />
     <Compile Include="Areas\Admin\Models\Mod_AssetMaster.cs" />
-    <Compile Include="BusinessLayer\BL_AssetMasterData.cs" />
     <Compile Include="BusinessLayer\ComputerBusinessLayer.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Log_InController.cs" />
@@ -164,6 +164,7 @@
     <Content Include="CSS\SearchBox\SearchBox_demo.css" />
     <Content Include="CSS\style.css" />
     <Content Include="CSS\button_CSS.css" />
+    <Content Include="CSS\Submit_button.css" />
     <Content Include="Datepicker\jquery-1.12.4.min.js" />
     <Content Include="Datepicker\kendo.all.min.js" />
     <Content Include="Datepicker\kendo.default-v2.min.css" />
@@ -206,6 +207,8 @@
     <Content Include="Areas\Admin\Views\Computer\Delete_Item.cshtml" />
     <Content Include="Areas\Admin\Views\Computer\Get_Detail.cshtml" />
     <Content Include="Areas\Admin\Views\MasterData\AssetMakeModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Computer\Asset_Master_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\MasterData\Get_Master_Data.cshtml" />
     <None Include="Properties\PublishProfiles\rajaonprewebapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
