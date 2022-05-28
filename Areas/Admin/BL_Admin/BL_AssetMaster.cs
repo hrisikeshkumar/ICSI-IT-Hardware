@@ -26,7 +26,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlConnection con = new SqlConnection(strcon);
 
 
-
                 using (SqlCommand cmd = new SqlCommand("sp_AsetMaster"))
                 {
                     SqlParameter sqlP_type = new SqlParameter("@Type", "Get_List");
@@ -56,9 +55,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                     BL_data.Asset_Status = Convert.ToInt32( (dr["Aset_Status"] == DBNull.Value) ? 0 : dr["Aset_Status"]);
 
-                    
-
-
                     current_data.Add(BL_data);
                 }
 
@@ -68,14 +64,14 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             return current_data;
         }
 
-        public int Save_data(Mod_AssetMaster Data)
+        public int Save_data(Mod_AssetMaster Data, string type, string Asset_ID)
         {
             int status = 0;
             string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
             SqlConnection con = new SqlConnection(strcon);
             try
             {
-                
+               
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -83,8 +79,15 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 cmd.Connection = con;
 
-                SqlParameter sqlP_type = new SqlParameter("@Type", "Add_new");
+                SqlParameter sqlP_type = new SqlParameter("@Type", type);
                 cmd.Parameters.Add(sqlP_type);
+
+                if (type == "Update")
+                {
+                    SqlParameter Asset_Id= new SqlParameter("@Item_ID", Asset_ID);
+                    cmd.Parameters.Add(Asset_Id);
+                }
+
 
                 SqlParameter Asset_make = new SqlParameter("@Item_Make", Data.Asset_make);
                 cmd.Parameters.Add(Asset_make);
@@ -106,6 +109,53 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             finally { con.Close(); }
 
             return status;   
+        }
+
+        public Mod_AssetMaster Get_Data_By_ID(string Asset_Id)
+        {
+            Mod_AssetMaster Data = new Mod_AssetMaster();
+
+            try
+            {
+                DataTable dt_Comuter;
+                string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                SqlConnection con = new SqlConnection(strcon);
+
+
+                using (SqlCommand cmd = new SqlCommand("sp_AsetMaster"))
+                {
+                    SqlParameter sqlP_type = new SqlParameter("@Type", "Get_Data_By_ID");
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = con;
+                    cmd.Parameters.Add(sqlP_type);
+
+                    SqlParameter sqlP_Asset_ID = new SqlParameter("@Item_ID", Asset_Id);
+                    cmd.Parameters.Add(sqlP_Asset_ID);
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        sda.SelectCommand = cmd;
+                        using (DataTable dt = new DataTable())
+                        {
+                            sda.Fill(dt);
+                            dt_Comuter = dt;
+                        }
+                    }
+                }
+
+                if (dt_Comuter.Rows.Count > 0)
+                {
+                    Data.Asset_ID = Convert.ToString(dt_Comuter.Rows[0]["ID"]);
+                    Data.Asset_make = Convert.ToString(dt_Comuter.Rows[0]["Make"]);
+                    Data.Asset_Model = Convert.ToString(dt_Comuter.Rows[0]["model"]);
+                    Data.Asset_Type = Convert.ToString(dt_Comuter.Rows[0]["Aset_Type"]);
+                    ;
+                }
+
+            }
+            catch (Exception ex) { }
+
+                return Data;
         }
 
     }

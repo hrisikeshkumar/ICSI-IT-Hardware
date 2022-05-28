@@ -11,11 +11,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 {
     public class MasterDataController : Controller
     {
-        // GET: Admin/MasterData
-        //public ActionResult AssetMakeModel()
-        //{
-        //    return View();
-        //}
 
         public ActionResult Get_Master_Data()
         {
@@ -45,7 +40,52 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 {
                     BL_AssetMaster Md_Asset = new BL_AssetMaster();
 
-                    status = Md_Asset.Save_data(Get_Data);
+                    status = Md_Asset.Save_data(Get_Data, "Add_new", "");
+
+                    if (status == 1)
+                    {
+                        TempData["Message"] = String.Format("Data have saved successfully");
+                    }
+                    else
+                    {
+                        TempData["Message"] = String.Format("Data is not saved");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                TempData["Message"] = string.Format("ShowFailure();");
+
+            }
+
+            return RedirectToAction("Create_Item", "Computer");
+        }
+
+
+
+        public ActionResult Edit_Assets(string id)
+        {
+            
+            BL_AssetMaster Md_Asset = new BL_AssetMaster();
+            //Md_Asset.Get_Data_By_ID(Asset.Asset_ID.ToString().Trim());
+            Mod_AssetMaster data = Md_Asset.Get_Data_By_ID(id);
+
+            return View("~/Areas/Admin/Views/MasterData/Edit_Assets.cshtml", data);
+        }
+
+        [HttpPost]
+        public ActionResult Update_master(Mod_AssetMaster Get_Data, string Asset_ID)
+        {
+            int status = 0;
+            try
+            {
+
+                if (ModelState.IsValid)
+                {
+                    BL_AssetMaster Md_Asset = new BL_AssetMaster();
+
+                    status = Md_Asset.Save_data(Get_Data, "Update", Asset_ID);
 
                     if (status == 1)
                     {
