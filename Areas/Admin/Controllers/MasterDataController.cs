@@ -59,7 +59,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Create_Item", "Computer");
+            return RedirectToAction("Get_Master_Data", "MasterData");
         }
 
 
@@ -104,7 +104,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Create_Item", "Computer");
+            return RedirectToAction("Get_Master_Data", "MasterData");
         }
 
 
