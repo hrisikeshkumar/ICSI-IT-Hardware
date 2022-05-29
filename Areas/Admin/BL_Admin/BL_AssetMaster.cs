@@ -82,7 +82,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlParameter sqlP_type = new SqlParameter("@Type", type);
                 cmd.Parameters.Add(sqlP_type);
 
-                if (type == "Update")
+                if (type == "Update" || type == "Delete")
                 {
                     SqlParameter Asset_Id= new SqlParameter("@Item_ID", Asset_ID);
                     cmd.Parameters.Add(Asset_Id);

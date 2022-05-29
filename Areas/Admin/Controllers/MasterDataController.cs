@@ -107,6 +107,39 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Get_Master_Data", "MasterData");
         }
 
+        public ActionResult Delete_Item(Mod_AssetMaster Get_Data, string id)
+        {
+            int status = 0;
+            try
+            {
+
+                if (ModelState.IsValid)
+                {
+
+
+                    BL_AssetMaster Md_Asset = new BL_AssetMaster();
+
+                    status = Md_Asset.Save_data(Get_Data, "Delete", id);
+
+                    if (status == 1)
+                    {
+                        TempData["Message"] = String.Format("Data saved successfully");
+                    }
+                    else
+                    {
+                        TempData["Message"] = String.Format("Data is not saved");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                TempData["Message"] = string.Format("ShowFailure();");
+
+            }
+
+            return RedirectToAction("Get_Master_Data", "MasterData");
+        }
 
 
     }
