@@ -14,9 +14,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         public ActionResult Get_Master_Data()
         {
-            BL_AssetMaster master_data = new BL_AssetMaster();
+            BL_Computer Computer_data = new BL_Computer();
 
-            List<Mod_AssetMaster> MasterList = master_data.Get_Data();
+            List<Mod_Computer> MasterList = Computer_data.Get_Data();
 
             return View("~/Areas/Admin/Views/MasterData/Get_Master_Data.cshtml", MasterList);
         }

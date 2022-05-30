@@ -122,6 +122,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_AssetMaster.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\BL_Computer.cs" />
     <Compile Include="Areas\Admin\Controllers\Admin_DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\ComputerController.cs" />
     <Compile Include="Areas\Admin\Controllers\LaptopController.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Areas\Admin\Models\Admin_dashB.cs" />
     <Compile Include="Areas\Admin\Models\DesktopPC.cs" />
     <Compile Include="Areas\Admin\Models\Mod_AssetMaster.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_Computer.cs" />
     <Compile Include="BusinessLayer\ComputerBusinessLayer.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Log_InController.cs" />
@@ -205,9 +207,7 @@
     <Content Include="Areas\Admin\Views\Computer\Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\Computer\Edit_Item.cshtml" />
     <Content Include="Areas\Admin\Views\Computer\Delete_Item.cshtml" />
-    <Content Include="Areas\Admin\Views\Computer\Get_Detail.cshtml" />
     <Content Include="Areas\Admin\Views\MasterData\AssetMakeModel.cshtml" />
-    <Content Include="Areas\Admin\Views\Computer\Asset_Master_Details.cshtml" />
     <Content Include="Areas\Admin\Views\MasterData\Get_Master_Data.cshtml" />
     <Content Include="Areas\Admin\Views\MasterData\Edit_Assets.cshtml" />
     <None Include="Properties\PublishProfiles\rajaonprewebapp - Web Deploy.pubxml" />
