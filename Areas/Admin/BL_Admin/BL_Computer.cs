@@ -12,7 +12,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
     public class BL_Computer
     {
 
-        public List<Mod_Computer> Get_Data()
+        public List<Mod_Computer> Get_CompData()
         {
 
             Mod_Computer BL_data;
@@ -48,10 +48,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 {
                     BL_data = new Mod_Computer();
                     
-                    BL_data.Item_Model = Convert.ToString(dr["Model"]);
-                    BL_data.Amc_Vndr_Name = Convert.ToString(dr["Aset_Type"]);
+                    BL_data.Item_Type = Convert.ToString(dr["Asset_Type"]);
 
-                  
+                    BL_data.Item_serial_No = Convert.ToString(dr["Item_SlNo"]);
 
                     current_data.Add(BL_data);
                 }
@@ -60,6 +59,65 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             catch (Exception ex) { }
 
             return current_data;
+        }
+
+
+        public int Save_Computer_data(Mod_Computer Data, string type, string Asset_ID)
+        {
+            int status = 1;
+            string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            SqlConnection con = new SqlConnection(strcon);
+            try
+            {
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "sp_AsetMaster";
+
+                cmd.Connection = con;
+
+                SqlParameter sqlP_type = new SqlParameter("@Type", type);
+                cmd.Parameters.Add(sqlP_type);
+
+                if (type == "Update" || type == "Delete")
+                {
+                    SqlParameter Asset_Id = new SqlParameter("@Item_Id", Asset_ID);
+                    cmd.Parameters.Add(Asset_Id);
+                }
+
+                SqlParameter Asset_Make_Id = new SqlParameter("@Item_MakeId", Data.Item_Make_id);
+                cmd.Parameters.Add(Asset_Make_Id);
+
+                SqlParameter Asset_SL_No = new SqlParameter("@Item_serial_No", Data.Item_serial_No);
+                cmd.Parameters.Add(Asset_SL_No);
+
+                SqlParameter Proc_Date = new SqlParameter("@Proc_Date", Data.Proc_date);
+                cmd.Parameters.Add(Proc_Date);
+
+                SqlParameter Warnt_end_dt = new SqlParameter("@Warnt_end_DT", Data.Warnt_end_dt);
+                cmd.Parameters.Add(Warnt_end_dt);
+
+                SqlParameter Asset_Price = new SqlParameter("@Asset_Price", Data.price);
+                cmd.Parameters.Add(Asset_Price);
+
+                SqlParameter Remarks = new SqlParameter("@Remarks", Data.Remarks);
+                cmd.Parameters.Add(Remarks);
+
+                SqlParameter Asset_Type = new SqlParameter("@Asset_Type", "Desktop");
+                cmd.Parameters.Add(Asset_Type);
+
+                con.Open();
+
+                cmd.ExecuteNonQuery();
+
+                status = 1;
+
+            }
+            catch (Exception ex) { status = 0; }
+            finally { con.Close(); }
+
+            return status;
         }
 
 

@@ -3,23 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using IT_Hardware_Aug2021.BusinessLayer;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
+using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
 
 namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 {
 
     public class ComputerController : Controller
     {
-
-        //static string Data_Transfer = string.Empty;
-        // GET: Admin/Computer
-
         public ActionResult Details()
         {
-            ComputerBusinessLayer com= new ComputerBusinessLayer();
+            BL_Computer com= new BL_Computer();
 
-            List<DesktopPC> pc_List = com.Get_Desktop_list();
+            List<Mod_Computer> pc_List = com.Get_CompData();
 
             return View("~/Areas/Admin/Views/Computer/Details.cshtml", pc_List);
         }
@@ -30,11 +26,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             ViewBag.Message = Message;
 
             return View("~/Areas/Admin/Views/Computer/Create_Item.cshtml");
-            //return View();
+            
         }
 
         [HttpPost]
-        public ActionResult Create_Item_Post(DesktopPC Get_Data)
+        public ActionResult Create_Item_Post(Mod_Computer Get_Data)
         {
             string Message = "";
             try
@@ -42,18 +38,16 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    ComputerBusinessLayer save_data = new ComputerBusinessLayer();
-                    int status = save_data.Save_Item(Get_Data, "Add_new");
+                    BL_Computer save_data = new BL_Computer();
+                    int status = save_data.Save_Computer_data(Get_Data, "Add_new", "");
 
                     if (status == 1)
                     {
                         TempData["Message"] = String.Format("Data is not saved");
-
                     }
                     else {
 
-                        TempData["Message"] = String.Format("Data have saved successfully");
-
+                        TempData["Message"] = String.Format("Data save successfully");
                     }
                 }
             }
