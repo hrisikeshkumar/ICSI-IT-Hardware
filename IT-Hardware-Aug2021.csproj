@@ -203,10 +203,10 @@
     <Content Include="Areas\Admin\Views\PrintScan\PrinterView.cshtml" />
     <Content Include="Areas\Admin\Views\Laptop\LaptopView.cshtml" />
     <Content Include="Areas\Admin\Views\Monitor\Monitor_List.cshtml" />
-    <Content Include="Areas\Admin\Views\Computer\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Computer\Create_Item.cshtml" />
-    <Content Include="Areas\Admin\Views\Computer\Edit_Item.cshtml" />
-    <Content Include="Areas\Admin\Views\Computer\Delete_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\Computer\Com_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Computer\Com_Create_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\Computer\Com_Edit_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\Computer\Com_Delete_Item.cshtml" />
     <Content Include="Areas\Admin\Views\MasterData\AssetMakeModel.cshtml" />
     <Content Include="Areas\Admin\Views\MasterData\Get_Master_Data.cshtml" />
     <Content Include="Areas\Admin\Views\MasterData\Edit_Assets.cshtml" />

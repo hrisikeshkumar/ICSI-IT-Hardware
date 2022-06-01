@@ -8,8 +8,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
     public class Mod_Computer
     {
 
-        public int Item_Make_id { get; set; }
-        public int Item_id { get; set; }
+        public string Item_Make_id { get; set; }
+        public string Item_id { get; set; }
         public string Item_Make { get; set; }
         public string Item_Model { get; set; }
         public string Item_Type { get; set; }

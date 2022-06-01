@@ -17,7 +17,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             List<Mod_Computer> pc_List = com.Get_CompData();
 
-            return View("~/Areas/Admin/Views/Computer/Details.cshtml", pc_List);
+            return View("~/Areas/Admin/Views/Computer/Com_Details.cshtml", pc_List);
         }
 
         [HttpGet]
@@ -25,7 +25,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         {
             ViewBag.Message = Message;
 
-            return View("~/Areas/Admin/Views/Computer/Create_Item.cshtml");
+            return View("~/Areas/Admin/Views/Computer/Com_Create_Item.cshtml");
             
         }
 
@@ -60,19 +60,52 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Create_Item", "Computer");
         }
 
-        public ActionResult Edit_Item()
+        public ActionResult Edit_Item(string id)
         {
-            return View("~/Areas/Admin/Views/Computer/Edit_Item.cshtml");
+            BL_Computer Md_Com = new BL_Computer();
+            Mod_Computer data = Md_Com.Get_Data_By_ID(id);
+
+            return View("~/Areas/Admin/Views/Computer/Com_Edit_Item.cshtml");
         }
 
-        public ActionResult Edit_Item_Post()
+      
+        public ActionResult Update_Computer(Mod_Computer Get_Data, string Asset_ID)
         {
-            return View("~/Areas/Admin/Views/Computer/Edit_Item.cshtml");
+            int status = 0;
+            try
+            {
+
+                if (ModelState.IsValid)
+                {
+                    BL_Computer Md_Asset = new BL_Computer();
+
+                    status = Md_Asset.Save_Computer_data(Get_Data, "Update", Asset_ID);
+
+                    if (status == 1)
+                    {
+                        TempData["Message"] = String.Format("Data have saved successfully");
+                    }
+                    else
+                    {
+                        TempData["Message"] = String.Format("Data is not saved");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                TempData["Message"] = string.Format("ShowFailure();");
+
+            }
+
+            return RedirectToAction("Get_Master_Data", "MasterData");
         }
+
+
 
         public ActionResult Get_Detail()
         {
-            return View("~/Areas/Admin/Views/Computer/Get_Detail.cshtml");
+            return View("~/Areas/Admin/Views/Computer/Com_Get_Detail.cshtml");
         }
 
         public ActionResult Delete_Item()

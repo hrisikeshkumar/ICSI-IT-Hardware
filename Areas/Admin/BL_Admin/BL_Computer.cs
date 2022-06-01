@@ -73,7 +73,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "sp_AsetMaster";
+                cmd.CommandText = "sp_Computer";
 
                 cmd.Connection = con;
 
@@ -111,13 +111,64 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 cmd.ExecuteNonQuery();
 
-                status = 1;
+                status = 0;
 
             }
-            catch (Exception ex) { status = 0; }
+            catch (Exception ex) { status = 1; }
             finally { con.Close(); }
 
             return status;
+        }
+
+
+        public Mod_Computer Get_Data_By_ID(string Asset_Id)
+        {
+            Mod_Computer Data = new Mod_Computer();
+
+            try
+            {
+                DataTable dt_Comuter;
+                string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                SqlConnection con = new SqlConnection(strcon);
+
+
+                using (SqlCommand cmd = new SqlCommand("sp_Computer"))
+                {
+                    SqlParameter sqlP_type = new SqlParameter("@Type", "Get_Data_By_ID");
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = con;
+                    cmd.Parameters.Add(sqlP_type);
+
+                    SqlParameter sqlP_Asset_ID = new SqlParameter("@Item_ID", Asset_Id);
+                    cmd.Parameters.Add(sqlP_Asset_ID);
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        sda.SelectCommand = cmd;
+                        using (DataTable dt = new DataTable())
+                        {
+                            sda.Fill(dt);
+                            dt_Comuter = dt;
+                        }
+                    }
+                }
+
+                if (dt_Comuter.Rows.Count > 0)
+                {
+                    Data.Item_id = Convert.ToString(dt_Comuter.Rows[0]["Item_Id"]);
+                    Data.Item_Make_id = Convert.ToString(dt_Comuter.Rows[0]["Item_MakeId"]);
+                    Data.Item_serial_No = Convert.ToString(dt_Comuter.Rows[0]["Item_SlNo"]);
+                    Data.Proc_date = Convert.ToDateTime(dt_Comuter.Rows[0]["Proc_Date"]).Date;
+                    Data.Warnt_end_dt = Convert.ToDateTime(dt_Comuter.Rows[0]["Warnt_end_DT"]).Date;
+                    Data.price = Convert.ToInt32(dt_Comuter.Rows[0]["Asset_Price"]);
+                    Data.Remarks = Convert.ToString(dt_Comuter.Rows[0]["Remarks"]);
+
+                }
+
+            }
+            catch (Exception ex) { }
+
+            return Data;
         }
 
 
