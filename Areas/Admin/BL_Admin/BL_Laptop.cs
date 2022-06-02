@@ -9,14 +9,16 @@ using IT_Hardware_Aug2021.Areas.Admin.Models;
 
 namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 {
-    public class BL_Computer
+    public class BL_Laptop
     {
 
-        public List<Mod_Computer> Get_CompData()
+
+
+        public List<Mod_Laptop> Get_CompData()
         {
 
-            Mod_Computer BL_data;
-            List<Mod_Computer> current_data = new List<Mod_Computer>();
+            Mod_Laptop BL_data;
+            List<Mod_Laptop> current_data = new List<Mod_Laptop>();
 
             try
             {
@@ -46,8 +48,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 foreach (DataRow dr in dt_Comuter.Rows)
                 {
-                    BL_data = new Mod_Computer();
-                    
+                    BL_data = new Mod_Laptop();
+
                     BL_data.Item_Type = Convert.ToString(dr["Asset_Type"]);
 
                     BL_data.Item_serial_No = Convert.ToString(dr["Item_SlNo"]);
@@ -63,7 +65,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             return current_data;
         }
 
-        public int Save_Computer_data(Mod_Computer Data, string type, string Asset_ID)
+        public int Save_Laptop_data(Mod_Laptop Data, string type, string Asset_ID)
         {
             int status = 1;
             string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
@@ -105,7 +107,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlParameter Remarks = new SqlParameter("@Remarks", Data.Remarks);
                 cmd.Parameters.Add(Remarks);
 
-                SqlParameter Asset_Type = new SqlParameter("@Asset_Type", "Desktop");
+                SqlParameter Asset_Type = new SqlParameter("@Asset_Type", "Laptop");
                 cmd.Parameters.Add(Asset_Type);
 
                 con.Open();
@@ -122,9 +124,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
         }
 
 
-        public Mod_Computer Get_Data_By_ID(string Asset_Id)
+        public Mod_Laptop Get_Data_By_ID(string Asset_Id)
         {
-            Mod_Computer Data = new Mod_Computer();
+            Mod_Laptop Data = new Mod_Laptop();
 
             try
             {
@@ -171,7 +173,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
             return Data;
         }
-
 
 
 

@@ -1,6 +1,5 @@
-﻿
-@using IT_Hardware_Aug2021.Areas.Admin.Models
-@model IList<Mod_Computer>
+﻿@using IT_Hardware_Aug2021.Areas.Admin.Models
+@model IList<Mod_Laptop>
 
 @{
     ViewBag.Title = "Index";
@@ -15,7 +14,7 @@
 
 <div style=" margin-top: -100px;  text-align: center; height: 50px; align-content: center; width: 100% " class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
-    <p style="font-size:large; padding-top:-5px; font-weight:400;">List of Computer</p>
+    <p style="font-size:large; padding-top:-5px; font-weight:400;">List of Laptops</p>
 
 </div>
 
@@ -38,7 +37,7 @@
             </td>
             <td align="right" width="25%">
                 <h4>
-                    @Html.ActionLink("Add New", "Create_Item", "Computer")
+                    @Html.ActionLink("Add New", "Lap_Create_Item", "Laptop")
 
                     @*<a href="@Url.Action("Create", null, new { area = "Admin", controller = "Computer" }, Request.Url.Scheme)">Add New</a>*@
                 </h4>
@@ -73,7 +72,7 @@
                             </td>
                             <td>
 
-                                @Html.ActionLink("Edit", "Edit_Computer", new { id = item.Item_id }) |
+                                @Html.ActionLink("Edit", "Edit_Laptop", new { id = item.Item_id }) |
                                 @Html.ActionLink("Details", "Get_Detail", new { id = item.Item_id }) |
                                 @Html.ActionLink("Delete", "Delete_Item", new { id = item.Item_id })
                             </td>

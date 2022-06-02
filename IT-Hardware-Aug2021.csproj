@@ -123,6 +123,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_AssetMaster.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Computer.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\BL_Laptop.cs" />
     <Compile Include="Areas\Admin\Controllers\Admin_DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\ComputerController.cs" />
     <Compile Include="Areas\Admin\Controllers\LaptopController.cs" />
@@ -132,10 +133,9 @@
     <Compile Include="Areas\Admin\Controllers\OtherItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\PrintScanController.cs" />
     <Compile Include="Areas\Admin\Models\Admin_dashB.cs" />
-    <Compile Include="Areas\Admin\Models\DesktopPC.cs" />
     <Compile Include="Areas\Admin\Models\Mod_AssetMaster.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Computer.cs" />
-    <Compile Include="BusinessLayer\ComputerBusinessLayer.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_Laptop.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Log_InController.cs" />
     <Compile Include="Global.asax.cs">
@@ -201,15 +201,16 @@
     <Content Include="CSS\bootstrap\.DS_Store" />
     <Content Include="CSS\bootstrap\mixins\.DS_Store" />
     <Content Include="Areas\Admin\Views\PrintScan\PrinterView.cshtml" />
-    <Content Include="Areas\Admin\Views\Laptop\LaptopView.cshtml" />
     <Content Include="Areas\Admin\Views\Monitor\Monitor_List.cshtml" />
     <Content Include="Areas\Admin\Views\Computer\Com_Details.cshtml" />
     <Content Include="Areas\Admin\Views\Computer\Com_Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\Computer\Com_Edit_Item.cshtml" />
-    <Content Include="Areas\Admin\Views\Computer\Com_Delete_Item.cshtml" />
     <Content Include="Areas\Admin\Views\MasterData\AssetMakeModel.cshtml" />
     <Content Include="Areas\Admin\Views\MasterData\Get_Master_Data.cshtml" />
     <Content Include="Areas\Admin\Views\MasterData\Edit_Assets.cshtml" />
+    <Content Include="Areas\Admin\Views\Laptop\Lap_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Laptop\Lap_Create_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\Laptop\Edit_Laptop.cshtml" />
     <None Include="Properties\PublishProfiles\rajaonprewebapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -241,6 +242,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\OtherItem\" />
+    <Folder Include="BusinessLayer\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

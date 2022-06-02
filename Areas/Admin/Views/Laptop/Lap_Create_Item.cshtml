@@ -1,14 +1,15 @@
-﻿@using IT_Hardware_Aug2021.Controllers
+﻿@model IT_Hardware_Aug2021.Areas.Admin.Models.Mod_Laptop
+
 @{
     ViewBag.Title = "Index";
     //Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model IT_Hardware_Aug2021.Areas.Admin.Models.Mod_Computer
 
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @*<script src="https://code.jquery.com/jquery-1.12.4.js"></script>*@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
 
 <script>
@@ -96,14 +97,14 @@
 
 <div style=" margin-top: -50px;  text-align: center; height: 50px; align-content: center; width: 100% " class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
-    <p style="font-size:large; padding-top:-5px; font-weight:400;">Enter New Computer</p>
+    <p style="font-size:large; padding-top:-5px; font-weight:400;">Enter New Laptop</p>
 
 </div>
 
 <div style=" align-content:center; width:100%" class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
 
-    @using (Html.BeginForm("Update_Computer", "Computer", FormMethod.Post))
+    @using (Html.BeginForm("Create_Item_Post", "Computer", FormMethod.Post))
     {
 
         <table class=" table-hover table-striped shadow " style="width:100%">
@@ -172,10 +173,11 @@
 
                 <td style="width: 25%; padding-top: 10px; padding-bottom: 5px" align="center">
                     <button class="button_cls form-rounded">Submit</button>
+
                 </td>
 
                 <td style="width: 25%; padding-top: 10px; padding-bottom: 5px" align="center">
-                    @Html.ActionLink("Back", "Details", "Computer", null, new { @class = "button_cls form-rounded", })
+                    @Html.ActionLink("Back", "Lap_Details", "Laptop", null, new { @class = "button_cls form-rounded", })
                 </td>
 
                 <td align="left" style="width:25%;"></td>
@@ -184,8 +186,6 @@
 
     }
 </div>
-
-
 
 
 @if (TempData["Message"] != null && TempData["Message"] != "" && TempData["Message"] != string.Empty)
@@ -200,11 +200,3 @@
     </script>
 
 }
-
-
-
-
-
-
-
-
