@@ -3,34 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using IT_Hardware_Aug2021.Areas.Admin.Models;
 using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
+using IT_Hardware_Aug2021.Areas.Admin.Models;
 
 namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 {
-
-    public class ComputerController : Controller
+    public class DataCardController : Controller
     {
-        public ActionResult Com_Details()
+
+
+        public ActionResult DataCard_Details()
         {
-            BL_Computer com= new BL_Computer();
+            BL_DataCard com = new BL_DataCard();
 
-            List<Mod_Computer> pc_List = com.Get_CompData();
+            List<Mod_DataCard> pc_List = com.Get_DataCardData();
 
-            return View("~/Areas/Admin/Views/Computer/Com_Details.cshtml", pc_List);
+            return View("~/Areas/Admin/Views/DataCard/DataCard_Details.cshtml", pc_List);
         }
 
         [HttpGet]
-        public ActionResult Com_Create_Item(string Message)
+        public ActionResult Lap_Create_Item(string Message)
         {
             ViewBag.Message = Message;
 
-            return View("~/Areas/Admin/Views/Computer/Com_Create_Item.cshtml");
-            
+            return View("~/Areas/Admin/Views/DataCard/DataCard_Create_Item.cshtml");
+
         }
 
         [HttpPost]
-        public ActionResult Create_Item_Post(Mod_Computer Get_Data)
+        public ActionResult Lap_Create_Post(Mod_DataCard Get_Data)
         {
             string Message = "";
             try
@@ -38,38 +39,40 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    BL_Computer save_data = new BL_Computer();
-                    int status = save_data.Save_Computer_data(Get_Data, "Add_new", "");
+                    BL_DataCard save_data = new BL_DataCard();
+                    int status = save_data.Save_DataCard_data(Get_Data, "Add_new", "");
 
                     if (status == 1)
                     {
                         TempData["Message"] = String.Format("Data is not saved");
                     }
-                    else {
+                    else
+                    {
 
                         TempData["Message"] = String.Format("Data save successfully");
                     }
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
 
                 TempData["Message"] = string.Format("ShowFailure();");
-                
+
             }
-            
-            return RedirectToAction("Com_Create_Item", "Computer");
+
+            return RedirectToAction("Create_Item", "DataCard");
         }
 
-        public ActionResult Com_Edit_Item(string id)
+        public ActionResult Edit_DataCard(string id)
         {
-            BL_Computer Md_Com = new BL_Computer();
-            Mod_Computer data = Md_Com.Get_Data_By_ID(id);
+            BL_DataCard Md_Com = new BL_DataCard();
+            Mod_DataCard data = Md_Com.Get_Data_By_ID(id);
 
-            return View("~/Areas/Admin/Views/Computer/Com_Edit_Item.cshtml", data);
+            return View("~/Areas/Admin/Views/DataCard/Edit_DataCard.cshtml", data);
         }
 
-      
-        public ActionResult Update_Computer(Mod_Computer Get_Data, string Asset_ID)
+
+        public ActionResult Update_DataCard(Mod_DataCard Get_Data, string Asset_ID)
         {
             int status = 0;
             try
@@ -77,9 +80,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    BL_Computer Md_Asset = new BL_Computer();
+                    BL_DataCard Md_Asset = new BL_DataCard();
 
-                    status = Md_Asset.Save_Computer_data(Get_Data, "Update", Asset_ID);
+                    status = Md_Asset.Save_DataCard_data(Get_Data, "Update", Asset_ID);
 
                     if (status == 1)
                     {
@@ -98,11 +101,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Com_Details", "Computer");
+            return RedirectToAction("DataCard_Details", "DataCard");
         }
 
 
-        public ActionResult Delete_Item(Mod_Computer Get_Data, string id)
+        public ActionResult Delete_DataCard(Mod_DataCard Get_Data, string id)
         {
             int status = 0;
             try
@@ -112,9 +115,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 {
 
 
-                    BL_Computer Md_Asset = new BL_Computer();
+                    BL_DataCard Md_Asset = new BL_DataCard();
 
-                    status = Md_Asset.Save_Computer_data(Get_Data, "Delete", id);
+                    status = Md_Asset.Save_DataCard_data(Get_Data, "Delete", id);
 
                     if (status == 1)
                     {
@@ -133,9 +136,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Com_Details", "Computer");
+            return RedirectToAction("DataCard_Details", "DataCard");
         }
-
 
 
     }
