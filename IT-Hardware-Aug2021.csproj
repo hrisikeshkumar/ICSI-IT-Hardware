@@ -124,6 +124,10 @@
     <Compile Include="Areas\Admin\BL_Admin\BL_AssetMaster.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Computer.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Laptop.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\BL_Monitor.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\BL_Printer.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\BL_Scanner.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\BL_Ups.cs" />
     <Compile Include="Areas\Admin\Controllers\Admin_DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\ComputerController.cs" />
     <Compile Include="Areas\Admin\Controllers\LaptopController.cs" />
@@ -131,11 +135,19 @@
     <Compile Include="Areas\Admin\Controllers\MonitorController.cs" />
     <Compile Include="Areas\Admin\Controllers\Move_ItemsController.cs" />
     <Compile Include="Areas\Admin\Controllers\OtherItemController.cs" />
-    <Compile Include="Areas\Admin\Controllers\PrintScanController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PrinterController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ScannerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UpsController.cs" />
     <Compile Include="Areas\Admin\Models\Admin_dashB.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_AppleIpad.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_DataCard.cs" />
     <Compile Include="Areas\Admin\Models\Mod_AssetMaster.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Computer.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Laptop.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_Monitor.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_Printer.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_Scanner.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_Ups.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Log_InController.cs" />
     <Compile Include="Global.asax.cs">
@@ -201,7 +213,6 @@
     <Content Include="CSS\bootstrap\.DS_Store" />
     <Content Include="CSS\bootstrap\mixins\.DS_Store" />
     <Content Include="Areas\Admin\Views\PrintScan\PrinterView.cshtml" />
-    <Content Include="Areas\Admin\Views\Monitor\Monitor_List.cshtml" />
     <Content Include="Areas\Admin\Views\Computer\Com_Details.cshtml" />
     <Content Include="Areas\Admin\Views\Computer\Com_Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\Computer\Com_Edit_Item.cshtml" />
@@ -211,6 +222,9 @@
     <Content Include="Areas\Admin\Views\Laptop\Lap_Details.cshtml" />
     <Content Include="Areas\Admin\Views\Laptop\Lap_Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\Laptop\Edit_Laptop.cshtml" />
+    <Content Include="Areas\Admin\Views\Monitor\Monitor_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Monitor\Moitor_Create_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\Monitor\Edit_Monitor.cshtml" />
     <None Include="Properties\PublishProfiles\rajaonprewebapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -242,6 +256,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\OtherItem\" />
+    <Folder Include="Areas\Admin\Views\Printer\" />
+    <Folder Include="Areas\Admin\Views\Scanner\" />
+    <Folder Include="Areas\Admin\Views\Ups\" />
     <Folder Include="BusinessLayer\" />
     <Folder Include="Models\" />
   </ItemGroup>

@@ -8,30 +8,30 @@ using IT_Hardware_Aug2021.Areas.Admin.Models;
 
 namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 {
-    public class MonitorController : Controller
+    public class PrinterController : Controller
     {
+       
 
-
-            public ActionResult Monitor_Details()
+            public ActionResult Printer_Details()
             {
-                BL_Monitor com = new BL_Monitor();
+                BL_Printer com = new BL_Printer();
 
-                List<Mod_Monitor> pc_List = com.Get_MonitorData();
+                List<Mod_Printer> pc_List = com.Get_PrinterData();
 
-                return View("~/Areas/Admin/Views/Monitor/Monitor_Details.cshtml", pc_List);
+                return View("~/Areas/Admin/Views/Printer/Printer_Details.cshtml", pc_List);
             }
 
             [HttpGet]
-            public ActionResult Moitor_Create_Item(string Message)
+            public ActionResult Lap_Create_Item(string Message)
             {
                 ViewBag.Message = Message;
 
-                return View("~/Areas/Admin/Views/Monitor/Moitor_Create_Item.cshtml");
+                return View("~/Areas/Admin/Views/Printer/Printer_Create_Item.cshtml");
 
             }
 
             [HttpPost]
-            public ActionResult Lap_Create_Post(Mod_Monitor Get_Data)
+            public ActionResult Lap_Create_Post(Mod_Printer Get_Data)
             {
                 string Message = "";
                 try
@@ -39,8 +39,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     if (ModelState.IsValid)
                     {
-                        BL_Monitor save_data = new BL_Monitor();
-                        int status = save_data.Save_Monitor_data(Get_Data, "Add_new", "");
+                        BL_Printer save_data = new BL_Printer();
+                        int status = save_data.Save_Printer_data(Get_Data, "Add_new", "");
 
                         if (status == 1)
                         {
@@ -60,19 +60,19 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                 }
 
-                return RedirectToAction("Create_Item", "Monitor");
+                return RedirectToAction("Create_Item", "Printer");
             }
 
-            public ActionResult Edit_Monitor(string id)
+            public ActionResult Edit_Printer(string id)
             {
-                BL_Monitor Md_Com = new BL_Monitor();
-                Mod_Monitor data = Md_Com.Get_Data_By_ID(id);
+                BL_Printer Md_Com = new BL_Printer();
+                Mod_Printer data = Md_Com.Get_Data_By_ID(id);
 
-                return View("~/Areas/Admin/Views/Monitor/Edit_Monitor.cshtml", data);
+                return View("~/Areas/Admin/Views/Printer/Edit_Printer.cshtml", data);
             }
 
 
-            public ActionResult Update_Monitor(Mod_Monitor Get_Data, string Asset_ID)
+            public ActionResult Update_Printer(Mod_Printer Get_Data, string Asset_ID)
             {
                 int status = 0;
                 try
@@ -80,9 +80,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     if (ModelState.IsValid)
                     {
-                        BL_Monitor Md_Asset = new BL_Monitor();
+                        BL_Printer Md_Asset = new BL_Printer();
 
-                        status = Md_Asset.Save_Monitor_data(Get_Data, "Update", Asset_ID);
+                        status = Md_Asset.Save_Printer_data(Get_Data, "Update", Asset_ID);
 
                         if (status == 1)
                         {
@@ -101,11 +101,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                 }
 
-                return RedirectToAction("Monitor_Details", "Monitor");
+                return RedirectToAction("Printer_Details", "Printer");
             }
 
 
-            public ActionResult Delete_Monitor(Mod_Monitor Get_Data, string id)
+            public ActionResult Delete_Printer(Mod_Printer Get_Data, string id)
             {
                 int status = 0;
                 try
@@ -115,9 +115,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                     {
 
 
-                        BL_Monitor Md_Asset = new BL_Monitor();
+                        BL_Printer Md_Asset = new BL_Printer();
 
-                        status = Md_Asset.Save_Monitor_data(Get_Data, "Delete", id);
+                        status = Md_Asset.Save_Printer_data(Get_Data, "Delete", id);
 
                         if (status == 1)
                         {
@@ -136,12 +136,12 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                 }
 
-                return RedirectToAction("Monitor_Details", "Monitor");
+                return RedirectToAction("Printer_Details", "Printer");
             }
 
 
 
 
-        
-    }
+        }
+   
 }
