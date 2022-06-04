@@ -231,6 +231,24 @@
     <Content Include="Areas\Admin\Views\Monitor\Monitor_Details.cshtml" />
     <Content Include="Areas\Admin\Views\Monitor\Moitor_Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\Monitor\Edit_Monitor.cshtml" />
+    <Content Include="Areas\Admin\Views\Printer\Edit_Printer.cshtml" />
+    <Content Include="Areas\Admin\Views\Printer\Printer_Create_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\Printer\Printer_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Scanner\Edit_Scanner.cshtml" />
+    <Content Include="Areas\Admin\Views\Scanner\Scanner_Create_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\Scanner\Scanner_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\OtherItem\Edit_OtherItem.cshtml" />
+    <Content Include="Areas\Admin\Views\OtherItem\OtherItem_Create_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\OtherItem\OtherItem_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DataCard\Edit_DataCard.cshtml" />
+    <Content Include="Areas\Admin\Views\DataCard\DataCard_Create_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\DataCard\Monitor_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\AppleIpad\Edit_AppleIpad.cshtml" />
+    <Content Include="Areas\Admin\Views\AppleIpad\AppleIpad_Create_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\AppleIpad\AppleIpad_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Ups\Edit_Ups.cshtml" />
+    <Content Include="Areas\Admin\Views\Ups\Ups_Create_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\Ups\Ups_Details.cshtml" />
     <None Include="Properties\PublishProfiles\rajaonprewebapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -261,12 +279,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\AppleIpad\" />
-    <Folder Include="Areas\Admin\Views\DataCard\" />
-    <Folder Include="Areas\Admin\Views\OtherItem\" />
-    <Folder Include="Areas\Admin\Views\Printer\" />
-    <Folder Include="Areas\Admin\Views\Scanner\" />
-    <Folder Include="Areas\Admin\Views\Ups\" />
     <Folder Include="BusinessLayer\" />
     <Folder Include="Models\" />
   </ItemGroup>
