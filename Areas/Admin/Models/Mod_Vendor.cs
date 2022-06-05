@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -16,6 +17,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public string Item_serial_No { get; set; }
         public string Remarks { get; set; }
         public int price { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yy}")]
         public DateTime? Proc_date { get; set; }
         public DateTime? Warnt_end_dt { get; set; }
         public string Create_usr_id { get; set; }
