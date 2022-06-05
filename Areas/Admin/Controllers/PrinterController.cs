@@ -22,7 +22,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             }
 
             [HttpGet]
-            public ActionResult Lap_Create_Item(string Message)
+            public ActionResult Printer_Create_Item(string Message)
             {
                 ViewBag.Message = Message;
 
@@ -31,7 +31,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             }
 
             [HttpPost]
-            public ActionResult Lap_Create_Post(Mod_Printer Get_Data)
+            public ActionResult Printer_Create_Post(Mod_Printer Get_Data)
             {
                 string Message = "";
                 try

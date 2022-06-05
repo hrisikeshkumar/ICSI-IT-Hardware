@@ -137,8 +137,8 @@
     <nav class="hs-navigation">
         <ul class="nav-links">
             <li><a href="/Admin/Admin_Dashboard/Admin_Dashboard"> <span class="icon"> <i class="zmdi zmdi-collection-item"></i> </span> Dash Board</a> </li>
-            
-            @*<li><a href="@Url.Action("AssetMakeModel", null, new { area = "Admin", controller = "MasterData" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-collection-item"></i> </span> Master Data</a> </li>*@
+
+            <li><a href="@Url.Action("Emp_Details", null, new { area = "Admin", controller = "Empployee" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-collection-item"></i> </span> Master Data</a> </li>
 
             <li><a href="@Url.Action("Get_Master_Data", null, new { area = "Admin", controller = "MasterData" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-collection-item"></i> </span> Master Data</a> </li>
 
@@ -175,8 +175,8 @@
                         <ul class="its-children">
 
                             <li> <a href="@Url.Action("DataCard_Details", null, new { area = string.Empty, controller = "DataCard" }, Request.Url.Scheme)">Data Card</a> </li>
-                            <li> <a href="@Url.Action("Ipad_Details", null, new { area = string.Empty, controller = "Ipad" }, Request.Url.Scheme)">Apple Ipad /Surface Pro</a> </li>
-                            <li> <a href="@Url.Action("MisItem_Details", null, new { area = string.Empty, controller = "MisItem" }, Request.Url.Scheme)"> Mislenious Items</a> </li>
+                            <li> <a href="@Url.Action("AppleIpad_Details", null, new { area = string.Empty, controller = "AppleIpad" }, Request.Url.Scheme)">Apple Ipad /Surface Pro</a> </li>
+                            <li> <a href="@Url.Action("OtherItem_Details", null, new { area = string.Empty, controller = "OtherItem" }, Request.Url.Scheme)"> Mislenious Items</a> </li>
 
                         </ul>
                     </li>

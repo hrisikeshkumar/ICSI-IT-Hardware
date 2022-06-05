@@ -218,7 +218,6 @@
     <Content Include="CSS\.DS_Store" />
     <Content Include="CSS\bootstrap\.DS_Store" />
     <Content Include="CSS\bootstrap\mixins\.DS_Store" />
-    <Content Include="Areas\Admin\Views\PrintScan\PrinterView.cshtml" />
     <Content Include="Areas\Admin\Views\Computer\Com_Details.cshtml" />
     <Content Include="Areas\Admin\Views\Computer\Com_Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\Computer\Com_Edit_Item.cshtml" />
@@ -242,7 +241,7 @@
     <Content Include="Areas\Admin\Views\OtherItem\OtherItem_Details.cshtml" />
     <Content Include="Areas\Admin\Views\DataCard\Edit_DataCard.cshtml" />
     <Content Include="Areas\Admin\Views\DataCard\DataCard_Create_Item.cshtml" />
-    <Content Include="Areas\Admin\Views\DataCard\Monitor_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DataCard\DataCard_Details.cshtml" />
     <Content Include="Areas\Admin\Views\AppleIpad\Edit_AppleIpad.cshtml" />
     <Content Include="Areas\Admin\Views\AppleIpad\AppleIpad_Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\AppleIpad\AppleIpad_Details.cshtml" />

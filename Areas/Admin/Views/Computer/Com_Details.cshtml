@@ -38,7 +38,7 @@
             </td>
             <td align="right" width="25%">
                 <h4>
-                    @Html.ActionLink("Add New", "Create_Item", "Computer")
+                    @Html.ActionLink("Add New", "Com_Create_Item", "Computer")
 
                     @*<a href="@Url.Action("Create", null, new { area = "Admin", controller = "Computer" }, Request.Url.Scheme)">Add New</a>*@
                 </h4>
@@ -73,7 +73,7 @@
                             </td>
                             <td>
 
-                                @Html.ActionLink("Edit", "Edit_Computer", new { id = item.Item_id }) |
+                                @Html.ActionLink("Edit", "Com_Edit_Item", new { id = item.Item_id }) |
                                 @Html.ActionLink("Details", "Com_Get_Detail", new { id = item.Item_id }) |
                                 @Html.ActionLink("Delete", "Delete_Item", new { id = item.Item_id })
                             </td>

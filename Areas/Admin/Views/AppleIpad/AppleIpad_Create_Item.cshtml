@@ -1,4 +1,4 @@
-﻿@model IT_Hardware_Aug2021.Areas.Admin.Models.Mod_Monitor
+﻿@model IT_Hardware_Aug2021.Areas.Admin.Models.Mod_AppleIpad
 
 
 @{
@@ -98,14 +98,14 @@
 
 <div style=" margin-top: -50px;  text-align: center; height: 50px; align-content: center; width: 100% " class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
-    <p style="font-size:large; padding-top:-5px; font-weight:400;">Enter New Monitor</p>
+    <p style="font-size:large; padding-top:-5px; font-weight:400;">Enter New Ipad / Surface Pro</p>
 
 </div>
 
 <div style=" align-content:center; width:100%" class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
 
-    @using (Html.BeginForm("Create_Item_Post", "Monitor", FormMethod.Post))
+    @using (Html.BeginForm("Create_Item_Post", "AppleIpad", FormMethod.Post))
     {
 
         <table class=" table-hover table-striped shadow " style="width:100%">
@@ -178,7 +178,7 @@
                 </td>
 
                 <td style="width: 25%; padding-top: 10px; padding-bottom: 5px" align="center">
-                    @Html.ActionLink("Back", "Monitor_Details", "Monitor", null, new { @class = "button_cls form-rounded", })
+                    @Html.ActionLink("Back", "AppleIpad_Details", "AppleIpad", null, new { @class = "button_cls form-rounded", })
                 </td>
 
                 <td align="left" style="width:25%;"></td>
