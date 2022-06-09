@@ -125,6 +125,7 @@
     <Compile Include="Areas\Admin\BL_Admin\BL_Computer.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_DataCard.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_AppleIpad.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\BL_DC_MisItems.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Employee.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Laptop.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Monitor.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Areas\Admin\Controllers\AppleIpadController.cs" />
     <Compile Include="Areas\Admin\Controllers\ComputerController.cs" />
     <Compile Include="Areas\Admin\Controllers\DataCardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DC_MisItemsController.cs" />
     <Compile Include="Areas\Admin\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LaptopController.cs" />
     <Compile Include="Areas\Admin\Controllers\MasterDataController.cs" />
@@ -156,6 +158,7 @@
     <Compile Include="Areas\Admin\Models\Mod_DataCard.cs" />
     <Compile Include="Areas\Admin\Models\Mod_AssetMaster.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Computer.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_DC_MisItems.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Employee.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Laptop.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Monitor.cs" />
@@ -272,6 +275,9 @@
     <Content Include="Areas\Admin\Views\Switch\Edit_Switch.cshtml" />
     <Content Include="Areas\Admin\Views\Switch\Switch_Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\Switch\Switch_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DC_MisItems\Edit_DC_MisItems.cshtml" />
+    <Content Include="Areas\Admin\Views\DC_MisItems\DC_MisItems_Create_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\DC_MisItems\DC_MisItems_Details.cshtml" />
     <None Include="Properties\PublishProfiles\rajaonprewebapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
