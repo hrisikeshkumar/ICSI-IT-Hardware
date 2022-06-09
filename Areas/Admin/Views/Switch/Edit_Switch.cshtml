@@ -1,4 +1,4 @@
-﻿@model IT_Hardware_Aug2021.Areas.Admin.Models.Mod_Vendor
+﻿@model IT_Hardware_Aug2021.Areas.Admin.Models.Mod_Switch
 
 
 @{
@@ -97,33 +97,64 @@
 
 <div style=" margin-top: -50px;  text-align: center; height: 50px; align-content: center; width: 100% " class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
-    <p style="font-size:large; padding-top:-5px; font-weight:400;">Edit Vendor Data</p>
+    <p style="font-size:large; padding-top:-5px; font-weight:400;">Edit Switch / TFT Data</p>
 
 </div>
 
 <div style=" align-content:center; width:100%" class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
 
-    @using (Html.BeginForm("Update_Vendor", "Vendor", FormMethod.Post))
+    @using (Html.BeginForm("Update_Switch", "Switch", FormMethod.Post))
     {
 
         <table class=" table-hover table-striped shadow " style="width:100%">
 
             <tr>
                 <td style="width:25%; height:50px;">
-                    Vendor Name
+                    Asset Make
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Vendor_name, new { @class = " form-rounded", @style = " width :80%; " })
+                    @Html.TextBoxFor(x => x.Item_Make, new { @class = " form-rounded", @style = " width :80%; " })
                 </td>
                 <td style="width:25%;">
-                    Vendor Address
+                    Asset Model
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Vendor_Addr, new { @class = " form-rounded", @style = " width :80%; " })
+                    @Html.TextBoxFor(x => x.Item_Model, new { @class = " form-rounded", @style = " width :80%; " })
                 </td>
             </tr>
-           
+            <tr>
+                <td style="width:25%;">
+                    Asset Serial No.
+                </td>
+                <td style="width:25%;">
+                    @Html.TextBoxFor(x => x.Item_serial_No, new { @class = " form-rounded", @style = " width :80%; " })
+                </td>
+
+                <td style="width:25%;">
+                    Date of Purchase
+                </td>
+                <td style="width:25%;">
+                    @Html.TextBoxFor(x => x.Proc_date, new { @class = "dateclass form-rounded", @style = " width :80%; " })
+                </td>
+
+            </tr>
+            <tr>
+                <td style="width: 25%; height: 50px;">
+                    Warrenty End Date
+                </td>
+                <td style="width:25%;">
+                    @Html.TextBoxFor(x => x.Warnt_end_dt, new { @class = "dateclass form-rounded", @style = " width :80%; " })
+                </td>
+
+                <td style="width:25%;">
+                    Price
+                </td>
+                <td style="width:25%;">
+                    @Html.TextBoxFor(x => x.price, new { @class = " form-rounded", @style = " width :80%; " })
+                </td>
+            </tr>
+
             <tr>
                 <td style="width:25%;">
                     Remarks
@@ -145,7 +176,7 @@
                 </td>
 
                 <td style="width: 25%; padding-top: 10px; padding-bottom: 5px" align="center">
-                    @Html.ActionLink("Back", "Vendor_Details", "Vendor", null, new { @class = "button_cls form-rounded", })
+                    @Html.ActionLink("Back", "Switch_Details", "Switch", null, new { @class = "button_cls form-rounded", })
                 </td>
 
                 <td align="left" style="width:25%;"></td>
@@ -154,6 +185,8 @@
 
     }
 </div>
+
+
 
 
 @if (TempData["Message"] != null && TempData["Message"] != "" && TempData["Message"] != string.Empty)

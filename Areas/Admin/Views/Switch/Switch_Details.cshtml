@@ -1,6 +1,6 @@
 ﻿@using IT_Hardware_Aug2021.Areas.Admin.Models
 
-@model IList<Mod_Vendor>
+@model IList<Mod_Switch>
 
 @{
     ViewBag.Title = "Index";
@@ -14,7 +14,7 @@
 
 <div style=" margin-top: -100px;  text-align: center; height: 50px; align-content: center; width: 100% " class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
-    <p style="font-size:large; padding-top:-5px; font-weight:400;">List of Vendor</p>
+    <p style="font-size:large; padding-top:-5px; font-weight:400;">List of Switch</p>
 
 </div>
 
@@ -37,7 +37,7 @@
             </td>
             <td align="right" width="25%">
                 <h4>
-                    @Html.ActionLink("Add New", "Vendor_Create_Item", "Vendor")
+                    @Html.ActionLink("Add New", "Switch_Create_Item", "Switch")
 
                 </h4>
             </td>
@@ -64,20 +64,20 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Vendor_name)
+                                @Html.DisplayFor(modelItem => item.Item_Type)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Vendor_Addr)
+                                @Html.DisplayFor(modelItem => item.Item_serial_No)
                             </td>
                             <td>
 
-                                @Html.ActionLink("Edit", "Edit_Vendor", new { id = item.Vendor_id }) |
-                                @Html.ActionLink("Details", "Get_Detail", new { id = item.Vendor_id }) |
-                                @Html.ActionLink("Delete", "Delete_Item", new { id = item.Vendor_id })
+                                @Html.ActionLink("Edit", "Edit_Switch", new { id = item.Item_id }) |
+                                @Html.ActionLink("Details", "Get_Detail", new { id = item.Item_id }) |
+                                @Html.ActionLink("Delete", "Delete_Item", new { id = item.Item_id })
                             </td>
                         </tr>
                     }
-                     
+
                 </table>
 
             </td>

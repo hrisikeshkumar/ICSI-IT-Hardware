@@ -28,7 +28,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     SqlConnection con = new SqlConnection(strcon);
 
 
-                    using (SqlCommand cmd = new SqlCommand("sp_Computer"))
+                    using (SqlCommand cmd = new SqlCommand("sp_Vendor"))
                     {
                         SqlParameter sqlP_type = new SqlParameter("@Type", "Get_List");
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -51,11 +51,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     {
                         BL_data = new Mod_Vendor();
 
-                        BL_data.Item_Type = Convert.ToString(dr["Asset_Type"]);
+                        BL_data.Vendor_id = Convert.ToString(dr["Vendor_ID"]);
 
-                        BL_data.Item_serial_No = Convert.ToString(dr["Item_SlNo"]);
+                        BL_data.Vendor_name = Convert.ToString(dr["Vendor_name"]);
 
-                        BL_data.Item_id = Convert.ToString(dr["Item_Id"]);
+                        BL_data.Vendor_Addr = Convert.ToString(dr["Vendor_Address"]);
 
                         current_data.Add(BL_data);
                     }
@@ -66,7 +66,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 return current_data;
             }
 
-            public int Save_Vendor_data(Mod_Vendor Data, string type, string Asset_ID)
+            public int Save_Vendor_data(Mod_Vendor Data, string type, string Vendor_ID)
             {
                 int status = 1;
                 string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
@@ -77,7 +77,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = con;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "sp_Computer";
+                    cmd.CommandText = "sp_Vendor";
 
                     cmd.Connection = con;
 
@@ -86,31 +86,20 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                     if (type == "Update" || type == "Delete")
                     {
-                        SqlParameter Asset_Id = new SqlParameter("@Item_Id", Asset_ID);
-                        cmd.Parameters.Add(Asset_Id);
+                        SqlParameter Vendor_Id = new SqlParameter("@Vendor_ID", Vendor_ID);
+                        cmd.Parameters.Add(Vendor_Id);
                     }
 
-                    SqlParameter Asset_Make_Id = new SqlParameter("@Item_MakeId", Data.Item_Make_id);
+                    SqlParameter Asset_Make_Id = new SqlParameter("@Vendor_name", Data.Vendor_name);
                     cmd.Parameters.Add(Asset_Make_Id);
 
-                    SqlParameter Asset_SL_No = new SqlParameter("@Item_serial_No", Data.Item_serial_No);
-                    cmd.Parameters.Add(Asset_SL_No);
-
-                    SqlParameter Proc_Date = new SqlParameter("@Proc_Date", Data.Proc_date);
-                    cmd.Parameters.Add(Proc_Date);
-
-                    SqlParameter Warnt_end_dt = new SqlParameter("@Warnt_end_DT", Data.Warnt_end_dt);
-                    cmd.Parameters.Add(Warnt_end_dt);
-
-                    SqlParameter Asset_Price = new SqlParameter("@Asset_Price", Data.price);
-                    cmd.Parameters.Add(Asset_Price);
+                    SqlParameter Asset_SL_No = new SqlParameter("@Vendor_Addr", Data.Vendor_Addr);
+                    cmd.Parameters.Add(Asset_SL_No);                
 
                     SqlParameter Remarks = new SqlParameter("@Remarks", Data.Remarks);
                     cmd.Parameters.Add(Remarks);
 
-                    SqlParameter Asset_Type = new SqlParameter("@Asset_Type", "Vendor");
-                    cmd.Parameters.Add(Asset_Type);
-
+                    
                     con.Open();
 
                     cmd.ExecuteNonQuery();
@@ -124,7 +113,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 return status;
             }
 
-            public Mod_Vendor Get_Data_By_ID(string Asset_Id)
+            public Mod_Vendor Get_Data_By_ID(string Vendor_Id)
             {
                 Mod_Vendor Data = new Mod_Vendor();
 
@@ -135,15 +124,15 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     SqlConnection con = new SqlConnection(strcon);
 
 
-                    using (SqlCommand cmd = new SqlCommand("sp_Computer"))
+                    using (SqlCommand cmd = new SqlCommand("sp_Vendor"))
                     {
                         SqlParameter sqlP_type = new SqlParameter("@Type", "Get_Data_By_ID");
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Connection = con;
                         cmd.Parameters.Add(sqlP_type);
 
-                        SqlParameter sqlP_Asset_ID = new SqlParameter("@Item_ID", Asset_Id);
-                        cmd.Parameters.Add(sqlP_Asset_ID);
+                        SqlParameter VendorId = new SqlParameter("@Vendor_ID", Vendor_Id);
+                        cmd.Parameters.Add(VendorId);
 
                         using (SqlDataAdapter sda = new SqlDataAdapter())
                         {
@@ -158,12 +147,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                     if (dt_Comuter.Rows.Count > 0)
                     {
-                        Data.Item_id = Convert.ToString(dt_Comuter.Rows[0]["Item_Id"]);
-                        Data.Item_Make_id = Convert.ToString(dt_Comuter.Rows[0]["Item_MakeId"]);
-                        Data.Item_serial_No = Convert.ToString(dt_Comuter.Rows[0]["Item_SlNo"]);
-                        Data.Proc_date = Convert.ToDateTime(dt_Comuter.Rows[0]["Proc_Date"]).Date;
-                        Data.Warnt_end_dt = Convert.ToDateTime(dt_Comuter.Rows[0]["Warnt_end_DT"]).Date;
-                        Data.price = Convert.ToInt32(dt_Comuter.Rows[0]["Asset_Price"]);
+                        Data.Vendor_id = Convert.ToString(dt_Comuter.Rows[0]["Vendor_ID"]);
+                        Data.Vendor_name = Convert.ToString(dt_Comuter.Rows[0]["Vendor_name"]);
+                        Data.Vendor_Addr = Convert.ToString(dt_Comuter.Rows[0]["Vendor_Address"]);
                         Data.Remarks = Convert.ToString(dt_Comuter.Rows[0]["Remarks"]);
 
                     }

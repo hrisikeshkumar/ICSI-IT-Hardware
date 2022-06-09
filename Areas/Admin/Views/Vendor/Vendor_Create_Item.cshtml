@@ -112,50 +112,19 @@
 
             <tr>
                 <td style="width:25%; height:50px;">
-                    Asset Make
+                    Vendor Name
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Item_Make, new { @class = " form-rounded", @style = " width :80%; " })
+                    @Html.TextBoxFor(x => x.Vendor_name, new { @class = " form-rounded", @style = " width :80%; " })
                 </td>
                 <td style="width:25%;">
-                    Asset Model
+                    Vendor Address
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Item_Model, new { @class = " form-rounded", @style = " width :80%; " })
+                    @Html.TextBoxFor(x => x.Vendor_Addr, new { @class = " form-rounded", @style = " width :80%; " })
                 </td>
             </tr>
-            <tr>
-                <td style="width:25%;">
-                    Asset Serial No.
-                </td>
-                <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Item_serial_No, new { @class = " form-rounded", @style = " width :80%; " })
-                </td>
-
-                <td style="width:25%;">
-                    Date of Purchase
-                </td>
-                <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Proc_date, new { @class = "dateclass form-rounded", @style = " width :80%; " })
-                </td>
-
-            </tr>
-            <tr>
-                <td style="width: 25%; height: 50px;">
-                    Warrenty End Date
-                </td>
-                <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Warnt_end_dt, new { @class = "dateclass form-rounded", @style = " width :80%; " })
-                </td>
-
-                <td style="width:25%;">
-                    Price
-                </td>
-                <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.price, new { @class = " form-rounded", @style = " width :80%; " })
-                </td>
-            </tr>
-
+            
             <tr>
                 <td style="width:25%;">
                     Remarks
