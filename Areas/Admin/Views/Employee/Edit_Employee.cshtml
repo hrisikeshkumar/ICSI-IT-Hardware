@@ -111,50 +111,36 @@
 
             <tr>
                 <td style="width:25%; height:50px;">
-                    Asset Make
+                    Employee Code
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Item_Make, new { @class = " form-rounded", @style = " width :80%; " })
+                    @Html.TextBoxFor(x => x.Emp_Code, new { @class = " form-rounded", @style = " width :80%; " })
                 </td>
                 <td style="width:25%;">
-                    Asset Model
+                    Employee  Name
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Item_Model, new { @class = " form-rounded", @style = " width :80%; " })
+                    @Html.TextBoxFor(x => x.Emp_Name, new { @class = " form-rounded", @style = " width :80%; " })
                 </td>
             </tr>
             <tr>
+
                 <td style="width:25%;">
-                    Asset Serial No.
+                    Employee Type
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Item_serial_No, new { @class = " form-rounded", @style = " width :80%; " })
+                    @Html.TextBoxFor(x => x.Emp_Type, new { @class = " form-rounded", @style = " width :80%; " })
                 </td>
 
                 <td style="width:25%;">
-                    Date of Purchase
+                    Employee  Designation
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Proc_date, new { @class = "dateclass form-rounded", @style = " width :80%; " })
+                    @Html.TextBoxFor(x => x.Emp_Designation, new { @class = " form-rounded", @style = " width :80%; " })
                 </td>
+
 
             </tr>
-            <tr>
-                <td style="width: 25%; height: 50px;">
-                    Warrenty End Date
-                </td>
-                <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Warnt_end_dt, new { @class = "dateclass form-rounded", @style = " width :80%; " })
-                </td>
-
-                <td style="width:25%;">
-                    Price
-                </td>
-                <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.price, new { @class = " form-rounded", @style = " width :80%; " })
-                </td>
-            </tr>
-
             <tr>
                 <td style="width:25%;">
                     Remarks

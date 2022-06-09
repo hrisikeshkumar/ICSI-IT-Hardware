@@ -52,10 +52,10 @@
                 <table style="width:100%">
                     <tr>
                         <th>
-                            Item Type
+                            Employee Name
                         </th>
                         <th>
-                            serial No
+                            Employee Designation
                         </th>
                         <th> Action </th>
                     </tr>
@@ -64,16 +64,16 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Item_Type)
+                                @Html.DisplayFor(modelItem => item.Emp_Name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Item_serial_No)
+                                @Html.DisplayFor(modelItem => item.Emp_Designation)
                             </td>
                             <td>
 
-                                @Html.ActionLink("Edit", "Edit_Employee", new { id = item.Item_id }) |
-                                @Html.ActionLink("Details", "Get_Detail", new { id = item.Item_id }) |
-                                @Html.ActionLink("Delete", "Delete_Item", new { id = item.Item_id })
+                                @Html.ActionLink("Edit", "Edit_Employee", new { id = item.Emp_Unique_Id }) |
+                                @Html.ActionLink("Details", "Get_Detail", new { id = item.Emp_Unique_Id }) |
+                                @Html.ActionLink("Delete", "Delete_Item", new { id = item.Emp_Unique_Id })
                             </td>
                         </tr>
                     }

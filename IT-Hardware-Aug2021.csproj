@@ -290,7 +290,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="BusinessLayer\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

@@ -25,7 +25,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     SqlConnection con = new SqlConnection(strcon);
 
 
-                    using (SqlCommand cmd = new SqlCommand("sp_Computer"))
+                    using (SqlCommand cmd = new SqlCommand("sp_Employee"))
                     {
                         SqlParameter sqlP_type = new SqlParameter("@Type", "Get_List");
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -48,11 +48,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     {
                         BL_data = new Mod_Employee();
 
-                        BL_data.Item_Type = Convert.ToString(dr["Asset_Type"]);
+                        BL_data.Emp_Unique_Id = Convert.ToString(dr["Emp_Unique_Id"]);
 
-                        BL_data.Item_serial_No = Convert.ToString(dr["Item_SlNo"]);
+                        BL_data.Emp_Name = Convert.ToString(dr["Emp_Name"]);
 
-                        BL_data.Item_id = Convert.ToString(dr["Item_Id"]);
+                        BL_data.Emp_Designation = Convert.ToString(dr["Emp_Designation"]);
 
                         current_data.Add(BL_data);
                     }
@@ -63,7 +63,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 return current_data;
             }
 
-            public int Save_Employee_data(Mod_Employee Data, string type, string Asset_ID)
+            public int Save_Employee_data(Mod_Employee Data, string type, string Unique_Id)
             {
                 int status = 1;
                 string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
@@ -83,26 +83,23 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                     if (type == "Update" || type == "Delete")
                     {
-                        SqlParameter Asset_Id = new SqlParameter("@Item_Id", Asset_ID);
-                        cmd.Parameters.Add(Asset_Id);
+                        SqlParameter Emp_Unique_Id = new SqlParameter("@Item_Id", Unique_Id);
+                        cmd.Parameters.Add(Emp_Unique_Id);
                     }
 
-                    SqlParameter Asset_Make_Id = new SqlParameter("@Item_MakeId", Data.Item_Make_id);
-                    cmd.Parameters.Add(Asset_Make_Id);
+                    SqlParameter Emp_Code = new SqlParameter("@Item_MakeId", Data.Emp_Code);
+                    cmd.Parameters.Add(Emp_Code);
 
-                    SqlParameter Asset_SL_No = new SqlParameter("@Item_serial_No", Data.Item_serial_No);
-                    cmd.Parameters.Add(Asset_SL_No);
+                    SqlParameter Emp_Name = new SqlParameter("@Item_serial_No", Data.Emp_Name);
+                    cmd.Parameters.Add(Emp_Name);
 
-                    SqlParameter Proc_Date = new SqlParameter("@Proc_Date", Data.Proc_date);
-                    cmd.Parameters.Add(Proc_Date);
+                    SqlParameter Emp_Designation = new SqlParameter("@Proc_Date", Data.Emp_Designation);
+                    cmd.Parameters.Add(Emp_Designation);
 
-                    SqlParameter Warnt_end_dt = new SqlParameter("@Warnt_end_DT", Data.Warnt_end_dt);
-                    cmd.Parameters.Add(Warnt_end_dt);
+                    SqlParameter Emp_Type = new SqlParameter("@Warnt_end_DT", Data.Emp_Type);
+                    cmd.Parameters.Add(Emp_Type);
 
-                    SqlParameter Asset_Price = new SqlParameter("@Asset_Price", Data.price);
-                    cmd.Parameters.Add(Asset_Price);
-
-                    SqlParameter Remarks = new SqlParameter("@Remarks", Data.Remarks);
+                    SqlParameter Remarks = new SqlParameter("@Asset_Price", Data.Remarks);
                     cmd.Parameters.Add(Remarks);
 
                     SqlParameter Asset_Type = new SqlParameter("@Asset_Type", "Employee");
@@ -121,7 +118,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 return status;
             }
 
-            public Mod_Employee Get_Data_By_ID(string Asset_Id)
+            public Mod_Employee Get_Data_By_ID(string Unique_Id)
             {
                 Mod_Employee Data = new Mod_Employee();
 
@@ -132,15 +129,15 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     SqlConnection con = new SqlConnection(strcon);
 
 
-                    using (SqlCommand cmd = new SqlCommand("sp_Computer"))
+                    using (SqlCommand cmd = new SqlCommand("sp_Employee"))
                     {
                         SqlParameter sqlP_type = new SqlParameter("@Type", "Get_Data_By_ID");
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Connection = con;
                         cmd.Parameters.Add(sqlP_type);
 
-                        SqlParameter sqlP_Asset_ID = new SqlParameter("@Item_ID", Asset_Id);
-                        cmd.Parameters.Add(sqlP_Asset_ID);
+                        SqlParameter Emp_Unique_Id = new SqlParameter("@Emp_Unique_Id", Unique_Id);
+                        cmd.Parameters.Add(Emp_Unique_Id);
 
                         using (SqlDataAdapter sda = new SqlDataAdapter())
                         {
@@ -155,12 +152,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                     if (dt_Comuter.Rows.Count > 0)
                     {
-                        Data.Item_id = Convert.ToString(dt_Comuter.Rows[0]["Item_Id"]);
-                        Data.Item_Make_id = Convert.ToString(dt_Comuter.Rows[0]["Item_MakeId"]);
-                        Data.Item_serial_No = Convert.ToString(dt_Comuter.Rows[0]["Item_SlNo"]);
-                        Data.Proc_date = Convert.ToDateTime(dt_Comuter.Rows[0]["Proc_Date"]).Date;
-                        Data.Warnt_end_dt = Convert.ToDateTime(dt_Comuter.Rows[0]["Warnt_end_DT"]).Date;
-                        Data.price = Convert.ToInt32(dt_Comuter.Rows[0]["Asset_Price"]);
+                        Data.Emp_Unique_Id = Convert.ToString(dt_Comuter.Rows[0]["Emp_Unique_Id"]);
+                        Data.Emp_Code = Convert.ToString(dt_Comuter.Rows[0]["Emp_Code"]);
+                        Data.Emp_Name = Convert.ToString(dt_Comuter.Rows[0]["Emp_Name"]);
+                        Data.Emp_Designation = Convert.ToString(dt_Comuter.Rows[0]["Emp_Designation"]);
+                        Data.Emp_Type = Convert.ToString(dt_Comuter.Rows[0]["Emp_Type"]);
                         Data.Remarks = Convert.ToString(dt_Comuter.Rows[0]["Remarks"]);
 
                     }
