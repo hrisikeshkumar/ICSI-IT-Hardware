@@ -148,7 +148,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-        public JsonResult Get_Designation(int Emp_Type)
+        public JsonResult Get_Designation(string Emp_Type)
         {
 
             BL_Employee data = new BL_Employee();

@@ -189,13 +189,13 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             return Emp_Type;
         }
 
-        public List<SelectListItem> Bind_Designation(int Emp_Type)
+        public List<SelectListItem> Bind_Designation(string Emp_Type)
         {
             List<SelectListItem> Emp_Desig = new List<SelectListItem>();
 
             SelectListItem ListItem;
 
-            if (Emp_Type ==2)
+            if (Emp_Type =="2")
             {
                 ListItem = new SelectListItem();
                 ListItem.Value = "201";
@@ -208,7 +208,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 Emp_Desig.Add(ListItem);
 
             }
-            else if (Emp_Type == 1)
+            else if (Emp_Type == "1")
             {
 
                 ListItem = new SelectListItem();

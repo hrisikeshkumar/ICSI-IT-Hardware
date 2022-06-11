@@ -151,7 +151,7 @@
                 Remarks
             </td>
             <td style="width:75%; " colspan="3">
-                @Html.TextAreaFor(x => x.Remarks, new { @class = " form-rounded", @style = " width :80%; " })
+                @Html.TextAreaFor(x => x.Remarks, new { @class = " form-rounded", @style = " width :90%; " })
             </td>
         </tr>
 
@@ -210,6 +210,7 @@
 
         $('#Emp_Type').change(function () {
             $('#Emp_Designation').empty();
+            
             $.ajax({
                 type: "POST",
                 url: "/Admin/Employee/Get_Designation",
@@ -220,8 +221,9 @@
                         $('#Emp_Designation').append('<option value="' + value.Value + '">' + value.Text + '</option>');
                     });
                 }
-                
+
             });
+           
         });
     });
 </script>
