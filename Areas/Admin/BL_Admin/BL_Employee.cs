@@ -174,20 +174,13 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
         {
             List<SelectListItem> Emp_Type = new List<SelectListItem>();
 
-          
-
-            SelectListItem List1 = new SelectListItem();
-            List1.Value = "1";
-            List1.Text = "Select";
-            Emp_Type.Add(List1);
-
             SelectListItem List2 = new SelectListItem();
-            List2.Value = "2";
+            List2.Value = "1";
             List2.Text = "Parmanent";
             Emp_Type.Add(List2);
 
             SelectListItem List3 = new SelectListItem();
-            List3.Value = "3";
+            List3.Value = "2";
             List3.Text = "Casual/Consultant";
             Emp_Type.Add(List3);
 
@@ -196,24 +189,108 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             return Emp_Type;
         }
 
-        public List<SelectListItem> Bind_Designation()
+        public List<SelectListItem> Bind_Designation(int Emp_Type)
         {
             List<SelectListItem> Emp_Desig = new List<SelectListItem>();
 
-            SelectListItem List1 = new SelectListItem();
-            List1.Value = "1";
-            List1.Text = "Select";
-            Emp_Desig.Add(List1);
+            SelectListItem ListItem;
 
-            SelectListItem List2 = new SelectListItem();
-            List2.Value = "2";
-            List2.Text = "Desig1";
-            Emp_Desig.Add(List2);
+            if (Emp_Type ==2)
+            {
+                ListItem = new SelectListItem();
+                ListItem.Value = "201";
+                ListItem.Text = "Casual";
+                Emp_Desig.Add(ListItem);
 
-            SelectListItem List3 = new SelectListItem();
-            List3.Value = "3";
-            List3.Text = "Desig2";
-            Emp_Desig.Add(List3);
+                ListItem = new SelectListItem();
+                ListItem.Value = "202";
+                ListItem.Text = "Contractual";
+                Emp_Desig.Add(ListItem);
+
+            }
+            else if (Emp_Type == 1)
+            {
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "1";
+                ListItem.Text = "President";
+                Emp_Desig.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "2";
+                ListItem.Text = "Secretary";
+                Emp_Desig.Add(ListItem);
+
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "3";
+                ListItem.Text = "Joint Secretary(SG)";
+                Emp_Desig.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "4";
+                ListItem.Text = "Joint Secretary";
+                Emp_Desig.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "5";
+                ListItem.Text = "Director";
+                Emp_Desig.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "6";
+                ListItem.Text = "Joint Director";
+                Emp_Desig.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "7";
+                ListItem.Text = "Deputy Director";
+                Emp_Desig.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "8";
+                ListItem.Text = "Assistant Director";
+                Emp_Desig.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "9";
+                ListItem.Text = "Executive All";
+                Emp_Desig.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "10";
+                ListItem.Text = "Senior Executive Assistant";
+                Emp_Desig.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "11";
+                ListItem.Text = "Executive Assistant";
+                Emp_Desig.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "12";
+                ListItem.Text = "Junior Executive Assistant";
+                Emp_Desig.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "13";
+                ListItem.Text = "Senior Office Assistant";
+                Emp_Desig.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "14";
+                ListItem.Text = "Office Assistant";
+                Emp_Desig.Add(ListItem);
+
+            }
+            else
+            {
+                ListItem = new SelectListItem();
+                ListItem.Value = null;
+                ListItem.Text = "Please Select a Type";
+                Emp_Desig.Add(ListItem);
+
+            }
 
 
             return Emp_Desig;

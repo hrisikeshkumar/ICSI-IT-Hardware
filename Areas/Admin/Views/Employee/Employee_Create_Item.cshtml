@@ -214,12 +214,13 @@
                 type: "POST",
                 url: "/Admin/Employee/Get_Designation",
                 datatype: "Json",
-                data: { CategoryID: $('#Emp_Designation').val() },
+                data: { Emp_Type: $('#Emp_Type').val() },
                 success: function (data) {
                     $.each(data, function (index, value) {
                         $('#Emp_Designation').append('<option value="' + value.Value + '">' + value.Text + '</option>');
                     });
                 }
+                
             });
         });
     });

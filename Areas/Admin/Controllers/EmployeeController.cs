@@ -148,7 +148,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-        public JsonResult Get_Designation()
+        public JsonResult Get_Designation(int Emp_Type)
         {
 
             BL_Employee data = new BL_Employee();
@@ -157,7 +157,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             Mod_emp.Emp_Type_List = data.Bind_EmpType();
 
-            Mod_emp.Designation_List = data.Bind_Designation();
+            Mod_emp.Designation_List = data.Bind_Designation(Emp_Type);
 
             return Json(Mod_emp.Designation_List, JsonRequestBehavior.AllowGet);
           
