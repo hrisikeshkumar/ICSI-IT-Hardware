@@ -14,9 +14,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         public ActionResult Employee_Details()
         {
-            BL_Employee com = new BL_Employee();
+            BL_Employee data = new BL_Employee(); 
 
-            List<Mod_Employee> pc_List = com.Get_EmployeeData();
+            List<Mod_Employee> pc_List = data.Get_EmployeeData();
 
             return View("~/Areas/Admin/Views/Employee/Employee_Details.cshtml", pc_List);
         }
@@ -26,7 +26,15 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         {
             ViewBag.Message = Message;
 
-            return View("~/Areas/Admin/Views/Employee/Employee_Create_Item.cshtml");
+            BL_Employee data = new BL_Employee();
+
+            Mod_Employee Mod_emp = new Mod_Employee();
+
+            Mod_emp.Emp_Type_List = data.Bind_EmpType();
+
+            //Mod_emp.Designation_List = data.Bind_Designation();
+
+            return View("~/Areas/Admin/Views/Employee/Employee_Create_Item.cshtml", Mod_emp);
 
         }
 
@@ -137,6 +145,22 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             }
 
             return RedirectToAction("Employee_Details", "Employee");
+        }
+
+
+        public JsonResult Get_Designation()
+        {
+
+            BL_Employee data = new BL_Employee();
+
+            Mod_Employee Mod_emp = new Mod_Employee();
+
+            Mod_emp.Emp_Type_List = data.Bind_EmpType();
+
+            Mod_emp.Designation_List = data.Bind_Designation();
+
+            return Json(Mod_emp.Designation_List, JsonRequestBehavior.AllowGet);
+          
         }
 
     }
