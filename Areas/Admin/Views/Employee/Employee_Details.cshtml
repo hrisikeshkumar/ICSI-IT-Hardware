@@ -57,25 +57,30 @@
                         <th>
                             Employee Designation
                         </th>
+                        <th>
+                            Department
+                        </th>
                         <th> Action </th>
                     </tr>
 
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Emp_Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Emp_Designation)
-                            </td>
-                            <td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Emp_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Emp_Designation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Emp_Dept)
+                    </td>
+                    <td>
 
-                                @Html.ActionLink("Edit", "Edit_Employee", new { id = item.Emp_Unique_Id }) |
-                                @Html.ActionLink("Details", "Get_Detail", new { id = item.Emp_Unique_Id }) |
-                                @Html.ActionLink("Delete", "Delete_Item", new { id = item.Emp_Unique_Id })
-                            </td>
-                        </tr>
+                        @Html.ActionLink("Edit", "Edit_Employee", new { id = item.Emp_Unique_Id }) |
+                        @Html.ActionLink("Delete", "Delete_Item", new { id = item.Emp_Unique_Id })
+                    </td>
+                </tr>
                     }
 
                 </table>

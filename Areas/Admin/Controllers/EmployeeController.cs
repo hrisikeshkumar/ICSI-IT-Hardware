@@ -16,9 +16,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         {
             BL_Employee data = new BL_Employee(); 
 
-            List<Mod_Employee> pc_List = data.Get_EmployeeData();
+            List<Mod_Employee> Emp_List = data.Get_EmployeeData();
 
-            return View("~/Areas/Admin/Views/Employee/Employee_Details.cshtml", pc_List);
+            return View("~/Areas/Admin/Views/Employee/Employee_Details.cshtml", Emp_List);
         }
 
         [HttpGet]
@@ -32,7 +32,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             Mod_emp.Emp_Type_List = data.Bind_EmpType();
 
-            //Mod_emp.Designation_List = data.Bind_Designation();
+            Mod_emp.Dept_List = data.Bind_Dept();
 
             return View("~/Areas/Admin/Views/Employee/Employee_Create_Item.cshtml", Mod_emp);
 
@@ -73,10 +73,14 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         public ActionResult Edit_Employee(string id)
         {
-            BL_Employee Md_Com = new BL_Employee();
-            Mod_Employee data = Md_Com.Get_Data_By_ID(id);
+            BL_Employee Emp_Data = new BL_Employee();
+            Mod_Employee Mod_emp = new Mod_Employee();
 
-            return View("~/Areas/Admin/Views/Employee/Edit_Employee.cshtml", data);
+            Mod_emp.Emp_Type_List = Emp_Data.Bind_EmpType();
+            Mod_emp.Dept_List = Emp_Data.Bind_Dept();
+            Mod_emp = Emp_Data.Get_Data_By_ID(id);
+
+            return View("~/Areas/Admin/Views/Employee/Edit_Employee.cshtml", Mod_emp);
         }
 
 
@@ -88,9 +92,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    BL_Employee Md_Asset = new BL_Employee();
+                    BL_Employee Md_Emp = new BL_Employee();
 
-                    status = Md_Asset.Save_Employee_data(Get_Data, "Update", Asset_ID);
+                    status = Md_Emp.Save_Employee_data(Get_Data, "Update", Asset_ID);
 
                     if (status == 1)
                     {
@@ -123,9 +127,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 {
 
 
-                    BL_Employee Md_Asset = new BL_Employee();
+                    BL_Employee Md_Emp = new BL_Employee();
 
-                    status = Md_Asset.Save_Employee_data(Get_Data, "Delete", id);
+                    status = Md_Emp.Save_Employee_data(Get_Data, "Delete", id);
 
                     if (status == 1)
                     {
@@ -154,8 +158,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             BL_Employee data = new BL_Employee();
 
             Mod_Employee Mod_emp = new Mod_Employee();
-
-            Mod_emp.Emp_Type_List = data.Bind_EmpType();
 
             Mod_emp.Designation_List = data.Bind_Designation(Emp_Type);
 

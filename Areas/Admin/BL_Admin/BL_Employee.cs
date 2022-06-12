@@ -296,6 +296,108 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             return Emp_Desig;
         }
 
+        public List<SelectListItem> Bind_Dept()
+        {
+            List<SelectListItem> Emp_Dept = new List<SelectListItem>();
+
+            SelectListItem ListItem;
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "101";
+                ListItem.Text = "President Office";
+            Emp_Dept.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "102";
+                ListItem.Text = "Secretary Office";
+            Emp_Dept.Add(ListItem);
+
+            
+                ListItem = new SelectListItem();
+                ListItem.Value = "103";
+                ListItem.Text = "HR";
+            Emp_Dept.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "104";
+                ListItem.Text = "PFP";
+            Emp_Dept.Add(ListItem);
+
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "105";
+                ListItem.Text = "PMQ(SG)";
+            Emp_Dept.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "106";
+                ListItem.Text = "LAW";
+            Emp_Dept.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "107";
+                ListItem.Text = "PRCC";
+            Emp_Dept.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "108";
+                ListItem.Text = "Admin";
+            Emp_Dept.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "108";
+                ListItem.Text = "Infra";
+            Emp_Dept.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "109";
+                ListItem.Text = "Student Service";
+            Emp_Dept.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "110";
+                ListItem.Text = "Training";
+            Emp_Dept.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "111";
+                ListItem.Text = "Membership";
+            Emp_Dept.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "112";
+                ListItem.Text = "IIP";
+            Emp_Dept.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "113";
+                ListItem.Text = "IT";
+            Emp_Dept.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "114";
+                ListItem.Text = "Purchase";
+            Emp_Dept.Add(ListItem);
+
+                ListItem = new SelectListItem();
+                ListItem.Value = "115";
+                ListItem.Text = "F&A";
+            Emp_Dept.Add(ListItem);
+
+            ListItem = new SelectListItem();
+            ListItem.Value = "116";
+            ListItem.Text = "Academics";
+            Emp_Dept.Add(ListItem);
+
+            ListItem = new SelectListItem();
+            ListItem.Value = "117";
+            ListItem.Text = "Exam";
+            Emp_Dept.Add(ListItem);
+
+
+            return Emp_Dept;
+        }
+
     }
-    
+
 }
