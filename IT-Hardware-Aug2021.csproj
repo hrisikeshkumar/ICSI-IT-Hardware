@@ -127,6 +127,8 @@
     <Compile Include="Areas\Admin\BL_Admin\BL_AppleIpad.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_DC_MisItems.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Employee.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\BL_Item_Issue.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\BL_Shift_Item.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Laptop.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Monitor.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_OtherItem.cs" />
@@ -142,10 +144,11 @@
     <Compile Include="Areas\Admin\Controllers\DataCardController.cs" />
     <Compile Include="Areas\Admin\Controllers\DC_MisItemsController.cs" />
     <Compile Include="Areas\Admin\Controllers\EmployeeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Item_IssueController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Shift_ItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\LaptopController.cs" />
     <Compile Include="Areas\Admin\Controllers\MasterDataController.cs" />
     <Compile Include="Areas\Admin\Controllers\MonitorController.cs" />
-    <Compile Include="Areas\Admin\Controllers\Move_ItemsController.cs" />
     <Compile Include="Areas\Admin\Controllers\OtherItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\PrinterController.cs" />
     <Compile Include="Areas\Admin\Controllers\ScannerController.cs" />
@@ -160,6 +163,7 @@
     <Compile Include="Areas\Admin\Models\Mod_Computer.cs" />
     <Compile Include="Areas\Admin\Models\Mod_DC_MisItems.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Employee.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_Item_Issue.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Laptop.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Monitor.cs" />
     <Compile Include="Areas\Admin\Models\Mod_OtherItem.cs" />
@@ -169,6 +173,7 @@
     <Compile Include="Areas\Admin\Models\Mod_Switch.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Ups.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Vendor.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_Shift_Item.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Log_InController.cs" />
     <Compile Include="Global.asax.cs">
@@ -229,7 +234,6 @@
     <Content Include="fonts\Material-Design-Iconic-Font.ttf" />
     <Content Include="fonts\Material-Design-Iconic-Font.woff" />
     <Content Include="fonts\Material-Design-Iconic-Font.woff2" />
-    <Content Include="Areas\Admin\Views\Move_Items\Item_Movement.cshtml" />
     <Content Include="CSS\.DS_Store" />
     <Content Include="CSS\bootstrap\.DS_Store" />
     <Content Include="CSS\bootstrap\mixins\.DS_Store" />
@@ -278,6 +282,12 @@
     <Content Include="Areas\Admin\Views\DC_MisItems\Edit_DC_MisItems.cshtml" />
     <Content Include="Areas\Admin\Views\DC_MisItems\DC_MisItems_Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\DC_MisItems\DC_MisItems_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Shift_Item\Edit_Shift_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\Shift_Item\Shift_Item_Create_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\Shift_Item\Shift_Item_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Item_Issue\Edit_Item_Issue.cshtml" />
+    <Content Include="Areas\Admin\Views\Item_Issue\Item_Issue_Create_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\Item_Issue\Item_Issue_Details.cshtml" />
     <None Include="Properties\PublishProfiles\rajaonprewebapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
