@@ -22,7 +22,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Employee_Create_Item(string Message)
+        public ActionResult Create_Employee(string Message)
         {
             ViewBag.Message = Message;
 
@@ -34,11 +34,12 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             Mod_emp.Dept_List = data.Bind_Dept();
 
-            return View("~/Areas/Admin/Views/Employee/Employee_Create_Item.cshtml", Mod_emp);
+            return View("~/Areas/Admin/Views/Employee/Create_Employee.cshtml", Mod_emp);
 
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Employee_Create_Post(Mod_Employee Get_Data)
         {
             string Message = "";
@@ -60,6 +61,10 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                         TempData["Message"] = String.Format("Data save successfully");
                     }
                 }
+                else
+                {
+                    TempData["Message"] = String.Format("Data not Entered Properly");
+                }
             }
             catch (Exception ex)
             {
@@ -68,7 +73,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Create_Item", "Employee");
+            return RedirectToAction("Create_Employee", "Employee");
         }
 
         public ActionResult Edit_Employee(string id)

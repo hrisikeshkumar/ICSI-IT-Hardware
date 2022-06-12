@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace IT_Hardware_Aug2021.Areas.Admin.Models
 {
@@ -10,6 +11,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
     {
         public string Emp_Unique_Id { get; set; }
         public string Emp_Code { get; set; }
+
+        [Required(ErrorMessage = "Name is Required")]
         public string Emp_Name { get; set; }
         public string Emp_Designation { get; set; }
         public string Emp_Dept { get; set; }
