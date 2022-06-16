@@ -10,7 +10,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
     {
 
         public string Vendor_id { get; set; }
+
+        [Required]
         public string Vendor_name { get; set; }
+
+        [Required]
         public string Vendor_Addr { get; set; }
         public string Purchase_Order { get; set; }
         public string Remarks { get; set; }

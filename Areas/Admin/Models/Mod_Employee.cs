@@ -14,8 +14,17 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
 
         [Required(ErrorMessage = "Name is Required")]
         public string Emp_Name { get; set; }
+
+        [Required(ErrorMessage = "Required")]
         public string Emp_Designation { get; set; }
+
+        public string Emp_Designation_Name { get; set; }
+
+        [Required(ErrorMessage = "Required")]
         public string Emp_Dept { get; set; }
+        public string Emp_Dept_Name { get; set; }
+
+        [Required(ErrorMessage = "Required")]
         public string Emp_Type { get; set; }
         public List<SelectListItem> Designation_List { get; set; }
         public List<SelectListItem> Dept_List { get; set; }
@@ -30,16 +39,5 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
 
     }
 
-    public class Employee_Type
-    {
-        public int Id { get; set; }
-        public string Values { get; set; }
-    }
-
-    public class Employee_Designation
-    {
-        public int Id { get; set; }
-        public string Values { get; set; }
-    }
 
 }

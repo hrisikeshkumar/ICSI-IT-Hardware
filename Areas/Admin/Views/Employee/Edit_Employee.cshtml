@@ -107,83 +107,101 @@
     @using (Html.BeginForm("Update_Employee", "Employee", FormMethod.Post))
     {
 
-    <table class=" table-hover table-striped shadow " style="width:100%">
+        @Html.AntiForgeryToken()
+        HtmlHelper.UnobtrusiveJavaScriptEnabled = false;
 
-        <tr>
-            <td style="width:25%; height:50px;">
-                Employee Code
-            </td>
-            <td style="width:25%;">
-                @Html.TextBoxFor(x => x.Emp_Code, new { @class = " form-rounded", @style = " width :80%; " })
-            </td>
-            <td style="width:25%;">
-                Employee  Name
-            </td>
-            <td style="width:25%;">
-                @Html.TextBoxFor(x => x.Emp_Name, new { @class = " form-rounded", @style = " width :80%; " })
-            </td>
-        </tr>
-        <tr>
-            <td style="width:25%;">
-                Employee Type
-            </td>
-            <td style="width:25%;">
-                @Html.TextBoxFor(x => x.Emp_Type, new { @class = " form-rounded", @style = " width :80%; " })
-            </td>
 
-            <td style="width:25%;">
-                Employee  Designation
-            </td>
-            <td style="width:25%;">
-                @Html.TextBoxFor(x => x.Emp_Designation, new { @class = " form-rounded", @style = " width :80%; " })
-            </td>
-        </tr>
-        <tr>
-            <td style="width:25%;">
-                Remarks
-            </td>
-            <td style="width:75%; " colspan="3">
-                @Html.TextAreaFor(x => x.Remarks, new { @class = " form-rounded", @style = " width :80%; " })
-            </td>
-        </tr>
-        <tr>
-            <td style="width:25%;">
-                Department
-            </td>
-            <td style="width:25%;">
+        <table class=" table-hover table-striped shadow " style="width:100%">
 
-                @Html.DropDownListFor(x => x.Emp_Dept, Model.Dept_List, "Please select", new { @class = " form-rounded", @style = " width :80%; " })
+            <tr>
+                <td style="width:20%; height:50px;">
+                    Employee Code
+                    @Html.HiddenFor(x=>x.Emp_Unique_Id)
+                </td>
+                <td style="width:30%;">
+                    @Html.TextBoxFor(x => x.Emp_Code, new { @class = " form-rounded", @style = " width :50%; " })
+                </td>
+                <td style="width:20%;">
+                    Employee  Name
+                </td>
+                <td style="width:30%;">
+                    @Html.TextBoxFor(x => x.Emp_Name, new { @class = " form-rounded", @style = " width :90%; " })
+                    <i id="IconEmp_Name" class="valid fa fa-question-circle" style="font-size:24px;color:red"></i>
+                </td>
+            </tr>
+            <tr>
 
-            </td>
+                <td style="width:20%;">
+                    Employee Type
+                </td>
+                <td style="width:30%;">
 
-            <td style="width:25%;">
-                Location
-            </td>
-            <td style="width:25%;">
+                    @Html.DropDownListFor(x => x.Emp_Type, Model.Emp_Type_List, "Please select", new { @class = " form-rounded", @style = " width :90%; " })
+                    <i id="IconEmp_Type" class="valid fa fa-question-circle" style="font-size:24px;color:red"></i>
 
-                @Html.TextBoxFor(x => x.Location, new { @class = " form-rounded", @style = " width :80%; " })
+                
 
-            </td>
+                </td>
 
-        </tr>
-        <tr>
-            <td style="width:100%; height:10px;" colspan="4">
-            </td>
-        </tr>
-        <tr style=" height: 50px; ">
-            <td align="left" style="width:25%; "></td>
+                <td style="width:20%;">
+                    Employee  Designation
+                </td>
+                <td style="width:30%;">
 
-            <td style="width: 25%; padding-top: 10px; padding-bottom: 5px" align="center">
-                <button class="button_cls form-rounded">Submit</button>
-            </td>
+                    @Html.DropDownListFor(x => x.Emp_Designation, Model.Designation_List, "Please select a Type", new { @class = " form-rounded", @style = " width :90%; " })
+                    <i id="IconEmp_Designation" class="valid fa fa-question-circle" style="font-size:24px;color:red"></i>
+                </td>
 
-            <td style="width: 25%; padding-top: 10px; padding-bottom: 5px" align="center">
-                @Html.ActionLink("Back", "Employee_Details", "Employee", null, new { @class = "button_cls form-rounded", })
-            </td>
+            </tr>
+            <tr>
+                <td style="width:20%;">
+                    Department
+                </td>
+                <td style="width:30%;">
 
-            <td align="left" style="width:25%;"></td>
-        </tr>
-    </table>
+                    @Html.DropDownListFor(x => x.Emp_Dept, Model.Dept_List, "Please select", new { @class = " form-rounded", @style = " width :90%; " })
+                    <i id="IconEmp_Dept" class="valid fa fa-question-circle" style="font-size:24px;color:red"></i>
+                </td>
+
+                <td style="width:20%;">
+                    Location
+                </td>
+
+
+                <td style="width:30%;">
+                    @Html.TextBoxFor(x => x.Location, new { @class = " form-rounded", @style = " width :90%; " })
+                </td>
+
+            </tr>
+
+            <tr>
+                <td style="width:20%;">
+                    Remarks
+                </td>
+                <td style="width:80%; " colspan="3">
+                    @Html.TextAreaFor(x => x.Remarks, new { @class = " form-rounded", @style = " width :90%; " })
+                </td>
+            </tr>
+
+            <tr>
+                <td style="width:100%; height:10px;" colspan="4">
+                </td>
+            </tr>
+
+            <tr style=" height: 50px; ">
+                <td align="left" style="width:25%; "></td>
+
+                <td style="width: 25%; padding-top: 10px; padding-bottom: 5px" align="center">
+                    <button name="btnSave" id="btnSave" class="button_cls form-rounded">Submit</button>
+                </td>
+
+                <td style="width: 25%; padding-top: 10px; padding-bottom: 5px" align="center">
+                    @Html.ActionLink("Back", "Employee_Details", "Employee", null, new { @class = "button_cls form-rounded", })
+                </td>
+
+                <td align="left" style="width:25%;"></td>
+            </tr>
+        </table>
 
     }
 </div>
@@ -203,5 +221,159 @@
 }
 
 
+
+<script src="~/js/Validation/jquery.validate.js"></script>
+<script src="~/js/Validation/jquery.validate.min.js"></script>
+<script src="~/js/Validation/jquery.validate.unobtrusive.js"></script>
+<script src="~/js/Validation/jquery.validate.unobtrusive.min.js"></script>
+
+
+<script type="text/javascript">
+    $(function () {
+        //$.ajax({
+        //    type: "GET",
+        //    url: "/home/GetCategories",
+        //    datatype: "Json",
+        //    success: function (data) {
+        //        $.each(data, function (index, value) {
+        //            $('#dropdownCategory').append('<option value="' + value.CategoryID + '">' + value.CategoryName + '</option>');
+        //        });
+        //    }
+        //});
+
+        $('#Emp_Type').change(function () {
+            $('#Emp_Designation').empty();
+
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Employee/Get_Designation",
+                datatype: "Json",
+                data: { Emp_Type: $('#Emp_Type').val() },
+                success: function (data) {
+                    $.each(data, function (index, value) {
+                        $('#Emp_Designation').append('<option value="' + value.Value + '">' + value.Text + '</option>');
+                    });
+                }
+
+            });
+
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnSave').click(function () {
+            var Emp_Name, Emp_Type, Emp_Designation, Emp_Dept, EmailId, emailExp;
+            Emp_Name = $("#Emp_Name").val();
+            Emp_Type = $("#Emp_Type").val();
+            Emp_Designation = $("#Emp_Designation").val();
+            Emp_Dept = $("#Emp_Dept").val();
+
+            if (Emp_Name == '') {
+                //alert("Please Enter Employee Name");
+                $("#Emp_Name").focus();
+                $("#IconEmp_Name").addClass("invalid")
+                $("#IconEmp_Name").removeClass("valid")
+                return false;
+            }
+            else {
+                $("#IconEmp_Name").addClass("valid")
+                $("#IconEmp_Name").removeClass("invalid")
+            }
+            if (Emp_Type == null || Emp_Type < 1) {
+                $("#IconEmp_Type").addClass("invalid")
+                $("#IconEmp_Type").removeClass("valid")
+                return false;
+            }
+            else {
+                $("#IconEmp_Type").addClass("valid")
+                $("#IconEmp_Type").removeClass("invalid")
+            }
+            if (Emp_Designation == null || Emp_Designation < 1) {
+                $("#IconEmp_Designation").addClass("invalid")
+                $("#IconEmp_Designation").removeClass("valid")
+                return false;
+            }
+            else {
+                $("#IconEmp_Designation").addClass("valid")
+                $("#IconEmp_Designation").removeClass("invalid")
+            }
+            if (Emp_Dept == null || Emp_Dept < 1) {
+                $("#IconEmp_Dept").addClass("invalid")
+                $("#IconEmp_Dept").removeClass("valid")
+                return false;
+            }
+            else {
+                $("#IconEmp_Dept").addClass("valid")
+                $("#IconEmp_Dept").removeClass("invalid")
+            }
+
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#Emp_Name').focusout(function () {
+            if ($('#Emp_Name').val() == '') {
+                $("#IconEmp_Name").addClass("invalid")
+                $("#IconEmp_Name").removeClass("valid")
+
+            }
+            else {
+                $("#IconEmp_Name").addClass("valid")
+                $("#IconEmp_Name").removeClass("invalid")
+            }
+        });
+
+        $('#Emp_Type').focusout(function () {
+            var Emp_Type = $('#Emp_Type').val();
+            if (Emp_Type == null || Emp_Type < 1) {
+                $("#IconEmp_Type").addClass("invalid")
+                $("#IconEmp_Type").removeClass("valid")
+
+            }
+            else {
+                $("#IconEmp_Type").addClass("valid")
+                $("#IconEmp_Type").removeClass("invalid")
+            }
+        });
+
+        $('#Emp_Designation').focusout(function () {
+            var Emp_Designation = $('#Emp_Designation').val();
+            if (Emp_Designation == null || Emp_Designation < 1) {
+                $("#IconEmp_Designation").addClass("invalid")
+                $("#IconEmp_Designation").removeClass("valid")
+
+            }
+            else {
+                $("#IconEmp_Designation").addClass("valid")
+                $("#IconEmp_Designation").removeClass("invalid")
+            }
+        });
+
+
+        $('#Emp_Dept').focusout(function () {
+            var Emp_Dept = $('#Emp_Dept').val();
+            if (Emp_Dept == null || Emp_Dept < 1) {
+                $("#IconEmp_Dept").addClass("invalid")
+                $("#IconEmp_Dept").removeClass("valid")
+
+            }
+            else {
+                $("#IconEmp_Dept").addClass("valid")
+                $("#IconEmp_Dept").removeClass("invalid")
+            }
+
+        });
+
+
+    });
+
+</script>
 
 

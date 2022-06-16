@@ -105,26 +105,34 @@
 <div style=" align-content:center; width:100%" class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
 
-    @using (Html.BeginForm("Create_Item_Post", "Vendor", FormMethod.Post))
+    @using (Html.BeginForm("Vendor_Create_Post", "Vendor", FormMethod.Post))
     {
+
+        @Html.AntiForgeryToken()
+        HtmlHelper.UnobtrusiveJavaScriptEnabled = false;
 
         <table class=" table-hover table-striped shadow " style="width:100%">
 
             <tr>
                 <td style="width:25%; height:50px;">
                     Vendor Name
+
                 </td>
-                <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Vendor_name, new { @class = " form-rounded", @style = " width :80%; " })
+                <td style="width:75%;" colspan="3">
+                    @Html.TextBoxFor(x => x.Vendor_name, new { @class = " form-rounded", @style = " width :40%; " })
+                    <i id="IconVendor_name" class="valid fa fa-question-circle" style="font-size:24px;color:red"></i>
                 </td>
+            </tr>
+            <tr>
                 <td style="width:25%;">
                     Vendor Address
                 </td>
-                <td style="width:25%;">
+                <td style="width:75%;" colspan="3">
                     @Html.TextBoxFor(x => x.Vendor_Addr, new { @class = " form-rounded", @style = " width :80%; " })
+                    <i id="IconVendor_Addr" class="valid fa fa-question-circle" style="font-size:24px;color:red"></i>
                 </td>
             </tr>
-            
+
             <tr>
                 <td style="width:25%;">
                     Remarks
@@ -171,4 +179,57 @@
 
 }
 
+
+
+<script src="~/js/Validation/jquery.validate.js"></script>
+<script src="~/js/Validation/jquery.validate.min.js"></script>
+<script src="~/js/Validation/jquery.validate.unobtrusive.js"></script>
+<script src="~/js/Validation/jquery.validate.unobtrusive.min.js"></script>
+
+
+<style type="text/css">
+    .valid {
+        visibility: hidden;
+    }
+
+    .invalid {
+        visibility: visible;
+    }
+</style>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnSave').click(function () {
+            var Vendr_Name, Vendr_Addr
+            Vendr_Name = $("#Vendor_name");
+            Vendr_Addr = $("#Vendor_Addr");
+
+
+            if (Vendr_Name.val() == '') {
+                $("#IconVendor_name").addClass("invalid")
+                $("#IconVendor_name").removeClass("valid")
+                return false;
+            }
+            else {
+                $("#IconVendor_name").addClass("valid")
+                $("#IconVendor_name").removeClass("invalid")
+            }
+
+
+            if (Vendr_Addr.val() == '') {
+                $("#IconVendr_Addr").addClass("invalid")
+                $("#IconVendr_Addr").removeClass("valid")
+                return false;
+            }
+            else {
+                $("#IconVendr_Addr").addClass("valid")
+                $("#IconVendr_Addr").removeClass("invalid")
+            }
+
+
+
+        });
+    });
+</script>
 

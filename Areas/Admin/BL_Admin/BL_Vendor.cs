@@ -102,9 +102,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     
                     con.Open();
 
-                    cmd.ExecuteNonQuery();
+                    status = cmd.ExecuteNonQuery();
 
-                    status = 0;
+                  
 
                 }
                 catch (Exception ex) { status = 1; }
@@ -150,7 +150,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                         Data.Vendor_id = Convert.ToString(dt_Comuter.Rows[0]["Vendor_ID"]);
                         Data.Vendor_name = Convert.ToString(dt_Comuter.Rows[0]["Vendor_name"]);
                         Data.Vendor_Addr = Convert.ToString(dt_Comuter.Rows[0]["Vendor_Address"]);
-                        Data.Remarks = Convert.ToString(dt_Comuter.Rows[0]["Remarks"]);
+                        Data.Remarks = Convert.ToString(dt_Comuter.Rows[0]["remarks"]);
 
                     }
 

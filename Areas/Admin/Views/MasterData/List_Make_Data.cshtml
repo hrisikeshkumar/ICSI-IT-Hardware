@@ -14,7 +14,7 @@
 
 <div style=" margin-top: -100px;  text-align: center; height: 50px; align-content: center; width: 100% " class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
-    <p style="font-size:large; padding-top:-5px; font-weight:400;">List of Computer</p>
+    <p style="font-size:large; padding-top:-5px; font-weight:400;">List of Assets Make and Model</p>
 
 </div>
 
@@ -37,7 +37,7 @@
             </td>
             <td align="right" width="25%">
                 <h4>
-                    @Html.ActionLink("Add New", "Add_Data", "MasterData")
+                    @Html.ActionLink("Add New", "Add_AssetMakeModel", "MasterData")
 
                 </h4>
             </td>
@@ -71,7 +71,7 @@
                             </td>
                             <td>
 
-                                @Html.ActionLink("Edit", "Edit_Assets", new { id = item.Asset_ID }) |                               
+                                @Html.ActionLink("Edit", "Edit_AssetsMasterData", new { id = item.Asset_ID }) |                               
                                 @Html.ActionLink("Delete", "Delete_Item", new { id = item.Asset_ID })
 
                             </td>

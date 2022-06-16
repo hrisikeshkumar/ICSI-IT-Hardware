@@ -49,7 +49,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 if (ModelState.IsValid)
                 {
                     BL_Employee save_data = new BL_Employee();
-                    int status = save_data.Save_Employee_data(Get_Data, "Add_new", "");
+                    int status = save_data.Save_Employee_data(Get_Data, "Add_new");
 
                     if (status == 1)
                     {
@@ -83,13 +83,17 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             Mod_emp.Emp_Type_List = Emp_Data.Bind_EmpType();
             Mod_emp.Dept_List = Emp_Data.Bind_Dept();
-            Mod_emp = Emp_Data.Get_Data_By_ID(id);
+           
+            Mod_emp = Emp_Data.Get_Data_By_ID(id, Mod_emp);
+
+            Mod_emp.Designation_List = Emp_Data.Bind_Designation(Mod_emp.Emp_Type);
 
             return View("~/Areas/Admin/Views/Employee/Edit_Employee.cshtml", Mod_emp);
         }
 
 
-        public ActionResult Update_Employee(Mod_Employee Get_Data, string Asset_ID)
+        [ValidateAntiForgeryToken]
+        public ActionResult Update_Employee(Mod_Employee Get_Data)
         {
             int status = 0;
             try
@@ -99,7 +103,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 {
                     BL_Employee Md_Emp = new BL_Employee();
 
-                    status = Md_Emp.Save_Employee_data(Get_Data, "Update", Asset_ID);
+                    status = Md_Emp.Save_Employee_data(Get_Data, "Update");
 
                     if (status == 1)
                     {
@@ -118,11 +122,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Employee_Details", "Employee");
+            return RedirectToAction("Update_Employee", "Employee");
         }
 
 
-        public ActionResult Delete_Employee(Mod_Employee Get_Data, string id)
+        public ActionResult Delete_Employee(Mod_Employee Get_Data)
         {
             int status = 0;
             try
@@ -134,7 +138,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     BL_Employee Md_Emp = new BL_Employee();
 
-                    status = Md_Emp.Save_Employee_data(Get_Data, "Delete", id);
+                    status = Md_Emp.Save_Employee_data(Get_Data, "Delete");
 
                     if (status == 1)
                     {

@@ -12,25 +12,25 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
     public class MasterDataController : Controller
     {
 
-        public ActionResult Get_Master_Data()
+        public ActionResult List_Make_Data()
         {
             BL_AssetMaster AssetMaster_data = new BL_AssetMaster();
 
             List<Mod_AssetMaster> MasterList = AssetMaster_data.Get_Data();
 
-            return View("~/Areas/Admin/Views/MasterData/Get_Master_Data.cshtml", MasterList);
+            return View("~/Areas/Admin/Views/MasterData/List_Make_Data.cshtml", MasterList);
         }
 
 
         [HttpGet]
-        public ActionResult Add_Data(Mod_AssetMaster Get_Data)
+        public ActionResult Add_AssetMakeModel(Mod_AssetMaster Get_Data)
         {
-            return View("~/Areas/Admin/Views/MasterData/AssetMakeModel.cshtml");
+            return View("~/Areas/Admin/Views/MasterData/Add_AssetMakeModel.cshtml");
         }
 
 
         [HttpPost]
-        public ActionResult Save_master(Mod_AssetMaster Get_Data)
+        public ActionResult Save_AssetMakeModel(Mod_AssetMaster Get_Data)
         {
             int status = 0;
             try
@@ -59,23 +59,23 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Get_Master_Data", "MasterData");
+            return RedirectToAction("Add_AssetMakeModel", "MasterData");
         }
 
 
-
-        public ActionResult Edit_Assets(string id)
+        public ActionResult Edit_AssetsMasterData(string id)
         {
             
             BL_AssetMaster Md_Asset = new BL_AssetMaster();
             //Md_Asset.Get_Data_By_ID(Asset.Asset_ID.ToString().Trim());
             Mod_AssetMaster data = Md_Asset.Get_Data_By_ID(id);
 
-            return View("~/Areas/Admin/Views/MasterData/Edit_Assets.cshtml", data);
+            return View("~/Areas/Admin/Views/MasterData/Edit_AssetsMasterData.cshtml", data);
+
         }
 
         [HttpPost]
-        public ActionResult Update_master(Mod_AssetMaster Get_Data, string Asset_ID)
+        public ActionResult Update_Makedata(Mod_AssetMaster Get_Data, string Asset_ID)
         {
             int status = 0;
             try

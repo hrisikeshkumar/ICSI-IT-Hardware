@@ -11,7 +11,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
     public class VendorController : Controller
     {
 
-
         public ActionResult Vendor_Details()
         {
             BL_Vendor com = new BL_Vendor();
@@ -31,6 +30,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Vendor_Create_Post(Mod_Vendor Get_Data)
         {
             string Message = "";
@@ -42,7 +42,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                     BL_Vendor save_data = new BL_Vendor();
                     int status = save_data.Save_Vendor_data(Get_Data, "Add_new", "");
 
-                    if (status == 1)
+                    if (status > 0)
                     {
                         TempData["Message"] = String.Format("Data is not saved");
                     }
@@ -60,7 +60,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Create_Item", "Vendor");
+            return RedirectToAction("Vendor_Create_Item", "Vendor");
         }
 
         public ActionResult Edit_Vendor(string id)
@@ -71,8 +71,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Vendor/Edit_Vendor.cshtml", data);
         }
 
-
-        public ActionResult Update_Vendor(Mod_Vendor Get_Data, string Asset_ID)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update_Vendor(Mod_Vendor Get_Data)
         {
             int status = 0;
             try
@@ -82,9 +83,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 {
                     BL_Vendor Md_Asset = new BL_Vendor();
 
-                    status = Md_Asset.Save_Vendor_data(Get_Data, "Update", Asset_ID);
+                    status = Md_Asset.Save_Vendor_data(Get_Data, "Update", Get_Data.Vendor_id);
 
-                    if (status == 1)
+                    if (status > 0)
                     {
                         TempData["Message"] = String.Format("Data have saved successfully");
                     }
@@ -119,7 +120,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Save_Vendor_data(Get_Data, "Delete", id);
 
-                    if (status == 1)
+                    if (status >0)
                     {
                         TempData["Message"] = String.Format("Data saved successfully");
                     }

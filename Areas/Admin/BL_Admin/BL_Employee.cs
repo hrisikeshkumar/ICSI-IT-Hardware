@@ -49,13 +49,23 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 {
                     BL_data = new Mod_Employee();
 
-                    BL_data.Emp_Unique_Id = Convert.ToString(dr["Emp_Unique_Id"]);
+                    BL_data.Emp_Unique_Id = Convert.ToString(dr["Unique_Id"]);
+
+                    BL_data.Emp_Code = Convert.ToString(dr["Emp_Code"]);
 
                     BL_data.Emp_Name = Convert.ToString(dr["Emp_Name"]);
 
                     BL_data.Emp_Designation = Convert.ToString(dr["Emp_Designation"]);
 
+                    BL_data.Emp_Type = Convert.ToString(dr["Emp_Type"]);
 
+                    BL_data.Emp_Dept = Convert.ToString(dr["Emp_Dept"]);
+
+                    BL_data.Location = Convert.ToString(dr["Emp_Location"]);
+
+                    BL_data.Emp_Dept_Name = Convert.ToString(dr["Dept_name"]);
+
+                    BL_data.Emp_Designation_Name = Convert.ToString(dr["Designation_name"]);
 
                     current_data.Add(BL_data);
                 }
@@ -66,7 +76,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             return current_data;
         }
 
-        public int Save_Employee_data(Mod_Employee Data, string type, string Unique_Id)
+        public int Save_Employee_data(Mod_Employee Data, string type)
         {
             int status = 1;
             string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
@@ -77,7 +87,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "sp_Computer";
+                cmd.CommandText = "sp_Employee";
 
                 cmd.Connection = con;
 
@@ -86,31 +96,34 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 if (type == "Update" || type == "Delete")
                 {
-                    SqlParameter Emp_Unique_Id = new SqlParameter("@Item_Id", Unique_Id);
+                    SqlParameter Emp_Unique_Id = new SqlParameter("@Emp_Unique_Id", Data.Emp_Unique_Id);
                     cmd.Parameters.Add(Emp_Unique_Id);
                 }
 
-                SqlParameter Emp_Code = new SqlParameter("@Item_MakeId", Data.Emp_Code);
+                SqlParameter Emp_Code = new SqlParameter("@Emp_Code", Data.Emp_Code);
                 cmd.Parameters.Add(Emp_Code);
 
-                SqlParameter Emp_Name = new SqlParameter("@Item_serial_No", Data.Emp_Name);
+                SqlParameter Emp_Name = new SqlParameter("@Emp_Name", Data.Emp_Name);
                 cmd.Parameters.Add(Emp_Name);
 
-                SqlParameter Emp_Designation = new SqlParameter("@Proc_Date", Data.Emp_Designation);
+                SqlParameter Emp_Designation = new SqlParameter("@Emp_Designation", Data.Emp_Designation);
                 cmd.Parameters.Add(Emp_Designation);
 
-                SqlParameter Emp_Type = new SqlParameter("@Warnt_end_DT", Data.Emp_Type);
+                SqlParameter Emp_Dept = new SqlParameter("@Emp_Dept", Data.Emp_Dept);
+                cmd.Parameters.Add(Emp_Dept);
+
+                SqlParameter Emp_Type = new SqlParameter("@Emp_Type", Data.Emp_Type);
                 cmd.Parameters.Add(Emp_Type);
 
-                SqlParameter Remarks = new SqlParameter("@Asset_Price", Data.Remarks);
-                cmd.Parameters.Add(Remarks);
+                SqlParameter Location = new SqlParameter("@Emp_Location", Data.Location);
+                cmd.Parameters.Add(Location);
 
-                SqlParameter Asset_Type = new SqlParameter("@Asset_Type", "Employee");
-                cmd.Parameters.Add(Asset_Type);
+                SqlParameter Remarks = new SqlParameter("@Remarks", Data.Remarks);
+                cmd.Parameters.Add(Remarks);
 
                 con.Open();
 
-                cmd.ExecuteNonQuery();
+                status= cmd.ExecuteNonQuery();
 
                 status = 0;
 
@@ -121,10 +134,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             return status;
         }
 
-        public Mod_Employee Get_Data_By_ID(string Unique_Id)
+        public Mod_Employee Get_Data_By_ID(string Unique_Id , Mod_Employee Data)
         {
-            Mod_Employee Data = new Mod_Employee();
-
+            
             try
             {
                 DataTable dt_Comuter;
@@ -155,12 +167,16 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 if (dt_Comuter.Rows.Count > 0)
                 {
-                    Data.Emp_Unique_Id = Convert.ToString(dt_Comuter.Rows[0]["Emp_Unique_Id"]);
+                    Data.Emp_Unique_Id = Convert.ToString(dt_Comuter.Rows[0]["Unique_Id"]);
                     Data.Emp_Code = Convert.ToString(dt_Comuter.Rows[0]["Emp_Code"]);
                     Data.Emp_Name = Convert.ToString(dt_Comuter.Rows[0]["Emp_Name"]);
                     Data.Emp_Designation = Convert.ToString(dt_Comuter.Rows[0]["Emp_Designation"]);
                     Data.Emp_Type = Convert.ToString(dt_Comuter.Rows[0]["Emp_Type"]);
+                    Data.Emp_Dept = Convert.ToString(dt_Comuter.Rows[0]["Emp_Dept"]);
                     Data.Remarks = Convert.ToString(dt_Comuter.Rows[0]["Remarks"]);
+                    Data.Location = Convert.ToString(dt_Comuter.Rows[0]["Emp_Location"]);
+                    Data.Emp_Dept_Name = Convert.ToString(dt_Comuter.Rows[0]["Dept_name"]);
+                    Data.Emp_Dept_Name = Convert.ToString(dt_Comuter.Rows[0]["Designation_name"]);
 
                 }
 
@@ -326,7 +342,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 ListItem = new SelectListItem();
                 ListItem.Value = "105";
-                ListItem.Text = "PMQ(SG)";
+                ListItem.Text = "PMQ";
             Emp_Dept.Add(ListItem);
 
                 ListItem = new SelectListItem();
@@ -392,6 +408,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             ListItem = new SelectListItem();
             ListItem.Value = "117";
             ListItem.Text = "Exam";
+            Emp_Dept.Add(ListItem);
+
+            ListItem = new SelectListItem();
+            ListItem.Value = "118";
+            ListItem.Text = "Discipline";
             Emp_Dept.Add(ListItem);
 
 

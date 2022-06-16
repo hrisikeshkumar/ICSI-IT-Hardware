@@ -244,9 +244,9 @@
     <Content Include="Areas\Admin\Views\Computer\Com_Details.cshtml" />
     <Content Include="Areas\Admin\Views\Computer\Com_Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\Computer\Com_Edit_Item.cshtml" />
-    <Content Include="Areas\Admin\Views\MasterData\AssetMakeModel.cshtml" />
-    <Content Include="Areas\Admin\Views\MasterData\Get_Master_Data.cshtml" />
-    <Content Include="Areas\Admin\Views\MasterData\Edit_Assets.cshtml" />
+    <Content Include="Areas\Admin\Views\MasterData\Add_AssetMakeModel.cshtml" />
+    <Content Include="Areas\Admin\Views\MasterData\List_Make_Data.cshtml" />
+    <Content Include="Areas\Admin\Views\MasterData\Edit_AssetsMasterData.cshtml" />
     <Content Include="Areas\Admin\Views\Laptop\Lap_Details.cshtml" />
     <Content Include="Areas\Admin\Views\Laptop\Lap_Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\Laptop\Edit_Laptop.cshtml" />
