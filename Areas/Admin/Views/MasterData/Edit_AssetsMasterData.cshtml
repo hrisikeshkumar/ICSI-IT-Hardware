@@ -1,7 +1,8 @@
 ﻿@model IT_Hardware_Aug2021.Areas.Admin.Models.Mod_AssetMaster
 
 
-<link href="~/CSS/Radio_button.css" rel="stylesheet" />
+
+<link href="~/CSS/RadioButton_Box.css" rel="stylesheet" />
 
 
 <link href="~/CSS/Submit_button.css" rel="stylesheet" />
@@ -84,123 +85,117 @@
 
 <div style=" align-content:center; width:100%" class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
-  
 
-    @using (Html.BeginForm("Update_Makedata", "MasterData", Model.Asset_ID,  FormMethod.Post))
+
+    @using (Html.BeginForm("Update_Makedata", "MasterData", Model.Asset_ID, FormMethod.Post))
     {
 
-    <table class="  table-striped shadow " style="width:100%">
+        <table class="  table-striped shadow " style="width:100%">
 
-        <tr>
-            <td style="width:15%; height:50px;">
-                Asset Make @Html.HiddenFor(x => x.Asset_ID)
-            </td>
-            <td style="width:35%;">
-
-
-                @Html.TextBoxFor(x => x.Asset_make, new { @class = "form-rounded", @style = " width :90%; " })
-
-            </td>
-            <td style="width:15%;">
-                Asset Model
-            </td>
-            <td style="width:35%;">
-                @Html.TextBoxFor(x => x.Asset_Model, new { @class = "form-rounded", @style = " width :90%; " })
-            </td>
-        </tr>
+            <tr>
+                <td style="width:15%; height:50px;">
+                    Asset Make @Html.HiddenFor(x => x.Asset_ID)
+                </td>
+                <td style="width:35%;">
 
 
+                    @Html.TextBoxFor(x => x.Asset_make, new { @class = "form-rounded", @style = " width :90%; " })
 
-        <tr>
-
-            <td colspan="4" align="left" style="vertical-align: middle; padding-top: 40px;">
-
-
-                <div class="section over-hide z-bigger">
-
-                    <div class="section over-hide z-bigger">
-                        <div class="container pb-5">
-                            <div class="row justify-content-center pb-5">
-
-                                <div class="col-12 pb-5">
-                                    @Html.RadioButtonFor(model => model.Asset_Type, "Desktop", new { id = "Desktop", @class = "checkbox-tools", @checked = "true" });
-                                    <label class="for-checkbox-tools" for="Desktop">
-                                        <i class='uil uil-desktop'></i>
-                                        Desktop
-
-                                    </label>
-
-                                    @Html.RadioButtonFor(model => model.Asset_Type, "Laptop", new { id = "Laptop", @class = "checkbox-tools", @checked = "false" })
-                                    <label class="for-checkbox-tools" for="Laptop">
-                                        <i class='uil uil-laptop'></i>
-                                        Laptop
-                                    </label>
-
-                                    @Html.RadioButtonFor(model => model.Asset_Type, "Printer", new { id = "Printer", @class = "checkbox-tools", @checked = "false" })
-                                    <label class="for-checkbox-tools" for="Printer">
-                                        <i class='uil uil-print'></i>
-                                        Printer
-                                    </label>
+                </td>
+                <td style="width:15%;">
+                    Asset Model
+                </td>
+                <td style="width:35%;">
+                    @Html.TextBoxFor(x => x.Asset_Model, new { @class = "form-rounded", @style = " width :90%; " })
+                </td>
+            </tr>
 
 
-                                    @Html.RadioButtonFor(model => model.Asset_Type, "Scaner", new { id = "Scaner", @class = "checkbox-tools", @checked = "false" })
-                                    <label class="for-checkbox-tools" for="Scaner">
-                                        <i class='uil uil-file'></i>
-                                        Scaner
-                                    </label>
 
-                                    @Html.RadioButtonFor(model => model.Asset_Type, "Other", new { id = "Other", @class = "checkbox-tools", @checked = "false" })
-                                    <label class="for-checkbox-tools" for="Other">
-                                        <i class='uil uil-brush-alt'></i>
-                                        Other
+            <tr>
 
-                                    </label>
-                                    <!--
-                                -->
+                <td colspan="4" align="left" style="vertical-align: middle; padding-top: 40px;">
 
-                                </div>
 
-                            </div>
+                    <div>
+
+                        <div class="form cf">
+                            <section class="plan cf">
+
+
+                                @Html.RadioButtonFor(model => model.Asset_Type, "Desktop", new { @id = "Desktop" })
+                                <label class="free-label four col" for="Desktop">Desktop PC</label>
+
+
+                                @Html.RadioButtonFor(model => model.Asset_Type, "Laptop", new { @id = "Laptop" })
+                                <label class="basic-label four col" for="Laptop">Laptop</label>
+
+
+                                @Html.RadioButtonFor(model => model.Asset_Type, "PrintSacn", new { @id = "PrintSacn" })
+                                <label class="premium-label four col" for="PrintSacn">Printer/Scanner</label>
+
+
+                                @Html.RadioButtonFor(model => model.Asset_Type, "UPS", new { @id = "UPS" })
+                                <label class="premium-label four col" for="UPS">UPS</label>
+
+
+                                @Html.RadioButtonFor(model => model.Asset_Type, "Server", new { @id = "Server" })
+                                <label class="premium-label four col" for="Server">Server</label>
+
+
+                                @Html.RadioButtonFor(model => model.Asset_Type, "Switch", new { @id = "Switch" })
+                                <label class="premium-label four col" for="Switch">Network Switch</label>
+
+                                @Html.RadioButtonFor(model => model.Asset_Type, "Ipad", new { @id = "Ipad" })
+                                <label class="premium-label four col" for="Ipad">IPAD / Surface Pro</label>
+
+
+                                @Html.RadioButtonFor(model => model.Asset_Type, "Other", new { @id = "Other" })
+                                <label class="premium-label four col" for="Other">Other Item</label>
+
+
+                            </section>
                         </div>
+
                     </div>
-                </div>
-
-            </td>
-
-        </tr>
 
 
+                </td>
+
+            </tr>
 
 
-        <tr>
-            <td style="width:100%; height:10px;" colspan="4">
-            </td>
-        </tr>
-
-        <tr style=" height: 30px; ">
-            <td align="left" style="width:15%; "></td>
-
-            <td style="width: 35%; padding-top: 10px; padding-bottom: 5px" align="center">
-
-                <div class="wrap_but">
-                    <button class="button" style="font-weight:bold; font-size:14px;">Submit</button>
-                </div>
 
 
-            </td>
+            <tr>
+                <td style="width:100%; height:10px;" colspan="4">
+                </td>
+            </tr>
 
-            <td style="width: 15%; padding-top: 10px; padding-bottom: 5px" align="center">
+            <tr style=" height: 30px; ">
+                <td align="left" style="width:15%; "></td>
 
-                <div class="wrap_but">
-                    @Html.ActionLink("Back", "List_Make_Data", "MasterData", Model.Asset_ID, new { @class = "button", @style = "font-weight:bold; font-size:14px;" })
-                </div>
-            </td>
+                <td style="width: 35%; padding-top: 10px; padding-bottom: 5px" align="center">
 
-            <td align="left" style="width:35%;"></td>
-        </tr>
+                    <div class="wrap_but">
+                        <button class="button" style="font-weight:bold; font-size:14px;">Submit</button>
+                    </div>
 
 
-    </table>
+                </td>
+
+                <td style="width: 15%; padding-top: 10px; padding-bottom: 5px" align="center">
+
+                    <div class="wrap_but">
+                        @Html.ActionLink("Back", "List_Make_Data", "MasterData", Model.Asset_ID, new { @class = "button", @style = "font-weight:bold; font-size:14px;" })
+                    </div>
+                </td>
+
+                <td align="left" style="width:35%;"></td>
+            </tr>
+
+
+        </table>
 
     }
 </div>
@@ -219,27 +214,5 @@
     </script>
 
 }
-
-<script type="text/javascript">
-    var animateButton = function (e) {
-
-        e.preventDefault;
-        //reset animation
-        e.target.classList.remove('animate');
-
-        e.target.classList.add('animate');
-
-        e.target.classList.add('animate');
-        setTimeout(function () {
-            e.target.classList.remove('animate');
-        }, 6000);
-    };
-
-    var classname = document.getElementsByClassName("button");
-
-    for (var i = 0; i < classname.length; i++) {
-        classname[i].addEventListener('click', animateButton, false);
-    }
-</script>
 
 

@@ -42,9 +42,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Save_data(Get_Data, "Add_new", "");
 
-                    if (status == 1)
+                    if (status > 0)
                     {
-                        TempData["Message"] = String.Format("Data have saved successfully");
+                        TempData["Message"] = String.Format("Data save successfully");
                     }
                     else
                     {
@@ -63,6 +63,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+        [HttpGet]
         public ActionResult Edit_AssetsMasterData(string id)
         {
             
@@ -71,7 +72,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             Mod_AssetMaster data = Md_Asset.Get_Data_By_ID(id);
 
             return View("~/Areas/Admin/Views/MasterData/Edit_AssetsMasterData.cshtml", data);
-
         }
 
         [HttpPost]
@@ -87,9 +87,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Save_data(Get_Data, "Update", Asset_ID);
 
-                    if (status == 1)
+                    if (status > 0)
                     {
-                        TempData["Message"] = String.Format("Data have saved successfully");
+                        TempData["Message"] = String.Format("Data save successfully");
                     }
                     else
                     {
@@ -104,8 +104,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Get_Master_Data", "MasterData");
+            return RedirectToAction("List_Make_Data", "MasterData");
         }
+
 
         public ActionResult Delete_Item(Mod_AssetMaster Get_Data, string id)
         {

@@ -199,6 +199,7 @@
     <Content Include="CSS\material-design-iconic-font.css" />
     <Content Include="CSS\material-design-iconic-font.min.css" />
     <Content Include="CSS\Menu_CSS1.css" />
+    <Content Include="CSS\RadioButton_Box.css" />
     <Content Include="CSS\Radio_button.css" />
     <Content Include="CSS\SearchBox\searchbox.css" />
     <Content Include="CSS\SearchBox\SearchBox_demo.css" />

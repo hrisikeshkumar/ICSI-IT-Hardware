@@ -71,7 +71,7 @@
                             </td>
                             <td>
 
-                                @Html.ActionLink("Edit", "Edit_AssetsMasterData", new { id = item.Asset_ID }) |                               
+                                @Html.ActionLink("Edit", "Edit_AssetsMasterData", new { id = item.Asset_ID }) |
                                 @Html.ActionLink("Delete", "Delete_Item", new { id = item.Asset_ID })
 
                             </td>
@@ -101,4 +101,21 @@
         @Html.Raw(ViewBag.JavaScriptFunction)
     </script>
 }
+
+
+
+@if (TempData["Message"] != null && TempData["Message"] != "" && TempData["Message"] != string.Empty)
+{
+    <script type="text/javascript">
+
+    window.onload = function () {
+        /**/
+        alert("@TempData["Message"]");
+    /**/
+    };
+    </script>
+
+}
+
+
 

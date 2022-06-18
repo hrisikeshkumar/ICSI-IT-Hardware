@@ -2,9 +2,7 @@
 
 
 
-@*<link href="~/CSS/Radio_button.css" rel="stylesheet" />*@
-
-
+<link href="~/CSS/RadioButton_Box.css" rel="stylesheet" />
 
 <link href="~/CSS/Submit_button.css" rel="stylesheet" />
 
@@ -86,16 +84,11 @@
 </div>
 
 
-
-
-
 <div style=" align-content:center; width:100%" class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
 
     @using (Html.BeginForm("Save_AssetMakeModel", "MasterData", FormMethod.Post))
     {
-
-
 
         <table class="  table-striped shadow " style="width:100%">
 
@@ -121,44 +114,46 @@
                 <td colspan="4" align="left" style="vertical-align: middle; padding-top: 40px; padding-bottom: 40px; padding-left:20px">
 
 
-                      <div>
+                    <div>
+                        <div class="form cf">
+                            <section class="plan cf">
 
-                             <div class="form cf">
-                                 <section class="plan cf">
-
-
-                                                 @Html.RadioButtonFor(model => model.Asset_Type, "Desktop", new { @id = "Desktop" })
-                                                 <label class="free-label four col" for="Desktop">Desktop PC</label>
+                                @Html.RadioButtonFor(model => model.Asset_Type, "Desktop", new { @id = "Desktop" })
+                                <label class="free-label four col" for="Desktop">Desktop PC</label>
 
 
-                                                 @Html.RadioButtonFor(model => model.Asset_Type, "Laptop", new { @id = "Laptop" })
-                                                 <label class="basic-label four col" for="Laptop">Laptop</label>
+                                @Html.RadioButtonFor(model => model.Asset_Type, "Laptop", new { @id = "Laptop" })
+                                <label class="basic-label four col" for="Laptop">Laptop</label>
 
 
-                                                 @Html.RadioButtonFor(model => model.Asset_Type, "PrintSacn", new { @id = "PrintSacn" })
-                                                 <label class="premium-label four col" for="PrintSacn">Printer/Scanner</label>
+                                @Html.RadioButtonFor(model => model.Asset_Type, "PrintSacn", new { @id = "PrintSacn" })
+                                <label class="premium-label four col" for="PrintSacn">Printer/Scanner</label>
 
 
-                                                 @Html.RadioButtonFor(model => model.Asset_Type, "UPS", new { @id = "UPS" })
-                                                 <label class="premium-label four col" for="UPS">UPS</label>
+                                @Html.RadioButtonFor(model => model.Asset_Type, "UPS", new { @id = "UPS" })
+                                <label class="premium-label four col" for="UPS">UPS</label>
 
 
-                                                 @Html.RadioButtonFor(model => model.Asset_Type, "Server", new { @id = "Server" })
-                                                 <label class="premium-label four col" for="Server">Server</label>
+                                @Html.RadioButtonFor(model => model.Asset_Type, "Server", new { @id = "Server" })
+                                <label class="premium-label four col" for="Server">Server</label>
 
 
-                                                 @Html.RadioButtonFor(model => model.Asset_Type, "Switch", new { @id = "Switch" })
-                                                 <label class="premium-label four col" for="Switch">Switch</label>
+                                @Html.RadioButtonFor(model => model.Asset_Type, "Switch", new { @id = "Switch" })
+                                <label class="premium-label four col" for="Switch">Network Switch</label>
 
 
-                                                 @Html.RadioButtonFor(model => model.Asset_Type, "Other", new { @id = "Other" })
-                                                 <label class="premium-label four col" for="Other">Other Item</label>
+                                @Html.RadioButtonFor(model => model.Asset_Type, "Ipad", new { @id = "Ipad" })
+                                <label class="premium-label four col" for="Ipad">IPAD / Surface Pro</label>
 
 
-                                         </section>
-                             </div>
+                                @Html.RadioButtonFor(model => model.Asset_Type, "Other", new { @id = "Other" })
+                                <label class="premium-label four col" for="Other">Other Item</label>
 
-                       </div>
+
+                            </section>
+                        </div>
+
+                    </div>
 
                 </td>
 
@@ -187,6 +182,7 @@
 
                     <div class="wrap_but">
                         @Html.ActionLink("Back", "List_Make_Data", "MasterData", null, new { @class = "button", @style = "font-weight:bold; font-size:14px;" })
+
                     </div>
                 </td>
 
@@ -213,135 +209,6 @@
     </script>
 
 }
-
-<script type="text/javascript">
-    var animateButton = function (e) {
-
-        e.preventDefault;
-        //reset animation
-        e.target.classList.remove('animate');
-
-        e.target.classList.add('animate');
-
-        e.target.classList.add('animate');
-        setTimeout(function () {
-            e.target.classList.remove('animate');
-        }, 6000);
-    };
-
-    var classname = document.getElementsByClassName("button");
-
-    for (var i = 0; i < classname.length; i++) {
-        classname[i].addEventListener('click', animateButton, false);
-    }
-</script>
-
-
-
-<style type="text/css">
-
-
-    .container {
-        max-width: 80%;
-        width: 80%;
-        margin: 0 auto;
-    }
-
-    .four {
-        width: 18%;
-        max-width: 18%;
-    }
-
-
-    /* COLUMNS */
-
-    .col {
-        display: block;
-        float: left;
-        margin: 1% 0 1% 1.6%;
-    }
-
-        .col:first-of-type {
-            margin-left: 0;
-        }
-
-    /* CLEARFIX */
-
-    .cf:before,
-    .cf:after {
-        content: " ";
-        display: table;
-    }
-
-    .cf:after {
-        clear: both;
-    }
-
-    .cf {
-        *zoom: 1;
-    }
-
-    /* FORM */
-
-    .form .plan input, .form .payment-plan input, .form .payment-type input {
-        display: none;
-    }
-
-    .form label {
-        position: relative;
-        color: #fff;
-        background-color: #aaa;
-        font-size: 18px;
-        text-align: center;
-        height: 50px;
-        line-height: 50px;
-        display: block;
-        cursor: pointer;
-        border: 3px solid transparent;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-
-    .form .plan input:checked + label, .form .payment-plan input:checked + label, .form .payment-type input:checked + label {
-        border: 3px solid #333;
-        background-color: #2fcc71;
-    }
-
-        .form .plan input:checked + label:after, form .payment-plan input:checked + label:after, .form .payment-type input:checked + label:after {
-            content: "\2713";
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            border-radius: 100%;
-            border: 2px solid #333;
-            background-color: #2fcc71;
-            z-index: 999;
-            position: absolute;
-            top: -10px;
-            right: -10px;
-        }
-
-
-
-</style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
