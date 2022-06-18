@@ -205,6 +205,8 @@
     <Content Include="CSS\style.css" />
     <Content Include="CSS\button_CSS.css" />
     <Content Include="CSS\Submit_button.css" />
+    <Content Include="CSS\Testing\RadioButton.css" />
+    <Content Include="CSS\Testing\RadioFinal.css" />
     <Content Include="Datepicker\jquery-1.12.4.min.js" />
     <Content Include="Datepicker\kendo.all.min.js" />
     <Content Include="Datepicker\kendo.default-v2.min.css" />
