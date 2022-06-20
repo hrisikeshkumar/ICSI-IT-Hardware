@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
+using System.Web.Mvc;
 
 namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 {
@@ -27,10 +28,15 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 using (SqlCommand cmd = new SqlCommand("sp_Computer"))
                 {
-                    SqlParameter sqlP_type = new SqlParameter("@Type", "Get_List");
+
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Connection = con;
+
+                    SqlParameter sqlP_type = new SqlParameter("@Type", "Get_List");
                     cmd.Parameters.Add(sqlP_type);
+
+                    SqlParameter sqlP_Asset_Type = new SqlParameter("@Asset_Type", "Desktop");
+                    cmd.Parameters.Add(sqlP_Asset_Type);
 
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
@@ -87,7 +93,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     cmd.Parameters.Add(Asset_Id);
                 }
 
-                SqlParameter Asset_Make_Id = new SqlParameter("@Item_MakeId", Data.Item_Make_id);
+                SqlParameter Asset_Make_Id = new SqlParameter("@Item_Model_id", Data.Item_Model_id);
                 cmd.Parameters.Add(Asset_Make_Id);
 
                 SqlParameter Asset_SL_No = new SqlParameter("@Item_serial_No", Data.Item_serial_No);
@@ -110,12 +116,12 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 con.Open();
 
-                cmd.ExecuteNonQuery();
+                status = cmd.ExecuteNonQuery();
 
-                status = 0;
+                
 
             }
-            catch (Exception ex) { status = 1; }
+            catch (Exception ex) { status = -1; }
             finally { con.Close(); }
 
             return status;
@@ -173,6 +179,61 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
         }
 
 
+        public List<SelectListItem> Item_MakeModel_List(string Item_Type , string List_Type, string Item_Make)
+        {
+
+            List<SelectListItem> List_Item = new List<SelectListItem>();
+
+            try
+            {
+                DataTable dt_Comuter;
+                string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                SqlConnection con = new SqlConnection(strcon);
+
+
+                using (SqlCommand cmd = new SqlCommand("ItemMakeModel_List"))
+                {
+                    
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = con;
+
+                    SqlParameter sqlP_Item_Type = new SqlParameter("@Item_Type", Item_Type);
+                    cmd.Parameters.Add(sqlP_Item_Type);
+
+                    SqlParameter sqlP_List_Type = new SqlParameter("@List_Type", List_Type);
+                    cmd.Parameters.Add(sqlP_List_Type);
+
+                    if (List_Type != "MAKE")
+                    {
+                        SqlParameter sqlP_Item_Make = new SqlParameter("@Make", Item_Make);
+                        cmd.Parameters.Add(sqlP_Item_Make);
+                    }
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        sda.SelectCommand = cmd;
+                        using (DataTable dt = new DataTable())
+                        {
+                            sda.Fill(dt);
+                            dt_Comuter = dt;
+                        }
+                    }
+                }
+
+                foreach (DataRow dr in dt_Comuter.Rows)
+                {
+                    SelectListItem Listdata = new SelectListItem();
+                    Listdata.Value = Convert.ToString(dr[0]);
+                    Listdata.Text = Convert.ToString(dr[1]);
+
+                    List_Item.Add(Listdata);
+                }
+
+            }
+            catch (Exception ex) { }
+
+            return List_Item;
+        }
 
 
     }

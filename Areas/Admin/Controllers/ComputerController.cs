@@ -25,7 +25,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         {
             ViewBag.Message = Message;
 
-            return View("~/Areas/Admin/Views/Computer/Com_Create_Item.cshtml");
+            Mod_Computer Mod_data = new Mod_Computer();
+            BL_Computer data = new BL_Computer();
+            Mod_data.Item_Make_List = data.Item_MakeModel_List("Desktop", "MAKE","");
+
+            return View("~/Areas/Admin/Views/Computer/Com_Create_Item.cshtml", Mod_data);
             
         }
 
@@ -41,7 +45,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                     BL_Computer save_data = new BL_Computer();
                     int status = save_data.Save_Computer_data(Get_Data, "Add_new", "");
 
-                    if (status == 1)
+                    if (status < 1)
                     {
                         TempData["Message"] = String.Format("Data is not saved");
                     }
@@ -81,7 +85,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Save_Computer_data(Get_Data, "Update", Asset_ID);
 
-                    if (status == 1)
+                    if (status < 1)
                     {
                         TempData["Message"] = String.Format("Data have saved successfully");
                     }
@@ -137,6 +141,22 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+        public JsonResult Model_List(string Item_Make)
+        {
+
+            BL_Computer data = new BL_Computer();
+
+            Mod_Computer Mod_Make = new Mod_Computer();
+
+            Mod_Make.Item_Model_List = data.Item_MakeModel_List("Desktop", "MODEL", Item_Make);
+
+            return Json(Mod_Make.Item_Model_List, JsonRequestBehavior.AllowGet);
+
+        }
+
 
     }
+
+
+
 }
