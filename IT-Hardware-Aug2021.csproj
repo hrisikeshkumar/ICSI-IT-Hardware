@@ -138,6 +138,7 @@
     <Compile Include="Areas\Admin\BL_Admin\BL_Switch.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Ups.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Vendor.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\Item_MakeModel.cs" />
     <Compile Include="Areas\Admin\Controllers\Admin_DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\AppleIpadController.cs" />
     <Compile Include="Areas\Admin\Controllers\ComputerController.cs" />

@@ -29,10 +29,15 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 using (SqlCommand cmd = new SqlCommand("sp_Computer"))
                 {
-                    SqlParameter sqlP_type = new SqlParameter("@Type", "Get_List");
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Connection = con;
+
+                    SqlParameter sqlP_type = new SqlParameter("@Type", "Get_List");
                     cmd.Parameters.Add(sqlP_type);
+
+                    SqlParameter sqlP_Asset_Type = new SqlParameter("@Asset_Type", "Laptop");
+                    cmd.Parameters.Add(sqlP_Asset_Type);
+
 
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {

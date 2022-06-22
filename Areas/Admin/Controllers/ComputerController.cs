@@ -26,8 +26,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             ViewBag.Message = Message;
 
             Mod_Computer Mod_data = new Mod_Computer();
-            BL_Computer data = new BL_Computer();
-            Mod_data.Item_Make_List = data.Item_MakeModel_List("Desktop", "MAKE","");
+            Item_MakeModel Make_List = new Item_MakeModel();
+            Mod_data.Item_Make_List = Make_List.Item_MakeModel_List("Desktop", "MAKE","");
+
 
             return View("~/Areas/Admin/Views/Computer/Com_Create_Item.cshtml", Mod_data);
             
@@ -66,14 +67,21 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         public ActionResult Com_Edit_Item(string id)
         {
-            BL_Computer Md_Com = new BL_Computer();
-            Mod_Computer data = Md_Com.Get_Data_By_ID(id);
+            BL_Computer BL_data = new BL_Computer();
+            Mod_Computer Model_data = new Mod_Computer();
+            Item_MakeModel Make_List = new Item_MakeModel();
 
-            return View("~/Areas/Admin/Views/Computer/Com_Edit_Item.cshtml", data);
+            Model_data = BL_data.Get_Data_By_ID(Model_data, id);
+            
+            Model_data.Item_Make_List = Make_List.Item_MakeModel_List("Desktop", "MAKE", "");
+
+            Model_data.Item_Model_List = Make_List.Item_MakeModel_List("Desktop", "MODEL", Model_data.Item_Make_id.Trim().ToString());
+
+            return View("~/Areas/Admin/Views/Computer/Com_Edit_Item.cshtml", Model_data);
         }
 
       
-        public ActionResult Update_Computer(Mod_Computer Get_Data, string Asset_ID)
+        public ActionResult Update_Computer(Mod_Computer Get_Data, string Item_id)
         {
             int status = 0;
             try
@@ -83,7 +91,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 {
                     BL_Computer Md_Asset = new BL_Computer();
 
-                    status = Md_Asset.Save_Computer_data(Get_Data, "Update", Asset_ID);
+                    status = Md_Asset.Save_Computer_data(Get_Data, "Update", Item_id);
 
                     if (status < 1)
                     {
@@ -106,7 +114,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-        public ActionResult Delete_Item(Mod_Computer Get_Data, string id)
+        public ActionResult Delete_Item(Mod_Computer Get_Data, string Item_id)
         {
             int status = 0;
             try
@@ -118,7 +126,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     BL_Computer Md_Asset = new BL_Computer();
 
-                    status = Md_Asset.Save_Computer_data(Get_Data, "Delete", id);
+                    status = Md_Asset.Save_Computer_data(Get_Data, "Delete", Item_id);
 
                     if (status == 1)
                     {
@@ -144,11 +152,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         public JsonResult Model_List(string Item_Make)
         {
 
-            BL_Computer data = new BL_Computer();
+            Item_MakeModel Make_List = new Item_MakeModel();
 
             Mod_Computer Mod_Make = new Mod_Computer();
 
-            Mod_Make.Item_Model_List = data.Item_MakeModel_List("Desktop", "MODEL", Item_Make);
+            Mod_Make.Item_Model_List = Make_List.Item_MakeModel_List("Desktop", "MODEL", Item_Make);
 
             return Json(Mod_Make.Item_Model_List, JsonRequestBehavior.AllowGet);
 

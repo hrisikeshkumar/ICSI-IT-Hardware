@@ -26,12 +26,16 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             {
                 ViewBag.Message = Message;
 
-                return View("~/Areas/Admin/Views/Monitor/Moitor_Create_Item.cshtml");
+                Mod_Monitor Mod_data = new Mod_Monitor();
+                Item_MakeModel Make_List = new Item_MakeModel();
+                Mod_data.Item_Make_List = Make_List.Item_MakeModel_List("Desktop", "MAKE", "");
+
+                return View("~/Areas/Admin/Views/Monitor/Moitor_Create_Item.cshtml", Mod_data);
 
             }
 
             [HttpPost]
-            public ActionResult Lap_Create_Post(Mod_Monitor Get_Data)
+            public ActionResult Moitor_Create_Post(Mod_Monitor Get_Data)
             {
                 string Message = "";
                 try
@@ -65,10 +69,16 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             public ActionResult Edit_Monitor(string id)
             {
-                BL_Monitor Md_Com = new BL_Monitor();
-                Mod_Monitor data = Md_Com.Get_Data_By_ID(id);
+                Item_MakeModel Make_List = new Item_MakeModel();
+                BL_Monitor BL_data = new BL_Monitor();
+                Mod_Monitor Model_data = new Mod_Monitor();
+                
 
-                return View("~/Areas/Admin/Views/Monitor/Edit_Monitor.cshtml", data);
+                Model_data = BL_data.Get_Data_By_ID(Model_data, id);
+                Model_data.Item_Make_List = Make_List.Item_MakeModel_List("Desktop", "MAKE", "");
+                Model_data.Item_Model_List = Make_List.Item_MakeModel_List("Desktop", "MODEL", Model_data.Item_Make_id.Trim().ToString());
+
+                return View("~/Areas/Admin/Views/Monitor/Edit_Monitor.cshtml", Model_data);
             }
 
 
@@ -141,7 +151,20 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
 
 
+        public JsonResult Model_List(string Item_Make)
+        {
 
-        
+            Item_MakeModel Make_List = new Item_MakeModel();
+
+            Mod_Computer Mod_Make = new Mod_Computer();
+
+            Mod_Make.Item_Model_List = Make_List.Item_MakeModel_List("Desktop", "MODEL", Item_Make);
+
+            return Json(Mod_Make.Item_Model_List, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+
     }
 }
