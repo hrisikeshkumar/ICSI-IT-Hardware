@@ -35,6 +35,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     cmd.Connection = con;
                     cmd.Parameters.Add(sqlP_type);
 
+                    SqlParameter sqlP_Asset_Type = new SqlParameter("@Asset_Type", "Switch");
+                    cmd.Parameters.Add(sqlP_Asset_Type);
+
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
                         sda.SelectCommand = cmd;
@@ -90,7 +93,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     cmd.Parameters.Add(Asset_Id);
                 }
 
-                SqlParameter Asset_Make_Id = new SqlParameter("@Item_MakeId", Data.Item_Make_id);
+                SqlParameter Asset_Make_Id = new SqlParameter("@Item_Model_id", Data.Item_Model_id);
                 cmd.Parameters.Add(Asset_Make_Id);
 
                 SqlParameter Asset_SL_No = new SqlParameter("@Item_serial_No", Data.Item_serial_No);
@@ -160,7 +163,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 if (dt_Comuter.Rows.Count > 0)
                 {
                     Data.Item_id = Convert.ToString(dt_Comuter.Rows[0]["Item_Id"]);
-                    Data.Item_Make_id = Convert.ToString(dt_Comuter.Rows[0]["Item_MakeId"]);
+                    Data.Item_Make_id = Convert.ToString(dt_Comuter.Rows[0]["Make"]);
+                    Data.Item_Model_id = Convert.ToString(dt_Comuter.Rows[0]["Item_MakeId"]);
                     Data.Item_serial_No = Convert.ToString(dt_Comuter.Rows[0]["Item_SlNo"]);
                     Data.Proc_date = Convert.ToDateTime(dt_Comuter.Rows[0]["Proc_Date"]).Date;
                     Data.Warnt_end_dt = Convert.ToDateTime(dt_Comuter.Rows[0]["Warnt_end_DT"]).Date;

@@ -25,7 +25,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public int price { get; set; }
         [Required]
         public DateTime? Proc_date { get; set; }
-        [Required]
         public DateTime? Warnt_end_dt { get; set; }
         public string Create_usr_id { get; set; }
         public DateTime? Create_date { get; set; }

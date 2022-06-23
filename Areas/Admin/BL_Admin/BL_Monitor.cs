@@ -90,8 +90,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     cmd.Parameters.Add(Asset_Id);
                 }
 
-                SqlParameter Asset_Make_Id = new SqlParameter("@Item_MakeId", Data.Item_Make_id);
+                SqlParameter Asset_Make_Id = new SqlParameter("@Item_Model_id", Data.Item_Model_id);
                 cmd.Parameters.Add(Asset_Make_Id);
+
 
                 SqlParameter Asset_SL_No = new SqlParameter("@Item_serial_No", Data.Item_serial_No);
                 cmd.Parameters.Add(Asset_SL_No);
@@ -118,7 +119,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 status = 0;
 
             }
-            catch (Exception ex) { status = 1; }
+            catch (Exception ex) { status = -1; }
             finally { con.Close(); }
 
             return status;

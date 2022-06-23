@@ -162,6 +162,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 if (dt_Comuter.Rows.Count > 0)
                 {
+
                     Data.Item_id = Convert.ToString(dt_Comuter.Rows[0]["Item_Id"]);
                     Data.Item_Make_id = Convert.ToString(dt_Comuter.Rows[0]["Make"]);
                     Data.Item_Model_id = Convert.ToString(dt_Comuter.Rows[0]["Item_MakeId"]);

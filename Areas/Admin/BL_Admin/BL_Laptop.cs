@@ -94,7 +94,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     cmd.Parameters.Add(Asset_Id);
                 }
 
-                SqlParameter Asset_Make_Id = new SqlParameter("@Item_MakeId", Data.Item_Make_id);
+                SqlParameter Asset_Make_Id = new SqlParameter("@Item_Model_id", Data.Item_Model_id);
                 cmd.Parameters.Add(Asset_Make_Id);
 
                 SqlParameter Asset_SL_No = new SqlParameter("@Item_serial_No", Data.Item_serial_No);
@@ -117,21 +117,21 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 con.Open();
 
-                cmd.ExecuteNonQuery();
+                status=cmd.ExecuteNonQuery();
 
-                status = 0;
+                
 
             }
-            catch (Exception ex) { status = 1; }
+            catch (Exception ex) { status = -1; }
             finally { con.Close(); }
 
             return status;
         }
 
 
-        public Mod_Laptop Get_Data_By_ID(string Asset_Id)
+        public Mod_Laptop Get_Data_By_ID(Mod_Laptop Data,  string Asset_Id)
         {
-            Mod_Laptop Data = new Mod_Laptop();
+            
 
             try
             {
@@ -164,7 +164,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 if (dt_Comuter.Rows.Count > 0)
                 {
                     Data.Item_id = Convert.ToString(dt_Comuter.Rows[0]["Item_Id"]);
-                    Data.Item_Make_id = Convert.ToString(dt_Comuter.Rows[0]["Item_MakeId"]);
+                    Data.Item_Make_id = Convert.ToString(dt_Comuter.Rows[0]["Make"]);
+                    Data.Item_Model_id = Convert.ToString(dt_Comuter.Rows[0]["Item_MakeId"]);
                     Data.Item_serial_No = Convert.ToString(dt_Comuter.Rows[0]["Item_SlNo"]);
                     Data.Proc_date = Convert.ToDateTime(dt_Comuter.Rows[0]["Proc_Date"]).Date;
                     Data.Warnt_end_dt = Convert.ToDateTime(dt_Comuter.Rows[0]["Warnt_end_DT"]).Date;

@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace IT_Hardware_Aug2021.Areas.Admin.Models
 {
     public class Mod_Ups
     {
-        public string Item_Make_id { get; set; }
         public string Item_id { get; set; }
-        public string Item_Make { get; set; }
-        public string Item_Model { get; set; }
+        public string Item_Make_id { get; set; }
+        public List<SelectListItem> Item_Make_List { get; set; }
+        public string Item_Model_id { get; set; }
+        public List<SelectListItem> Item_Model_List { get; set; }
         public string Item_Type { get; set; }
+        [Required]
         public string Item_serial_No { get; set; }
         public string Remarks { get; set; }
         public int price { get; set; }
