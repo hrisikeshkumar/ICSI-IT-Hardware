@@ -76,9 +76,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             Model_data = BL_data.Get_Data_By_ID(Model_data, id);
 
-            Model_data.Item_Make_List = Make_List.Item_MakeModel_List("Desktop", "MAKE", "");
+            Model_data.Item_Make_List = Make_List.Item_MakeModel_List("Server", "MAKE", "");
 
-            Model_data.Item_Model_List = Make_List.Item_MakeModel_List("Desktop", "MODEL", Model_data.Item_Make_id.Trim().ToString());
+            Model_data.Item_Model_List = Make_List.Item_MakeModel_List("Server", "MODEL", Model_data.Item_Make_id.Trim().ToString());
 
             return View("~/Areas/Admin/Views/Server/Edit_Server.cshtml", Model_data);
         }
