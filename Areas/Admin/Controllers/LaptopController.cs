@@ -130,7 +130,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Save_Laptop_data(Get_Data, "Delete", id);
 
-                    if (status < 1)
+                    if (status > 1)
                     {
                         TempData["Message"] = String.Format("Data saved successfully");
                     }

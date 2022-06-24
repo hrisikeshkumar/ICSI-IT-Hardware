@@ -96,7 +96,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Save_Scanner_data(Get_Data, "Update", Asset_ID);
 
-                    if (status == 1)
+                    if (status < 1)
                     {
                         TempData["Message"] = String.Format("Data have saved successfully");
                     }

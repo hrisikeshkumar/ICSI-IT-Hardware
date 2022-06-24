@@ -26,6 +26,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         {
             ViewBag.Message = Message;
 
+            Mod_DC_MisItems Mod_data = new Mod_DC_MisItems();
+            Item_MakeModel Make_List = new Item_MakeModel();
+            Mod_data.Item_Make_List = Make_List.Item_MakeModel_List("DC_MisItems", "MAKE", "");
+
+
             return View("~/Areas/Admin/Views/DC_MisItems/DC_MisItems_Create_Item.cshtml");
 
         }
@@ -42,7 +47,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                     BL_DC_MisItems save_data = new BL_DC_MisItems();
                     int status = save_data.Save_DC_MisItems_data(Get_Data, "Add_new", "");
 
-                    if (status == 1)
+                    if (status < 1)
                     {
                         TempData["Message"] = String.Format("Data is not saved");
                     }
@@ -65,10 +70,19 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         public ActionResult Edit_DC_MisItems(string id)
         {
-            BL_DC_MisItems Md_Com = new BL_DC_MisItems();
-            Mod_DC_MisItems data = Md_Com.Get_Data_By_ID(id);
+            
+            BL_DC_MisItems BL_data = new BL_DC_MisItems();
+            Mod_DC_MisItems Model_data = new Mod_DC_MisItems();
+            Item_MakeModel Make_List = new Item_MakeModel();
 
-            return View("~/Areas/Admin/Views/DC_MisItems/Edit_DC_MisItems.cshtml", data);
+            Model_data = BL_data.Get_Data_By_ID(Model_data, id);
+
+            Model_data.Item_Make_List = Make_List.Item_MakeModel_List("DC_MisItems", "MAKE", "");
+
+            Model_data.Item_Model_List = Make_List.Item_MakeModel_List("DC_MisItems", "MODEL", Model_data.Item_Make_id.Trim().ToString());
+
+
+            return View("~/Areas/Admin/Views/DC_MisItems/Edit_DC_MisItems.cshtml", Model_data);
         }
 
 
@@ -84,7 +98,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Save_DC_MisItems_data(Get_Data, "Update", Asset_ID);
 
-                    if (status == 1)
+                    if (status > 1)
                     {
                         TempData["Message"] = String.Format("Data have saved successfully");
                     }
@@ -119,7 +133,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Save_DC_MisItems_data(Get_Data, "Delete", id);
 
-                    if (status == 1)
+                    if (status > 1)
                     {
                         TempData["Message"] = String.Format("Data saved successfully");
                     }
@@ -139,7 +153,18 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("DC_MisItems_Details", "DC_MisItems");
         }
 
+        public JsonResult Model_List(string Item_Make)
+        {
 
+            Item_MakeModel Make_List = new Item_MakeModel();
+
+            Mod_Computer Mod_Make = new Mod_Computer();
+
+            Mod_Make.Item_Model_List = Make_List.Item_MakeModel_List("DC_MisItems", "MODEL", Item_Make);
+
+            return Json(Mod_Make.Item_Model_List, JsonRequestBehavior.AllowGet);
+
+        }
 
 
     }

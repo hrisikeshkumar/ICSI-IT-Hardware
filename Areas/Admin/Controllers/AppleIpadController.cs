@@ -26,7 +26,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         {
             ViewBag.Message = Message;
 
-            return View("~/Areas/Admin/Views/AppleIpad/AppleIpad_Create_Item.cshtml");
+            Mod_AppleIpad Mod_data = new Mod_AppleIpad();
+            Item_MakeModel Make_List = new Item_MakeModel();
+            Mod_data.Item_Make_List = Make_List.Item_MakeModel_List("Ipad", "MAKE", "");
+
+            return View("~/Areas/Admin/Views/AppleIpad/AppleIpad_Create_Item.cshtml", Mod_data);
 
         }
 
@@ -42,7 +46,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                     BL_AppleIpad save_data = new BL_AppleIpad();
                     int status = save_data.Save_AppleIpad_data(Get_Data, "Add_new", "");
 
-                    if (status == 1)
+                    if (status < 1)
                     {
                         TempData["Message"] = String.Format("Data is not saved");
                     }
@@ -65,10 +69,20 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         public ActionResult Edit_AppleIpad(string id)
         {
-            BL_AppleIpad Md_Com = new BL_AppleIpad();
-            Mod_AppleIpad data = Md_Com.Get_Data_By_ID(id);
+            
 
-            return View("~/Areas/Admin/Views/AppleIpad/Edit_AppleIpad.cshtml", data);
+            BL_AppleIpad BL_data = new BL_AppleIpad();
+            Mod_AppleIpad Model_data = new Mod_AppleIpad();
+            Item_MakeModel Make_List = new Item_MakeModel();
+
+            Model_data = BL_data.Get_Data_By_ID(Model_data, id);
+
+            Model_data.Item_Make_List = Make_List.Item_MakeModel_List("Desktop", "MAKE", "");
+
+            Model_data.Item_Model_List = Make_List.Item_MakeModel_List("Desktop", "MODEL", Model_data.Item_Make_id.Trim().ToString());
+
+
+            return View("~/Areas/Admin/Views/AppleIpad/Edit_AppleIpad.cshtml", Model_data);
         }
 
 
@@ -84,7 +98,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Save_AppleIpad_data(Get_Data, "Update", Asset_ID);
 
-                    if (status == 1)
+                    if (status < 1)
                     {
                         TempData["Message"] = String.Format("Data have saved successfully");
                     }
@@ -119,7 +133,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Save_AppleIpad_data(Get_Data, "Delete", id);
 
-                    if (status == 1)
+                    if (status < 1)
                     {
                         TempData["Message"] = String.Format("Data saved successfully");
                     }
@@ -137,6 +151,19 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             }
 
             return RedirectToAction("AppleIpad_Details", "AppleIpad");
+        }
+
+        public JsonResult Model_List(string Item_Make)
+        {
+
+            Item_MakeModel Make_List = new Item_MakeModel();
+
+            Mod_Computer Mod_Make = new Mod_Computer();
+
+            Mod_Make.Item_Model_List = Make_List.Item_MakeModel_List("Ipad", "MODEL", Item_Make);
+
+            return Json(Mod_Make.Item_Model_List, JsonRequestBehavior.AllowGet);
+
         }
 
 

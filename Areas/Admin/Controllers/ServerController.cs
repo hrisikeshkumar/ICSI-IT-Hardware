@@ -26,7 +26,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         {
             ViewBag.Message = Message;
 
-            return View("~/Areas/Admin/Views/Server/Server_Create_Item.cshtml");
+            Mod_Server Mod_data = new Mod_Server();
+            Item_MakeModel Make_List = new Item_MakeModel();
+            Mod_data.Item_Make_List = Make_List.Item_MakeModel_List("Server", "MAKE", "");
+
+            return View("~/Areas/Admin/Views/Server/Server_Create_Item.cshtml", Mod_data);
 
         }
 
@@ -42,7 +46,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                     BL_Server save_data = new BL_Server();
                     int status = save_data.Save_Server_data(Get_Data, "Add_new", "");
 
-                    if (status == 1)
+                    if (status < 1)
                     {
                         TempData["Message"] = String.Format("Data is not saved");
                     }
@@ -65,10 +69,18 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         public ActionResult Edit_Server(string id)
         {
-            BL_Server Md_Com = new BL_Server();
-            Mod_Server data = Md_Com.Get_Data_By_ID(id);
+           
+            BL_Server BL_data = new BL_Server();
+            Mod_Server Model_data = new Mod_Server();
+            Item_MakeModel Make_List = new Item_MakeModel();
 
-            return View("~/Areas/Admin/Views/Server/Edit_Server.cshtml", data);
+            Model_data = BL_data.Get_Data_By_ID(Model_data, id);
+
+            Model_data.Item_Make_List = Make_List.Item_MakeModel_List("Desktop", "MAKE", "");
+
+            Model_data.Item_Model_List = Make_List.Item_MakeModel_List("Desktop", "MODEL", Model_data.Item_Make_id.Trim().ToString());
+
+            return View("~/Areas/Admin/Views/Server/Edit_Server.cshtml", Model_data);
         }
 
 
@@ -84,7 +96,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Save_Server_data(Get_Data, "Update", Asset_ID);
 
-                    if (status == 1)
+                    if (status > 0)
                     {
                         TempData["Message"] = String.Format("Data have saved successfully");
                     }
@@ -139,6 +151,19 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Server_Details", "Server");
         }
 
+
+        public JsonResult Model_List(string Item_Make)
+        {
+
+            Item_MakeModel Make_List = new Item_MakeModel();
+
+            Mod_Computer Mod_Make = new Mod_Computer();
+
+            Mod_Make.Item_Model_List = Make_List.Item_MakeModel_List("Server", "MODEL", Item_Make);
+
+            return Json(Mod_Make.Item_Model_List, JsonRequestBehavior.AllowGet);
+
+        }
 
 
     }

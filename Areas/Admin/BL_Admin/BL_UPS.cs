@@ -127,9 +127,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 return status;
             }
 
-            public Mod_Ups Get_Data_By_ID(string Asset_Id)
+            public Mod_Ups Get_Data_By_ID(Mod_Ups Data,string Asset_Id)
             {
-                Mod_Ups Data = new Mod_Ups();
+                
 
                 try
                 {

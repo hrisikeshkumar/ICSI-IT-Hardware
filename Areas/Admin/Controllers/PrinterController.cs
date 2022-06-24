@@ -82,7 +82,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 Model_data.Item_Model_List = Make_List.Item_MakeModel_List("Printer", "MODEL", Model_data.Item_Make_id.Trim().ToString());
 
 
-            return View("~/Areas/Admin/Views/Printer/Edit_Printer.cshtml", data);
+            return View("~/Areas/Admin/Views/Printer/Edit_Printer.cshtml", Model_data);
             }
 
 
@@ -154,8 +154,22 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             }
 
 
+        public JsonResult Model_List(string Item_Make)
+        {
 
+            Item_MakeModel Make_List = new Item_MakeModel();
+
+            Mod_Computer Mod_Make = new Mod_Computer();
+
+            Mod_Make.Item_Model_List = Make_List.Item_MakeModel_List("Printer", "MODEL", Item_Make);
+
+            return Json(Mod_Make.Item_Model_List, JsonRequestBehavior.AllowGet);
 
         }
-   
+
+
+
+
+    }
+
 }

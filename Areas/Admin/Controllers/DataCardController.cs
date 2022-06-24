@@ -25,8 +25,12 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         public ActionResult DataCard_Create_Item(string Message)
         {
             ViewBag.Message = Message;
+            Mod_DataCard Mod_data = new Mod_DataCard();
+            Item_MakeModel Make_List = new Item_MakeModel();
+            Mod_data.Item_Make_List = Make_List.Item_MakeModel_List("DataCard", "MAKE", "");
 
-            return View("~/Areas/Admin/Views/DataCard/DataCard_Create_Item.cshtml");
+
+            return View("~/Areas/Admin/Views/DataCard/DataCard_Create_Item.cshtml", Mod_data);
 
         }
 
@@ -42,7 +46,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                     BL_DataCard save_data = new BL_DataCard();
                     int status = save_data.Save_DataCard_data(Get_Data, "Add_new", "");
 
-                    if (status == 1)
+                    if (status < 1)
                     {
                         TempData["Message"] = String.Format("Data is not saved");
                     }
@@ -65,10 +69,20 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         public ActionResult Edit_DataCard(string id)
         {
-            BL_DataCard Md_Com = new BL_DataCard();
-            Mod_DataCard data = Md_Com.Get_Data_By_ID(id);
+            
 
-            return View("~/Areas/Admin/Views/DataCard/Edit_DataCard.cshtml", data);
+            BL_DataCard BL_data = new BL_DataCard();
+            Mod_DataCard Model_data = new Mod_DataCard();
+            Item_MakeModel Make_List = new Item_MakeModel();
+
+            Model_data = BL_data.Get_Data_By_ID(Model_data, id);
+
+            Model_data.Item_Make_List = Make_List.Item_MakeModel_List("DataCard", "MAKE", "");
+
+            Model_data.Item_Model_List = Make_List.Item_MakeModel_List("DataCard", "MODEL", Model_data.Item_Make_id.Trim().ToString());
+
+
+            return View("~/Areas/Admin/Views/DataCard/Edit_DataCard.cshtml", Model_data);
         }
 
 
@@ -84,7 +98,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Save_DataCard_data(Get_Data, "Update", Asset_ID);
 
-                    if (status == 1)
+                    if (status > 0)
                     {
                         TempData["Message"] = String.Format("Data have saved successfully");
                     }
@@ -119,7 +133,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Save_DataCard_data(Get_Data, "Delete", id);
 
-                    if (status == 1)
+                    if (status > 0)
                     {
                         TempData["Message"] = String.Format("Data saved successfully");
                     }
@@ -138,6 +152,20 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             return RedirectToAction("DataCard_Details", "DataCard");
         }
+
+        public JsonResult Model_List(string Item_Make)
+        {
+
+            Item_MakeModel Make_List = new Item_MakeModel();
+
+            Mod_Computer Mod_Make = new Mod_Computer();
+
+            Mod_Make.Item_Model_List = Make_List.Item_MakeModel_List("DataCard", "MODEL", Item_Make);
+
+            return Json(Mod_Make.Item_Model_List, JsonRequestBehavior.AllowGet);
+
+        }
+
 
 
     }

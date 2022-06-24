@@ -127,9 +127,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
         }
 
 
-        public Mod_Server Get_Data_By_ID(string Asset_Id)
+        public Mod_Server Get_Data_By_ID(Mod_Server Data, string Asset_Id)
         {
-            Mod_Server Data = new Mod_Server();
+            
 
             try
             {

@@ -19,7 +19,7 @@
             changeMonth: true,
             dateFormat: 'dd/mm/yy',
             minDate: new Date('01/01/1900'),
-            maxDate: '+1Y'
+            maxDate: '+10Y'
         });
     });
 </script>
@@ -112,15 +112,19 @@
             <tr>
                 <td style="width:25%; height:50px;">
                     Asset Make
+                    @Html.HiddenFor(x => x.Item_id)
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Item_Make, new { @class = " form-rounded", @style = " width :80%; " })
+
+                    @Html.DropDownListFor(x => x.Item_Make_id, Model.Item_Make_List, new { @class = " form-rounded", @style = " width :90%; " })
                 </td>
                 <td style="width:25%;">
                     Asset Model
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Item_Model, new { @class = " form-rounded", @style = " width :80%; " })
+
+                    @Html.DropDownListFor(x => x.Item_Model_id, Model.Item_Model_List, new { @class = " form-rounded", @style = " width :90%; " })
+
                 </td>
             </tr>
             <tr>
@@ -201,6 +205,46 @@
     </script>
 
 }
+
+
+
+<script type="text/javascript">
+    $(function () {
+
+
+        //$.ajax({
+        //    type: "GET",
+        //    url: "/home/GetCategories",
+        //    datatype: "Json",
+        //    success: function (data) {
+        //        $.each(data, function (index, value) {
+        //            $('#dropdownCategory').append('<option value="' + value.CategoryID + '">' + value.CategoryName + '</option>');
+        //        });
+        //    }
+        //});
+
+
+        $('#Item_Make_id').change(function () {
+            $('#Item_Model_id').empty();
+
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Computer/Model_List",
+                datatype: "Json",
+                data: { Item_Make: $('#Item_Make_id').val() },
+                success: function (data) {
+                    $.each(data, function (index, value) {
+                        $('#Item_Model_id').append('<option value="' + value.Value + '">' + value.Text + '</option>');
+                    });
+                }
+
+            });
+
+        });
+    });
+</script>
+
+
 
 
 
