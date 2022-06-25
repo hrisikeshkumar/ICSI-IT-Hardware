@@ -126,8 +126,8 @@
                                 <label class="basic-label four col" for="Laptop">Laptop</label>
 
 
-                                @Html.RadioButtonFor(model => model.Asset_Type, "PrintSacn", new { @id = "PrintSacn" })
-                                <label class="premium-label four col" for="PrintSacn">Printer/Scanner</label>
+                                @Html.RadioButtonFor(model => model.Asset_Type, "PrintScan", new { @id = "PrintScan" })
+                                <label class="premium-label four col" for="PrintScan">Printer/Scanner</label>
 
 
                                 @Html.RadioButtonFor(model => model.Asset_Type, "UPS", new { @id = "UPS" })
@@ -144,6 +144,10 @@
 
                                 @Html.RadioButtonFor(model => model.Asset_Type, "Ipad", new { @id = "Ipad" })
                                 <label class="premium-label four col" for="Ipad">IPAD / Surface Pro</label>
+
+
+                                @Html.RadioButtonFor(model => model.Asset_Type, "DC_Other", new { @id = "DC_Other" })
+                                <label class="premium-label four col" for="DC_Other">Data Center Other Item</label>
 
 
                                 @Html.RadioButtonFor(model => model.Asset_Type, "Other", new { @id = "Other" })

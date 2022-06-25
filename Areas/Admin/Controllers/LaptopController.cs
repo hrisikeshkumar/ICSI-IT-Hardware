@@ -63,7 +63,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Create_Item", "Laptop");
+            return RedirectToAction("Lap_Create_Item", "Laptop");
         }
 
         public ActionResult Edit_Laptop(string id)
