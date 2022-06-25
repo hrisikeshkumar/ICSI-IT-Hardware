@@ -35,7 +35,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Scanner_Create_Post(Mod_Scanner Get_Data)
+        public ActionResult Scanner_CreateItem_Post(Mod_Scanner Get_Data)
         {
             string Message = "";
             try

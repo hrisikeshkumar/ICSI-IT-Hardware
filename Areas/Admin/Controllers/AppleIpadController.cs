@@ -35,7 +35,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult AppleIpad_Create_Post(Mod_AppleIpad Get_Data)
+        public ActionResult AppleIpad_CreateItem_Post(Mod_AppleIpad Get_Data)
         {
             string Message = "";
             try

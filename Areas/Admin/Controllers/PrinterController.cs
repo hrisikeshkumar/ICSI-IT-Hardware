@@ -36,7 +36,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             }
 
             [HttpPost]
-            public ActionResult Printer_Create_Post(Mod_Printer Get_Data)
+            public ActionResult Printer_CreateItem_Post(Mod_Printer Get_Data)
             {
                 string Message = "";
                 try
@@ -64,7 +64,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                 }
 
-                return RedirectToAction("Create_Item", "Printer");
+                return RedirectToAction("Printer_Create_Item", "Printer");
             }
 
             public ActionResult Edit_Printer(string id)

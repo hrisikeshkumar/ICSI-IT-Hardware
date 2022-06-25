@@ -36,7 +36,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult DC_MisItems_Create_Post(Mod_DC_MisItems Get_Data)
+        public ActionResult DC_Mis_CreateItem_Post(Mod_DC_MisItems Get_Data)
         {
             string Message = "";
             try

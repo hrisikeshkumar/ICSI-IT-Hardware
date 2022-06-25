@@ -36,7 +36,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Lap_Create_Post(Mod_Switch Get_Data)
+        public ActionResult Switch_CreateItem_Post(Mod_Switch Get_Data)
         {
             string Message = "";
             try

@@ -35,7 +35,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult DataCard_Create_Post(Mod_DataCard Get_Data)
+        public ActionResult DataCard_CreateItem_Post(Mod_DataCard Get_Data)
         {
             string Message = "";
             try
