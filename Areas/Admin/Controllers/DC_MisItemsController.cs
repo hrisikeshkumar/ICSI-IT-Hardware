@@ -86,7 +86,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-        public ActionResult Update_DC_MisItems(Mod_DC_MisItems Get_Data, string Asset_ID)
+        public ActionResult Update_DC_MisItems(Mod_DC_MisItems Get_Data, string Item_id)
         {
             int status = 0;
             try
@@ -96,7 +96,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 {
                     BL_DC_MisItems Md_Asset = new BL_DC_MisItems();
 
-                    status = Md_Asset.Save_DC_MisItems_data(Get_Data, "Update", Asset_ID);
+                    status = Md_Asset.Save_DC_MisItems_data(Get_Data, "Update", Item_id);
 
                     if (status > 1)
                     {

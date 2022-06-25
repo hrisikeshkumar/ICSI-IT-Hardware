@@ -83,7 +83,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-        public ActionResult Update_Laptop(Mod_Laptop Get_Data, string Asset_ID)
+        public ActionResult Update_Laptop(Mod_Laptop Get_Data, string Item_id)
         {
             int status = 0;
             try
@@ -93,7 +93,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 {
                     BL_Laptop Md_Asset = new BL_Laptop();
 
-                    status = Md_Asset.Save_Laptop_data(Get_Data, "Update", Asset_ID);
+                    status = Md_Asset.Save_Laptop_data(Get_Data, "Update", Item_id);
 
                     if (status == 1)
                     {
@@ -158,7 +158,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             Mod_Computer Mod_Make = new Mod_Computer();
 
-            Mod_Make.Item_Model_List = Make_List.Item_MakeModel_List("Desktop", "MODEL", Item_Make);
+            Mod_Make.Item_Model_List = Make_List.Item_MakeModel_List("Laptop", "MODEL", Item_Make);
 
             return Json(Mod_Make.Item_Model_List, JsonRequestBehavior.AllowGet);
 

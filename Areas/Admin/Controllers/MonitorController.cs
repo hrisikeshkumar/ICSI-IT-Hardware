@@ -63,7 +63,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                 }
 
-                return RedirectToAction("Create_Item", "Monitor");
+                return RedirectToAction("Moitor_Create_Item", "Monitor");
             }
 
             public ActionResult Edit_Monitor(string id)
@@ -81,7 +81,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             }
 
 
-            public ActionResult Update_Monitor(Mod_Monitor Get_Data, string Asset_ID)
+            public ActionResult Update_Monitor(Mod_Monitor Get_Data, string Item_id)
             {
                 int status = 0;
                 try
@@ -91,7 +91,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                     {
                         BL_Monitor Md_Asset = new BL_Monitor();
 
-                        status = Md_Asset.Save_Monitor_data(Get_Data, "Update", Asset_ID);
+                        status = Md_Asset.Save_Monitor_data(Get_Data, "Update", Item_id);
 
                         if (status >0)
                         {

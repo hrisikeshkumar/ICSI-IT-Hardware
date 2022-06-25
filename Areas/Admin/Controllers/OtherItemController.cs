@@ -85,7 +85,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-        public ActionResult Update_OtherItem(Mod_OtherItem Get_Data, string Asset_ID)
+        public ActionResult Update_OtherItem(Mod_OtherItem Get_Data, string Item_id)
         {
             int status = 0;
             try
@@ -95,7 +95,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 {
                     BL_OtherItem Md_Asset = new BL_OtherItem();
 
-                    status = Md_Asset.Save_OtherItem_data(Get_Data, "Update", Asset_ID);
+                    status = Md_Asset.Save_OtherItem_data(Get_Data, "Update", Item_id);
 
                     if (status > 0)
                     {
