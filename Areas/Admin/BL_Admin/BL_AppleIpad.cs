@@ -34,7 +34,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                         SqlParameter sqlP_type = new SqlParameter("@Type", "Get_List");
                         cmd.Parameters.Add(sqlP_type);
 
-                        SqlParameter sqlP_Asset_Type = new SqlParameter("@Asset_Type", "IPAD");
+                        SqlParameter sqlP_Asset_Type = new SqlParameter("@Asset_Type", "AppleIpad");
                         cmd.Parameters.Add(sqlP_Asset_Type);
 
                         using (SqlDataAdapter sda = new SqlDataAdapter())

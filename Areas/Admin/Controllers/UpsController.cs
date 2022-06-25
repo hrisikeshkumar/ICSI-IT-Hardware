@@ -63,7 +63,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Create_Item", "Ups");
+            return RedirectToAction("Ups_Create_Item", "Ups");
         }
 
         public ActionResult Edit_Ups(string id)

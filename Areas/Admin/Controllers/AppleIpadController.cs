@@ -63,7 +63,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Create_Item", "AppleIpad");
+            return RedirectToAction("AppleIpad_Create_Item", "AppleIpad");
         }
 
         public ActionResult Edit_AppleIpad(string id)

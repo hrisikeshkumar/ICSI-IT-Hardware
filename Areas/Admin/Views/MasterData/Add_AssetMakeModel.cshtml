@@ -90,111 +90,123 @@
     @using (Html.BeginForm("Save_AssetMakeModel", "MasterData", FormMethod.Post))
     {
 
-        <table class="  table-striped shadow " style="width:100%">
+    <table class="  table-striped shadow " style="width:100%">
 
-            <tr>
-                <td style="width:15%; height:50px;">
-                    Asset Make
-                </td>
-                <td style="width:35%;">
+        <tr>
+            <td style="width:15%; height:50px;">
+                Asset Make
+            </td>
+            <td style="width:35%;">
 
-                    @Html.TextBoxFor(x => x.Asset_make, new { @class = "form-rounded", @style = " width :90%; " })
+                @Html.TextBoxFor(x => x.Asset_make, new { @class = "form-rounded", @style = " width :90%; " })
 
-                </td>
-                <td style="width:15%;">
-                    Asset Model
-                </td>
-                <td style="width:35%;">
-                    @Html.TextBoxFor(x => x.Asset_Model, new { @class = "form-rounded", @style = " width :90%; " })
-                </td>
-            </tr>
-
-            <tr>
-
-                <td colspan="4" align="left" style="vertical-align: middle; padding-top: 40px; padding-bottom: 40px; padding-left:20px">
+            </td>
+            <td style="width:15%;">
+                Asset Model
+            </td>
+            <td style="width:35%;">
+                @Html.TextBoxFor(x => x.Asset_Model, new { @class = "form-rounded", @style = " width :90%; " })
+            </td>
+        </tr>
 
 
-                    <div>
-                        <div class="form cf">
-                            <section class="plan cf">
 
-                                @Html.RadioButtonFor(model => model.Asset_Type, "Desktop", new { @id = "Desktop" })
-                                <label class="free-label four col" for="Desktop">Desktop PC</label>
+        <tr>
+            <td style="width: 100%; height: 10px; padding-top: 20px;" colspan="4">
+                Select Item Type
+            </td>
+        </tr>
 
+        <tr>
 
-                                @Html.RadioButtonFor(model => model.Asset_Type, "Laptop", new { @id = "Laptop" })
-                                <label class="basic-label four col" for="Laptop">Laptop</label>
-
-
-                                @Html.RadioButtonFor(model => model.Asset_Type, "PrintScan", new { @id = "PrintScan" })
-                                <label class="premium-label four col" for="PrintScan">Printer/Scanner</label>
+            <td colspan="4" align="center" style="vertical-align: middle; padding-top: 20px; padding-bottom: 20px; padding-left: 10px; padding-right: 10px">
 
 
-                                @Html.RadioButtonFor(model => model.Asset_Type, "UPS", new { @id = "UPS" })
-                                <label class="premium-label four col" for="UPS">UPS</label>
+                <div>
+                    <div class="form cf">
+                        <section class="plan cf">
+
+                            @Html.RadioButtonFor(model => model.Asset_Type, "Desktop", new { @id = "Desktop" })
+                            <label class="free-label four col" for="Desktop">Desktop PC</label>
 
 
-                                @Html.RadioButtonFor(model => model.Asset_Type, "Server", new { @id = "Server" })
-                                <label class="premium-label four col" for="Server">Server</label>
+                            @Html.RadioButtonFor(model => model.Asset_Type, "Laptop", new { @id = "Laptop" })
+                            <label class="basic-label four col" for="Laptop">Laptop</label>
 
 
-                                @Html.RadioButtonFor(model => model.Asset_Type, "Switch", new { @id = "Switch" })
-                                <label class="premium-label four col" for="Switch">Network Switch</label>
+                            @Html.RadioButtonFor(model => model.Asset_Type, "PrintScan", new { @id = "PrintScan" })
+                            <label class="premium-label four col" for="PrintScan">Printer/Scanner</label>
 
 
-                                @Html.RadioButtonFor(model => model.Asset_Type, "Ipad", new { @id = "Ipad" })
-                                <label class="premium-label four col" for="Ipad">IPAD / Surface Pro</label>
+                            @Html.RadioButtonFor(model => model.Asset_Type, "UPS", new { @id = "UPS" })
+                            <label class="premium-label four col" for="UPS">UPS</label>
 
 
-                                @Html.RadioButtonFor(model => model.Asset_Type, "DC_Other", new { @id = "DC_Other" })
-                                <label class="premium-label four col" for="DC_Other">Data Center Other Item</label>
+                            @Html.RadioButtonFor(model => model.Asset_Type, "Server", new { @id = "Server" })
+                            <label class="premium-label four col" for="Server">Server</label>
 
 
-                                @Html.RadioButtonFor(model => model.Asset_Type, "Other", new { @id = "Other" })
-                                <label class="premium-label four col" for="Other">Other Item</label>
+                            @Html.RadioButtonFor(model => model.Asset_Type, "Switch", new { @id = "Switch" })
+                            <label class="premium-label four col" for="Switch">Network Switch</label>
 
 
-                            </section>
-                        </div>
+                            @Html.RadioButtonFor(model => model.Asset_Type, "DataCard", new { @id = "DataCard" })
+                            <label class="premium-label four col" for="DataCard">Data Card</label>
 
+
+                            @Html.RadioButtonFor(model => model.Asset_Type, "Ipad", new { @id = "Ipad" })
+                            <label class="premium-label four col" for="Ipad">IPAD / Surface Pro</label>
+
+
+                            @Html.RadioButtonFor(model => model.Asset_Type, "DC_Other", new { @id = "DC_Other" })
+                            <label class="premium-label four col" for="DC_Other">Data Center Other Item</label>
+
+
+                            @Html.RadioButtonFor(model => model.Asset_Type, "OtherItem", new { @id = "OtherItem" })
+                            <label class="premium-label four col" for="OtherItem">Other Item</label>
+
+
+                        </section>
                     </div>
 
-                </td>
+                </div>
 
-            </tr>
+            </td>
 
-
-
-            <tr>
-                <td style="width:100%; height:10px;" colspan="4">
-                </td>
-            </tr>
-
-            <tr style=" height: 30px; ">
-                <td align="left" style="width:15%; "></td>
-
-                <td style="width: 35%; padding-top: 10px; padding-bottom: 5px" align="center">
-
-                    <div class="wrap_but">
-                        <button class="button" style="font-weight:bold; font-size:14px;">Submit</button>
-                    </div>
+        </tr>
 
 
-                </td>
 
-                <td style="width: 15%; padding-top: 10px; padding-bottom: 5px" align="center">
+        <tr>
+            <td style="width:100%; height:10px;" colspan="4">
+            </td>
+        </tr>
 
-                    <div class="wrap_but">
-                        @Html.ActionLink("Back", "List_Make_Data", "MasterData", null, new { @class = "button", @style = "font-weight:bold; font-size:14px;" })
+        <tr style=" height: 30px; ">
+            <td align="left" style="width:15%; "></td>
 
-                    </div>
-                </td>
+            <td style="width: 35%; padding-top: 10px; padding-bottom: 5px" align="center">
 
-                <td align="left" style="width:35%;"></td>
-            </tr>
+                <div class="wrap_but">
+                    <button class="button" style="font-weight:bold; font-size:14px;">Submit</button>
+                </div>
 
 
-        </table>
+            </td>
+
+            <td style="width: 15%; padding-top: 10px; padding-bottom: 5px" align="center">
+
+                <div class="wrap_but">
+                    @Html.ActionLink("Back", "List_Make_Data", "MasterData", null, new { @class = "button", @style = "font-weight:bold; font-size:14px;" })
+
+                </div>
+            </td>
+
+            <td align="left" style="width:35%;"></td>
+        </tr>
+
+
+    </table>
 
     }
 </div>

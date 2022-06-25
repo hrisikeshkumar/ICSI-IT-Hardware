@@ -63,7 +63,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Create_Item", "Server");
+            return RedirectToAction("Server_Create_Item", "Server");
         }
 
         public ActionResult Edit_Server(string id)

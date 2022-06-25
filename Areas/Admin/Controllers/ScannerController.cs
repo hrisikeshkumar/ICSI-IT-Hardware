@@ -63,7 +63,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Create_Item", "Scanner");
+            return RedirectToAction("Scanner_Create_Item", "Scanner");
         }
 
         public ActionResult Edit_Scanner(string id)

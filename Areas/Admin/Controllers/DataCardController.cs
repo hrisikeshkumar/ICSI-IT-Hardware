@@ -64,7 +64,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Create_Item", "DataCard");
+            return RedirectToAction("DataCard_Create_Item", "DataCard");
         }
 
         public ActionResult Edit_DataCard(string id)

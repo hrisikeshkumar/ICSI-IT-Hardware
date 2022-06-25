@@ -64,7 +64,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Create_Item", "OtherItem");
+            return RedirectToAction("OtherItem_Create_Item", "OtherItem");
         }
 
         public ActionResult Edit_OtherItem(string id)

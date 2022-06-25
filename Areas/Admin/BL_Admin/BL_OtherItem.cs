@@ -113,12 +113,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                     con.Open();
 
-                    cmd.ExecuteNonQuery();
+                    status = cmd.ExecuteNonQuery();
 
-                    status = 0;
 
                 }
-                catch (Exception ex) { status = 1; }
+                catch (Exception ex) { status = -1; }
                 finally { con.Close(); }
 
                 return status;

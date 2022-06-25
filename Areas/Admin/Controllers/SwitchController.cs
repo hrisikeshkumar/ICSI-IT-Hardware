@@ -64,7 +64,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Create_Item", "Switch");
+            return RedirectToAction("Switch_Create_Item", "Switch");
         }
 
         public ActionResult Edit_Switch(string id)
