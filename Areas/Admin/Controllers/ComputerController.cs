@@ -93,7 +93,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Save_Computer_data(Get_Data, "Update", Item_id);
 
-                    if (status < 1)
+                    if (status > 0)
                     {
                         TempData["Message"] = String.Format("Data have saved successfully");
                     }
@@ -128,7 +128,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Save_Computer_data(Get_Data, "Delete", Item_id);
 
-                    if (status < 1)
+                    if (status > 0)
                     {
                         TempData["Message"] = String.Format("Data saved successfully");
                     }

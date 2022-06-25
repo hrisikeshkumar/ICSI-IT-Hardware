@@ -209,3 +209,40 @@
 
 
 
+<script type="text/javascript">
+    $(function () {
+
+
+        //$.ajax({
+        //    type: "GET",
+        //    url: "/home/GetCategories",
+        //    datatype: "Json",
+        //    success: function (data) {
+        //        $.each(data, function (index, value) {
+        //            $('#dropdownCategory').append('<option value="' + value.CategoryID + '">' + value.CategoryName + '</option>');
+        //        });
+        //    }
+        //});
+
+
+        $('#Item_Make_id').change(function () {
+            $('#Item_Model_id').empty();
+
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Server/Model_List",
+                datatype: "Json",
+                data: { Item_Make: $('#Item_Make_id').val() },
+                success: function (data) {
+                    $.each(data, function (index, value) {
+                        $('#Item_Model_id').append('<option value="' + value.Value + '">' + value.Text + '</option>');
+                    });
+                }
+
+            });
+
+        });
+    });
+</script>
+
+

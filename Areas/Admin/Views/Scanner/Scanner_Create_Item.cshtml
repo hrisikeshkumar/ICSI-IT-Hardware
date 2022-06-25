@@ -116,7 +116,7 @@
                 </td>
                 <td style="width:25%;">
 
-                    @Html.DropDownListFor(x => x.Item_Make_id, Model.Item_Make_List, "Please select", new { @class = " form-rounded", @style = " width :90%; " })
+                    @Html.DropDownListFor(x => x.Item_Make_id, Model.Item_Make_List,  new { @class = " form-rounded", @style = " width :90%; " })
                 </td>
                 <td style="width:25%;">
                     Asset Model
@@ -229,7 +229,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/Admin/Computer/Model_List",
+                url: "/Admin/Scanner/Model_List",
                 datatype: "Json",
                 data: { Item_Make: $('#Item_Make_id').val() },
                 success: function (data) {

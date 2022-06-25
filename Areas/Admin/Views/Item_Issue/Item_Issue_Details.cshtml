@@ -67,26 +67,26 @@
 
                     @foreach (var item in Model)
                     {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Item_Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Present_Custady)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Transfered_Custady)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Issued_date)
-                    </td>
-                    <td>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Item_Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Present_Custady)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Transfered_Custady)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Issued_date)
+                            </td>
+                            <td>
 
-                        @Html.ActionLink("Details", "Get_Detail", new { id = item.Item_Issue_Id }) |
-                        @Html.ActionLink("Delete", "Delete_Item_Issue", new { id = item.Item_Issue_Id })
+                                @Html.ActionLink("Details", "Get_Detail", new { id = item.Item_Issue_Id }) |
+                                @Html.ActionLink("Delete", "Delete_Item_Issue", new { id = item.Item_Issue_Id })
 
-                    </td>
-                </tr>
+                            </td>
+                        </tr>
                     }
 
                 </table>
@@ -111,5 +111,20 @@
     <script type="text/javascript">
         @Html.Raw(ViewBag.JavaScriptFunction)
     </script>
+}
+
+
+
+@if (TempData["Message"] != null && TempData["Message"] != "" && TempData["Message"] != string.Empty)
+{
+    <script type="text/javascript">
+
+    window.onload = function () {
+        /**/
+        alert("@TempData["Message"]");
+    /**/
+    };
+    </script>
+
 }
 

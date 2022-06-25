@@ -46,14 +46,13 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                     BL_Server save_data = new BL_Server();
                     int status = save_data.Save_Server_data(Get_Data, "Add_new", "");
 
-                    if (status < 1)
+                    if (status > 0)
                     {
-                        TempData["Message"] = String.Format("Data is not saved");
+                        TempData["Message"] = String.Format("Data saved successfully");
                     }
                     else
                     {
-
-                        TempData["Message"] = String.Format("Data save successfully");
+                        TempData["Message"] = String.Format("Data is not saved");
                     }
                 }
             }
@@ -98,7 +97,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     if (status > 0)
                     {
-                        TempData["Message"] = String.Format("Data have saved successfully");
+                        TempData["Message"] = String.Format("Data saved successfully");
                     }
                     else
                     {

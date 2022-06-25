@@ -28,7 +28,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                 Mod_Monitor Mod_data = new Mod_Monitor();
                 Item_MakeModel Make_List = new Item_MakeModel();
-                Mod_data.Item_Make_List = Make_List.Item_MakeModel_List("Monitor", "MAKE", "");
+                Mod_data.Item_Make_List = Make_List.Item_MakeModel_List("Desktop", "MAKE", "");
 
                 return View("~/Areas/Admin/Views/Monitor/Moitor_Create_Item.cshtml", Mod_data);
 
@@ -46,14 +46,13 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                         BL_Monitor save_data = new BL_Monitor();
                         int status = save_data.Save_Monitor_data(Get_Data, "Add_new", "");
 
-                        if (status == 1)
+                        if (status > 0)
                         {
-                            TempData["Message"] = String.Format("Data is not saved");
+                            TempData["Message"] = String.Format("Data saved successfully");
                         }
                         else
                         {
-
-                            TempData["Message"] = String.Format("Data save successfully");
+                            TempData["Message"] = String.Format("Data is not saved");
                         }
                     }
                 }
@@ -75,8 +74,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 
 
                 Model_data = BL_data.Get_Data_By_ID(Model_data, id);
-                Model_data.Item_Make_List = Make_List.Item_MakeModel_List("Monitor", "MAKE", "");
-                Model_data.Item_Model_List = Make_List.Item_MakeModel_List("Monitor", "MODEL", Model_data.Item_Make_id.Trim().ToString());
+                Model_data.Item_Make_List = Make_List.Item_MakeModel_List("Desktop", "MAKE", "");
+                Model_data.Item_Model_List = Make_List.Item_MakeModel_List("Desktop", "MODEL", Model_data.Item_Make_id.Trim().ToString());
 
                 return View("~/Areas/Admin/Views/Monitor/Edit_Monitor.cshtml", Model_data);
             }
@@ -158,7 +157,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             Mod_Computer Mod_Make = new Mod_Computer();
 
-            Mod_Make.Item_Model_List = Make_List.Item_MakeModel_List("Monitor", "MODEL", Item_Make);
+            Mod_Make.Item_Model_List = Make_List.Item_MakeModel_List("Desktop", "MODEL", Item_Make);
 
             return Json(Mod_Make.Item_Model_List, JsonRequestBehavior.AllowGet);
 

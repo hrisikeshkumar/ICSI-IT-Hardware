@@ -46,14 +46,13 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                     BL_AppleIpad save_data = new BL_AppleIpad();
                     int status = save_data.Save_AppleIpad_data(Get_Data, "Add_new", "");
 
-                    if (status < 1)
+                    if (status > 0)
                     {
-                        TempData["Message"] = String.Format("Data is not saved");
+                        TempData["Message"] = String.Format("Data saved successfully");
                     }
                     else
                     {
-
-                        TempData["Message"] = String.Format("Data save successfully");
+                        TempData["Message"] = String.Format("Data is not saved");
                     }
                 }
             }
@@ -98,9 +97,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Save_AppleIpad_data(Get_Data, "Update", Asset_ID);
 
-                    if (status < 1)
+                    if (status > 0)
                     {
-                        TempData["Message"] = String.Format("Data have saved successfully");
+                        TempData["Message"] = String.Format("Data saved successfully");
                     }
                     else
                     {
