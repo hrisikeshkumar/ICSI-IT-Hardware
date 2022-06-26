@@ -144,6 +144,9 @@
 
             <li><a href="@Url.Action("List_Make_Data", null, new { area = "Admin", controller = "MasterData" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-collection-item"></i> </span>Make/Model Master</a> </li>
 
+            <li> <a href="@Url.Action("SLA_Details", null, new { area = string.Empty, controller = "SLA" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-compass"></i> </span> Service Level Agreement</a>  </li>
+
+
             <li class="has-child">
                 <span class="its-parent">
                     <span class="icon">
@@ -188,33 +191,35 @@
 
                         </ul>
                     </li>
-                  
+
 
                 </ul>
 
-                    </li>
-                    <li> <a href="@Url.Action("Item_Issue_Details", null, new { area = string.Empty, controller = "Item_Issue" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-compass"></i> </span> Issue Item To Employees</a>  </li>
-                    <li> <a href="@Url.Action("Shift_Item_Details", null, new { area = string.Empty, controller = "Shift_Item" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-compass"></i> </span> Shift Item To Other Company</a>  </li>
-                    <li> <a href="@Url.Action("Approval_Details", null, new { area = string.Empty, controller = "Approval" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-compass"></i> </span> Approval</a>  </li>
-                    <li> <a href="@Url.Action("AMC_Details", null, new { area = string.Empty, controller = "AMC" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-compass"></i> </span> Item AMC Details</a>  </li>
-                    <li> <a href="@Url.Action("AMC_Details", null, new { area = string.Empty, controller = "AMC" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-compass"></i> </span> Other AMC Details</a>  </li>
-
-                    <li class="has-child">
-                        <span class="its-parent">
-                            <span class="icon">
-                                <i class="zmdi zmdi-wrap-text"></i>
-                            </span>Reports
-                        </span>
-                        <ul class="its-children">
-                            <li> <a href="#1"> Stock Report </a></li>
-                            <li> <a href="#1"> Items Movement Report</a></li>
-
-                        </ul>
-                    </li>
+            </li>
 
 
-                    <!--//has-child-->
+            <li> <a href="@Url.Action("Item_Issue_Details", null, new { area = string.Empty, controller = "Item_Issue" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-compass"></i> </span> Issue Item To Employees</a>  </li>
+            <li> <a href="@Url.Action("Shift_Item_Details", null, new { area = string.Empty, controller = "Shift_Item" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-compass"></i> </span> Shift Item To Other Company</a>  </li>
+            <li> <a href="@Url.Action("Approval_Details", null, new { area = string.Empty, controller = "Approval" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-compass"></i> </span> Approval</a>  </li>
+            <li> <a href="@Url.Action("AMC_Details", null, new { area = string.Empty, controller = "AMC" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-compass"></i> </span> Item AMC Details</a>  </li>
+            <li> <a href="@Url.Action("AMC_Details", null, new { area = string.Empty, controller = "AMC" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-compass"></i> </span> Other AMC Details</a>  </li>
+
+            <li class="has-child">
+                <span class="its-parent">
+                    <span class="icon">
+                        <i class="zmdi zmdi-wrap-text"></i>
+                    </span>Reports
+                </span>
+                <ul class="its-children">
+                    <li> <a href="#1"> Stock Report </a></li>
+                    <li> <a href="#1"> Items Movement Report</a></li>
+
                 </ul>
+            </li>
+
+
+            <!--//has-child-->
+        </ul>
     </nav>
     <!--End hs Mega Menu-->
     <div class="container" style="padding-top:10%; padding-left:5%">

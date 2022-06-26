@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
+using System.Web.Mvc;
 
 namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 {
@@ -50,9 +51,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                     BL_data.Item_Name = Convert.ToString(dr["Asset_Type"]);
 
-                    BL_data.Present_Custady = Convert.ToString(dr["Item_SlNo"]);
+                    BL_data.Previous_Custady_Id = Convert.ToString(dr["Item_SlNo"]);
 
-                    BL_data.Transfered_Custady = Convert.ToString(dr["Item_Id"]);
+                    BL_data.Transfered_Custady_Id = Convert.ToString(dr["Item_Id"]);
 
                     current_data.Add(BL_data);
                 }
@@ -90,10 +91,10 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlParameter Item_Id = new SqlParameter("@Item_MakeId", Data.Item_Id);
                 cmd.Parameters.Add(Item_Id);
 
-                SqlParameter Present_Company = new SqlParameter("@Item_serial_No", Data.Present_Custady);
+                SqlParameter Present_Company = new SqlParameter("@Item_serial_No", Data.Previous_Custady_Id);
                 cmd.Parameters.Add(Present_Company);
 
-                SqlParameter Shifted_Company = new SqlParameter("@Proc_Date", Data.Transfered_Custady);
+                SqlParameter Shifted_Company = new SqlParameter("@Proc_Date", Data.Transfered_Custady_Id);
                 cmd.Parameters.Add(Shifted_Company);
 
                 SqlParameter Shift_date = new SqlParameter("@Warnt_end_DT", Data.Issued_date);
@@ -155,9 +156,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     Data.Item_Issue_Id = Convert.ToString(dt_Comuter.Rows[0]["Item_Id"]);
                     Data.Item_SerialNo = Convert.ToString(dt_Comuter.Rows[0]["Item_MakeId"]);
                     Data.Item_Name = Convert.ToString(dt_Comuter.Rows[0]["Item_SlNo"]);
-                    Data.Item_Transfered_Location = Convert.ToString(dt_Comuter.Rows[0]["Item_MakeId"]);
-                    Data.Present_Custady = Convert.ToString(dt_Comuter.Rows[0]["Item_MakeId"]);
-                    Data.Transfered_Custady = Convert.ToString(dt_Comuter.Rows[0]["Item_MakeId"]);
+                    Data.Transfered_Emp_Location = Convert.ToString(dt_Comuter.Rows[0]["Item_MakeId"]);
+                    Data.Transfered_Custady_Id = Convert.ToString(dt_Comuter.Rows[0]["Item_MakeId"]);
+                    Data.Transfered_Custady_Id = Convert.ToString(dt_Comuter.Rows[0]["Item_MakeId"]);
                     Data.Issued_date = Convert.ToDateTime(dt_Comuter.Rows[0]["Proc_Date"]).Date;
                     Data.Remarks = Convert.ToString(dt_Comuter.Rows[0]["Remarks"]);
 
@@ -168,5 +169,70 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
             return Data;
         }
+
+
+
+
+
+        public List<Item_SL_Wise> Item_SLnumber_List( string Sl_No)
+        {
+
+            List<Item_SL_Wise> List_Item =new List<Item_SL_Wise>();
+
+            try
+            {
+                DataTable dt_Comuter;
+                string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                SqlConnection con = new SqlConnection(strcon);
+
+
+                using (SqlCommand cmd = new SqlCommand("Item_List_Serial_No_Wise"))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = con;
+
+                    SqlParameter sqlP_Item_Type = new SqlParameter("@Item_SlNo", Sl_No);
+                    cmd.Parameters.Add(sqlP_Item_Type);
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        sda.SelectCommand = cmd;
+                        using (DataTable dt = new DataTable())
+                        {
+                            sda.Fill(dt);
+                            dt_Comuter = dt;
+                        }
+                    }
+                }
+
+                foreach (DataRow dr in dt_Comuter.Rows)
+                {
+                    Item_SL_Wise item = new Item_SL_Wise();
+                    item.Item_Id = Convert.ToString(dr["Item_Id"]);
+                    item.Item_SL_Number = Convert.ToString(dr["Item_SlNo"]);
+                    item.Item_Type = Convert.ToString(dr["Asset_Type"]);
+
+                    List_Item.Add(item);
+                }
+
+            }
+            catch (Exception ex) { }
+
+            return List_Item;
+        }
+
+
+
+
+
     }
+
+    public class Item_SL_Wise
+    { 
+        public string Item_Id { get; set; }
+        public string Item_SL_Number { get; set; }
+        public string Item_Type { get; set; }
+    }
+
 }

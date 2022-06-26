@@ -135,6 +135,7 @@
     <Compile Include="Areas\Admin\BL_Admin\BL_Printer.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Scanner.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Server.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\BL_SLA.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Switch.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Ups.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Vendor.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Areas\Admin\Controllers\PrinterController.cs" />
     <Compile Include="Areas\Admin\Controllers\ScannerController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SLAController.cs" />
     <Compile Include="Areas\Admin\Controllers\SwitchController.cs" />
     <Compile Include="Areas\Admin\Controllers\UpsController.cs" />
     <Compile Include="Areas\Admin\Controllers\VendorController.cs" />
@@ -171,6 +173,7 @@
     <Compile Include="Areas\Admin\Models\Mod_Printer.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Scanner.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Server.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_SLA.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Switch.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Ups.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Vendor.cs" />
@@ -296,6 +299,9 @@
     <Content Include="Areas\Admin\Views\Item_Issue\Edit_Item_Issue.cshtml" />
     <Content Include="Areas\Admin\Views\Item_Issue\Item_Issue_Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\Item_Issue\Item_Issue_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\SLA\SLA_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\SLA\SLA_Create_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\SLA\Edit_SLA.cshtml" />
     <None Include="Properties\PublishProfiles\rajaonprewebapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

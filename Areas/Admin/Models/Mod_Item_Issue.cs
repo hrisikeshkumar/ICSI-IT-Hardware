@@ -10,11 +10,23 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
 
         public string Item_Issue_Id { get; set; }
         public string Item_Id { get; set; }
+        public string Item_Type { get; set; }
         public string Item_SerialNo { get; set; }
         public string Item_Name { get; set; }
-        public string Present_Custady { get; set; }
-        public string Transfered_Custady { get; set; }
-        public string Item_Transfered_Location { get; set; }
+        public string Previous_Custady_Id { get; set; }
+        public string Previous_Emp_Name { get; set; }
+        public string Previous_Emp_Designation { get; set; }
+        public string Previous_Emp_Type { get; set; }
+        public string Previous_Emp_Dept { get; set; }
+        public string Previous_Emp_Location { get; set; }
+
+
+        public string Transfered_Custady_Id { get; set; }
+        public string Transfered_Emp_Name { get; set; }
+        public string Transfered_Emp_Designation { get; set; }
+        public string Transfered_Emp_Type { get; set; }
+        public string Transfered_Emp_Dept { get; set; }
+        public string Transfered_Emp_Location { get; set; }
         public DateTime? Issued_date { get; set; }
         public string Remarks { get; set; }
         public string Create_usr_id { get; set; }
