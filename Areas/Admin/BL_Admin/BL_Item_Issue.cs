@@ -223,6 +223,59 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
         }
 
 
+        public Mod_Item_Issue_Employee Issue_Employee(Mod_Item_Issue_Employee Emp_Details, string Sl_No, string Type)
+        {
+
+            
+
+            try
+            {
+                DataTable dt_Comuter;
+                string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                SqlConnection con = new SqlConnection(strcon);
+
+
+                using (SqlCommand cmd = new SqlCommand("Find_Item_Issue"))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = con;
+
+                    SqlParameter sqlP_Item_Id = new SqlParameter("@Item_SlNo", Sl_No);
+                    cmd.Parameters.Add(sqlP_Item_Id);
+                    SqlParameter sqlP_Item_Type = new SqlParameter("@Type", Type);
+                    cmd.Parameters.Add(sqlP_Item_Type);
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        sda.SelectCommand = cmd;
+                        using (DataTable dt = new DataTable())
+                        {
+                            sda.Fill(dt);
+                            dt_Comuter = dt;
+
+
+                            Emp_Details.Transfered_Custady_Id = Convert.ToString(dt_Comuter.Rows[0]["Issue_Id"]);
+                            Emp_Details.Transfered_Emp_Name = Convert.ToString(dt_Comuter.Rows[0]["Emp_Name"]);
+                            Emp_Details.Transfered_Emp_Designation = Convert.ToString(dt_Comuter.Rows[0]["Designation_name"]);
+                            //Emp_Details.Transfered_Emp_Type = Convert.ToString(dt_Comuter.Rows[0]["Item_Id"]);
+                            Emp_Details.Transfered_Emp_Dept = Convert.ToString(dt_Comuter.Rows[0]["Dept_name"]);
+                            Emp_Details.Transfered_Emp_Location = Convert.ToString(dt_Comuter.Rows[0]["Emp_Location"]);
+
+
+                        }
+                    }
+                }
+
+             
+                
+
+
+            }
+            catch (Exception ex) { }
+
+            return Emp_Details;
+        }
 
 
 

@@ -20,7 +20,7 @@
             changeMonth: true,
             dateFormat: 'dd/mm/yy',
             minDate: new Date('01/01/1900'),
-            maxDate: '+1Y'
+            maxDate: '+10Y'
         });
     });
 </script>
@@ -114,13 +114,11 @@
                 <td style="width:25%;">
                     Asset Serial Number
                 </td>
-                <td style="width:25%;">
+                <td style="width:50%;" colspan="2">
                     @Html.TextBoxFor(x => x.Item_SerialNo, new { @class = " form-rounded", @style = " width :90%; border: 1px solid #0000FF; " })
                 </td>
                 <td style="width:25%; height:50px;">
-                    @Html.TextBoxFor(x => x.Item_Id, new { @class = " form-rounded", @style = " width :90%; border: 1px solid #0000FF; " })
-                </td>
-                <td style="width:25%;">
+                    @Html.HiddenFor(x => x.Item_Id, new { @class = " form-rounded", @style = " width :90%; border: 1px solid #0000FF; " })
                 </td>
 
             </tr>
@@ -283,8 +281,14 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     response($.map(data, function (item) {
-                        return item.Item_SL_Number + ' ( ' + item.Item_Type + ' )';
+                        return item.Item_SL_Number + ' -- ' + item.Item_Type + '--' + item.Item_Id  ;
                         //return item ;
+
+                        //return {
+                        //    label: item.Item_SL_Number + '  ' + item.Item_Type + ' )',
+                        //    value: item.Item_Id,
+                        //    valeeee: item.ItemId
+                        //};
                     }))
                 },
                 failure: function (response) {
@@ -297,9 +301,40 @@
         },
         minLength: 1,
         select: function (event, ui) {
-            alert('you have selected ' + ui.item.label );
-            $('#Item_SerialNo').val(ui.item.label);
+            //alert('you have selected ' + ui.item.label);
+
+            $('#Item_SerialNo').val(ui.item.label.split('--')[0]);
+            $('#Item_Name').val(ui.item.value.split('--')[1]);
+            $('#Item_Id').val(ui.item.value.split('--')[2]);
+
             return false;
         }
     });
 </script> 
+
+
+<script>
+    $(document).ready(function () {
+
+        $("#Item_SerialNo").focusout(function () {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Laptop/Model_List",
+                datatype: "Json",
+                data: { Item_Id: $('#Item_Id').val() },
+                success: function (data) {
+                    $.each(data, function (index, value) {
+                        $('#Previous_Custady_Id').val(value.Previous_Custady_Id);
+                        $('#Previous_Emp_Name').val(value.Previous_Emp_Name);
+                        $('#Previous_Emp_Designation').val(value.Previous_Emp_Designation);
+                        $('#Previous_Emp_Dept').val(value.Previous_Emp_Dept);
+                        $('#Previous_Emp_Location').val(value.Previous_Emp_Location);
+
+                    });
+                }
+
+            });
+        });
+
+    });
+</script>

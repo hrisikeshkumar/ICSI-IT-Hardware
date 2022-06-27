@@ -159,5 +159,23 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return Json(list);
         }
 
+        [HttpPost]
+        public JsonResult Model_List(string Item_Id , String Type)
+        {
+
+            Mod_Item_Issue_Employee Emp_Details= new Mod_Item_Issue_Employee();
+
+            BL_Item_Issue Item_data = new BL_Item_Issue();
+
+            Emp_Details = Item_data.Issue_Employee(Emp_Details, Item_Id, "Item_Issue");
+
+
+
+
+            return Json(Emp_Details);
+
+        }
+
+
     }
 }
