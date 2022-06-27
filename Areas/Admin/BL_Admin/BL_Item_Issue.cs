@@ -241,7 +241,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Connection = con;
 
-                    SqlParameter sqlP_Item_Id = new SqlParameter("@Item_SlNo", Sl_No);
+                    SqlParameter sqlP_Item_Id = new SqlParameter("@@Item_Id", Sl_No);
                     cmd.Parameters.Add(sqlP_Item_Id);
                     SqlParameter sqlP_Item_Type = new SqlParameter("@Type", Type);
                     cmd.Parameters.Add(sqlP_Item_Type);
@@ -254,14 +254,28 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                             sda.Fill(dt);
                             dt_Comuter = dt;
 
+                            if (dt_Comuter.Rows.Count >0)
+                            {
+                                if (Type == "Item_Issue")
+                                {
 
-                            Emp_Details.Transfered_Custady_Id = Convert.ToString(dt_Comuter.Rows[0]["Issue_Id"]);
-                            Emp_Details.Transfered_Emp_Name = Convert.ToString(dt_Comuter.Rows[0]["Emp_Name"]);
-                            Emp_Details.Transfered_Emp_Designation = Convert.ToString(dt_Comuter.Rows[0]["Designation_name"]);
-                            //Emp_Details.Transfered_Emp_Type = Convert.ToString(dt_Comuter.Rows[0]["Item_Id"]);
-                            Emp_Details.Transfered_Emp_Dept = Convert.ToString(dt_Comuter.Rows[0]["Dept_name"]);
-                            Emp_Details.Transfered_Emp_Location = Convert.ToString(dt_Comuter.Rows[0]["Emp_Location"]);
-
+                                    Emp_Details.Transfered_Custady_Id = Convert.ToString(dt_Comuter.Rows[0]["Issue_Id"]);
+                                    Emp_Details.Transfered_Emp_Name = Convert.ToString(dt_Comuter.Rows[0]["Emp_Name"]);
+                                    Emp_Details.Transfered_Emp_Designation = Convert.ToString(dt_Comuter.Rows[0]["Designation_name"]);
+                                    Emp_Details.Transfered_Emp_Dept = Convert.ToString(dt_Comuter.Rows[0]["Dept_name"]);
+                                    Emp_Details.Transfered_Emp_Location = Convert.ToString(dt_Comuter.Rows[0]["Emp_Location"]);
+                                    //Emp_Details.Transfered_Emp_Type = Convert.ToString(dt_Comuter.Rows[0]["Item_Id"]);
+                                }
+                                else
+                                {
+                                    
+                                    Emp_Details.Transfered_Emp_Name = Convert.ToString(dt_Comuter.Rows[0]["Emp_Name"]);
+                                    Emp_Details.Transfered_Emp_Designation = Convert.ToString(dt_Comuter.Rows[0]["Designation_name"]);                                    
+                                    Emp_Details.Transfered_Emp_Dept = Convert.ToString(dt_Comuter.Rows[0]["Dept_name"]);
+                                    Emp_Details.Transfered_Emp_Location = Convert.ToString(dt_Comuter.Rows[0]["Emp_Location"]);
+                                    //Emp_Details.Transfered_Emp_Type = Convert.ToString(dt_Comuter.Rows[0]["Item_Id"]);
+                                }
+                            }
 
                         }
                     }
@@ -279,7 +293,60 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
 
 
+
+        public List<Mod_Item_Issue_Employee> Emp_List(string EmpName)
+        {
+
+            List<Mod_Item_Issue_Employee> List_Item = new List<Mod_Item_Issue_Employee>();
+
+            try
+            {
+                DataTable dt_Comuter;
+                string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                SqlConnection con = new SqlConnection(strcon);
+
+
+                using (SqlCommand cmd = new SqlCommand("Emp_List"))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = con;
+
+                    SqlParameter sqlP_Item_Type = new SqlParameter("@EmpName", EmpName);
+                    cmd.Parameters.Add(sqlP_Item_Type);
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        sda.SelectCommand = cmd;
+                        using (DataTable dt = new DataTable())
+                        {
+                            sda.Fill(dt);
+                            dt_Comuter = dt;
+                        }
+                    }
+                }
+
+                foreach (DataRow dr in dt_Comuter.Rows)
+                {
+                    Mod_Item_Issue_Employee item = new Mod_Item_Issue_Employee();
+
+                    item.Transfered_Custady_Id = Convert.ToString(dr["Unique_Id"]);
+                    item.Transfered_Emp_Name = Convert.ToString(dr["Emp_Name"]);
+                    item.Transfered_Emp_Designation = Convert.ToString(dr["Designation_name"]);
+
+                    List_Item.Add(item);
+                }
+
+            }
+            catch (Exception ex) { }
+
+            return List_Item;
+        }
+
+
     }
+
+
 
     public class Item_SL_Wise
     { 
@@ -287,5 +354,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
         public string Item_SL_Number { get; set; }
         public string Item_Type { get; set; }
     }
+
+
 
 }

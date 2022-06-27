@@ -144,14 +144,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         public JsonResult AutoComplete(string SL_No)
         {
 
-
-            //Mod_Make.Item_Model_List = Make_List.Item_MakeModel_List("Laptop", "MODEL", Item_Make);
-
-            //return Json(Mod_Make.Item_Model_List, JsonRequestBehavior.AllowGet);
-
-
-          
-
             BL_Item_Issue data = new BL_Item_Issue();
             List<Item_SL_Wise> list = data.Item_SLnumber_List(SL_No);
 
@@ -160,7 +152,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult Model_List(string Item_Id , String Type)
+        public JsonResult Find_Item_Issue(string Item_Id , String Type)
         {
 
             Mod_Item_Issue_Employee Emp_Details= new Mod_Item_Issue_Employee();
@@ -174,6 +166,18 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             return Json(Emp_Details);
 
+        }
+
+
+
+        [HttpPost]
+        public JsonResult AutoComplete_TransferEmployee(string EmpID)
+        {
+
+            BL_Item_Issue data = new BL_Item_Issue();
+            List<Mod_Item_Issue_Employee> list = data.Emp_List(EmpID);
+
+            return Json(list);
         }
 
 
