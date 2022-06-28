@@ -26,7 +26,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlConnection con = new SqlConnection(strcon);
 
 
-                using (SqlCommand cmd = new SqlCommand("sp_Computer"))
+                using (SqlCommand cmd = new SqlCommand("sp_Item_Issue"))
                 {
                     SqlParameter sqlP_type = new SqlParameter("@Type", "Get_List");
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -49,11 +49,17 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 {
                     BL_data = new Mod_Item_Issue();
 
-                    BL_data.Item_Name = Convert.ToString(dr["Asset_Type"]);
+                    BL_data.Item_Issue_Id = Convert.ToString(dr["Issue_Id"]);
 
-                    BL_data.Previous_Custady_Id = Convert.ToString(dr["Item_SlNo"]);
+                    BL_data.Transfered_Emp_Name = Convert.ToString(dr["Emp_Name"]);
 
-                    BL_data.Transfered_Custady_Id = Convert.ToString(dr["Item_Id"]);
+                    BL_data.Transfered_Emp_Designation = Convert.ToString(dr["Designation_name"]);
+
+                    BL_data.Previous_Emp_Name = Convert.ToString(dr["Prev_Emp_Name"]);
+
+                    BL_data.Issued_date = Convert.ToDateTime(dr["Item_Issue_date"]);
+
+                    BL_data.Item_Type = Convert.ToString(dr["Asset_Type"]);
 
                     current_data.Add(BL_data);
                 }
@@ -75,7 +81,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "sp_Computer";
+                cmd.CommandText = "sp_Item_Issue";
 
                 cmd.Connection = con;
 
@@ -84,36 +90,34 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 if (type == "Update" || type == "Delete")
                 {
-                    SqlParameter SqlIssued_Id = new SqlParameter("@Item_Id", Issued_Id);
+                    SqlParameter SqlIssued_Id = new SqlParameter("@Item_Issue_id", Issued_Id);
                     cmd.Parameters.Add(SqlIssued_Id);
                 }
 
-                SqlParameter Item_Id = new SqlParameter("@Item_MakeId", Data.Item_Id);
+                SqlParameter Item_Id = new SqlParameter("@Item_Id", Data.Item_Id);
                 cmd.Parameters.Add(Item_Id);
 
-                SqlParameter Present_Company = new SqlParameter("@Item_serial_No", Data.Previous_Custady_Id);
+                SqlParameter Present_Company = new SqlParameter("@Previous_Emp_Id", Data.Previous_Custady_Id);
                 cmd.Parameters.Add(Present_Company);
 
-                SqlParameter Shifted_Company = new SqlParameter("@Proc_Date", Data.Transfered_Custady_Id);
+                SqlParameter Shifted_Company = new SqlParameter("@Present_Emp_Id", Data.Transfered_Custady_Id);
                 cmd.Parameters.Add(Shifted_Company);
 
-                SqlParameter Shift_date = new SqlParameter("@Warnt_end_DT", Data.Issued_date);
+                SqlParameter Shift_date = new SqlParameter("@Item_Issue_Date", Data.Issued_date);
                 cmd.Parameters.Add(Shift_date);
 
                 SqlParameter Remarks = new SqlParameter("@Remarks", Data.Remarks);
                 cmd.Parameters.Add(Remarks);
 
-                SqlParameter Asset_Type = new SqlParameter("@Asset_Type", "Item_Issue");
-                cmd.Parameters.Add(Asset_Type);
 
                 con.Open();
 
-                cmd.ExecuteNonQuery();
+                status = cmd.ExecuteNonQuery();
 
-                status = 0;
+                
 
             }
-            catch (Exception ex) { status = 1; }
+            catch (Exception ex) { status = -1; }
             finally { con.Close(); }
 
             return status;
@@ -169,9 +173,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
             return Data;
         }
-
-
-
 
 
         public List<Item_SL_Wise> Item_SLnumber_List( string Sl_No)
@@ -241,7 +242,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Connection = con;
 
-                    SqlParameter sqlP_Item_Id = new SqlParameter("@@Item_Id", Sl_No);
+                    SqlParameter sqlP_Item_Id = new SqlParameter("@Item_Id", Sl_No);
                     cmd.Parameters.Add(sqlP_Item_Id);
                     SqlParameter sqlP_Item_Type = new SqlParameter("@Type", Type);
                     cmd.Parameters.Add(sqlP_Item_Type);
@@ -256,25 +257,15 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                             if (dt_Comuter.Rows.Count >0)
                             {
-                                if (Type == "Item_Issue")
-                                {
+                               
 
-                                    Emp_Details.Transfered_Custady_Id = Convert.ToString(dt_Comuter.Rows[0]["Issue_Id"]);
-                                    Emp_Details.Transfered_Emp_Name = Convert.ToString(dt_Comuter.Rows[0]["Emp_Name"]);
-                                    Emp_Details.Transfered_Emp_Designation = Convert.ToString(dt_Comuter.Rows[0]["Designation_name"]);
-                                    Emp_Details.Transfered_Emp_Dept = Convert.ToString(dt_Comuter.Rows[0]["Dept_name"]);
-                                    Emp_Details.Transfered_Emp_Location = Convert.ToString(dt_Comuter.Rows[0]["Emp_Location"]);
+                                    Emp_Details.Previous_Custady_Id = Convert.ToString(dt_Comuter.Rows[0]["Present_Emp_Id"]);
+                                    Emp_Details.Previous_Emp_Name = Convert.ToString(dt_Comuter.Rows[0]["Emp_Name"]);
+                                    Emp_Details.Previous_Emp_Designation = Convert.ToString(dt_Comuter.Rows[0]["Designation_name"]);
+                                    Emp_Details.Previous_Emp_Dept = Convert.ToString(dt_Comuter.Rows[0]["Dept_name"]);
+                                    Emp_Details.Previous_Emp_Location = Convert.ToString(dt_Comuter.Rows[0]["Emp_Location"]);
                                     //Emp_Details.Transfered_Emp_Type = Convert.ToString(dt_Comuter.Rows[0]["Item_Id"]);
-                                }
-                                else
-                                {
-                                    
-                                    Emp_Details.Transfered_Emp_Name = Convert.ToString(dt_Comuter.Rows[0]["Emp_Name"]);
-                                    Emp_Details.Transfered_Emp_Designation = Convert.ToString(dt_Comuter.Rows[0]["Designation_name"]);                                    
-                                    Emp_Details.Transfered_Emp_Dept = Convert.ToString(dt_Comuter.Rows[0]["Dept_name"]);
-                                    Emp_Details.Transfered_Emp_Location = Convert.ToString(dt_Comuter.Rows[0]["Emp_Location"]);
-                                    //Emp_Details.Transfered_Emp_Type = Convert.ToString(dt_Comuter.Rows[0]["Item_Id"]);
-                                }
+                               
                             }
 
                         }
@@ -290,8 +281,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
             return Emp_Details;
         }
-
-
 
 
         public List<Mod_Item_Issue_Employee> Emp_List(string EmpName)

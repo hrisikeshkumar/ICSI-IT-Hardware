@@ -42,7 +42,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                     BL_Item_Issue save_data = new BL_Item_Issue();
                     int status = save_data.Save_Item_Issue_data(Get_Data, "Add_new", "");
 
-                    if (status == 1)
+                    if (status < 1)
                     {
                         TempData["Message"] = String.Format("Data is not saved");
                     }
@@ -60,7 +60,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Create_Item", "Item_Issue");
+            return RedirectToAction("Item_Issue_Create_Item", "Item_Issue");
         }
 
         public ActionResult Edit_Item_Issue(string id)
@@ -84,7 +84,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Save_Item_Issue_data(Get_Data, "Update", Asset_ID);
 
-                    if (status == 1)
+                    if (status > 0)
                     {
                         TempData["Message"] = String.Format("Data have saved successfully");
                     }
@@ -152,7 +152,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult Find_Item_Issue(string Item_Id , String Type)
+        public JsonResult Find_Item_Issue(string Item_Id)
         {
 
             Mod_Item_Issue_Employee Emp_Details= new Mod_Item_Issue_Employee();

@@ -98,7 +98,7 @@
 
 <div style=" margin-top: -50px;  text-align: center; height: 50px; align-content: center; width: 100% " class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
-    <p style="font-size:large; padding-top:-5px; font-weight:400;">New Shifted Item</p>
+    <p style="font-size:large; padding-top:-5px; font-weight:400;">Issue Item</p>
 
 </div>
 
@@ -128,7 +128,7 @@
                     Asset Type
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Item_Name, new { @class = " form-rounded", @style = " width :90%; pointer-events: none; background-color: #ADD8E6; " })
+                    @Html.TextBoxFor(x => x.Item_Name, new { @class = " form-rounded", @readonly="true" , @style = " width :90%;  background-color: #e4f0f0; " })
                 </td>
 
                 <td style="width: 25%; height: 50px;">
@@ -152,14 +152,14 @@
 
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Previous_Emp_Name, new { @class = " form-rounded", @style = " width :90%; pointer-events: none; background-color: #ADD8E6;" })
+                    @Html.TextBoxFor(x => x.Previous_Emp_Name, new { @class = " form-rounded", @readonly = "true", @style = " width :90%;  background-color: #e4f0f0;" })
                 </td>
 
                 <td style="width:25%;">
                     Employee Designation
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Previous_Emp_Designation, new { @class = " form-rounded", @style = " width :90%; pointer-events: none; background-color: #ADD8E6;" })
+                    @Html.TextBoxFor(x => x.Previous_Emp_Designation, new { @class = " form-rounded", @readonly = "true", @style = " width :90%; background-color: #e4f0f0;" })
                 </td>
 
             </tr>
@@ -168,14 +168,14 @@
                     Employee Department
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Previous_Emp_Dept, new { @class = " form-rounded", @style = " width :90%; pointer-events: none; background-color: #ADD8E6;" })
+                    @Html.TextBoxFor(x => x.Previous_Emp_Dept, new { @class = " form-rounded", @readonly = "true", @style = " width :90%;  background-color: #e4f0f0;" })
                 </td>
 
                 <td style="width:25%;">
                     Employee Location
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Previous_Emp_Location, new { @class = "dateclass form-rounded", @style = " width :90%; pointer-events: none; background-color: #ADD8E6;" })
+                    @Html.TextBoxFor(x => x.Previous_Emp_Location, new { @class = "dateclass form-rounded", @readonly = "true", @style = " width :90%;  background-color: #e4f0f0;" })
                 </td>
 
             </tr>
@@ -199,7 +199,7 @@
                     Employee Designation
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Transfered_Emp_Designation, new { @class = " form-rounded", @style = " width :90%; pointer-events: none; background-color: #ADD8E6;" })
+                    @Html.TextBoxFor(x => x.Transfered_Emp_Designation, new { @class = " form-rounded", @readonly = "true", @style = " width :90%;  background-color: #e4f0f0;" })
                 </td>
             </tr>
             <tr>
@@ -207,14 +207,14 @@
                     Employee Department
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Transfered_Emp_Dept, new { @class = " form-rounded", @style = " width :90%; pointer-events: none; background-color: #ADD8E6;" })
+                    @Html.TextBoxFor(x => x.Transfered_Emp_Dept, new { @class = " form-rounded", @readonly = "true", @style = " width :90%;  background-color: #e4f0f0;" })
                 </td>
 
                 <td style="width:25%;">
                     Employee Location
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Transfered_Emp_Location, new { @class = " form-rounded", @style = " width :90%; pointer-events: none; background-color: #ADD8E6;" })
+                    @Html.TextBoxFor(x => x.Transfered_Emp_Location, new { @class = " form-rounded", @readonly = "true", @style = " width :90%; background-color: #e4f0f0;" })
                 </td>
             </tr>
 
@@ -235,7 +235,7 @@
                 <td align="left" style="width:25%; "></td>
 
                 <td style="width: 25%; padding-top: 10px; padding-bottom: 5px" align="center">
-                    <button class="button_cls form-rounded">Submit</button>
+                    <button class="button_cls form-rounded" id="btn_submit">Submit</button>
 
                 </td>
 
@@ -266,8 +266,6 @@
 
 
 
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.0.min.js" type="text/javascript"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
 <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css" rel="Stylesheet" type="text/css" />
 
 <script type="text/javascript">
@@ -324,22 +322,62 @@
                 data: { Item_Id: $('#Item_Id').val() },
                 success: function (data) {
                     $.each(data, function (index, value) {
-                        $('#Previous_Custady_Id').val(value.Previous_Custady_Id);
-                        $('#Previous_Emp_Name').val(value.Previous_Emp_Name);
-                        $('#Previous_Emp_Designation').val(value.Previous_Emp_Designation);
-                        $('#Previous_Emp_Dept').val(value.Previous_Emp_Dept);
-                        $('#Previous_Emp_Location').val(value.Previous_Emp_Location);
+
+                        if ( value === null) {
+                           
+
+                            if (index === 'Previous_Emp_Name') {
+                                alert('Item does not issued Previously ');
+                            }
+                        }
+                        else {
+
+                            if (index === 'Previous_Emp_Name')
+                            {
+                                $('#Previous_Emp_Name').val(value);
+                            }
+                            else if (index === 'Previous_Custady_Id') {
+                                $('#Previous_Custady_Id').val(value);
+                            }
+                            else if (index === 'Previous_Emp_Designation') {
+                                $('#Previous_Emp_Designation').val(value);
+                            }
+                            else if (index === 'Previous_Emp_Dept') {
+                                $('#Previous_Emp_Dept').val(value);
+                            }
+                            else if (index === 'Previous_Emp_Location') {
+                                $('#Previous_Emp_Location').val(value);
+                            }
+
+                            
+                        }
+
+                      
 
                     });
                 }
 
             });
+            //$("#Issued_date").focus();
+        });
+
+        $("#Issued_date").focusout(function () {
+
+            $("#Transfered_Emp_Name").focus();
+        });
+
+        $("#Transfered_Emp_Name").focusout(function () {
+
+            $("#Remarks").focus();
+        });
+
+        $("#Remarks").focusout(function () {
+
+            $("#btn_submit").focus();
         });
 
     });
 </script>
-
-
 
 
 <script type="text/javascript">
@@ -353,7 +391,8 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     response($.map(data, function (item) {
-                        return item.Transfered_Emp_Name + ' -- ' + item.Transfered_Emp_Designation + '--' + item.Transfered_Custady_Id;
+                        return item.Transfered_Emp_Name + ' -- ' + item.Transfered_Emp_Designation + '--' + item.Transfered_Emp_Dept
+                            + '--' + item.Transfered_Emp_Location + '--' +  item.Transfered_Custady_Id;
                     }))
                 },
                 failure: function (response) {
@@ -370,7 +409,9 @@
 
             $('#Transfered_Emp_Name').val(ui.item.label.split('--')[0]);
             $('#Transfered_Emp_Designation').val(ui.item.value.split('--')[1]);
-            $('#Transfered_Custady_Id').val(ui.item.value.split('--')[2]);
+            $('#Transfered_Emp_Dept').val(ui.item.label.split('--')[2]);
+            $('#Transfered_Emp_Location').val(ui.item.value.split('--')[3]);
+            $('#Transfered_Custady_Id').val(ui.item.value.split('--')[4]);
            
             return false;
         }
