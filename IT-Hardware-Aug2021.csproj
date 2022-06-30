@@ -197,6 +197,7 @@
     <Content Include="CSS\bootstrap\mixins\_visibility.css" />
     <Content Include="CSS\bootstrap\utilities\_stretched-link.css" />
     <Content Include="CSS\bootstrap\_media.css" />
+    <Content Include="CSS\Final_Submit_Button.css" />
     <Content Include="CSS\hs-menu.css" />
     <Content Include="CSS\hs-menu.min.css" />
     <Content Include="CSS\Log_in.css" />

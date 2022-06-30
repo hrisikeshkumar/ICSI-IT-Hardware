@@ -52,6 +52,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                         TempData["Message"] = String.Format("Data save successfully");
                     }
                 }
+                else
+                {
+
+                    TempData["Message"] = String.Format("Required field are not provided");
+                }
             }
             catch (Exception ex)
             {

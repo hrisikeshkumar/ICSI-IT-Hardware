@@ -105,7 +105,7 @@
 <div style=" align-content:center; width:100%" class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
 
-    @using (Html.BeginForm("Item_Issue_Create_Post", "Item_Issue", FormMethod.Post))
+    @using (Html.BeginForm("Item_Issue_Create_Post", "Item_Issue", FormMethod.Post, new { @id ="submitForm"}))
     {
 
         <table class=" table-hover table-striped shadow " style="width:100%">
@@ -116,6 +116,7 @@
                 </td>
                 <td style="width:50%;" colspan="2">
                     @Html.TextBoxFor(x => x.Item_SerialNo, new { @class = " form-rounded", @style = " width :90%; border: 1px solid #0000FF; " })
+                    <i id="Icon_Item_SerialNo" class="valid fa fa-question-circle" style="font-size:24px;color:red"></i>
                 </td>
                 <td style="width:25%; height:50px;">
                     @Html.HiddenFor(x => x.Item_Id, new { @class = " form-rounded", @style = " width :90%; border: 1px solid #0000FF; " })
@@ -128,7 +129,7 @@
                     Asset Type
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Item_Name, new { @class = " form-rounded", @readonly="true" , @style = " width :90%;  background-color: #e4f0f0; " })
+                    @Html.TextBoxFor(x => x.Item_Name, new { @class = " form-rounded", @readonly = "true", @style = " width :90%;  background-color: #e4f0f0; " })
                 </td>
 
                 <td style="width: 25%; height: 50px;">
@@ -136,6 +137,7 @@
                 </td>
                 <td style="width:25%;">
                     @Html.TextBoxFor(x => x.Issued_date, new { @class = "dateclass form-rounded", @style = " width :90%; border: 1px solid #0000FF; " })
+                    <i id="Icon_Issued_date" class="valid fa fa-question-circle" style="font-size:24px;color:red"></i>
                 </td>
             </tr>
 
@@ -193,6 +195,7 @@
                 </td>
                 <td style="width:25%;">
                     @Html.TextBoxFor(x => x.Transfered_Emp_Name, new { @class = " form-rounded", @style = " width :90%; border: 1px solid #0000FF;" })
+                    <i id="Icon_Transfered_Emp_Name" class="valid fa fa-question-circle" style="font-size:24px;color:red"></i>
                 </td>
 
                 <td style="width:25%;">
@@ -323,8 +326,8 @@
                 success: function (data) {
                     $.each(data, function (index, value) {
 
-                        if ( value === null) {
-                           
+                        if (value === null) {
+
 
                             if (index === 'Previous_Emp_Name') {
                                 alert('Item does not issued Previously ');
@@ -332,8 +335,7 @@
                         }
                         else {
 
-                            if (index === 'Previous_Emp_Name')
-                            {
+                            if (index === 'Previous_Emp_Name') {
                                 $('#Previous_Emp_Name').val(value);
                             }
                             else if (index === 'Previous_Custady_Id') {
@@ -349,10 +351,10 @@
                                 $('#Previous_Emp_Location').val(value);
                             }
 
-                            
+
                         }
 
-                      
+
 
                     });
                 }
@@ -392,7 +394,7 @@
                 success: function (data) {
                     response($.map(data, function (item) {
                         return item.Transfered_Emp_Name + ' -- ' + item.Transfered_Emp_Designation + '--' + item.Transfered_Emp_Dept
-                            + '--' + item.Transfered_Emp_Location + '--' +  item.Transfered_Custady_Id;
+                            + '--' + item.Transfered_Emp_Location + '--' + item.Transfered_Custady_Id;
                     }))
                 },
                 failure: function (response) {
@@ -412,8 +414,45 @@
             $('#Transfered_Emp_Dept').val(ui.item.label.split('--')[2]);
             $('#Transfered_Emp_Location').val(ui.item.value.split('--')[3]);
             $('#Transfered_Custady_Id').val(ui.item.value.split('--')[4]);
-           
+
             return false;
         }
     });
 </script>
+
+
+
+
+@*<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("btn_submit").click(function () {
+
+            var submit = 0;
+            if ($('#Emp_Name').val() == '') {
+                $("#IconEmp_Name").addClass("invalid");
+                submit = 1;
+            }
+            if ($('#Emp_Name').val() == '') {
+                $("#IconEmp_Name").addClass("invalid");
+                submit = 1;
+            }
+            if ($('#Emp_Name').val() == '') {
+                $("#IconEmp_Name").addClass("invalid");
+                submit = 1;
+            }
+
+            if (submit == 1) {
+                alert('please fill required field');
+                return false;
+                
+            }
+        });
+    
+
+    });
+
+
+</script>*@
+
+

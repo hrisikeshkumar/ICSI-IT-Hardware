@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace IT_Hardware_Aug2021.Areas.Admin.Models
 {
@@ -14,6 +15,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public string Previous_Emp_Type { get; set; }
         public string Previous_Emp_Dept { get; set; }
         public string Previous_Emp_Location { get; set; }
+
+        [Required]
         public string Transfered_Custady_Id { get; set; }
         public string Transfered_Emp_Name { get; set; }
         public string Transfered_Emp_Designation { get; set; }
@@ -30,8 +33,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public string Item_Issue_Id { get; set; }
         public string Item_Id { get; set; }
         public string Item_Type { get; set; }
+        [Required]
         public string Item_SerialNo { get; set; }
         public string Item_Name { get; set; }
+
+        [Required]
         public DateTime? Issued_date { get; set; }
         public string Remarks { get; set; }
         public string Create_usr_id { get; set; }

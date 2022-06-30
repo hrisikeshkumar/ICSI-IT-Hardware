@@ -27,9 +27,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         {
             ViewBag.Message = Message;
 
+            BL_SLA BL_data = new BL_SLA();
+
             Mod_SLA Mod_data = new Mod_SLA();
-            Item_MakeModel Make_List = new Item_MakeModel();
-            Mod_data.Item_Make_List = Make_List.Item_MakeModel_List("PrintScan", "MAKE", "");
+            
+            Mod_data.Vendor_List = BL_data.Vendor_List();
 
 
             return View("~/Areas/Admin/Views/SLA/SLA_Create_Item.cshtml", Mod_data);
@@ -57,6 +59,10 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                         TempData["Message"] = String.Format("Data is not saved");
                     }
                 }
+                else
+                {
+                    TempData["Message"] = String.Format("Required data are not provided");
+                }
             }
             catch (Exception ex)
             {
@@ -70,19 +76,14 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         public ActionResult Edit_SLA(string id)
         {
-
             BL_SLA BL_data = new BL_SLA();
-            Mod_SLA Model_data = new Mod_SLA();
-            Item_MakeModel Make_List = new Item_MakeModel();
 
-            Model_data = BL_data.Get_Data_By_ID(Model_data, id);
+            Mod_SLA Mod_data = new Mod_SLA();
+            BL_data.Get_Data_By_ID(Mod_data, id);
 
-            Model_data.Item_Make_List = Make_List.Item_MakeModel_List("PrintScan", "MAKE", "");
+            Mod_data.Vendor_List = BL_data.Vendor_List();
 
-            Model_data.Item_Model_List = Make_List.Item_MakeModel_List("PrintScan", "MODEL", Model_data.Item_Make_id.Trim().ToString());
-
-
-            return View("~/Areas/Admin/Views/SLA/Edit_SLA.cshtml", Model_data);
+            return View("~/Areas/Admin/Views/SLA/Edit_SLA.cshtml", Mod_data);
         }
 
 
@@ -106,6 +107,10 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                     {
                         TempData["Message"] = String.Format("Data is not saved");
                     }
+                }
+                else
+                {
+                    TempData["Message"] = String.Format("Required data are not provided");
                 }
             }
             catch (Exception ex)
