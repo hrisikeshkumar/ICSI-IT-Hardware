@@ -186,11 +186,13 @@
     <Compile Include="Areas\Admin\Models\Mod_User_Info.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Vendor.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Shift_Item.cs" />
+    <Compile Include="BAL\BL_LogIn.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Log_InController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Mod_LogIn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -351,7 +353,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\User_Role_Mapping\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />

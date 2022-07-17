@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using IT_Hardware_Aug2021.Models;
+using IT_Hardware_Aug2021.BAL;
 
 namespace IT_Asset.Controllers
 {
@@ -12,25 +15,27 @@ namespace IT_Asset.Controllers
         [HttpGet]
         public ActionResult Log_In()
         {
-            return View("Log_In");
+            Mod_LogIn Model = new Mod_LogIn();
+
+            return View("Log_In", Model);
         }
 
         [HttpPost]
-        [ActionName("Log_In")]
-        public ActionResult Log_In_Submit()
+        public ActionResult Log_In(Mod_LogIn model)
         {
-            string UserName = Request["txt_UserName"].ToString();
-            string Password = Request["txt_Password"].ToString();
 
-            if (UserName != string.Empty && Password != string.Empty)
+            BL_LogIn Bal = new BL_LogIn();
+
+            if (Bal.User_Authentication(model))
             {
-                return RedirectToAction("Admin_Dashboard", "Admin_Dashboard", new { area = "Admin" });
+                FormsAuthentication.SetAuthCookie(model.UserName, false);
+                return RedirectToAction("Admin_Dashboard", "Admin_Dashboard");
             }
-            else {
-                ViewBag.Message = "UserName or password is wrong";
-                return View("Log_In");
-            }
-            
+
+            ModelState.AddModelError("", "invalid Username or Password");
+
+            return View("Log_In");
+                 
         }
     }
 }
