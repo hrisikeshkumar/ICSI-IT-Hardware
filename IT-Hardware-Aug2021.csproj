@@ -122,6 +122,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_AssetMaster.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\BL_Budget_Head.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\BL_Budget_Uses.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Computer.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_DataCard.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_AppleIpad.cs" />
@@ -138,10 +140,13 @@
     <Compile Include="Areas\Admin\BL_Admin\BL_SLA.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Switch.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Ups.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\BL_User_Info.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Vendor.cs" />
     <Compile Include="Areas\Admin\BL_Admin\Item_MakeModel.cs" />
     <Compile Include="Areas\Admin\Controllers\Admin_DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\AppleIpadController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Budget_HeadController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Budget_UsesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ComputerController.cs" />
     <Compile Include="Areas\Admin\Controllers\DataCardController.cs" />
     <Compile Include="Areas\Admin\Controllers\DC_MisItemsController.cs" />
@@ -158,9 +163,11 @@
     <Compile Include="Areas\Admin\Controllers\SLAController.cs" />
     <Compile Include="Areas\Admin\Controllers\SwitchController.cs" />
     <Compile Include="Areas\Admin\Controllers\UpsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\User_InfoController.cs" />
     <Compile Include="Areas\Admin\Controllers\VendorController.cs" />
     <Compile Include="Areas\Admin\Models\Admin_dashB.cs" />
     <Compile Include="Areas\Admin\Models\Mod_AppleIpad.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_Budget.cs" />
     <Compile Include="Areas\Admin\Models\Mod_DataCard.cs" />
     <Compile Include="Areas\Admin\Models\Mod_AssetMaster.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Computer.cs" />
@@ -176,6 +183,7 @@
     <Compile Include="Areas\Admin\Models\Mod_SLA.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Switch.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Ups.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_User_Info.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Vendor.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Shift_Item.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -303,6 +311,15 @@
     <Content Include="Areas\Admin\Views\SLA\SLA_Details.cshtml" />
     <Content Include="Areas\Admin\Views\SLA\SLA_Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\SLA\Edit_SLA.cshtml" />
+    <Content Include="Areas\Admin\Views\Budget_Head\Edit_Budget_Head.cshtml" />
+    <Content Include="Areas\Admin\Views\Budget_Head\Budget_Head_Create_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\Budget_Head\Budget_Head_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Budget_Uses\Budget_Uses_Create_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\Budget_Uses\Budget_Uses_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Budget_Uses\Edit_Budget_Uses.cshtml" />
+    <Content Include="Areas\Admin\Views\User_Info\User_Info_Create_Item.cshtml" />
+    <Content Include="Areas\Admin\Views\User_Info\User_Info_Details.cshtml" />
+    <Content Include="Areas\Admin\Views\User_Info\Edit_User_Info.cshtml" />
     <None Include="Properties\PublishProfiles\rajaonprewebapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -333,6 +350,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\User_Role_Mapping\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

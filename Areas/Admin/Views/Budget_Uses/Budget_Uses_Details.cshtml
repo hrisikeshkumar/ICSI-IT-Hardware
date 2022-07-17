@@ -1,8 +1,6 @@
-﻿
+﻿@using IT_Hardware_Aug2021.Areas.Admin.Models
 
-@using IT_Hardware_Aug2021.Areas.Admin.Models
-
-@model IList<Mod_SLA>
+@model IList<Mod_Budget>
 
 @{
     ViewBag.Title = "Index";
@@ -16,7 +14,7 @@
 
 <div style=" margin-top: -100px;  text-align: center; height: 50px; align-content: center; width: 100% " class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
-    <p style="font-size:large; padding-top:-5px; font-weight:400;">List of Service Level Agreement</p>
+    <p style="font-size:large; padding-top:-5px; font-weight:400;">Budget Uses List</p>
 
 </div>
 
@@ -39,7 +37,7 @@
             </td>
             <td align="right" width="25%">
                 <h4>
-                    @Html.ActionLink("Add New", "SLA_Create_Item", "SLA")
+                    @Html.ActionLink("Add New", "Budget_Uses_CreateItem_Post", "Budget_Uses")
 
                 </h4>
             </td>
@@ -54,36 +52,30 @@
                 <table style="width:100%">
                     <tr>
                         <th>
-                            Vendor Name
+                            Budget Name
                         </th>
                         <th>
-                            Service Type
-                        </th>
-                        <th>
-                            Expiry Date
+                            Budget Amount Uses
                         </th>
                         <th> Action </th>
                     </tr>
 
                     @foreach (var item in Model)
                     {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Vendor_id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Service_Type_Short)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Expiry_DT)
-                    </td>
-                    <td>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Budget_Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Budget_Amount)
+                            </td>
+                            <td>
 
-                        @Html.ActionLink("Edit", "Edit_SLA", new { id = item.SLA_Id }) |
-                        @Html.ActionLink("Details", "Get_Detail", new { id = item.SLA_Id }) |
-                        @Html.ActionLink("Delete", "Delete_SLA", new { id = item.SLA_Id })
-                    </td>
-                </tr>
+                                @Html.ActionLink("Edit", "Edit_Budget_Uses", new { id = item.Budget_Uses_Id }) |
+                                @Html.ActionLink("Details", "Get_Detail", new { id = item.Budget_Uses_Id }) |
+                                @Html.ActionLink("Delete", "Delete_Budget_Uses", new { id = item.Budget_Uses_Id })
+                            </td>
+                        </tr>
                     }
 
                 </table>
@@ -94,6 +86,22 @@
 
     </table>
 </div>
+
+<script type="text/javascript">
+    function ShowSuccessMsg() {
+        toastr.success("Successfully Added.");
+    };
+    function ShowFailure(Msg) {
+        toastr.error("Error:" + Msg);
+    };
+</script>
+@if (ViewBag.JavaScriptFunction != null)
+{
+    <script type="text/javascript">
+        @Html.Raw(ViewBag.JavaScriptFunction)
+    </script>
+}
+
 
 
 @if (TempData["Message"] != null && TempData["Message"] != "" && TempData["Message"] != string.Empty)

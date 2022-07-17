@@ -36,9 +36,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     SqlParameter sqlP_type = new SqlParameter("@Type", "Get_List");
                     cmd.Parameters.Add(sqlP_type);
 
-                    SqlParameter sqlP_Asset_Type = new SqlParameter("@Asset_Type", "SLA");
-                    cmd.Parameters.Add(sqlP_Asset_Type);
-
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
                         sda.SelectCommand = cmd;
@@ -102,7 +99,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlParameter Service_Type_Short = new SqlParameter("@Service_Type_Short", Data.Service_Type_Short);
                 cmd.Parameters.Add(Service_Type_Short);
 
-                SqlParameter Service_Type_Details = new SqlParameter("@Service_Type_Short", Data.Service_Type_Details);
+                SqlParameter Service_Type_Details = new SqlParameter("@Service_Type_Details", Data.Service_Type_Details);
                 cmd.Parameters.Add(Service_Type_Details);
 
                 SqlParameter PO_Copy = new SqlParameter("@PO_Copy", Data.PO_Copy);
@@ -137,7 +134,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             return status;
         }
 
-        public void Get_Data_By_ID(Mod_SLA Data, string Asset_Id)
+        public void Get_Data_By_ID(Mod_SLA Data, string SLA_Id)
         {
 
 
@@ -150,10 +147,15 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 using (SqlCommand cmd = new SqlCommand("sp_SLA_List"))
                 {
-                    SqlParameter sqlP_type = new SqlParameter("@Type", "Get_Data_By_ID");
+                   
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Connection = con;
+
+                    SqlParameter sqlP_type = new SqlParameter("@Type", "Get_Data_By_ID");
                     cmd.Parameters.Add(sqlP_type);
+
+                    SqlParameter Unique_Id = new SqlParameter("@Unique_Id", SLA_Id);
+                    cmd.Parameters.Add(Unique_Id);
 
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
