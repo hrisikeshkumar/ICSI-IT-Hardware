@@ -26,7 +26,7 @@ namespace IT_Hardware_Aug2021.BAL
 
                 using (SqlCommand cmd = new SqlCommand("sp_UserAuth"))
                 {
-                    SqlParameter sqlP_type = new SqlParameter("@Type", "Get_Data_By_ID");
+                    SqlParameter sqlP_type = new SqlParameter("@Type", "Get_User_By_ID");
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Connection = con;
                     cmd.Parameters.Add(sqlP_type);
