@@ -29,13 +29,22 @@ namespace IT_Asset.Controllers
             if (Bal.User_Authentication(model))
             {
                 FormsAuthentication.SetAuthCookie(model.UserName, false);
-                return RedirectToAction("Admin_Dashboard", "Admin_Dashboard");
+                Session["Username"] = Convert.ToString(model.UserName);
+                return RedirectToAction("Admin_Dashboard", "Admin_Dashboard" , new { area = "Admin" });
             }
 
             ModelState.AddModelError("", "invalid Username or Password");
 
             return View("Log_In");
                  
+        }
+
+        [HttpGet]
+        public ActionResult Log_Out()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Log_In");
+
         }
     }
 }

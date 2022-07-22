@@ -116,7 +116,10 @@
             <li> <a href="#1"><i class="zmdi zmdi-inbox"></i> Inbox </a> </li>
             <li> <a href="#1"> <i class="zmdi zmdi-delete"></i> Trash </a> </li>
             <li> <a href="#1"> <i class="zmdi zmdi-star"></i> Started  </a> </li>
-            <li> <a href="#1"> <i class="zmdi zmdi-run"></i> Logout  </a> </li>
+            <li> <a href="@Url.Action("Log_Out", null, new { area = string.Empty, controller = "Log_In" }, Request.Url.Scheme)"> <i class="zmdi zmdi-run"></i> Logout  </a>
+            
+            
+            </li>
         </ul>
         <ul class="user-info">
             <li class="profile-pic"> </li>

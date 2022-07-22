@@ -194,6 +194,8 @@
     </Compile>
     <Compile Include="Models\Mod_LogIn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User_Role\AuthorizationController.cs" />
+    <Compile Include="User_Role\Handel_Authorization.cs" />
     <Compile Include="User_Role\UserRoleProvider.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +235,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\Log_In.jpg" />
     <Content Include="Images\Working.jpg" />
+    <Content Include="image\Denied.jpg" />
     <Content Include="image\hs-menu.png" />
     <Content Include="image\Icon.jpg" />
     <Content Include="image\ICSI_Logo.png" />
@@ -350,6 +353,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Authorization\AccessDedied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
