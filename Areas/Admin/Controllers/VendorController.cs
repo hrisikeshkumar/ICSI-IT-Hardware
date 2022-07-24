@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
 using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
 
@@ -10,7 +11,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 {
     public class VendorController : Controller
     {
-
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult Vendor_Details()
         {
             BL_Vendor com = new BL_Vendor();
@@ -20,6 +21,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Vendor/Vendor_Details.cshtml", pc_List);
         }
 
+
+        [Authorize(Roles = "SU, Admin, Manager")]
         [HttpGet]
         public ActionResult Vendor_Create_Item(string Message)
         {
@@ -29,6 +32,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         }
 
+
+        [Authorize(Roles = "SU, Admin, Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Vendor_Create_Post(Mod_Vendor Get_Data)
@@ -63,6 +68,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Vendor_Create_Item", "Vendor");
         }
 
+
+        [Authorize(Roles = "SU, Admin, Manager")]
         public ActionResult Edit_Vendor(string id)
         {
             BL_Vendor Md_Com = new BL_Vendor();
@@ -71,6 +78,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Vendor/Edit_Vendor.cshtml", data);
         }
 
+
+
+        [Authorize(Roles = "SU, Admin, Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Update_Vendor(Mod_Vendor Get_Data)
@@ -106,6 +116,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+
+        [Authorize(Roles = "SU, Admin, Manager")]
         public ActionResult Delete_Vendor(Mod_Vendor Get_Data, string id)
         {
             int status = 0;
@@ -138,6 +150,24 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             }
 
             return RedirectToAction("Vendor_Details", "Vendor");
+        }
+
+
+
+        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.IsAuthenticated)
+            {
+
+                if (filterContext.Result is HttpUnauthorizedResult)
+                {
+                    filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~/Log_In/Log_In");
+            }
         }
 
 

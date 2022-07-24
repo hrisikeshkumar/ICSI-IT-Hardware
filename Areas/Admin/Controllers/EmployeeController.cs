@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
 using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
 
@@ -11,7 +12,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
     public class EmployeeController : Controller
     {
 
-
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult Employee_Details()
         {
             BL_Employee data = new BL_Employee(); 
@@ -21,6 +22,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Employee/Employee_Details.cshtml", Emp_List);
         }
 
+        [Authorize(Roles = "SU, Admin")]
         [HttpGet]
         public ActionResult Create_Employee(string Message)
         {
@@ -38,6 +40,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         }
 
+        [Authorize(Roles = "SU, Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Employee_Create_Post(Mod_Employee Get_Data)
@@ -76,6 +79,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Create_Employee", "Employee");
         }
 
+        [Authorize(Roles = "SU, Admin")]
         public ActionResult Edit_Employee(string id)
         {
             BL_Employee Emp_Data = new BL_Employee();
@@ -91,7 +95,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Employee/Edit_Employee.cshtml", Mod_emp);
         }
 
-
+        [Authorize(Roles = "SU, Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Update_Employee(Mod_Employee Get_Data)
         {
@@ -125,7 +129,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Update_Employee", "Employee");
         }
 
-
+        [Authorize(Roles = "SU, Admin")]
         public ActionResult Delete_Employee(Mod_Employee Get_Data)
         {
             int status = 0;
@@ -160,7 +164,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Employee_Details", "Employee");
         }
 
-
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public JsonResult Get_Designation(string Emp_Type)
         {
 
@@ -173,6 +177,25 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return Json(Mod_emp.Designation_List, JsonRequestBehavior.AllowGet);
           
         }
+
+
+
+        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.IsAuthenticated)
+            {
+
+                if (filterContext.Result is HttpUnauthorizedResult)
+                {
+                    filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~/Log_In/Log_In");
+            }
+        }
+
 
     }
 }

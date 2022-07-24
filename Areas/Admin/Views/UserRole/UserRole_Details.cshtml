@@ -1,0 +1,137 @@
+﻿@using IT_Hardware_Aug2021.Areas.Admin.Models
+
+@model IList<Mod_UserRole>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<link href="~/CSS/SearchBox/searchbox.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>
+
+
+<div style=" margin-top: -100px;  text-align: center; height: 50px; align-content: center; width: 100% " class="card w-100 shadow p-3 mb-5 bg-white rounded">
+
+    <p style="font-size:large; padding-top:-5px; font-weight:400;">User List</p>
+
+</div>
+
+
+
+<div style=" align-content:center; width:100%" class="card w-100 shadow p-3 mb-5 bg-white rounded">
+
+    @using (Html.BeginForm("User_Info_CreateItem_Post", "User_Info", FormMethod.Post))
+    {
+
+
+        <table class=" table-hover table-striped shadow " style="width:100%">
+            <tr>
+                <td width="75%">
+
+                    <div class="col-rt-3 equal-height">
+                        <div class="sb-example-3">
+                            <!-- partial:index.partial.html -->
+                            <div class="search__container">
+
+                                <input class="search__input" type="text" placeholder="Search">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </td>
+                <td align="right" width="25%">
+                    <h4>
+                        <button class="button_cls form-rounded">Save</button>
+
+                    </h4>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding-top:5px;">
+                   
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table style="width:100%">
+                        <tr>
+                            <th style="width:28%">
+                                User Name
+                            </th>
+                            <th style="width:12%">
+                                Super Admin 
+                            </th>
+                            <th style="width:12%">
+                                Admin
+                            </th>
+                            <th style="width:12%">
+                                Manager
+                            </th>
+                            <th style="width:12%">
+                                Inventory Manager
+                            </th>
+                            <th style="width:12%">
+                                Server Engineer
+                            </th>
+                            <th style="width:12%">
+                                FMS Engineer
+                            </th>
+
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                              <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.User_fullname)
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(modelItem => item.SU_Role)
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(modelItem => item.Admin_Role)
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(modelItem => item.Manager_Role)
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(modelItem => item.InventoryManager_Role)
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(modelItem => item.FmsEngineer_Role)
+                                    </td>
+                                    <td>
+                                        @Html.CheckBoxFor(modelItem => item.ServerEngineer_Role)
+                                    </td>
+                               </tr>
+                        }
+
+                    </table>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    }
+</div>
+
+
+
+@if (TempData["Message"] != null && TempData["Message"] != "" && TempData["Message"] != string.Empty)
+{
+    <script type="text/javascript">
+
+    window.onload = function () {
+        /**/
+        alert("@TempData["Message"]");
+    /**/
+    };
+    </script>
+
+}
+

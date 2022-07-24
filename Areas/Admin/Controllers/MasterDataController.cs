@@ -5,13 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
 using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
-
+using System.Web.Mvc.Filters;
 
 namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 {
     public class MasterDataController : Controller
     {
 
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult List_Make_Data()
         {
             BL_AssetMaster AssetMaster_data = new BL_AssetMaster();
@@ -22,6 +23,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpGet]
         public ActionResult Add_AssetMakeModel(Mod_AssetMaster Get_Data)
         {
@@ -29,6 +31,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpPost]
         public ActionResult Save_AssetMakeModel(Mod_AssetMaster Get_Data)
         {
@@ -63,6 +66,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpGet]
         public ActionResult Edit_AssetsMasterData(string id)
         {
@@ -74,6 +78,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/MasterData/Edit_AssetsMasterData.cshtml", data);
         }
 
+
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpPost]
         public ActionResult Update_Makedata(Mod_AssetMaster Get_Data, string Asset_ID)
         {
@@ -107,7 +113,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("List_Make_Data", "MasterData");
         }
 
-
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Delete_Item(Mod_AssetMaster Get_Data, string id)
         {
             int status = 0;
@@ -140,6 +146,23 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             }
 
             return RedirectToAction("Get_Master_Data", "MasterData");
+        }
+
+
+        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.IsAuthenticated)
+            {
+
+                if (filterContext.Result is HttpUnauthorizedResult)
+                {
+                    filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~/Log_In/Log_In");
+            }
         }
 
 

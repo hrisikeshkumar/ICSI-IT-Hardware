@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
 using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
 
@@ -11,7 +12,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
     public class User_InfoController : Controller
     {
 
-
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult User_Info_Details()
         {
             BL_User_Info com = new BL_User_Info();
@@ -21,6 +22,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/User_Info/User_Info_Details.cshtml", pc_List);
         }
 
+        [Authorize(Roles = "SU, Admin")]
         [HttpGet]
         public ActionResult User_Info_Create_Item(string Message)
         {
@@ -33,6 +35,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         }
 
+
+        [Authorize(Roles = "SU, Admin")]
         [HttpPost]
         public ActionResult User_Info_CreateItem_Post(Mod_User_Info Get_Data)
         {
@@ -65,6 +69,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("User_Info_Create_Item", "User_Info");
         }
 
+
+        [Authorize(Roles = "SU, Admin")]
         public ActionResult Edit_User_Info(string id)
         {
 
@@ -78,6 +84,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+        [Authorize(Roles = "SU, Admin")]
         public ActionResult Update_User_Info(Mod_User_Info Get_Data, string Item_id)
         {
             int status = 0;
@@ -111,6 +118,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+        [Authorize(Roles = "SU")]
         public ActionResult Delete_User_Info(Mod_User_Info Get_Data, string id)
         {
             int status = 0;
@@ -146,20 +154,22 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-        public JsonResult Model_List(string Item_Make)
+
+        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
         {
+            if (filterContext.HttpContext.Request.IsAuthenticated)
+            {
 
-            Item_MakeModel Make_List = new Item_MakeModel();
-
-            Mod_Computer Mod_Make = new Mod_Computer();
-
-            Mod_Make.Item_Model_List = Make_List.Item_MakeModel_List("PrintScan", "MODEL", Item_Make);
-
-            return Json(Mod_Make.Item_Model_List, JsonRequestBehavior.AllowGet);
-
+                if (filterContext.Result is HttpUnauthorizedResult)
+                {
+                    filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~/Log_In/Log_In");
+            }
         }
-
-
 
 
     }

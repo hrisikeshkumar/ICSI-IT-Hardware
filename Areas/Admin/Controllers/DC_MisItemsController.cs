@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
 using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
 
@@ -21,6 +22,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/DC_MisItems/DC_MisItems_Details.cshtml", pc_List);
         }
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpGet]
         public ActionResult DC_MisItems_Create_Item(string Message)
         {
@@ -35,6 +37,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         }
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpPost]
         public ActionResult DC_Mis_CreateItem_Post(Mod_DC_MisItems Get_Data)
         {
@@ -68,6 +71,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("DC_MisItems_Create_Item", "DC_MisItems");
         }
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Edit_DC_MisItems(string id)
         {
             
@@ -85,7 +89,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/DC_MisItems/Edit_DC_MisItems.cshtml", Model_data);
         }
 
-
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Update_DC_MisItems(Mod_DC_MisItems Get_Data, string Item_id)
         {
             int status = 0;
@@ -118,7 +122,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("DC_MisItems_Details", "DC_MisItems");
         }
 
-
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Delete_DC_MisItems(Mod_DC_MisItems Get_Data, string id)
         {
             int status = 0;
@@ -152,7 +156,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             return RedirectToAction("DC_MisItems_Details", "DC_MisItems");
         }
-
+       
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public JsonResult Model_List(string Item_Make)
         {
 
@@ -164,6 +169,24 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             return Json(Mod_Make.Item_Model_List, JsonRequestBehavior.AllowGet);
 
+        }
+
+
+
+        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.IsAuthenticated)
+            {
+
+                if (filterContext.Result is HttpUnauthorizedResult)
+                {
+                    filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~/Log_In/Log_In");
+            }
         }
 
 

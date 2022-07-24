@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
 using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
 
@@ -10,7 +11,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 {
     public class Budget_UsesController : Controller
     {
-
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult Budget_Uses_Details()
         {
             BL_Budget_Uses com = new BL_Budget_Uses();
@@ -20,6 +21,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Budget_Uses/Budget_Uses_Details.cshtml", pc_List);
         }
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpGet]
         public ActionResult Budget_Uses_Create_Item(string Message)
         {
@@ -30,6 +32,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Budget_Uses/Budget_Uses_Create_Item.cshtml", Mod_data);
         }
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpPost]
         public ActionResult Budget_Uses_CreateItem_Post(Mod_Budget Get_Data)
         {
@@ -62,6 +65,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Budget_Create_Item", "Budget");
         }
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Edit_Budget_Uses(string id)
         {
 
@@ -73,7 +77,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Budget_Uses/Edit_Budget_Uses.cshtml", Model_data);
         }
 
-
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Update_Budget_Uses(Mod_Budget Get_Data, string Budget_Uses_Id)
         {
             int status = 0;
@@ -106,7 +110,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Budget_Uses_Details", "Budget_Uses");
         }
 
-
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Delete_Budget_Uses(Mod_Budget Get_Data, string id)
         {
             int status = 0;
@@ -140,6 +144,25 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             return RedirectToAction("Budget_Uses_Details", "Budget_Uses");
         }
+
+
+
+        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.IsAuthenticated)
+            {
+
+                if (filterContext.Result is HttpUnauthorizedResult)
+                {
+                    filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~/Log_In/Log_In");
+            }
+        }
+
 
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
 using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
 
@@ -11,6 +12,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
     public class Shift_ItemController : Controller
     {
 
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult Shift_Item_Details()
         {
             BL_Shift_Item com = new BL_Shift_Item();
@@ -20,6 +22,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Shift_Item/Shift_Item_Details.cshtml", pc_List);
         }
 
+
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpGet]
         public ActionResult Shift_Item_Create_Item(string Message)
         {
@@ -29,6 +33,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         }
 
+
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpPost]
         public ActionResult Shift_Item_Create_Post(Mod_Shift_Item Get_Data)
         {
@@ -62,6 +68,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Create_Item", "Shift_Item");
         }
 
+
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Edit_Shift_Item(string id)
         {
             BL_Shift_Item Md_Com = new BL_Shift_Item();
@@ -71,6 +79,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Update_Shift_Item(Mod_Shift_Item Get_Data, string Asset_ID)
         {
             int status = 0;
@@ -104,6 +113,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Delete_Shift_Item(Mod_Shift_Item Get_Data, string id)
         {
             int status = 0;
@@ -139,6 +149,21 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.IsAuthenticated)
+            {
+
+                if (filterContext.Result is HttpUnauthorizedResult)
+                {
+                    filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~/Log_In/Log_In");
+            }
+        }
 
 
     }

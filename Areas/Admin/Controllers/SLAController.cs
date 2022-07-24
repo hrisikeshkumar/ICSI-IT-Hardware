@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
 using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
 
@@ -12,7 +13,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
     public class SLAController : Controller
     {
 
-
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult SLA_Details()
         {
             BL_SLA com = new BL_SLA();
@@ -22,6 +23,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/SLA/SLA_Details.cshtml", SLA_List);
         }
 
+
+        [Authorize(Roles = "SU, Admin, Manager")]
         [HttpGet]
         public ActionResult SLA_Create_Item(string Message)
         {
@@ -38,6 +41,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         }
 
+
+        [Authorize(Roles = "SU, Admin, Manager")]
         [HttpPost]
         public ActionResult SLA_CreateItem_Post(Mod_SLA Get_Data)
         {
@@ -74,6 +79,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("SLA_Create_Item", "SLA");
         }
 
+
+        [Authorize(Roles = "SU, Admin, Manager")]
         public ActionResult Edit_SLA(string id)
         {
             BL_SLA BL_data = new BL_SLA();
@@ -87,6 +94,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+        [Authorize(Roles = "SU, Admin, Manager")]
         public ActionResult Update_SLA(Mod_SLA Get_Data, string Item_id)
         {
             int status = 0;
@@ -124,6 +132,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+        [Authorize(Roles = "SU, Admin, Manager")]
         public ActionResult Delete_SLA(Mod_SLA Get_Data, string id)
         {
             int status = 0;
@@ -156,6 +165,23 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             }
 
             return RedirectToAction("SLA_Details", "SLA");
+        }
+
+
+        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.IsAuthenticated)
+            {
+
+                if (filterContext.Result is HttpUnauthorizedResult)
+                {
+                    filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~/Log_In/Log_In");
+            }
         }
 
 

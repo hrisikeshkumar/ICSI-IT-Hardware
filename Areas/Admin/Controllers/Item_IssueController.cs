@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
 using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
 
@@ -11,7 +12,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
     public class Item_IssueController : Controller
     {
 
-
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult Item_Issue_Details()
         {
             BL_Item_Issue com = new BL_Item_Issue();
@@ -21,6 +22,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Item_Issue/Item_Issue_Details.cshtml", pc_List);
         }
 
+
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpGet]
         public ActionResult Item_Issue_Create_Item(string Message)
         {
@@ -30,6 +33,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         }
 
+
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpPost]
         public ActionResult Item_Issue_Create_Post(Mod_Item_Issue Get_Data)
         {
@@ -68,6 +73,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Item_Issue_Create_Item", "Item_Issue");
         }
 
+
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Edit_Item_Issue(string id)
         {
             BL_Item_Issue Md_Com = new BL_Item_Issue();
@@ -77,6 +84,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Update_Item_Issue(Mod_Item_Issue Get_Data, string Asset_ID)
         {
             int status = 0;
@@ -110,6 +118,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Delete_Item_Issue(Mod_Item_Issue Get_Data, string id)
         {
             int status = 0;
@@ -145,7 +154,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-       [HttpPost]
+        [HttpPost]
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public JsonResult AutoComplete(string SL_No)
         {
 
@@ -156,6 +166,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return Json(list);
         }
 
+
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         [HttpPost]
         public JsonResult Find_Item_Issue(string Item_Id)
         {
@@ -174,7 +186,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         [HttpPost]
         public JsonResult AutoComplete_TransferEmployee(string EmpID)
         {
@@ -183,6 +195,24 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             List<Mod_Item_Issue_Employee> list = data.Emp_List(EmpID);
 
             return Json(list);
+        }
+
+
+
+        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.IsAuthenticated)
+            {
+
+                if (filterContext.Result is HttpUnauthorizedResult)
+                {
+                    filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~/Log_In/Log_In");
+            }
         }
 
 

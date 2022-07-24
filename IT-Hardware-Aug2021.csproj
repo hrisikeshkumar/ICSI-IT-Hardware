@@ -143,6 +143,7 @@
     <Compile Include="Areas\Admin\BL_Admin\BL_User_Info.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Vendor.cs" />
     <Compile Include="Areas\Admin\BL_Admin\Item_MakeModel.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\BL_UserRole.cs" />
     <Compile Include="Areas\Admin\Controllers\Admin_DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\AppleIpadController.cs" />
     <Compile Include="Areas\Admin\Controllers\Budget_HeadController.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Areas\Admin\Controllers\SLAController.cs" />
     <Compile Include="Areas\Admin\Controllers\SwitchController.cs" />
     <Compile Include="Areas\Admin\Controllers\UpsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserRoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\User_InfoController.cs" />
     <Compile Include="Areas\Admin\Controllers\VendorController.cs" />
     <Compile Include="Areas\Admin\Models\Admin_dashB.cs" />
@@ -183,6 +185,7 @@
     <Compile Include="Areas\Admin\Models\Mod_SLA.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Switch.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Ups.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_UserRole.cs" />
     <Compile Include="Areas\Admin\Models\Mod_User_Info.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Vendor.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Shift_Item.cs" />
@@ -326,6 +329,7 @@
     <Content Include="Areas\Admin\Views\User_Info\User_Info_Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\User_Info\User_Info_Details.cshtml" />
     <Content Include="Areas\Admin\Views\User_Info\Edit_User_Info.cshtml" />
+    <Content Include="Areas\Admin\Views\UserRole\UserRole_Details.cshtml" />
     <None Include="Properties\PublishProfiles\rajaonprewebapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -357,7 +361,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\User_Role_Mapping\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />

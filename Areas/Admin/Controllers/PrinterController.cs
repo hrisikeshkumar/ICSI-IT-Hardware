@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
 using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
 
@@ -10,9 +11,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 {
     public class PrinterController : Controller
     {
-       
 
-            public ActionResult Printer_Details()
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
+        public ActionResult Printer_Details()
             {
                 BL_Printer com = new BL_Printer();
 
@@ -21,8 +22,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 return View("~/Areas/Admin/Views/Printer/Printer_Details.cshtml", pc_List);
             }
 
-            [HttpGet]
-            public ActionResult Printer_Create_Item(string Message)
+
+
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
+        [HttpGet]
+        public ActionResult Printer_Create_Item(string Message)
             {
                 ViewBag.Message = Message;
 
@@ -35,8 +39,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            [HttpPost]
-            public ActionResult Printer_CreateItem_Post(Mod_Printer Get_Data)
+
+
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
+        [HttpPost]
+        public ActionResult Printer_CreateItem_Post(Mod_Printer Get_Data)
             {
                 string Message = "";
                 try
@@ -67,7 +74,10 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 return RedirectToAction("Printer_Create_Item", "Printer");
             }
 
-            public ActionResult Edit_Printer(string id)
+
+
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
+        public ActionResult Edit_Printer(string id)
             {
                 
                 BL_Printer BL_data = new BL_Printer();
@@ -85,7 +95,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             }
 
 
-            public ActionResult Update_Printer(Mod_Printer Get_Data, string Item_id)
+
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
+        public ActionResult Update_Printer(Mod_Printer Get_Data, string Item_id)
             {
                 int status = 0;
                 try
@@ -118,7 +130,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             }
 
 
-            public ActionResult Delete_Printer(Mod_Printer Get_Data, string id)
+
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
+        public ActionResult Delete_Printer(Mod_Printer Get_Data, string id)
             {
                 int status = 0;
                 try
@@ -153,6 +167,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             }
 
 
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public JsonResult Model_List(string Item_Make)
         {
 
@@ -167,6 +182,22 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+
+        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.IsAuthenticated)
+            {
+
+                if (filterContext.Result is HttpUnauthorizedResult)
+                {
+                    filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~/Log_In/Log_In");
+            }
+        }
 
 
     }

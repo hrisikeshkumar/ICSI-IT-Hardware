@@ -5,12 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
 using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
+using System.Web.Mvc.Filters;
 
 namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 {
 
     public class ComputerController : Controller
     {
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult Com_Details()
         {
             BL_Computer com= new BL_Computer();
@@ -20,6 +22,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Computer/Com_Details.cshtml", pc_List);
         }
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpGet]
         public ActionResult Com_Create_Item(string Message)
         {
@@ -34,6 +37,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             
         }
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpPost]
         public ActionResult Create_Item_Post(Mod_Computer Get_Data)
         {
@@ -65,6 +69,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Com_Create_Item", "Computer");
         }
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Com_Edit_Item(string id)
         {
             BL_Computer BL_data = new BL_Computer();
@@ -80,7 +85,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Computer/Com_Edit_Item.cshtml", Model_data);
         }
 
-      
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Update_Computer(Mod_Computer Get_Data, string Item_id)
         {
             int status = 0;
@@ -113,7 +118,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Com_Details", "Computer");
         }
 
-
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Delete_Item(Mod_Computer Get_Data, string Item_id)
         {
             int status = 0;
@@ -148,7 +153,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Com_Details", "Computer");
         }
 
-
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public JsonResult Model_List(string Item_Make)
         {
 
@@ -160,6 +165,23 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             return Json(Mod_Make.Item_Model_List, JsonRequestBehavior.AllowGet);
 
+        }
+
+
+        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.IsAuthenticated)
+            {
+
+                if (filterContext.Result is HttpUnauthorizedResult)
+                {
+                    filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~/Log_In/Log_In");
+            }
         }
 
 

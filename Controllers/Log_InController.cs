@@ -12,6 +12,7 @@ namespace IT_Asset.Controllers
     public class Log_InController : Controller
     {
         // GET: Log_In
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult Log_In()
         {
@@ -20,6 +21,7 @@ namespace IT_Asset.Controllers
             return View("Log_In", Model);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Log_In(Mod_LogIn model)
         {

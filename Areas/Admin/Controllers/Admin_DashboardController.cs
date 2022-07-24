@@ -10,7 +10,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
     public class Admin_DashboardController : Controller
     {
         // GET: Admin/Admin_Dashboard
-        [Authorize(Roles ="SU")]
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult Admin_Dashboard()
         {
             List<Admin_dashB> DashB = new List<Admin_dashB>();
@@ -26,12 +26,19 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-
         protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
         {
-            if (filterContext.Result is HttpUnauthorizedResult)
+            if (filterContext.HttpContext.Request.IsAuthenticated)
             {
-                filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+
+                if (filterContext.Result is HttpUnauthorizedResult)
+                {
+                    filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~/Log_In/Log_In");
             }
         }
 

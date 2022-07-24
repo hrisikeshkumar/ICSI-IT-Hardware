@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
 using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
 
@@ -11,7 +12,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
     public class DataCardController : Controller
     {
 
-
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult DataCard_Details()
         {
             BL_DataCard com = new BL_DataCard();
@@ -21,6 +22,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/DataCard/DataCard_Details.cshtml", pc_List);
         }
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpGet]
         public ActionResult DataCard_Create_Item(string Message)
         {
@@ -34,6 +36,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         }
 
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpPost]
         public ActionResult DataCard_CreateItem_Post(Mod_DataCard Get_Data)
         {
@@ -67,6 +70,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("DataCard_Create_Item", "DataCard");
         }
 
+
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Edit_DataCard(string id)
         {
             
@@ -85,7 +90,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/DataCard/Edit_DataCard.cshtml", Model_data);
         }
 
-
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Update_DataCard(Mod_DataCard Get_Data, string Item_id)
         {
             int status = 0;
@@ -118,7 +123,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("DataCard_Details", "DataCard");
         }
 
-
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Delete_DataCard(Mod_DataCard Get_Data, string id)
         {
             int status = 0;
@@ -153,6 +158,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("DataCard_Details", "DataCard");
         }
 
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public JsonResult Model_List(string Item_Make)
         {
 
@@ -166,6 +172,22 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         }
 
+
+        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.IsAuthenticated)
+            {
+
+                if (filterContext.Result is HttpUnauthorizedResult)
+                {
+                    filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~/Log_In/Log_In");
+            }
+        }
 
 
     }

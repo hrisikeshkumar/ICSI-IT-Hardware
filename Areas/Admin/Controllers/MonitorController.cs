@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
 using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
 
@@ -11,8 +12,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
     public class MonitorController : Controller
     {
 
-
-            public ActionResult Monitor_Details()
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
+        public ActionResult Monitor_Details()
             {
                 BL_Monitor com = new BL_Monitor();
 
@@ -21,8 +22,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 return View("~/Areas/Admin/Views/Monitor/Monitor_Details.cshtml", pc_List);
             }
 
-            [HttpGet]
-            public ActionResult Moitor_Create_Item(string Message)
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
+        [HttpGet]
+        public ActionResult Moitor_Create_Item(string Message)
             {
                 ViewBag.Message = Message;
 
@@ -34,8 +36,10 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            [HttpPost]
-            public ActionResult Moitor_Create_Post(Mod_Monitor Get_Data)
+
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
+        [HttpPost]
+        public ActionResult Moitor_Create_Post(Mod_Monitor Get_Data)
             {
                 string Message = "";
                 try
@@ -66,7 +70,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 return RedirectToAction("Moitor_Create_Item", "Monitor");
             }
 
-            public ActionResult Edit_Monitor(string id)
+
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
+        public ActionResult Edit_Monitor(string id)
             {
                 Item_MakeModel Make_List = new Item_MakeModel();
                 BL_Monitor BL_data = new BL_Monitor();
@@ -81,7 +87,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             }
 
 
-            public ActionResult Update_Monitor(Mod_Monitor Get_Data, string Item_id)
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
+        public ActionResult Update_Monitor(Mod_Monitor Get_Data, string Item_id)
             {
                 int status = 0;
                 try
@@ -114,7 +121,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             }
 
 
-            public ActionResult Delete_Monitor(Mod_Monitor Get_Data, string id)
+        [Authorize(Roles = "SU, Admin, InventoryManager")]
+        public ActionResult Delete_Monitor(Mod_Monitor Get_Data, string id)
             {
                 int status = 0;
                 try
@@ -150,6 +158,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
 
 
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public JsonResult Model_List(string Item_Make)
         {
 
@@ -163,6 +172,23 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         }
 
+
+
+        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.IsAuthenticated)
+            {
+
+                if (filterContext.Result is HttpUnauthorizedResult)
+                {
+                    filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~/Log_In/Log_In");
+            }
+        }
 
 
     }
