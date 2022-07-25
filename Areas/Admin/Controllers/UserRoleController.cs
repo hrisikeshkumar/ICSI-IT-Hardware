@@ -23,10 +23,12 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/UserRole/UserRole_Details.cshtml", Mod_userrole);
         }
 
-
-        [Authorize(Roles = "SU")]
-        public ActionResult Update_UserRole(Mod_UserRole Get_Data, string Item_id)
+        [HttpPost]
+        //[Authorize(Roles = "SU")]
+        public ActionResult Update_UserRole(Mod_UserRole[] Get_Data)
         {
+
+
             int status = 0;
             try
             {
@@ -35,7 +37,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 {
                     BL_UserRole Md_Asset = new BL_UserRole();
 
-                    status = Md_Asset.Save_UserRole_data(Get_Data, "Update", Item_id);
+                    status = Md_Asset.Save_UserRole_data(Get_Data, "Update");
 
                     if (status > 0)
                     {

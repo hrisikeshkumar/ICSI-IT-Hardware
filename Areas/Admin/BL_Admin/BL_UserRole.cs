@@ -105,13 +105,16 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             return current_data;
         }
 
-        public int Save_UserRole_data(Mod_UserRole Data, string type, string UserRole_ID)
+        public int Save_UserRole_data(Mod_UserRole[] Data, string type)
         {
             int status = 1;
             string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
             SqlConnection con = new SqlConnection(strcon);
             try
             {
+               DataTable rolemapping ;
+
+                rolemapping = Permission(Data);
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
@@ -123,15 +126,10 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlParameter sqlP_type = new SqlParameter("@Type", type);
                 cmd.Parameters.Add(sqlP_type);
 
-                if (type == "Update" || type == "Delete")
-                {
-                    SqlParameter Sql_UserRole_ID = new SqlParameter("@UserRole_Id", UserRole_ID);
-                    cmd.Parameters.Add(Sql_UserRole_ID);
-                }
 
-
-                SqlParameter User_Role = new SqlParameter("@User_Role", Data.User_Role);
+                SqlParameter User_Role = new SqlParameter("@UserRole", rolemapping);
                 cmd.Parameters.Add(User_Role);
+
 
 
                 con.Open();
@@ -147,6 +145,92 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             return status;
         }
 
+
+        private DataTable Permission(Mod_UserRole[] data)
+        {
+            
+
+            DataTable rolemapping = new DataTable();
+          
+            rolemapping.Columns.Add("UserID",typeof(int));
+            rolemapping.Columns.Add("UserRole", typeof(int));
+
+            for (int i = 0; i < data.Count(); i++)
+            {
+                
+
+                if (data[i].SU_Role)
+                {
+                    DataRow dr = rolemapping.NewRow();
+                    dr["UserID"] = Convert.ToString(data[i].User_ID);
+                    dr["UserRole"] = 1;
+                    rolemapping.Rows.Add(dr);              
+                    rolemapping.AcceptChanges();
+
+
+                }
+                if (data[i].Admin_Role)
+                {
+                    DataRow dr = rolemapping.NewRow();
+                    dr["UserID"] = Convert.ToString(data[i].User_ID);
+                    dr["UserRole"] = 4;
+                    rolemapping.Rows.Add(dr);
+                    rolemapping.AcceptChanges();
+
+
+
+                }
+                if (data[i].Manager_Role)
+                {
+                    DataRow dr = rolemapping.NewRow();
+                    dr["UserID"] = Convert.ToString(data[i].User_ID);
+                    dr["UserRole"] =5;
+                    rolemapping.Rows.Add(dr);
+                    rolemapping.AcceptChanges();
+
+                }
+                if (data[i].InventoryManager_Role)
+                {
+                    DataRow dr = rolemapping.NewRow();
+                    dr["UserID"] = Convert.ToString(data[i].User_ID);
+                    dr["UserRole"] = 6;
+                    rolemapping.Rows.Add(dr);
+                    rolemapping.AcceptChanges();
+
+
+                }
+                if (data[i].ServerEngineer_Role)
+                {
+                    DataRow dr = rolemapping.NewRow();
+                    dr["UserID"] = Convert.ToString(data[i].User_ID);
+                    dr["UserRole"] = 8;
+                    rolemapping.Rows.Add(dr);
+                    rolemapping.AcceptChanges();
+
+
+                }
+                if (data[i].FmsEngineer_Role)
+                {
+                    DataRow dr = rolemapping.NewRow();
+                    dr["UserID"] = Convert.ToString(data[i].User_ID);
+                    dr["UserRole"] = 7;
+                    rolemapping.Rows.Add(dr);
+                    rolemapping.AcceptChanges();
+
+
+                }
+
+            }
+
+            return rolemapping;
+        }
+
+
+        public class MapRole
+        {
+            public int UserID { get; set; }
+            public int UserRole { get; set; }
+        }
 
     }
 }
