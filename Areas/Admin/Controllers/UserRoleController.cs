@@ -13,7 +13,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
     public class UserRoleController : Controller
     {
 
-       // [Authorize(Roles = "SU, Admin")]
+        [Authorize(Roles = "SU, Admin")]
         public ActionResult UserRole_Details()
         {
             BL_UserRole com = new BL_UserRole();
@@ -24,7 +24,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "SU")]
+        [Authorize(Roles = "SU")]
         public ActionResult Update_UserRole(Mod_UserRole[] Get_Data)
         {
 
@@ -58,21 +58,21 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-        //protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
-        //{
-        //    if (filterContext.HttpContext.Request.IsAuthenticated)
-        //    {
+        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.IsAuthenticated)
+            {
 
-        //        if (filterContext.Result is HttpUnauthorizedResult)
-        //        {
-        //            filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        filterContext.Result = new RedirectResult("~/Log_In/Log_In");
-        //    }
-        //}
+                if (filterContext.Result is HttpUnauthorizedResult)
+                {
+                    filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~/Log_In/Log_In");
+            }
+        }
 
 
     }

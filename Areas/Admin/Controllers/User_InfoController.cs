@@ -17,9 +17,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         {
             BL_User_Info com = new BL_User_Info();
 
-            List<Mod_User_Info> pc_List = com.Get_User_InfoData();
+            List<Mod_User_Info> data = com.Get_User_InfoData();
 
-            return View("~/Areas/Admin/Views/User_Info/User_Info_Details.cshtml", pc_List);
+            return View("~/Areas/Admin/Views/User_Info/User_Info_Details.cshtml", data);
         }
 
         [Authorize(Roles = "SU, Admin")]
@@ -152,7 +152,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             return RedirectToAction("User_Info_Details", "User_Info");
         }
-
 
 
         protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)

@@ -37,7 +37,7 @@
             </td>
             <td align="right" width="25%">
                 <h4>
-                    @Html.ActionLink("Add New", "User_Info_CreateItem_Post", "User_Info")
+                    @Html.ActionLink("Add New", "User_Info_Create_Item", "User_Info")
 
                 </h4>
             </td>
@@ -51,25 +51,25 @@
             <td colspan="2">
                 <table style="width:100%">
                     <tr>
-                        <th>
+                        <th style="text-align:left">
                             User Name
                         </th>
-                        <th>
-                            Budget Amount Uses
+                        <th style="text-align:center">
+                            Acive 
                         </th>
-                        <th> Action </th>
+                        <th style="text-align:center"> Action </th>
                     </tr>
 
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.User_First_Name) + "  " + @Html.DisplayFor(modelItem => item.User_Last_Name)
+                            <td style="text-align:left">
+                                @Html.DisplayFor(modelItem => item.User_First_Name)   @Html.DisplayFor(modelItem => item.User_Last_Name)
                             </td>  
-                            <td>
-                                @Html.DisplayFor(modelItem => item.User_Role)
-                            </td>
-                            <td>
+                            <td style="text-align:center">
+                                @Html.CheckBoxFor(modelItem => item.Active)
+                            </td style="text-align:center">
+                            <td style="text-align:center">
 
                                 @Html.ActionLink("Edit", "Edit_User_Info", new { id = item.User_ID }) |
                                 @Html.ActionLink("Details", "Get_Detail", new { id = item.User_ID }) |

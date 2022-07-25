@@ -113,14 +113,14 @@
 
         <tr>
             <td style="width:25%; ">
-                User First Name
+                First Name
             </td>
             <td style="width:25%;">
                 @Html.TextBoxFor(x => x.User_First_Name, new { @class = " form-rounded", @style = " width :90%; " })
             </td>
 
             <td style="width:25%; height:50px;">
-                User Last Name
+                Last Name
             </td>
             <td style="width:25%;">
                 @Html.TextBoxFor(x => x.User_Last_Name, new { @class = " form-rounded", @style = " width :90%; " })
@@ -131,53 +131,33 @@
 
         <tr>
             <td style="width:25%; height:50px;">
-                Email Id
+                Employee Code
                 @Html.HiddenFor(x => x.User_ID, new { @class = " form-rounded", @style = " width :90%; " })
+            </td>
+            <td style="width:25%;">
+                @Html.TextBoxFor(x => x.Emp_Code, new { @class = " form-rounded", @style = " width :90%; " })
+            </td>
+
+            <td style="width:25%; height:50px;">
+                Email Id / User Id
             </td>
             <td style="width:25%;">
                 @Html.TextBoxFor(x => x.User_Email, new { @class = " form-rounded", @style = " width :90%; " })
             </td>
 
-            <td style="width:25%; height:50px;">
+        </tr>
+        <tr>
+            <td style="width:25%;">
                 Password
             </td>
             <td style="width:25%;">
                 @Html.TextBoxFor(x => x.User_Password, new { @class = " form-rounded", @style = " width :90%; " })
             </td>
-
-
-        </tr>
-        <tr>
-
-            <td style="width:25%;">
-                User Role
-            </td>
-            <td style="width:25%;">
-                @Html.DropDownListFor(x => x.User_Role,
-                 new List<SelectListItem>()
-                   {
-                     new SelectListItem() { Text= "Super Admin", Value = "Super_Admin" },
-                     new SelectListItem() { Text= "Admin", Value = "Admin"},
-                     new SelectListItem() { Text= "Manager", Value = "Manager"},
-                     new SelectListItem() { Text= "Inventory Manager", Value = "Inventory_Manager"},
-                     new SelectListItem() { Text= "Fms Engineer", Value = "Fms_Engineer"},
-                   }
-                 , "Please select a Type", new { @class = " form-rounded", @style = " width :90%; " })
-
-            </td>
-
             <td style="width:25%; height:50px;">
-                Status
+                Active Status
             </td>
             <td style="width:25%;">
-                @Html.DropDownListFor(x => x.User_Role,
-                 new List<SelectListItem>()
-                   {
-                     new SelectListItem() { Text= "Active", Value = "Active" },
-                     new SelectListItem() { Text= "InActive", Value = "InActive"},
-                   }
-                 , "Please select a Type", new { @class = " form-rounded", @style = " width :90%; " })
-
+               @Html.CheckBoxFor(x=>x.Active)
             </td>
         </tr>
 
