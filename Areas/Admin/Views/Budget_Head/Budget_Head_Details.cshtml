@@ -37,7 +37,7 @@
             </td>
             <td align="right" width="25%">
                 <h4>
-                    @Html.ActionLink("Add New", "Budget_Head_CreateItem_Post", "Budget_Head")
+                    @Html.ActionLink("Add New", "Budget_Head_Create_Item", "Budget_Head")
 
                 </h4>
             </td>
@@ -64,10 +64,10 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Item_Type)
+                                @Html.DisplayFor(modelItem => item.Budget_Name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Item_serial_No)
+                                @Html.DisplayFor(modelItem => item.Total_Budget_Amount)
                             </td>
                             <td>
 
