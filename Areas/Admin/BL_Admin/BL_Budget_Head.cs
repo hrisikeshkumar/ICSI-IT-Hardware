@@ -50,11 +50,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 {
                     BL_data = new Mod_Budget();
 
-                    BL_data.Budget_Head_Id = Convert.ToString(dr["Asset_Type"]);
+                    BL_data.Budget_Head_Id = Convert.ToString(dr["Budget_Head_Id"]);
 
-                    BL_data.Budget_Name = Convert.ToString(dr["Item_SlNo"]);
+                    BL_data.Budget_Name = Convert.ToString(dr["Budget_Name"]);
 
-                    BL_data.Total_Budget_Amount = Convert.ToString(dr["Item_Id"]);
+                    BL_data.Total_Budget_Amount = Convert.ToString(dr["Total_Budget_Amount"]);
 
                     current_data.Add(BL_data);
                 }
@@ -85,21 +85,21 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 if (type == "Update" || type == "Delete")
                 {
-                    SqlParameter Asset_Id = new SqlParameter("@Budget_Head_Id", Budget_Head_ID);
-                    cmd.Parameters.Add(Asset_Id);
+                    SqlParameter Budget_ID = new SqlParameter("@Budget_Head_Id", Budget_Head_ID);
+                    cmd.Parameters.Add(Budget_ID);
                 }
 
-                SqlParameter Asset_Make_Id = new SqlParameter("@Budget_Year", Data.Budget_Year);
-                cmd.Parameters.Add(Asset_Make_Id);
+                SqlParameter Budget_Year = new SqlParameter("@Budget_Year", Data.Budget_Year);
+                cmd.Parameters.Add(Budget_Year);
 
-                SqlParameter Asset_SL_No = new SqlParameter("@Budget_Name", Data.Budget_Name);
-                cmd.Parameters.Add(Asset_SL_No);
+                SqlParameter Budget_Name = new SqlParameter("@Budget_Name", Data.Budget_Name);
+                cmd.Parameters.Add(Budget_Name);
 
-                SqlParameter Proc_Date = new SqlParameter("@Total_Budget_Amount", Data.Total_Budget_Amount);
-                cmd.Parameters.Add(Proc_Date);
+                SqlParameter Total_Budget_Amount = new SqlParameter("@Total_Budget_Amount", Data.Total_Budget_Amount);
+                cmd.Parameters.Add(Total_Budget_Amount);
 
-                SqlParameter Warnt_end_dt = new SqlParameter("@Remarks", Data.Remarks);
-                cmd.Parameters.Add(Warnt_end_dt);
+                SqlParameter Remarks = new SqlParameter("@Remarks", Data.Remarks);
+                cmd.Parameters.Add(Remarks);
 
                 con.Open();
 
@@ -132,8 +132,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     cmd.Connection = con;
                     cmd.Parameters.Add(sqlP_type);
 
-                    SqlParameter sqlP_Asset_ID = new SqlParameter("@Budget_Head_Id", Budget_Head_Id);
-                    cmd.Parameters.Add(sqlP_Asset_ID);
+                    SqlParameter Budget_Id = new SqlParameter("@Budget_Head_Id", Budget_Head_Id);
+                    cmd.Parameters.Add(Budget_Id);
 
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {

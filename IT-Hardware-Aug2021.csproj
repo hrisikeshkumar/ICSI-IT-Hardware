@@ -170,6 +170,7 @@
     <Compile Include="Areas\Admin\Models\Admin_dashB.cs" />
     <Compile Include="Areas\Admin\Models\Mod_AppleIpad.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Budget.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_Budget_Uses.cs" />
     <Compile Include="Areas\Admin\Models\Mod_DataCard.cs" />
     <Compile Include="Areas\Admin\Models\Mod_AssetMaster.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Computer.cs" />

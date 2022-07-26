@@ -25,7 +25,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlConnection con = new SqlConnection(strcon);
 
 
-                using (SqlCommand cmd = new SqlCommand("sp_Budget_Head"))
+                using (SqlCommand cmd = new SqlCommand("sp_Budget_Uses"))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Connection = con;

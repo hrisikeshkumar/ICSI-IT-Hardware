@@ -63,8 +63,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Budget_Create_Item", "Budget");
+            return RedirectToAction("Budget_Head_Create_Item", "Budget");
         }
+
 
         [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Edit_Budget_Head(string id)
@@ -77,6 +78,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             return View("~/Areas/Admin/Views/Budget_Head/Edit_Budget_Head.cshtml", Model_data);
         }
+
 
         [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Update_Budget_Head(Mod_Budget Get_Data, string Budget_Head_Id)
@@ -110,6 +112,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             return RedirectToAction("Budget_Head_Details", "Budget_Head");
         }
+
 
         [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Delete_Budget_Head(Mod_Budget Get_Data, string id)

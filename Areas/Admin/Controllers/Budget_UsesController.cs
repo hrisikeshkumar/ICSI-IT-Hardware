@@ -145,8 +145,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Budget_Uses_Details", "Budget_Uses");
         }
 
-
-
         protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
         {
             if (filterContext.HttpContext.Request.IsAuthenticated)
