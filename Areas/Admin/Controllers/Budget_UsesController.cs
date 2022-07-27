@@ -16,9 +16,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         {
             BL_Budget_Uses com = new BL_Budget_Uses();
 
-            List<Mod_Budget> pc_List = com.Get_BudgetData();
+            List<Mod_Budget_Uses> Mod_Budget_Uses = com.Get_BudgetData();
 
-            return View("~/Areas/Admin/Views/Budget_Uses/Budget_Uses_Details.cshtml", pc_List);
+            return View("~/Areas/Admin/Views/Budget_Uses/Budget_Uses_Details.cshtml", Mod_Budget_Uses);
         }
 
         [Authorize(Roles = "SU, Admin, InventoryManager")]
@@ -27,14 +27,14 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         {
             ViewBag.Message = Message;
 
-            Mod_Budget Mod_data = new Mod_Budget();
+            Mod_Budget_Uses Mod_data = new Mod_Budget_Uses();
 
             return View("~/Areas/Admin/Views/Budget_Uses/Budget_Uses_Create_Item.cshtml", Mod_data);
         }
 
         [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpPost]
-        public ActionResult Budget_Uses_CreateItem_Post(Mod_Budget Get_Data)
+        public ActionResult Budget_Uses_CreateItem_Post(Mod_Budget_Uses Get_Data)
         {
             string Message = "";
             try
@@ -70,7 +70,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         {
 
             BL_Budget_Uses BL_data = new BL_Budget_Uses();
-            Mod_Budget Model_data = new Mod_Budget();
+            Mod_Budget_Uses Model_data = new Mod_Budget_Uses();
 
             Model_data = BL_data.Get_Data_By_ID(Model_data, id);
 
@@ -78,7 +78,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
         [Authorize(Roles = "SU, Admin, InventoryManager")]
-        public ActionResult Update_Budget_Uses(Mod_Budget Get_Data, string Budget_Uses_Id)
+        public ActionResult Update_Budget_Uses(Mod_Budget_Uses Get_Data, string Budget_Uses_Id)
         {
             int status = 0;
             try
@@ -111,7 +111,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
         [Authorize(Roles = "SU, Admin, InventoryManager")]
-        public ActionResult Delete_Budget_Uses(Mod_Budget Get_Data, string id)
+        public ActionResult Delete_Budget_Uses(Mod_Budget_Uses Get_Data, string id)
         {
             int status = 0;
             try

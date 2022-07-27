@@ -1,6 +1,6 @@
 ﻿@using IT_Hardware_Aug2021.Areas.Admin.Models
 
-@model IList<Mod_Budget>
+@model IList<Mod_Budget_Uses>
 
 @{
     ViewBag.Title = "Index";
@@ -57,6 +57,9 @@
                         <th>
                             Budget Amount Uses
                         </th>
+                        <th>
+                            Budget Type
+                        </th>
                         <th> Action </th>
                     </tr>
 
@@ -68,6 +71,9 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Budget_Amount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Budget_Type)
                             </td>
                             <td>
 
@@ -87,6 +93,7 @@
     </table>
 </div>
 
+
 <script type="text/javascript">
     function ShowSuccessMsg() {
         toastr.success("Successfully Added.");
@@ -95,6 +102,8 @@
         toastr.error("Error:" + Msg);
     };
 </script>
+
+
 @if (ViewBag.JavaScriptFunction != null)
 {
     <script type="text/javascript">

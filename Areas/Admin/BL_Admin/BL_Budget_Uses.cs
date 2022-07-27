@@ -12,11 +12,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
     public class BL_Budget_Uses
     {
 
-        public List<Mod_Budget> Get_BudgetData()
+        public List<Mod_Budget_Uses> Get_BudgetData()
         {
 
-            Mod_Budget BL_data;
-            List<Mod_Budget> current_data = new List<Mod_Budget>();
+            Mod_Budget_Uses BL_data;
+            List<Mod_Budget_Uses> current_data = new List<Mod_Budget_Uses>();
 
             try
             {
@@ -47,13 +47,13 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 foreach (DataRow dr in dt_Comuter.Rows)
                 {
-                    BL_data = new Mod_Budget();
+                    BL_data = new Mod_Budget_Uses();
 
-                    BL_data.Budget_Head_Id = Convert.ToString(dr["Asset_Type"]);
+                    BL_data.Budget_Uses_Id = Convert.ToString(dr["Budget_Uses_Id"]);
 
-                    BL_data.Budget_Name = Convert.ToString(dr["Item_SlNo"]);
+                    BL_data.Budget_Name = Convert.ToString(dr["Budget_Name"]);
 
-                    BL_data.Total_Budget_Amount = Convert.ToString(dr["Item_Id"]);
+                    BL_data.Budget_Type = Convert.ToString(dr["Budget_Type"]);
 
                     current_data.Add(BL_data);
                 }
@@ -64,7 +64,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             return current_data;
         }
 
-        public int Save_Budget_data(Mod_Budget Data, string type, string Budget_Head_ID)
+        public int Save_Budget_data(Mod_Budget_Uses Data, string type, string Budget_Uses_ID)
         {
             int status = 1;
             string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
@@ -84,21 +84,37 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 if (type == "Update" || type == "Delete")
                 {
-                    SqlParameter Asset_Id = new SqlParameter("@Budget_Head_Id", Budget_Head_ID);
-                    cmd.Parameters.Add(Asset_Id);
+                    SqlParameter Budget_ID = new SqlParameter("@Budget_Uses_Id", Budget_Uses_ID);
+                    cmd.Parameters.Add(Budget_ID);
                 }
 
-                SqlParameter Asset_Make_Id = new SqlParameter("@Budget_Year", Data.Budget_Year);
-                cmd.Parameters.Add(Asset_Make_Id);
+                SqlParameter Budget_Head_Id = new SqlParameter("@Budget_Uses_Id", Data.Budget_Head_Id);
+                cmd.Parameters.Add(Budget_Head_Id);
 
-                SqlParameter Asset_SL_No = new SqlParameter("@Budget_Name", Data.Budget_Name);
-                cmd.Parameters.Add(Asset_SL_No);
+                SqlParameter Budget_Type = new SqlParameter("@Budget_Type", Data.Budget_Type);
+                cmd.Parameters.Add(Budget_Type);
 
-                SqlParameter Proc_Date = new SqlParameter("@Total_Budget_Amount", Data.Total_Budget_Amount);
-                cmd.Parameters.Add(Proc_Date);
+                SqlParameter Utilization_Details = new SqlParameter("@Utilization_Details", Data.Utilization_Details);
+                cmd.Parameters.Add(Utilization_Details);
 
-                SqlParameter Warnt_end_dt = new SqlParameter("@Remarks", Data.Remarks);
-                cmd.Parameters.Add(Warnt_end_dt);
+                SqlParameter Amount_Utilized_Before = new SqlParameter("@Amount_Utilized_Before", Data.Amount_Utilized_Before);
+                cmd.Parameters.Add(Amount_Utilized_Before);
+
+                SqlParameter Balance_Available = new SqlParameter("@Balance_Available", Data.Balance_Available);
+                cmd.Parameters.Add(Balance_Available);
+
+                SqlParameter Budget_Amount = new SqlParameter("@Budget_Amount", Data.Budget_Amount);
+                cmd.Parameters.Add(Budget_Amount);
+
+                SqlParameter Remaning_Balance = new SqlParameter("@Remaning_Balance", Data.Remaning_Balance);
+                cmd.Parameters.Add(Remaning_Balance);
+
+                SqlParameter Remarks = new SqlParameter("@Remarks", Data.Remarks);
+                cmd.Parameters.Add(Remarks);
+
+                SqlParameter Entry_Date = new SqlParameter("@Processing_Date", Data.Processing_Date);
+                cmd.Parameters.Add(Entry_Date);
+
 
                 con.Open();
 
@@ -113,7 +129,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             return status;
         }
 
-        public Mod_Budget Get_Data_By_ID(Mod_Budget Data, string Budget_Head_Id)
+        public Mod_Budget_Uses Get_Data_By_ID(Mod_Budget_Uses Data, string Budget_Uses_Id)
         {
 
 
@@ -124,14 +140,14 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlConnection con = new SqlConnection(strcon);
 
 
-                using (SqlCommand cmd = new SqlCommand("sp_Budget_Head"))
+                using (SqlCommand cmd = new SqlCommand("sp_Budget_Uses"))
                 {
                     SqlParameter sqlP_type = new SqlParameter("@Type", "Get_Data_By_ID");
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Connection = con;
                     cmd.Parameters.Add(sqlP_type);
 
-                    SqlParameter sqlP_Asset_ID = new SqlParameter("@Budget_Head_Id", Budget_Head_Id);
+                    SqlParameter sqlP_Asset_ID = new SqlParameter("@Budget_Head_Id", Budget_Uses_Id);
                     cmd.Parameters.Add(sqlP_Asset_ID);
 
                     using (SqlDataAdapter sda = new SqlDataAdapter())
@@ -148,10 +164,18 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 if (dt_Comuter.Rows.Count > 0)
                 {
                     Data.Budget_Head_Id = Convert.ToString(dt_Comuter.Rows[0]["Budget_Head_Id"]);
-                    Data.Budget_Year = Convert.ToString(dt_Comuter.Rows[0]["Budget_Year"]);
+                    Data.Budget_Uses_Id = Convert.ToString(dt_Comuter.Rows[0]["Budget_Uses_Id"]);
                     Data.Budget_Name = Convert.ToString(dt_Comuter.Rows[0]["Budget_Name"]);
-                    Data.Total_Budget_Amount = Convert.ToString(dt_Comuter.Rows[0]["Total_Budget_Amount"]);
+                    Data.Budget_Year = Convert.ToString(dt_Comuter.Rows[0]["Budget_Year"]);
+                    Data.Utilization_Details = Convert.ToString(dt_Comuter.Rows[0]["Utilization_Details"]);
+                    Data.Budget_Type = Convert.ToString(dt_Comuter.Rows[0]["Budget_Type"]);
+                    Data.Total_Approved_Budget = Convert.ToInt32(dt_Comuter.Rows[0]["Total_Budget_Amount"]);
+                    Data.Amount_Utilized_Before = Convert.ToInt32(dt_Comuter.Rows[0]["Amount_Utilized"]);
+                    Data.Balance_Available = Convert.ToInt32(dt_Comuter.Rows[0]["Balance_Available"]);
+                    Data.Budget_Amount = Convert.ToInt32(dt_Comuter.Rows[0]["Budget_Amount"]);
+                    Data.Remaning_Balance = Convert.ToInt32(dt_Comuter.Rows[0]["Remaning_Balance"]);
                     Data.Remarks = Convert.ToString(dt_Comuter.Rows[0]["Remarks"]);
+                    Data.Processing_Date = Convert.ToDateTime(dt_Comuter.Rows[0]["Entry_Date"]);
                 }
 
             }

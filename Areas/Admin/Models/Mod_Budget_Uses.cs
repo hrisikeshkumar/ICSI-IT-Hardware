@@ -9,6 +9,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
     {
         public string Budget_Head_Id { get; set; }
         public string Budget_Uses_Id { get; set; }
+        public string Budget_Name { get; set; }
         public string Budget_Year { get; set; }
         public string Utilization_Details { get; set; }
         public string Budget_Type { get; set; }
@@ -18,7 +19,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public int Budget_Amount { get; set; }
         public int Remaning_Balance { get; set; }
         public string Remarks { get; set; }
-        public DateTime? Entry_Date { get; set; }
+        public DateTime? Processing_Date { get; set; }
         public string Create_User { get; set; }
         public DateTime? Create_date { get; set; }
     }
