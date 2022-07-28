@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
+using System.Web.Mvc;
 
 namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 {
@@ -184,6 +185,107 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             return Data;
         }
 
+        public void Get_Budget_Head(Mod_Budget_Uses Mod_Data, string Bud_Year)
+        {
+
+            try
+            {
+                DataTable dt_Comuter;
+                string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                SqlConnection con = new SqlConnection(strcon);
+
+
+                using (SqlCommand cmd = new SqlCommand("sp_GetAllBudgetHead"))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = con;
+
+                    SqlParameter sqlP_Bud_Year = new SqlParameter("@Year", Bud_Year);
+                    cmd.Parameters.Add(sqlP_Bud_Year);
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        sda.SelectCommand = cmd;
+                        using (DataTable dt = new DataTable())
+                        {
+                            sda.Fill(dt);
+                            dt_Comuter = dt;
+                        }
+                    }
+                }
+
+
+                
+                if (dt_Comuter.Rows.Count > 0)
+                {
+                    List<SelectListItem> List_Item = new List<SelectListItem>();
+                    SelectListItem li = new SelectListItem();
+
+                    li.Text = "Please Select";
+                    li.Value = string.Empty;
+                    List_Item.Add(li);
+
+                    foreach (DataRow dr in dt_Comuter.Rows)
+                    {
+                        li = new SelectListItem();
+                        li.Text = Convert.ToString(dr["Budget_Name"]);
+                        li.Value = Convert.ToString(dr["Budget_Head_Id"]);
+
+                        List_Item.Add(li);
+                    }
+                    Mod_Data.Budget_List = List_Item;
+                }
+            }
+            catch (Exception ex) { }
+        }
+
+        public void Get_Prev_Budget_Uses(Mod_Budget_Uses Mod_Data, string Bud_Head_Id, string Bud_Year)
+        {
+
+            try
+            {
+                DataTable dt_Comuter;
+                string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                SqlConnection con = new SqlConnection(strcon);
+
+
+                using (SqlCommand cmd = new SqlCommand("sp_Budget_Uses"))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = con;
+
+                    SqlParameter sqlP_Bud_Head_Id = new SqlParameter("@Budget_Head_Id", Bud_Head_Id);
+                    cmd.Parameters.Add(sqlP_Bud_Head_Id);
+
+                    SqlParameter sqlP_Bud_Year = new SqlParameter("@Budget_Year", Bud_Year);
+                    cmd.Parameters.Add(sqlP_Bud_Year);
+
+                    SqlParameter sqlP_Type = new SqlParameter("@Type", "Get_Bud_Info");
+                    cmd.Parameters.Add(sqlP_Type);
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        sda.SelectCommand = cmd;
+                        using (DataTable dt = new DataTable())
+                        {
+                            sda.Fill(dt);
+                            dt_Comuter = dt;
+                        }
+                    }
+                }
+
+
+
+                if (dt_Comuter.Rows.Count > 0)
+                {
+                                     
+                    Mod_Data.Total_Approved_Budget = Convert.ToInt32(dt_Comuter.Rows[0]["Total_Approved_Budget"]);
+                    Mod_Data.Amount_Utilized_Before = Convert.ToInt32(dt_Comuter.Rows[0]["Amount_Utilized_Prev"]);
+                    Mod_Data.Balance_Available = Convert.ToInt32(dt_Comuter.Rows[0]["Balance_Budget"]);
+                }
+            }
+            catch (Exception ex) { }
+        }
 
     }
 }
