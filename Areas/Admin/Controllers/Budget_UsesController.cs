@@ -62,7 +62,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Budget_Create_Item", "Budget");
+            return RedirectToAction("Budget_Create_Item", "Budget_Uses");
         }
 
         //[Authorize(Roles = "SU, Admin, InventoryManager")]
@@ -162,6 +162,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+        //[Authorize(Roles = "SU, Admin, InventoryManager")]
         public JsonResult Prev_Budget_info(string Bud_Head_Id, string Yearcode)
         {
 
@@ -171,7 +172,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             Bud_List.Get_Prev_Budget_Uses(Mod_budget, Bud_Head_Id,  Yearcode);
 
-            return Json(Mod_budget.Budget_List, JsonRequestBehavior.AllowGet);
+            return Json(Mod_budget, JsonRequestBehavior.AllowGet);
 
         }
 

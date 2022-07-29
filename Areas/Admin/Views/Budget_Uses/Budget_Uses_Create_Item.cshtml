@@ -174,7 +174,7 @@
                     Total Approved Budget
                 </td>
                 <td style="width:25%;">
-                    @Html.DisplayFor(x => x.Total_Approved_Budget, new { @class = " form-rounded", @style = " width :90%; " })
+                    @Html.TextBoxFor(x => x.Total_Approved_Budget, new { @class = " form-rounded", @readonly = "true", @style = " width :90%; background-color: #e4f0f0;" })
                 </td>
 
                 <td style="width:25%; height:50px;">
@@ -193,14 +193,14 @@
                 </td>
                 <td style="width:25%;">
 
-                    @Html.DisplayFor(x => x.Amount_Utilized_Before, new { @class = " form-rounded", @style = " width :90%; " })
+                    @Html.TextBoxFor(x => x.Amount_Utilized_Before, new { @class = " form-rounded", @readonly = "true", @style = " width :90%; background-color: #e4f0f0;" })
                 </td>
                 <td style="width:25%; height:50px;">
                     Total Available Budget
                 </td>
                 <td style="width:25%;">
 
-                    @Html.DisplayFor(x => x.Balance_Available, new { @class = " form-rounded", @style = " width :90%; " })
+                    @Html.TextBoxFor(x => x.Balance_Available, new { @class = " form-rounded", @readonly = "true", @style = " width :90%; background-color: #e4f0f0;" })
                 </td>
 
             </tr>
@@ -218,7 +218,7 @@
                 </td>
                 <td style="width:25%;">
 
-                    @Html.DisplayFor(x => x.Remaning_Balance, new { @class = " form-rounded", @style = " width :90%; " })
+                    @Html.TextBoxFor(x => x.Remaning_Balance, new { @class = " form-rounded", @readonly = "true", @style = " width :90%; background-color: #e4f0f0;" })
                 </td>
 
             </tr>
@@ -300,11 +300,9 @@
 
         $('#Budget_Head_Id').change(function () {
             
-
             $.ajax({
                 type: "POST",
                 url: "/Admin/Budget_Uses/Prev_Budget_info",
-                contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: { Yearcode: $('#Budget_Year').val(), Bud_Head_Id: $('#Budget_Head_Id').val()  },
                 success: function (response) {
@@ -324,6 +322,13 @@
                 }
             });
 
+        });
+    });
+
+
+    $(function () {
+        $('#Budget_Amount').focusout(function () {
+            $('#Remaning_Balance').val($('#Balance_Available').val() - $('#Budget_Amount').val());
         });
     });
 

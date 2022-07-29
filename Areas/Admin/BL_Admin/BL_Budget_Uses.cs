@@ -34,6 +34,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     SqlParameter sqlP_type = new SqlParameter("@Type", "Get_List");
                     cmd.Parameters.Add(sqlP_type);
 
+                    SqlParameter sqlP_Year = new SqlParameter("@Budget_Year", "2022-2023");
+                    cmd.Parameters.Add(sqlP_Year);
+
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
                         sda.SelectCommand = cmd;
@@ -76,7 +79,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "sp_Budget_Head";
+                cmd.CommandText = "sp_Budget_Uses";
 
                 cmd.Connection = con;
 
@@ -89,7 +92,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     cmd.Parameters.Add(Budget_ID);
                 }
 
-                SqlParameter Budget_Head_Id = new SqlParameter("@Budget_Uses_Id", Data.Budget_Head_Id);
+                SqlParameter Budget_Head_Id = new SqlParameter("@Budget_Head_Id", Data.Budget_Head_Id);
                 cmd.Parameters.Add(Budget_Head_Id);
 
                 SqlParameter Budget_Type = new SqlParameter("@Budget_Type", Data.Budget_Type);
@@ -97,6 +100,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 SqlParameter Utilization_Details = new SqlParameter("@Utilization_Details", Data.Utilization_Details);
                 cmd.Parameters.Add(Utilization_Details);
+
+                SqlParameter Total_approved_Budget = new SqlParameter("@Total_Approved_Budget", Data.Total_Approved_Budget);
+                cmd.Parameters.Add(Total_approved_Budget);
 
                 SqlParameter Amount_Utilized_Before = new SqlParameter("@Amount_Utilized_Before", Data.Amount_Utilized_Before);
                 cmd.Parameters.Add(Amount_Utilized_Before);
@@ -280,8 +286,12 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 {
                                      
                     Mod_Data.Total_Approved_Budget = Convert.ToInt32(dt_Comuter.Rows[0]["Total_Approved_Budget"]);
-                    Mod_Data.Amount_Utilized_Before = Convert.ToInt32(dt_Comuter.Rows[0]["Amount_Utilized_Prev"]);
-                    Mod_Data.Balance_Available = Convert.ToInt32(dt_Comuter.Rows[0]["Balance_Budget"]);
+
+                    if (Convert.ToString( dt_Comuter.Rows[0]["Amount_Utilized_Prev"] ) != string.Empty )
+                        Mod_Data.Amount_Utilized_Before = Convert.ToInt32(dt_Comuter.Rows[0]["Amount_Utilized_Prev"]);
+
+                    if (Convert.ToString(dt_Comuter.Rows[0]["Balance_Budget"]) != string.Empty)
+                        Mod_Data.Balance_Available = Convert.ToInt32(dt_Comuter.Rows[0]["Balance_Budget"]);
                 }
             }
             catch (Exception ex) { }
