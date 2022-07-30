@@ -57,6 +57,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                     BL_data.Budget_Name = Convert.ToString(dr["Budget_Name"]);
 
+                    BL_data.Budget_Amount = Convert.ToInt32(dr["Budget_Amount"]);
+
                     BL_data.Budget_Type = Convert.ToString(dr["Budget_Type"]);
 
                     current_data.Add(BL_data);
@@ -154,7 +156,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     cmd.Connection = con;
                     cmd.Parameters.Add(sqlP_type);
 
-                    SqlParameter sqlP_Asset_ID = new SqlParameter("@Budget_Head_Id", Budget_Uses_Id);
+                    SqlParameter sqlP_Asset_ID = new SqlParameter("@Budget_Uses_Id", Budget_Uses_Id);
                     cmd.Parameters.Add(sqlP_Asset_ID);
 
                     using (SqlDataAdapter sda = new SqlDataAdapter())
