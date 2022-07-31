@@ -153,6 +153,7 @@
     <Compile Include="Areas\Admin\Controllers\DC_MisItemsController.cs" />
     <Compile Include="Areas\Admin\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Admin\Controllers\Item_IssueController.cs" />
+    <Compile Include="Areas\Admin\Controllers\IT_Hardware_AMCController.cs" />
     <Compile Include="Areas\Admin\Controllers\Shift_ItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\LaptopController.cs" />
     <Compile Include="Areas\Admin\Controllers\MasterDataController.cs" />
@@ -362,6 +363,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\IT_Hardware_AMC\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />
