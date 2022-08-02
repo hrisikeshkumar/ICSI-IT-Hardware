@@ -62,6 +62,65 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
         }
 
+        public List<Mod_Warranty_Amc> Find_Warranty_Expired(string Asset_Types)
+        {
+            List<Mod_Warranty_Amc> Data = new List<Mod_Warranty_Amc>();
+            try
+            {
+                DataTable dt_Comuter;
+                string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                SqlConnection con = new SqlConnection(strcon);
+
+
+                using (SqlCommand cmd = new SqlCommand("sp_IT_AMC"))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = con;
+
+                    SqlParameter sqlP_type = new SqlParameter("@Type", "Find_Warranty_Expired");
+                    cmd.Parameters.Add(sqlP_type);
+
+                    SqlParameter sqlP_Asset_Types = new SqlParameter("@Asset_Type", Asset_Types);
+                    cmd.Parameters.Add(sqlP_Asset_Types);
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        sda.SelectCommand = cmd;
+                        using (DataTable dt = new DataTable())
+                        {
+                            sda.Fill(dt);
+                            dt_Comuter = dt;
+                        }
+                    }
+
+                   
+                    if (dt_Comuter.Rows.Count > 0)
+                    {
+                        Mod_Warranty_Amc mod_data;
+                        foreach (DataRow Dr in dt_Comuter.Rows)
+                        {
+                            mod_data = new Mod_Warranty_Amc();
+
+                            mod_data.Item_Id = Convert.ToString(Dr["Item_Id"]);
+                            mod_data.Emp_Name = Convert.ToString(Dr["Emp_Name"]);
+                            mod_data.Designation = Convert.ToString(Dr["Designation"]);
+                            mod_data.Item_SlNo = Convert.ToString(Dr["Item_SlNo"]);
+                            mod_data.Asset_Type = Convert.ToString(Dr["Asset_Type"]);
+                            mod_data.Warnt_end_DT = Convert.ToDateTime(Dr["Warnt_end_DT"]);
+
+                            Data.Add(mod_data);
+                        }
+                       
+                    }
+                }
+
+            }
+            catch (Exception ex) { }
+
+            return Data;
+
+        }
 
     }
 }

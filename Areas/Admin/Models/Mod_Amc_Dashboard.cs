@@ -20,4 +20,17 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public int Ups_Waranty { get; set; }
 
     }
+
+    public class Mod_Warranty_Amc
+    {
+       
+        public string Item_Id { get; set; }
+        public string Emp_Name { get; set; }
+        public string Designation { get; set; }
+        public string Item_SlNo { get; set; }
+        public string Asset_Type { get; set; }
+        public DateTime Warnt_end_DT { get; set; }
+
+    }
+
 }
