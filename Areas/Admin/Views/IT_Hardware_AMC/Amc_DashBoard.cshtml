@@ -97,7 +97,7 @@
 
 <div style=" margin-top: -50px;  text-align: center; height: 50px; align-content: center; width: 100% " class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
-    <p style="font-size:large; padding-top:-5px; font-weight:400;">Enter New User</p>
+    <p style="font-size:large; padding-top:-5px; font-weight:400;">IT Hardware AMC / Warranty Details</p>
 
 </div>
 
@@ -131,13 +131,13 @@
             </td>
             <td>
                
-                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "Budget_Year" }, Request.Url.Scheme)">
+                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "IT_Hardware_AMC" }, Request.Url.Scheme)">
                     @Model.PC_AMC
                 </a> 
 
             </td>
             <td>
-                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "Budget_Year" }, Request.Url.Scheme)">
+                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "IT_Hardware_AMC" }, Request.Url.Scheme)">
                     @Model.PC_Waranty
                 </a>
 
@@ -145,8 +145,8 @@
             <td>
 
                 <ul>
-                    <li> <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "Budget_Year"  , Types ="Desktop" }, Request.Url.Scheme)">Find Warranrty to be expired</a> </li>
-                    <li> <a href="@Url.Action("Budget_Head_Details", null, new { area = string.Empty, controller = "Budget_Head"  , Types ="Desktop"  }, Request.Url.Scheme)">Update All AMC data</a> </li>
+                    <li> <a href="@Url.Action("Find_Warranty_Expired", null, new { area = string.Empty, controller = "IT_Hardware_AMC"  , Types ="Desktop" }, Request.Url.Scheme)">Find Warranrty to be expired</a> </li>
+                    <li> <a href="@Url.Action("Budget_Head_Details", null, new { area = string.Empty, controller = "IT_Hardware_AMC"  , Types ="Desktop"  }, Request.Url.Scheme)">Update All AMC data</a> </li>
                 </ul>
 
             </td>
@@ -157,14 +157,14 @@
             </td>
             <td>
                
-                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "Budget_Year" }, Request.Url.Scheme)">
+                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "IT_Hardware_AMC" }, Request.Url.Scheme)">
                     @Model.Laptop_AMC
                 </a>
 
             </td>
             <td>
               
-                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "Budget_Year" }, Request.Url.Scheme)">
+                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "IT_Hardware_AMC" }, Request.Url.Scheme)">
                     @Model.Laptop_Waranty
                 </a>
 
@@ -172,8 +172,8 @@
             <td>
 
                 <ul>
-                    <li> <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "Budget_Year"  , Types ="Laptop"   }, Request.Url.Scheme)">Find Warranrty to be expired</a> </li>
-                    <li> <a href="@Url.Action("Budget_Head_Details", null, new { area = string.Empty, controller = "Budget_Head"  , Types ="Laptop"  }, Request.Url.Scheme)">Update All AMC data</a> </li>
+                    <li> <a href="@Url.Action("Find_Warranty_Expired", null, new { area = string.Empty, controller = "IT_Hardware_AMC"  , Types ="Laptop"   }, Request.Url.Scheme)">Find Warranrty to be expired</a> </li>
+                    <li> <a href="@Url.Action("Budget_Head_Details", null, new { area = string.Empty, controller = "IT_Hardware_AMC"  , Types ="Laptop"  }, Request.Url.Scheme)">Update All AMC data</a> </li>
                 </ul>
 
             </td>
@@ -184,14 +184,14 @@
             </td>
             <td>
               
-                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "Budget_Year" }, Request.Url.Scheme)">
+                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "IT_Hardware_AMC" }, Request.Url.Scheme)">
                     @Model.Printer_AMC
                 </a>
 
             </td>
             <td>
                
-                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "Budget_Year" }, Request.Url.Scheme)">
+                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "IT_Hardware_AMC" }, Request.Url.Scheme)">
                     @Model.Printer_Waranty
                 </a>
 
@@ -199,8 +199,8 @@
             <td>
 
                 <ul>
-                    <li> <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "Budget_Year"  , Types ="Printer"  }, Request.Url.Scheme)">Find Warranrty to be expired</a> </li>
-                    <li> <a href="@Url.Action("Budget_Head_Details", null, new { area = string.Empty, controller = "Budget_Head"  , Types ="Printer"  }, Request.Url.Scheme)">Update All AMC data</a> </li>
+                    <li> <a href="@Url.Action("Find_Warranty_Expired", null, new { area = string.Empty, controller = "IT_Hardware_AMC"  , Types ="Printer"  }, Request.Url.Scheme)">Find Warranrty to be expired</a> </li>
+                    <li> <a href="@Url.Action("Budget_Head_Details", null, new { area = string.Empty, controller = "IT_Hardware_AMC"  , Types ="Printer"  }, Request.Url.Scheme)">Update All AMC data</a> </li>
                 </ul>
 
             </td>
@@ -211,14 +211,14 @@
             </td>
             <td>
                
-                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "Budget_Year" }, Request.Url.Scheme)">
+                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "IT_Hardware_AMC" }, Request.Url.Scheme)">
                     @Model.Scanner_AMC
                 </a>
               
 
             </td>
             <td>
-                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "Budget_Year" }, Request.Url.Scheme)">
+                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "IT_Hardware_AMC" }, Request.Url.Scheme)">
                     @Model.Scanner_Waranty
                 </a>
 
@@ -226,8 +226,8 @@
             <td>
 
                 <ul>
-                    <li> <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "Budget_Year" , Types ="Scanner"  }, Request.Url.Scheme)">Find Warranrty to be expired</a> </li>
-                    <li> <a href="@Url.Action("Budget_Head_Details", null, new { area = string.Empty, controller = "Budget_Head" , Types ="Scanner"  }, Request.Url.Scheme)">Update All AMC data</a> </li>
+                    <li> <a href="@Url.Action("Find_Warranty_Expired", null, new { area = string.Empty, controller = "IT_Hardware_AMC" , Types ="Scanner"  }, Request.Url.Scheme)">Find Warranrty to be expired</a> </li>
+                    <li> <a href="@Url.Action("Budget_Head_Details", null, new { area = string.Empty, controller = "IT_Hardware_AMC" , Types ="Scanner"  }, Request.Url.Scheme)">Update All AMC data</a> </li>
                 </ul>
 
             </td>
@@ -238,14 +238,14 @@
             </td>
             <td>
               
-                    <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "Budget_Year" }, Request.Url.Scheme)">
+                    <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "IT_Hardware_AMC" }, Request.Url.Scheme)">
                         @Model.Ups_AMC
                     </a>
               
             </td>
             <td>
              
-                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "Budget_Year" }, Request.Url.Scheme)">
+                <a href="@Url.Action("Budget_Year_Details", null, new { area = string.Empty, controller = "IT_Hardware_AMC" }, Request.Url.Scheme)">
                      @Model.Ups_Waranty
                 </a>
                 

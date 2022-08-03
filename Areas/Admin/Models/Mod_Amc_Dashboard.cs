@@ -21,16 +21,20 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
 
     }
 
-    public class Mod_Warranty_Amc
+    public class Mod_Amc_Dtl 
     {
-       
+        public string Asset_Type { get; set; }
+        public DateTime Warnty_Check_Date { get; set; }
+        public List<Mod_List_Warranty_Amc> list_data { get; set; }
+    }
+
+    public class Mod_List_Warranty_Amc
+    {
         public string Item_Id { get; set; }
         public string Emp_Name { get; set; }
         public string Designation { get; set; }
         public string Item_SlNo { get; set; }
-        public string Asset_Type { get; set; }
         public DateTime Warnt_end_DT { get; set; }
-
     }
 
 }

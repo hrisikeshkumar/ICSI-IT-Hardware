@@ -22,37 +22,21 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
            return View("~/Areas/Admin/Views/IT_Hardware_AMC/Amc_DashBoard.cshtml", mod_data);
         }
 
-        public ActionResult Find_Warranty_Expired(string Types)
+        public ActionResult Find_Warranty_Expired(Mod_Amc_Dtl mod_data, string Types)
         {
            
             BL_Hardware_Amc B_Layer = new BL_Hardware_Amc();
-           
-            List<Mod_Warranty_Amc> mod_data = new List<Mod_Warranty_Amc>();
+            //Mod_Amc_Dtl mod_data = new Mod_Amc_Dtl();
+            if (Types == null || Types ==string.Empty)
+                Types = "Desktop";
+            mod_data.Asset_Type = Types;
+            if (mod_data.Warnty_Check_Date == null || mod_data.Warnty_Check_Date ==Convert.ToDateTime("01-01-0001"))
+                mod_data.Warnty_Check_Date = System.DateTime.Today;
 
-            if (Types == "Desktop")
-            {
-                mod_data = B_Layer.Find_Warranty_Expired("Desktop");
-            }
-            else if (Types == "Laptop")
-            {
-                mod_data = B_Layer.Find_Warranty_Expired("Laptop");
-            }
-            else if (Types == "Printer")
-            {
-                mod_data = B_Layer.Find_Warranty_Expired("Printer");
-            }
-            else if (Types == "Scanner")
-            {
-                mod_data = B_Layer.Find_Warranty_Expired("Scanner");
-            }
-            else if (Types == "Ups")
-            {
-                mod_data = B_Layer.Find_Warranty_Expired("Ups");
-            }
+            mod_data.list_data = B_Layer.Find_Warranty_Expired(mod_data, Types);
+               
 
-
-
-            return View("~/Areas/Admin/Views/IT_Hardware_AMC/Amc_DashBoard.cshtml", mod_data);
+            return View("~/Areas/Admin/Views/IT_Hardware_AMC/Find_Warranty_Expired.cshtml", mod_data);
         }
 
         public ActionResult Shift_Warnty_To_Amc(string Types)

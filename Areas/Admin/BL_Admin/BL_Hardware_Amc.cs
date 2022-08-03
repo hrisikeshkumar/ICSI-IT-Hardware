@@ -62,9 +62,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
         }
 
-        public List<Mod_Warranty_Amc> Find_Warranty_Expired(string Asset_Types)
+        public List<Mod_List_Warranty_Amc> Find_Warranty_Expired(Mod_Amc_Dtl mod_data1 ,string Asset_Types)
         {
-            List<Mod_Warranty_Amc> Data = new List<Mod_Warranty_Amc>();
+            List<Mod_List_Warranty_Amc> Data = new List<Mod_List_Warranty_Amc>();
             try
             {
                 DataTable dt_Comuter;
@@ -84,6 +84,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     SqlParameter sqlP_Asset_Types = new SqlParameter("@Asset_Type", Asset_Types);
                     cmd.Parameters.Add(sqlP_Asset_Types);
 
+                    SqlParameter Warnty_Check_Date = new SqlParameter("@Warnt_End_Dt", mod_data1.Warnty_Check_Date);
+                    cmd.Parameters.Add(Warnty_Check_Date);
+
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
                         sda.SelectCommand = cmd;
@@ -97,16 +100,15 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                    
                     if (dt_Comuter.Rows.Count > 0)
                     {
-                        Mod_Warranty_Amc mod_data;
+                        Mod_List_Warranty_Amc mod_data;
                         foreach (DataRow Dr in dt_Comuter.Rows)
                         {
-                            mod_data = new Mod_Warranty_Amc();
+                            mod_data = new Mod_List_Warranty_Amc();
 
                             mod_data.Item_Id = Convert.ToString(Dr["Item_Id"]);
                             mod_data.Emp_Name = Convert.ToString(Dr["Emp_Name"]);
                             mod_data.Designation = Convert.ToString(Dr["Designation"]);
-                            mod_data.Item_SlNo = Convert.ToString(Dr["Item_SlNo"]);
-                            mod_data.Asset_Type = Convert.ToString(Dr["Asset_Type"]);
+                            mod_data.Item_SlNo = Convert.ToString(Dr["Item_SlNo"]);                           
                             mod_data.Warnt_end_DT = Convert.ToDateTime(Dr["Warnt_end_DT"]);
 
                             Data.Add(mod_data);
