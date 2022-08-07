@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace IT_Hardware_Aug2021.Areas.Admin.Models
 {
@@ -25,6 +26,13 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
     {
         public string Asset_Type { get; set; }
         public DateTime Warnty_Check_Date { get; set; }
+
+        public string AMC_Start_Id { get; set; }
+
+        public string AMC_Vendor_Id { get; set; }
+        public List<SelectListItem> Vendor_List { get; set; }
+        public DateTime AMC_Start_DT { get; set; }
+        public DateTime AMC_End_DT { get; set; }
         public List<Mod_List_Warranty_Amc> list_data { get; set; }
     }
 
@@ -34,7 +42,33 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public string Emp_Name { get; set; }
         public string Designation { get; set; }
         public string Item_SlNo { get; set; }
+        public DateTime Warnt_Start_DT { get; set; }
         public DateTime Warnt_end_DT { get; set; }
+    }
+
+    public class Mod_add_To_Amc
+    {
+        public string Item_Id { get; set; }
+        public string Vendor_Id { get; set; }
+        public string Asset_Types { get; set; }
+        public string SL_Number { get; set; }
+        public DateTime AMC_Start_DT { get; set; }
+        public DateTime AMC_End_DT { get; set; }
+        public string Remarks { get; set; }
+        public List<SelectListItem> Vendor_List { get; set; }
+
+    }
+
+    public class mod_AMC_Warranty_List
+    {
+        public string Item_Id { get; set; }
+        public string Asset_Type { get; set; }
+        public string Emp_Name { get; set; }
+        public string Designation { get; set; }
+        public string Item_SlNo { get; set; }
+        public string Vendor_name { get; set; }
+        public DateTime AMC_End_Dt { get; set; }
+        public DateTime Warranty_End_Dt { get; set; }
     }
 
 }

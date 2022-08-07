@@ -337,6 +337,10 @@
     <Content Include="Areas\Admin\Views\UserRole\UserRole_Details.cshtml" />
     <Content Include="Areas\Admin\Views\IT_Hardware_AMC\Amc_DashBoard.cshtml" />
     <Content Include="Areas\Admin\Views\IT_Hardware_AMC\Find_Warranty_Expired.cshtml" />
+    <Content Include="Areas\Admin\Views\IT_Hardware_AMC\Shift_Warnty_To_Amc.cshtml" />
+    <Content Include="Areas\Admin\Views\IT_Hardware_AMC\Get_Warranty_List.cshtml" />
+    <Content Include="Areas\Admin\Views\IT_Hardware_AMC\Get_AMC_List.cshtml" />
+    <Content Include="Areas\Admin\Views\IT_Hardware_AMC\Bulk_AMC_Update.cshtml" />
     <None Include="Properties\PublishProfiles\rajaonprewebapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
