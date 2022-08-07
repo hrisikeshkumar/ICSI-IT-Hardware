@@ -71,4 +71,31 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public DateTime Warranty_End_Dt { get; set; }
     }
 
+
+     public class Mod_Bulk_Amc_Update
+    {
+        public string Asset_Type { get; set; }
+      
+        public string Updated_AMC_Vendor_Id { get; set; }
+        public List<SelectListItem> Vendor_List { get; set; }
+        public DateTime Updated_AMC_Start_DT { get; set; }
+        public DateTime Updated_AMC_End_DT { get; set; }
+        public List<Mod_Bulk_Amc_List> list_data { get; set; }
+    }
+
+    public class Mod_Bulk_Amc_List
+    {
+        public string Emp_Name { get; set; }
+        public string Designation { get; set; }
+        public string Item_Id { get; set; }
+        public string Item_SlNo { get; set; }
+        public string Present_Vendor_Name { get; set; }
+        public string Present_Vendor_Id { get; set; }
+        public DateTime AMC_Start_DT { get; set; }
+        public DateTime AMC_end_DT { get; set; }
+        public bool Update_Flag { get; set; }
+        public bool Obsolete_Item { get; set; }
+       
+    }
+
 }

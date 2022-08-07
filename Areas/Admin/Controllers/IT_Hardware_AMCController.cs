@@ -99,7 +99,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Remove_From_Amc(Item_Id);
 
-                    if (status == 1)
+                    if (status >0 )
                     {
                         TempData["Message"] = String.Format("Asset has removed from AMC");
                     }
@@ -121,7 +121,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         public ActionResult Shift_Warnty_To_Amc(Mod_Amc_Dtl data)
         {
-            int status = 0;
+            int status = -1;
             try
             {
 
@@ -131,7 +131,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Asset.Add_To_Amc(data);
 
-                    if (status == 1)
+                    if (status !=-1)
                     {
                         TempData["Message"] = String.Format("Asset has Added to AMC");
                     }
@@ -154,29 +154,56 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         {
             BL_Hardware_Amc B_Layer = new BL_Hardware_Amc();
 
-            List<mod_AMC_Warranty_List> mod_data = new List<mod_AMC_Warranty_List>();
+            Mod_Bulk_Amc_Update mod_data = new Mod_Bulk_Amc_Update();
 
-            mod_data = B_Layer.Get_Item_in_AMC_or_Warranty("AMC", Types);
+            mod_data.list_data = B_Layer.Get_Bulk_Item_AMC( Types);
 
             ViewBag.Assettype = Types;
 
+            BL_SLA vendor_list = new BL_SLA();
 
+            mod_data.Vendor_List = vendor_list.Vendor_List();
+
+            mod_data.Updated_AMC_Start_DT = System.DateTime.Today;
+            mod_data.Updated_AMC_End_DT = System.DateTime.Today.AddYears(3);
+
+           
 
             return View("~/Areas/Admin/Views/IT_Hardware_AMC/Bulk_AMC_Update.cshtml", mod_data);
         }
 
-        public ActionResult Update_Bulk_AMC_Data(string Types)
+        public ActionResult Update_Bulk_AMC_Data(Mod_Bulk_Amc_Update mod_Data)
         {
 
-            BL_Hardware_Amc B_Layer = new BL_Hardware_Amc();
+            int status = 0;
+            try
+            {
 
-            List<mod_AMC_Warranty_List> mod_data = new List<mod_AMC_Warranty_List>();
+                if (ModelState.IsValid)
+                {
+                    BL_Hardware_Amc Md_Asset = new BL_Hardware_Amc();
 
-            mod_data = B_Layer.Get_Item_in_AMC_or_Warranty("Warranty", Types);
+                    status = Md_Asset.Update_Bulk_AMC(mod_Data);
 
-            ViewBag.Assettype = Types;
+                    if (status >0)
+                    {
+                        TempData["Message"] = String.Format("Asset has removed from AMC");
+                    }
+                    else
+                    {
+                        TempData["Message"] = String.Format("Data is not saved");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Message"] = string.Format("ShowFailure();");
+            }
 
-            return View("~/Areas/Admin/Views/IT_Hardware_AMC/Get_Warranty_List.cshtml", mod_data);
+            return RedirectToAction("Get_List_AMC", "IT_Hardware_AMC", new { AssetTypes = "" });
+
+
+
         }
 
     }

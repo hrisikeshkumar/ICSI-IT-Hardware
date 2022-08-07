@@ -326,5 +326,138 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             return status;
         }
 
+        public List<Mod_Bulk_Amc_List> Get_Bulk_Item_AMC( string Asset_Types)
+        {
+            List<Mod_Bulk_Amc_List> Data = new List<Mod_Bulk_Amc_List>();
+            try
+            {
+            
+                DataTable dt_Comuter;
+                string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                SqlConnection con = new SqlConnection(strcon);
+
+
+                using (SqlCommand cmd = new SqlCommand("sp_IT_AMC"))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = con;
+
+                    SqlParameter sqlP_type = new SqlParameter("@Type", "Get_Item_in_AMC");
+                    cmd.Parameters.Add(sqlP_type);
+
+                    SqlParameter sqlP_Asset_Types = new SqlParameter("@Asset_Type", Asset_Types);
+                    cmd.Parameters.Add(sqlP_Asset_Types);
+
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        sda.SelectCommand = cmd;
+                        using (DataTable dt = new DataTable())
+                        {
+                            sda.Fill(dt);
+                            dt_Comuter = dt;
+                        }
+                    }
+
+
+                    if (dt_Comuter.Rows.Count > 0)
+                    {
+                        Mod_Bulk_Amc_List mod_data;
+                        foreach (DataRow Dr in dt_Comuter.Rows)
+                        {
+                            mod_data = new Mod_Bulk_Amc_List();
+
+                            mod_data.Emp_Name = Convert.ToString(Dr["Emp_Name"]);
+                            mod_data.Designation = Convert.ToString(Dr["Designation"]);
+                            mod_data.Item_Id = Convert.ToString(Dr["Item_Id"]);
+                            mod_data.Item_SlNo = Convert.ToString(Dr["Item_SlNo"]);
+                            mod_data.Present_Vendor_Name = Convert.ToString(Dr["Vendor_name"]);
+                            mod_data.Present_Vendor_Id = Convert.ToString(Dr["AMC_Vendor_ID"]);
+                            mod_data.AMC_Start_DT = Convert.ToDateTime(Dr["AMC_Start_Dt"]);
+                            mod_data.AMC_end_DT = Convert.ToDateTime(Dr["AMC_End_Dt"]);
+
+                            mod_data.Obsolete_Item = Convert.ToInt32(Dr["Obsolete_Item"]) ==1 ? true:false;
+
+                            mod_data.Update_Flag = false;
+
+                            Data.Add(mod_data);
+                        }
+
+                    }
+                }
+
+            }
+            catch (Exception ex) { }
+
+            return Data;
+
+        }
+
+        public int Update_Bulk_AMC(Mod_Bulk_Amc_Update data)
+        {
+            int status = 1;
+            string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            SqlConnection con = new SqlConnection(strcon);
+            try
+            {
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "sp_IT_AMC";
+
+                DataTable Dt_Update_data = new DataTable();
+                DataColumn Dt_Col1 = new DataColumn("Item_Id");
+                DataColumn Dt_Col2 = new DataColumn("Prev_Amc_Vendor_Id");
+                DataColumn Dt_Col3 = new DataColumn("Update_Flag");
+                Dt_Update_data.Columns.Add(Dt_Col1);
+                Dt_Update_data.Columns.Add(Dt_Col2);
+                Dt_Update_data.Columns.Add(Dt_Col3);
+                Fill_Data_Table(data.list_data, Dt_Update_data);
+
+                cmd.Connection = con;
+
+                SqlParameter Sql_Type = new SqlParameter("@Type", "Update_All_Amc");
+                cmd.Parameters.Add(Sql_Type);
+
+                SqlParameter AMC_Start_Id = new SqlParameter("@AMC_Vendor_Id", data.Updated_AMC_Vendor_Id);
+                cmd.Parameters.Add(AMC_Start_Id);
+
+                SqlParameter AMC_Start_DT = new SqlParameter("@AMC_Start_Dt", data.Updated_AMC_Start_DT);
+                cmd.Parameters.Add(AMC_Start_DT);
+
+                SqlParameter AMC_End_DT = new SqlParameter("@AMC_End_Dt", data.Updated_AMC_End_DT);
+                cmd.Parameters.Add(AMC_End_DT);
+
+                SqlParameter AMC_Vendor_Id = new SqlParameter("@Amc_All_Update", Dt_Update_data);
+                cmd.Parameters.Add(AMC_Vendor_Id);
+
+
+                con.Open();
+
+                status = cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex) { status = -1; }
+            finally { con.Close(); }
+
+            return status;
+        }
+
+        private void Fill_Data_Table(List<Mod_Bulk_Amc_List> data , DataTable table_data)
+        {
+            foreach (var item in data)
+            {
+                DataRow Dr = table_data.NewRow();
+                Dr["Item_Id"] = Convert.ToString(item.Item_Id);
+                Dr["Prev_Amc_Vendor_Id"] = Convert.ToString(item.Present_Vendor_Id);
+                Dr["Update_Flag"] = item.Update_Flag ==true? 1:0;
+                table_data.Rows.Add(Dr);
+                table_data.AcceptChanges();
+            }
+            
+        }
+
     }
 }
