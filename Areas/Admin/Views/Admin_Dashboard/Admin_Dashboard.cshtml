@@ -1,34 +1,182 @@
 ﻿@using IT_Asset.Areas.Admin.Models
-@model IEnumerable < Mod_Admin_dashB >
+@model Mod_Admin_dashB
 
 <title>@ViewBag.Title = "Admin_Dashboard";</title>
 
 
-<div class="container-fluid" style="width:100%;  ">
-  
-</div>
+<link href="~/CSS/SearchBox/searchbox.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>
 
 
-    <div style=" align-content:center; width:100%" class="panel panel-default " >
-        <table class="table-bordered table-hover table-striped shadow p-3 mb-5 bg-white rounded  zui-table-rounded" style="width:150%">
-            <thead>
-                <tr style="background-color:dodgerblue">
-                    <td style="width:80%;">Particulars</td>
-                    <td style="width:10%;">Initiate Date</td>                  
-                    <td style="width:10%;">Status</td>
-                </tr>
-               
-            </thead>
-            @foreach (var Item in Model.List_Proposal) { 
+<div style=" align-content:center;  width:100%" class="card-deck w-100 shadow p-3 mb-5 bg-white rounded">
+    <table class=" table-hover table-striped shadow " style="width:100%">
+        <tr>
+            <td style="text-align:center; ">
+                Proposal : @Html.RadioButton("Fruit", "1", new { @id = "1", @Selected = true })
+            </td>
+            <td style="text-align:center; ">
+                Bill Processed :  @Html.RadioButton("Fruit", "2", new { @id = "2" })
+            </td>
+            <td style="text-align:center; ">
+                SLA To be Expired :  @Html.RadioButton("Fruit", "3", new { @id = "3" })
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" style="height:10px;"></td>
+        </tr>
+    </table>
+
+    <table class=" table-hover table-striped shadow " style="width:100%">
+
+
+        <thead>
+            <tr style="background-color:dodgerblue">
+                <td style="width:65%;">Particulars</td>
+                <td style="width:20%;">Initiate Date</td>
+                <td style="width: 15%; text-align: center">Status</td>
+
+            </tr>
+
+        </thead>
+        @foreach (var Item in Model.List_Proposal)
+        {
             <tbody>
                 <tr>
-                    <td style="width:80%;">@Html.TextBoxFor(x=>x.)</td>
-                    <td style="width:10%;">Initiate Date</td>
-                    <td style="width:10%;">Status</td>
+                    <td style="width:60%;">
+                        <a href=""
+                           class=" btn-warning" data-toggle="modal" data-target="#myModal2" data-status="@Item.Proposal_Id" id="@Item.Proposal_Id">
+                            @Item.Utilization_Details
+                        </a>
+          
+                    </td>
+                    <td style="width:15%;">
+                        @Html.DisplayFor(x => x.IT_Initiate_Date, new { @class = "form-rounded", @style = " width :80%; " })
+                    </td>
+                    <td style="width: 15%; text-align: center">
+                        @Html.DisplayFor(x => x.Completed_Status, new { @class = "form-rounded", @style = " width :80%; " })
+                    </td>
+
 
                 </tr>
             </tbody>
-            }
+        }
 
-        </table>
+    </table>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('#myModal2').on('show.bs.modal', function (e) {
+            var button = $(e.relatedTarget) // Button that triggered the modal
+            var proposal_id = button.data('status') // Extract info from data-* attributes
+          
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/Admin/Budget_Uses/Prev_Budget_info1",
+            //    dataType: "json",
+            //    data: { Proposal_Id: proposal_id },
+            //    success: function (response) {
+            //        if (response != null) {
+            //            $('#Utilization_Details').val(response.Utilization_Details);
+            //            $('#Proposal_Id').val(response.Proposal_Id);
+            //            $('#FA_Remarks').val(response.FA_Remarks);
+            //            $('#Sec_Office_Remarks').val(response.Sec_Office_Remarks);
+            //            $('#Purchase_Remarks').val(response.Purchase_Remarks);
+            //            $('#Other_Dept_Remarks').val(response.Other_Dept_Remarks);
+            //        } else {
+            //            alert("Something went wrong");
+            //        }
+            //    },
+            //    failure: function (response) {
+            //        alert(response.responseText);
+            //    },
+            //    error: function (response) {
+            //        alert(response.responseText);
+            //    }
+            //});
+
+
+
+        });
+    });
+</script>
+
+<!--Modal quantity-->
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm("jjj", "IT_Hardware_AMC", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+            {
+                <div class="modal-header badge-warning">
+                    <h4 style="font-weight:bold">
+                        Please Fill the Details for adding Item to AMC
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table style="width:100%;">
+                        <tr>
+                            <td colspan="2" style="text-align:left">
+                                Utilization Details
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+
+                                @Html.DisplayFor(x => x.Utilization_Details, new { @class = " form-rounded", @style = " width :100%; " })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%; ">@Html.HiddenFor(X => X.Proposal_Id) Dte. Of F&A Remarks </td>
+                            <td>
+
+                                @Html.DisplayFor(x => x.FA_Remarks, new { @class = "", @style = " width :100%; " })
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td style="width:30%; ">Secretary Office Remarks </td>
+                            <td>
+
+                                @Html.TextBoxFor(x => x.Sec_Office_Remarks, new { @style = " width :100%; " })
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td style="width:30%; ">Dte. Of Purchase Remarks </td>
+                            <td>
+
+                                @Html.TextBoxFor(x => x.Purchase_Remarks, new { @style = " width :100%; " })
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td style="width:30%; ">Other Dept Remarks </td>
+                            <td>
+
+                                @Html.TextBoxFor(x => x.Other_Dept_Remarks, new { @style = " width :100%; " })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%; ">@Html.HiddenFor(X => X.Proposal_Id) Upload File Copy </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Edit</button>
+                </div>
+            }
+        </div>
     </div>
+</div>
+

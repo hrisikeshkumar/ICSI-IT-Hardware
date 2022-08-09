@@ -20,7 +20,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             Mod_Admin_dashB mod_Data = new Mod_Admin_dashB();
 
-            mod_Data.List_Proposal = B_Layer.
+            mod_Data.List_Proposal = B_Layer.Get_List_Proposal();
 
 
             return View("~/Areas/Admin/Views/Admin_Dashboard/Admin_Dashboard.cshtml", mod_Data);
