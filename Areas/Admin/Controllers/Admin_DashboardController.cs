@@ -2,45 +2,48 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using System.Web.Mvc.Filters;
 using IT_Hardware_Aug2021.User_Role;
+using System.Web.Mvc.Filters;
+using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
+using IT_Hardware_Aug2021.Areas.Admin.Models;
 
 namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 {
     public class Admin_DashboardController : Controller
     {
-        // GET: Admin/Admin_Dashboard
-        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
+
+        //[Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult Admin_Dashboard()
         {
-            List<Admin_dashB> DashB = new List<Admin_dashB>();
 
-            DashB.Add(new Admin_dashB { Item_Type = "Computer", Item_Sl_No = "rgr", Issued_To = "rgbgb", Move_From = "", Move_To = "", DateofMovement = DateTime.Now });
-            DashB.Add(new Admin_dashB { Item_Type = "Laptop", Item_Sl_No = "grhryh", Issued_To = "wdca", Move_From = "", Move_To = "", DateofMovement = DateTime.Now });
-            DashB.Add(new Admin_dashB { Item_Type = "Printer", Item_Sl_No = "54tg", Issued_To = "ukou", Move_From = "", Move_To = "", DateofMovement = DateTime.Now });
-            DashB.Add(new Admin_dashB { Item_Type = "Scanner", Item_Sl_No = "46y7efg", Issued_To = "vcv v", Move_From = "", Move_To = "", DateofMovement = DateTime.Now });
-            DashB.Add(new Admin_dashB { Item_Type = "Server", Item_Sl_No = "234fgf", Issued_To = "ljk,", Move_From = "", Move_To = "", DateofMovement = DateTime.Now });
+            BL_Admin_DashB B_Layer = new BL_Admin_DashB();
+
+            Mod_Admin_dashB mod_Data = new Mod_Admin_dashB();
+
+            mod_Data.List_Proposal = B_Layer.
 
 
-            return View(DashB);
+            return View("~/Areas/Admin/Views/Admin_Dashboard/Admin_Dashboard.cshtml", mod_Data);
+
+           
         }
 
 
-        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
-        {
-            if (filterContext.HttpContext.Request.IsAuthenticated)
-            {
+        //protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        //{
+        //    if (filterContext.HttpContext.Request.IsAuthenticated)
+        //    {
 
-                if (filterContext.Result is HttpUnauthorizedResult)
-                {
-                    filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
-                }
-            }
-            else
-            {
-                filterContext.Result = new RedirectResult("~/Log_In/Log_In");
-            }
-        }
+        //        if (filterContext.Result is HttpUnauthorizedResult)
+        //        {
+        //            filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        filterContext.Result = new RedirectResult("~/Log_In/Log_In");
+        //    }
+        //}
 
     }
 }

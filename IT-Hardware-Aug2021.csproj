@@ -121,6 +121,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\BL_Admin_DashB.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_AssetMaster.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Budget_Head.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Budget_Uses.cs" />
@@ -170,7 +171,7 @@
     <Compile Include="Areas\Admin\Controllers\UserRoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\User_InfoController.cs" />
     <Compile Include="Areas\Admin\Controllers\VendorController.cs" />
-    <Compile Include="Areas\Admin\Models\Admin_dashB.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_Admin_dashB.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Amc_Dashboard.cs" />
     <Compile Include="Areas\Admin\Models\Mod_AppleIpad.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Budget.cs" />
@@ -258,7 +259,7 @@
     <Content Include="js\Validation\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Areas\Admin\Views\Admin_Dashboard\Admin_Dashboard.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin_Dashboard\Admin_Dashboard_Old.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\AdminMenu.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -341,6 +342,7 @@
     <Content Include="Areas\Admin\Views\IT_Hardware_AMC\Get_Warranty_List.cshtml" />
     <Content Include="Areas\Admin\Views\IT_Hardware_AMC\Get_AMC_List.cshtml" />
     <Content Include="Areas\Admin\Views\IT_Hardware_AMC\Bulk_AMC_Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin_Dashboard\Admin_Dashboard.cshtml" />
     <None Include="Properties\PublishProfiles\rajaonprewebapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
