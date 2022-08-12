@@ -9,61 +9,128 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>
 
 
+<style type="text/css">
+
+    .hidetable {
+        display: none;
+    }
+</style>
+
+
 <div style=" align-content:center;  width:100%" class="card-deck w-100 shadow p-3 mb-5 bg-white rounded">
-    <table class=" table-hover table-striped shadow " style="width:100%">
-        <tr>
-            <td style="text-align:center; ">
-                Proposal : @Html.RadioButton("Fruit", "1", new { @id = "1", @Selected = true })
+    <table class="   " style="width: 100%; background-color: #b2f3b2;">
+        <tr >
+            <td style="text-align:center; width:60%; ">
+                <h4>  Welcome to IT inventory Dashboard </h4>
             </td>
-            <td style="text-align:center; ">
-                Bill Processed :  @Html.RadioButton("Fruit", "2", new { @id = "2" })
+            <td style="text-align:center; width:20%; "> 
+                <h4>  Proposal : @Html.RadioButton("dashboard", "1", new { @id = "1", @checked = true }) </h4>
             </td>
-            <td style="text-align:center; ">
-                SLA To be Expired :  @Html.RadioButton("Fruit", "3", new { @id = "3" })
+            <td style="text-align: center; width: 20%; ">
+                <h4> Bill Processed :  @Html.RadioButton("dashboard", "2", new { @id = "2" }) </h4>
             </td>
+           
         </tr>
         <tr>
-            <td colspan="3" style="height:10px;"></td>
+            <td colspan="3" style="height:10px; display:table "></td>
         </tr>
     </table>
 
-    <table class=" table-hover table-striped shadow " style="width:100%">
+    @*-------------------------------------------------- Proposal --------------------------------------------------------------------------*@
+
+    <div id="proposal" style="width: 100%;" >
+
+        <table class=" table-hover table-striped shadow " style="width: 100%; ">
 
 
-        <thead>
-            <tr style="background-color:dodgerblue">
-                <td style="width:65%;">Particulars</td>
-                <td style="width:20%;">Initiate Date</td>
-                <td style="width: 15%; text-align: center">Status</td>
-
-            </tr>
-
-        </thead>
-        @foreach (var Item in Model.List_Proposal)
-        {
-            <tbody>
-                <tr>
-                    <td style="width:60%;">
-                        <a href=""
-                           class=" btn-warning" data-toggle="modal" data-target="#myModal2" data-status="@Item.Proposal_Id" id="@Item.Proposal_Id">
-                            @Item.Utilization_Details
-                        </a>
-          
-                    </td>
-                    <td style="width:15%;">
-                        @Html.DisplayFor(x => x.IT_Initiate_Date, new { @class = "form-rounded", @style = " width :80%; " })
-                    </td>
-                    <td style="width: 15%; text-align: center">
-                        @Html.DisplayFor(x => x.Completed_Status, new { @class = "form-rounded", @style = " width :80%; " })
-                    </td>
-
+            <thead>
+                <tr style="background-color: #b2f3b2 ">
+                    <td style="width:65%;"> <h4> Proposal Initiated </h4></td>
+                    <td style="width:20%;"><h4>Initiate Date </h4></td>
+                    <td style="width: 15%; text-align: center"> <h4>Status </h4></td>
 
                 </tr>
-            </tbody>
-        }
+            </thead>
 
-    </table>
+
+            @foreach (var Item in Model.List_Proposal)
+            {
+                <tbody>
+                    <tr>
+                        <td style="width:60%;">
+                            <a href=""
+                               class=" " data-toggle="modal" data-target="#myModal2" data-status="@Item.Proposal_Id" id="@Item.Proposal_Id">
+                                @Item.Utilization_Details
+                            </a>
+                        </td>
+                        <td style="width:15%;">
+                            @Html.DisplayFor(x => x.IT_Initiate_Date, new { @class = "form-rounded", @style = " width :80%; " })
+                        </td>
+                        <td style="width: 15%; text-align: center">
+                            @Html.DisplayFor(x => x.Completed_Status, new { @class = "form-rounded", @style = " width :80%; " })
+                        </td>
+
+
+                    </tr>
+                </tbody>
+            }
+
+        </table>
+    </div>
+
+
+    @*-------------------------------------------------- Budget --------------------------------------------------------------------------*@
+
+    <div id="budget" style="width: 100%;" class="hidetable">
+
+        <table class=" table-hover table-striped shadow " style="width: 100%; ">
+
+
+            <thead>
+                <tr style="background-color: #b2f3b2">
+                    <td style="width:65%;"> <h4> Bill Processed </h4> </td>
+                    <td style="width:20%;"><h4> Initiate Date </h4></td>
+                    <td style="width: 15%; text-align: center"> <h4> Status</h4></td>
+
+                </tr>
+            </thead>
+
+
+            @foreach (var Item in Model.List_Proposal)
+            {
+                <tbody>
+                    <tr>
+                        <td style="width:60%;">
+                            <a href=""
+                               class=" " data-toggle="modal" data-target="#myModal2" data-status="@Item.Proposal_Id" id="@Item.Proposal_Id">
+                                @Item.Utilization_Details
+                            </a>
+                        </td>
+                        <td style="width:15%;">
+                            @Html.DisplayFor(x => x.IT_Initiate_Date, new { @class = "form-rounded", @style = " width :80%; " })
+                        </td>
+                        <td style="width: 15%; text-align: center">
+                            @Html.DisplayFor(x => x.Completed_Status, new { @class = "form-rounded", @style = " width :80%; " })
+                        </td>
+
+
+                    </tr>
+                </tbody>
+            }
+
+        </table>
+    </div>
+
+
 </div>
+
+
+@*-------------------------------------------------------------Modal-----------------------------------------------------------------------------*@
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
 <script type="text/javascript">
@@ -71,31 +138,31 @@
         $('#myModal2').on('show.bs.modal', function (e) {
             var button = $(e.relatedTarget) // Button that triggered the modal
             var proposal_id = button.data('status') // Extract info from data-* attributes
-          
-            //$.ajax({
-            //    type: "POST",
-            //    url: "/Admin/Budget_Uses/Prev_Budget_info1",
-            //    dataType: "json",
-            //    data: { Proposal_Id: proposal_id },
-            //    success: function (response) {
-            //        if (response != null) {
-            //            $('#Utilization_Details').val(response.Utilization_Details);
-            //            $('#Proposal_Id').val(response.Proposal_Id);
-            //            $('#FA_Remarks').val(response.FA_Remarks);
-            //            $('#Sec_Office_Remarks').val(response.Sec_Office_Remarks);
-            //            $('#Purchase_Remarks').val(response.Purchase_Remarks);
-            //            $('#Other_Dept_Remarks').val(response.Other_Dept_Remarks);
-            //        } else {
-            //            alert("Something went wrong");
-            //        }
-            //    },
-            //    failure: function (response) {
-            //        alert(response.responseText);
-            //    },
-            //    error: function (response) {
-            //        alert(response.responseText);
-            //    }
-            //});
+
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Admin_Dashboard/Get_Proposal_Detail_for_Modal",
+                dataType: "json",
+                data: { Proposal_Id: proposal_id },
+                success: function (response) {
+                    if (response != null) {
+                        $('#Utilization_Details').val(response.Utilization_Details);
+                        $('#Proposal_Id').val(response.Proposal_Id);
+                        $('#FA_Remarks').val(response.FA_Remarks);
+                        $('#Sec_Office_Remarks').val(response.Sec_Office_Remarks);
+                        $('#Purchase_Remarks').val(response.Purchase_Remarks);
+                        $('#Other_Dept_Remarks').val(response.Other_Dept_Remarks);
+                    } else {
+                        alert("Something went wrong");
+                    }
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
 
 
 
@@ -107,11 +174,11 @@
 
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal-dialog-centered">
+        <div class="modal-content ">
             @using (Html.BeginForm("jjj", "IT_Hardware_AMC", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
             {
-                <div class="modal-header badge-warning">
+                <div class="modal-header badge-warning k-i-align-items-center-alt">
                     <h4 style="font-weight:bold">
                         Please Fill the Details for adding Item to AMC
                     </h4>
@@ -119,54 +186,71 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <table style="width:100%;">
+                <div class="modal-body" style="align-content:center; text-align:center; align-items:center">
+                    <table style="width:100%; border-width:1px;">
                         <tr>
-                            <td colspan="2" style="text-align:left">
+                            <td style="text-align:left; width:15%; ">
                                 Utilization Details
                             </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
+                            <td style="text-align:center; width:85%; ">
 
-                                @Html.DisplayFor(x => x.Utilization_Details, new { @class = " form-rounded", @style = " width :100%; " })
+                                @Html.TextAreaFor(x => x.Utilization_Details, new { @readonly = "true", @class = " form-rounded", @style = " width :100%; " })
                             </td>
                         </tr>
                         <tr>
-                            <td style="width:30%; ">@Html.HiddenFor(X => X.Proposal_Id) Dte. Of F&A Remarks </td>
+                            <td colspan="2" style="height:10px;"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; width: 15%;">@Html.HiddenFor(X => X.Proposal_Id) Dte. Of F&A Remarks </td>
                             <td>
 
-                                @Html.DisplayFor(x => x.FA_Remarks, new { @class = "", @style = " width :100%; " })
+                                @Html.TextAreaFor(x => x.FA_Remarks, new { @readonly = "true", @class = "", @style = " width :100%; " })
                             </td>
                         </tr>
                         <tr>
-
-                            <td style="width:30%; ">Secretary Office Remarks </td>
-                            <td>
-
-                                @Html.TextBoxFor(x => x.Sec_Office_Remarks, new { @style = " width :100%; " })
-                            </td>
+                            <td colspan="2" style="height:10px;"></td>
                         </tr>
                         <tr>
 
-                            <td style="width:30%; ">Dte. Of Purchase Remarks </td>
+                            <td style="text-align: left; width: 15%; ">Secretary Office Remarks </td>
                             <td>
 
-                                @Html.TextBoxFor(x => x.Purchase_Remarks, new { @style = " width :100%; " })
+                                @Html.TextAreaFor(x => x.Sec_Office_Remarks, new { @readonly = "true", @style = " width :100%; " })
                             </td>
                         </tr>
                         <tr>
+                            <td colspan="2" style="height:10px;"></td>
+                        </tr>
+                        <tr>
 
-                            <td style="width:30%; ">Other Dept Remarks </td>
+                            <td style="text-align: left; width: 15%; ">Dte. Of Purchase Remarks </td>
                             <td>
 
-                                @Html.TextBoxFor(x => x.Other_Dept_Remarks, new { @style = " width :100%; " })
+                                @Html.TextAreaFor(x => x.Purchase_Remarks, new { @readonly = "true", @style = " width :100%; " })
                             </td>
                         </tr>
                         <tr>
-                            <td style="width:30%; ">@Html.HiddenFor(X => X.Proposal_Id) Upload File Copy </td>
+                            <td colspan="2" style="height:10px;"></td>
+                        </tr>
+
+                        <tr>
+
+                            <td style="text-align: left; width: 15%; ">Other Dept Remarks </td>
+                            <td>
+
+                                @Html.TextAreaFor(x => x.Other_Dept_Remarks, new { @readonly = "true", @style = " width :100%; " })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="height:10px;"></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; width: 15%; "> Upload File Copy </td>
                             <td>
                             </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="height:10px;"></td>
                         </tr>
                     </table>
 
@@ -179,4 +263,32 @@
         </div>
     </div>
 </div>
+
+
+@*--------------------------------------------------------------Radio Button------------------------------------------------------------------------------*@
+
+
+
+
+<script type="text/javascript">
+
+    $('input[type=radio][name=dashboard]').change(function () {
+
+        if (this.value == 1) {
+
+            $("#proposal").removeClass("hidetable");
+            $("#budget").addClass("hidetable");
+
+
+        } else if (this.value == 2) {
+
+            $("#proposal").addClass("hidetable");
+            $("#budget").removeClass("hidetable");
+
+
+        }
+
+    });
+
+</script>
 

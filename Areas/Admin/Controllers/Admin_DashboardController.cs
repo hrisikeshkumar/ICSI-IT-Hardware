@@ -29,6 +29,19 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+        public JsonResult Get_Proposal_Detail_for_Modal( string Proposal_Id)
+        {
+            BL_Admin_DashB B_Layer = new BL_Admin_DashB();
+
+            Mod_Admin_dashB mod_Data = new Mod_Admin_dashB();
+
+            B_Layer.Get_Proposal_By_Id( mod_Data, Proposal_Id);
+
+
+            return Json(mod_Data, JsonRequestBehavior.AllowGet);
+        }
+
+
         //protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
         //{
         //    if (filterContext.HttpContext.Request.IsAuthenticated)
