@@ -343,6 +343,7 @@
     <Content Include="Areas\Admin\Views\IT_Hardware_AMC\Get_AMC_List.cshtml" />
     <Content Include="Areas\Admin\Views\IT_Hardware_AMC\Bulk_AMC_Update.cshtml" />
     <Content Include="Areas\Admin\Views\Admin_Dashboard\Admin_Dashboard.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin_Dashboard\Edit_Proposal.cshtml" />
     <None Include="Properties\PublishProfiles\rajaonprewebapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

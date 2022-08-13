@@ -44,10 +44,10 @@
 
 
             <thead>
-                <tr style="background-color: #b2f3b2 ">
-                    <td style="width:65%;"> <h4> Proposal Initiated </h4></td>
-                    <td style="width:20%;"><h4>Initiate Date </h4></td>
-                    <td style="width: 15%; text-align: center"> <h4>Status </h4></td>
+                <tr style="background-color: #b2f3b2;; font-weight: bold; ">
+                    <td style="width: 65%; font-weight:bold;"> <h5> Proposal Initiated </h5></td>
+                    <td style="width: 20%; font-weight: bold;"><h5>Initiate Date </h5></td>
+                    <td style="width: 15%; font-weight: bold; text-align: center"> <h5>Status </h5></td>
 
                 </tr>
             </thead>
@@ -64,10 +64,10 @@
                             </a>
                         </td>
                         <td style="width:15%;">
-                            @Html.DisplayFor(x => x.IT_Initiate_Date, new { @class = "form-rounded", @style = " width :80%; " })
+                            @Html.Display(Convert.ToString( Item.IT_Initiate_Date), new { @class = "form-rounded", @style = " width :80%; " })
                         </td>
                         <td style="width: 15%; text-align: center">
-                            @Html.DisplayFor(x => x.Completed_Status, new { @class = "form-rounded", @style = " width :80%; " })
+                            @Html.Display(Item.Status, new { @class = "form-rounded", @style = " width :80%; " })
                         </td>
 
 
@@ -87,16 +87,16 @@
 
 
             <thead>
-                <tr style="background-color: #b2f3b2">
-                    <td style="width:65%;"> <h4> Bill Processed </h4> </td>
-                    <td style="width:20%;"><h4> Initiate Date </h4></td>
-                    <td style="width: 15%; text-align: center"> <h4> Status</h4></td>
+                <tr style="background-color: #b2f3b2 ">
+                    <td style="width:65%; font-weight:bold;"> <h5> Bill Processed </h5> </td>
+                    <td style="width: 20%; font-weight: bold;"><h5> Initiate Date </h5></td>
+                    <td style="width: 15%; font-weight: bold; text-align: center"> <h5> Status</h5></td>
 
                 </tr>
             </thead>
 
 
-            @foreach (var Item in Model.List_Proposal)
+            @foreach (var Item in Model.List_Bill_Process)
             {
                 <tbody>
                     <tr>
@@ -107,10 +107,10 @@
                             </a>
                         </td>
                         <td style="width:15%;">
-                            @Html.DisplayFor(x => x.IT_Initiate_Date, new { @class = "form-rounded", @style = " width :80%; " })
+                            @Html.Display(Convert.ToString( Item.IT_Initiate_Date), new { @class = "form-rounded", @style = " width :80%; " })
                         </td>
                         <td style="width: 15%; text-align: center">
-                            @Html.DisplayFor(x => x.Completed_Status, new { @class = "form-rounded", @style = " width :80%; " })
+                            @Html.Display(Item.Status, new { @class = "form-rounded", @style = " width :80%; " })
                         </td>
 
 
@@ -146,12 +146,12 @@
                 data: { Proposal_Id: proposal_id },
                 success: function (response) {
                     if (response != null) {
-                        $('#Utilization_Details').val(response.Utilization_Details);
-                        $('#Proposal_Id').val(response.Proposal_Id);
-                        $('#FA_Remarks').val(response.FA_Remarks);
-                        $('#Sec_Office_Remarks').val(response.Sec_Office_Remarks);
-                        $('#Purchase_Remarks').val(response.Purchase_Remarks);
-                        $('#Other_Dept_Remarks').val(response.Other_Dept_Remarks);
+                        $('#Prop_detail_Utilization_Details').val(response.Prop_detail.Utilization_Details);
+                        $('#Prop_detail_Proposal_Id').val(response.Prop_detail.Proposal_Id);
+                        $('#Prop_detail_FA_Remarks').val(response.Prop_detail.FA_Remarks);
+                        $('#Prop_detail_Sec_Office_Remarks').val(response.Prop_detail.Sec_Office_Remarks);
+                        $('#Prop_detail_Purchase_Remarks').val(response.Prop_detail.Purchase_Remarks);
+                        $('#Prop_detail_Other_Dept_Remarks').val(response.Prop_detail.Other_Dept_Remarks);
                     } else {
                         alert("Something went wrong");
                     }
@@ -176,7 +176,7 @@
      aria-hidden="true">
     <div class="modal-dialog-centered">
         <div class="modal-content ">
-            @using (Html.BeginForm("jjj", "IT_Hardware_AMC", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Edit_proposal", "Admin_Dashboard", FormMethod.Post, new { @class = "form-horizontal",  role = "form", enctype = "multipart/form-data" }))
             {
                 <div class="modal-header badge-warning k-i-align-items-center-alt">
                     <h4 style="font-weight:bold">
@@ -194,17 +194,17 @@
                             </td>
                             <td style="text-align:center; width:85%; ">
 
-                                @Html.TextAreaFor(x => x.Utilization_Details, new { @readonly = "true", @class = " form-rounded", @style = " width :100%; " })
+                                @Html.TextAreaFor(x => x.Prop_detail.Utilization_Details, new { @readonly = "true", @class = " form-rounded", @style = " width :100%; " })
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2" style="height:10px;"></td>
                         </tr>
                         <tr>
-                            <td style="text-align: left; width: 15%;">@Html.HiddenFor(X => X.Proposal_Id) Dte. Of F&A Remarks </td>
+                            <td style="text-align: left; width: 15%;">@Html.HiddenFor(X => X.Prop_detail.Proposal_Id) Dte. Of F&A Remarks </td>
                             <td>
 
-                                @Html.TextAreaFor(x => x.FA_Remarks, new { @readonly = "true", @class = "", @style = " width :100%; " })
+                                @Html.TextAreaFor(x => x.Prop_detail.FA_Remarks, new { @readonly = "true", @class = "", @style = " width :100%; " })
                             </td>
                         </tr>
                         <tr>
@@ -215,7 +215,7 @@
                             <td style="text-align: left; width: 15%; ">Secretary Office Remarks </td>
                             <td>
 
-                                @Html.TextAreaFor(x => x.Sec_Office_Remarks, new { @readonly = "true", @style = " width :100%; " })
+                                @Html.TextAreaFor(x => x.Prop_detail.Sec_Office_Remarks, new { @readonly = "true", @style = " width :100%; " })
                             </td>
                         </tr>
                         <tr>
@@ -226,7 +226,7 @@
                             <td style="text-align: left; width: 15%; ">Dte. Of Purchase Remarks </td>
                             <td>
 
-                                @Html.TextAreaFor(x => x.Purchase_Remarks, new { @readonly = "true", @style = " width :100%; " })
+                                @Html.TextAreaFor(x => x.Prop_detail.Purchase_Remarks, new { @readonly = "true", @style = " width :100%; " })
                             </td>
                         </tr>
                         <tr>
@@ -238,7 +238,7 @@
                             <td style="text-align: left; width: 15%; ">Other Dept Remarks </td>
                             <td>
 
-                                @Html.TextAreaFor(x => x.Other_Dept_Remarks, new { @readonly = "true", @style = " width :100%; " })
+                                @Html.TextAreaFor(x => x.Prop_detail.Other_Dept_Remarks, new { @readonly = "true", @style = " width :100%; " })
                             </td>
                         </tr>
                         <tr>

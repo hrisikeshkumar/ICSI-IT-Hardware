@@ -22,6 +22,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Computer/Com_Details.cshtml", pc_List);
         }
 
+
         [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpGet]
         public ActionResult Com_Create_Item(string Message)
@@ -36,6 +37,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Computer/Com_Create_Item.cshtml", Mod_data);
             
         }
+
 
         [Authorize(Roles = "SU, Admin, InventoryManager")]
         [HttpPost]
@@ -69,6 +71,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Com_Create_Item", "Computer");
         }
 
+
         [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Com_Edit_Item(string id)
         {
@@ -84,6 +87,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             return View("~/Areas/Admin/Views/Computer/Com_Edit_Item.cshtml", Model_data);
         }
+
 
         [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Update_Computer(Mod_Computer Get_Data, string Item_id)
@@ -117,6 +121,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             return RedirectToAction("Com_Details", "Computer");
         }
+
 
         [Authorize(Roles = "SU, Admin, InventoryManager")]
         public ActionResult Delete_Item(Mod_Computer Get_Data, string Item_id)
@@ -152,6 +157,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             return RedirectToAction("Com_Details", "Computer");
         }
+
 
         [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public JsonResult Model_List(string Item_Make)
