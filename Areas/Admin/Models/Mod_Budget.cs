@@ -17,5 +17,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public string Remarks { get; set; }
         public string Create_User { get; set; }
         public DateTime? Create_date { get; set; }
+
+        public List<SelectListItem> Bud_year_List { get; set; }
     }
 }

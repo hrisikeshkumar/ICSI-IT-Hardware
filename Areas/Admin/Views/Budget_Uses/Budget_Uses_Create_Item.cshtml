@@ -117,14 +117,7 @@
                 </td>
                 <td style="width:25%;">
 
-                    @Html.DropDownListFor(x => x.Budget_Year,
-                       new List<SelectListItem>()
-                         {
-                           new SelectListItem() { Text= "2022-2023", Value = "2022-2023"},
-                           new SelectListItem() { Text= "2023-2024", Value = "2023-2024" },
-                           new SelectListItem() { Text= "2021-2022", Value = "2021-2022" }
-                         }
-                       , "Please select a Type", new { @class = " form-rounded", @style = " width :90%; " })
+                    @Html.DropDownListFor(x => x.Budget_Year, Model.Budget_Year_List, new { @class = " form-rounded", @style = " width :90%; " })
 
                 </td>
 

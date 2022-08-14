@@ -11,7 +11,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 {
     public class Budget_UsesController : Controller
     {
-        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager")]
         public ActionResult Budget_Uses_Details()
         {
             BL_Budget_Uses com = new BL_Budget_Uses();
@@ -29,10 +29,14 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             Mod_Budget_Uses Mod_data = new Mod_Budget_Uses();
 
+            BL_Budget_Year bud_year = new BL_Budget_Year();
+
+            Mod_data.Budget_Year_List = bud_year.budget_year_dropdown();
+
             return View("~/Areas/Admin/Views/Budget_Uses/Budget_Uses_Create_Item.cshtml", Mod_data);
         }
 
-        [Authorize(Roles = "SU, Admin, InventoryManager")]
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager")]
         [HttpPost]
         public ActionResult Budget_Uses_CreateItem_Post(Mod_Budget_Uses Get_Data)
         {
@@ -65,7 +69,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Budget_Uses_Details", "Budget_Uses");
         }
 
-        [Authorize(Roles = "SU, Admin, InventoryManager")]
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager")]
         public ActionResult Edit_Budget_Uses(string id)
         {
 
@@ -76,12 +80,15 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             Model_data = BL_data.Get_Data_By_ID(Model_data, id);
 
+            BL_Budget_Year bud_year = new BL_Budget_Year();
+
+            Model_data.Budget_Year_List = bud_year.budget_year_dropdown();
 
 
             return View("~/Areas/Admin/Views/Budget_Uses/Edit_Budget_Uses.cshtml", Model_data);
         }
 
-        [Authorize(Roles = "SU, Admin, InventoryManager")]
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager")]
         public ActionResult Update_Budget_Uses(Mod_Budget_Uses Get_Data, string Budget_Uses_Id)
         {
             int status = 0;
@@ -114,7 +121,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Budget_Uses_Details", "Budget_Uses");
         }
 
-        [Authorize(Roles = "SU, Admin, InventoryManager")]
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager")]
         public ActionResult Delete_Budget_Uses(Mod_Budget_Uses Get_Data, string id)
         {
             int status = 0;
@@ -149,7 +156,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "SU, Admin, InventoryManager")]
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager")]
         public JsonResult Budget_List(string Yearcode)
         {
 
@@ -164,7 +171,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "SU, Admin, InventoryManager")]
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager")]
         public JsonResult Prev_Budget_info(string Bud_Head_Id, string Yearcode)
         {
 

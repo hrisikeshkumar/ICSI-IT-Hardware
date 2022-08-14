@@ -125,6 +125,7 @@
     <Compile Include="Areas\Admin\BL_Admin\BL_AssetMaster.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Budget_Head.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Budget_Uses.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\BL_Budget_Year.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Computer.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_DataCard.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_AppleIpad.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Areas\Admin\Models\Mod_AppleIpad.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Budget.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Budget_Uses.cs" />
+    <Compile Include="Areas\Admin\Models\Mod_Budget_Year.cs" />
     <Compile Include="Areas\Admin\Models\Mod_DataCard.cs" />
     <Compile Include="Areas\Admin\Models\Mod_AssetMaster.cs" />
     <Compile Include="Areas\Admin\Models\Mod_Computer.cs" />
@@ -344,6 +346,7 @@
     <Content Include="Areas\Admin\Views\IT_Hardware_AMC\Bulk_AMC_Update.cshtml" />
     <Content Include="Areas\Admin\Views\Admin_Dashboard\Admin_Dashboard.cshtml" />
     <Content Include="Areas\Admin\Views\Admin_Dashboard\Edit_Proposal.cshtml" />
+    <Content Include="Areas\Admin\Views\Budget_Year\Budget_Year_Details.cshtml" />
     <None Include="Properties\PublishProfiles\rajaonprewebapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -375,7 +378,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\Budget_Year\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />

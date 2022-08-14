@@ -25,5 +25,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public DateTime? Create_date { get; set; }
 
         public List<SelectListItem> Budget_List { get; set; }
+
+        public List<SelectListItem> Budget_Year_List { get; set; }
     }
 }

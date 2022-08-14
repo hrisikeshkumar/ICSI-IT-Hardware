@@ -29,7 +29,12 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             ViewBag.Message = Message;
 
             Mod_Budget Mod_data = new Mod_Budget();
-            
+
+            BL_Budget_Year bud_year = new BL_Budget_Year();
+
+            Mod_data.Bud_year_List = bud_year.budget_year_dropdown();
+
+
             return View("~/Areas/Admin/Views/Budget_Head/Budget_Head_Create_Item.cshtml", Mod_data);
         }
 
@@ -75,6 +80,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             Mod_Budget Model_data = new Mod_Budget();
            
             Model_data = BL_data.Get_Data_By_ID(Model_data, id);
+
+            BL_Budget_Year bud_year = new BL_Budget_Year();
+
+            Model_data.Bud_year_List = bud_year.budget_year_dropdown();
+
 
             return View("~/Areas/Admin/Views/Budget_Head/Edit_Budget_Head.cshtml", Model_data);
         }
