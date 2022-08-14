@@ -12,7 +12,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
     public class Admin_DashboardController : Controller
     {
 
-        //[Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult Admin_Dashboard()
         {
 
@@ -30,7 +30,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
            
         }
 
-
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager")]
         public JsonResult Get_Proposal_Detail_for_Modal( string Proposal_Id)
         {
             BL_Admin_DashB B_Layer = new BL_Admin_DashB();
@@ -47,7 +47,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return Json(mod_Data, JsonRequestBehavior.AllowGet);
         }
 
-
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager")]
         public ActionResult Edit_proposal(Mod_Admin_dashB Proposal)
         {
 
@@ -65,7 +65,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         }
 
-
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager")]
         public ActionResult Update_proposal(Proposal_details Proposal_data)
         {
 
@@ -100,21 +100,21 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-        //protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
-        //{
-        //    if (filterContext.HttpContext.Request.IsAuthenticated)
-        //    {
+        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.IsAuthenticated)
+            {
 
-        //        if (filterContext.Result is HttpUnauthorizedResult)
-        //        {
-        //            filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        filterContext.Result = new RedirectResult("~/Log_In/Log_In");
-        //    }
-        //}
+                if (filterContext.Result is HttpUnauthorizedResult)
+                {
+                    filterContext.Result = new RedirectResult("~/Authorization/AccessDedied");
+                }
+            }
+            else
+            {
+                filterContext.Result = new RedirectResult("~/Log_In/Log_In");
+            }
+        }
 
     }
 }
