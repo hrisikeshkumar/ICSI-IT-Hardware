@@ -68,7 +68,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Budget_Head_Create_Item", "Budget");
+            return RedirectToAction("Budget_Head_Create_Item", "Budget_Head");
         }
 
 

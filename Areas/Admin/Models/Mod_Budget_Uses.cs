@@ -27,5 +27,16 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public List<SelectListItem> Budget_List { get; set; }
 
         public List<SelectListItem> Budget_Year_List { get; set; }
+
+        public List<Bud_Uses_List> Bud_us_list { get; set; }
     }
+
+    public class Bud_Uses_List
+    {
+        public string Budget_Uses_Id { get; set; }
+        public string Budget_Name { get; set; }
+        public int Budget_Amount { get; set; }
+        public string Budget_Type { get; set; }
+    } 
+
 }

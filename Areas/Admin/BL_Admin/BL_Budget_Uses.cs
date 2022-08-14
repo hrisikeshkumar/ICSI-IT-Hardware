@@ -13,11 +13,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
     public class BL_Budget_Uses
     {
 
-        public List<Mod_Budget_Uses> Get_BudgetData()
+        public List<Bud_Uses_List> Get_BudgetData()
         {
 
-            Mod_Budget_Uses BL_data;
-            List<Mod_Budget_Uses> current_data = new List<Mod_Budget_Uses>();
+            Bud_Uses_List BL_data;
+            List<Bud_Uses_List> current_data = new List<Bud_Uses_List>();
 
             try
             {
@@ -34,8 +34,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     SqlParameter sqlP_type = new SqlParameter("@Type", "Get_List");
                     cmd.Parameters.Add(sqlP_type);
 
-                    SqlParameter sqlP_Year = new SqlParameter("@Budget_Year", "2022-2023");
-                    cmd.Parameters.Add(sqlP_Year);
+                    //SqlParameter sqlP_Year = new SqlParameter("@Budget_Year", "2022-2023");
+                    //cmd.Parameters.Add(sqlP_Year);
 
                     using (SqlDataAdapter sda = new SqlDataAdapter())
                     {
@@ -51,7 +51,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 foreach (DataRow dr in dt_Comuter.Rows)
                 {
-                    BL_data = new Mod_Budget_Uses();
+                    BL_data = new Bud_Uses_List();
 
                     BL_data.Budget_Uses_Id = Convert.ToString(dr["Budget_Uses_Id"]);
 
@@ -297,6 +297,64 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 }
             }
             catch (Exception ex) { }
+        }
+
+
+        public List<Bud_Uses_List> Get_BudgetUses_By_BudId(string Bud_head_Id)
+        {
+
+            Bud_Uses_List BL_data;
+            List<Bud_Uses_List> current_data = new List<Bud_Uses_List>();
+
+            try
+            {
+                DataTable dt_Comuter;
+                string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                SqlConnection con = new SqlConnection(strcon);
+
+
+                using (SqlCommand cmd = new SqlCommand("sp_Budget_Uses"))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = con;
+
+                    SqlParameter sqlP_type = new SqlParameter("@Type", "Get_List_By_BudId");
+                    cmd.Parameters.Add(sqlP_type);
+
+                    SqlParameter sqlP_Year = new SqlParameter("@Budget_Head_Id", Bud_head_Id);
+                    cmd.Parameters.Add(sqlP_Year);
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        sda.SelectCommand = cmd;
+                        using (DataTable dt = new DataTable())
+                        {
+                            sda.Fill(dt);
+                            dt_Comuter = dt;
+                        }
+                    }
+                }
+
+
+                foreach (DataRow dr in dt_Comuter.Rows)
+                {
+                    BL_data = new Bud_Uses_List();
+
+                    BL_data.Budget_Uses_Id = Convert.ToString(dr["Budget_Uses_Id"]);
+
+                    BL_data.Budget_Name = Convert.ToString(dr["Budget_Name"]);
+
+                    BL_data.Budget_Amount = Convert.ToInt32(dr["Budget_Amount"]);
+
+                    BL_data.Budget_Type = Convert.ToString(dr["Budget_Type"]);
+
+                    current_data.Add(BL_data);
+                }
+
+            }
+            catch (Exception ex) { }
+
+            return current_data;
         }
 
     }
