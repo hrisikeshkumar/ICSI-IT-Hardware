@@ -145,6 +145,7 @@
     <Compile Include="Areas\Admin\BL_Admin\BL_Ups.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_User_Info.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_Vendor.cs" />
+    <Compile Include="Areas\Admin\BL_Admin\FileModel.cs" />
     <Compile Include="Areas\Admin\BL_Admin\Item_MakeModel.cs" />
     <Compile Include="Areas\Admin\BL_Admin\BL_UserRole.cs" />
     <Compile Include="Areas\Admin\Controllers\Admin_DashboardController.cs" />
@@ -261,7 +262,6 @@
     <Content Include="js\Validation\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Areas\Admin\Views\Admin_Dashboard\Admin_Dashboard_Old.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\AdminMenu.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />

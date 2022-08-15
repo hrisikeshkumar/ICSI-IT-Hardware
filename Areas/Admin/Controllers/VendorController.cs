@@ -11,7 +11,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 {
     public class VendorController : Controller
     {
-        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager")]
         public ActionResult Vendor_Details()
         {
             BL_Vendor com = new BL_Vendor();

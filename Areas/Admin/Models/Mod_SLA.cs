@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
-
+using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
 
 namespace IT_Hardware_Aug2021.Areas.Admin.Models
 {
@@ -27,5 +27,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public string Verfd_status { get; set; }
         public string Verfd_usr_id { get; set; }
         public DateTime? Verfd_date { get; set; }
+
+        public List< FileModel> File_List { get; set; }
+
     }
 }

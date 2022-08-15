@@ -72,10 +72,10 @@
 
                 @Html.DropDownListFor(x => x.Vendor_id, Model.Vendor_List, new { @class = " form-rounded", @style = " width :60%; " })
             </td>
-           
+
         </tr>
         <tr>
-          
+
             <td style="width:25%;">
                 Service Type Overview
             </td>
@@ -101,38 +101,51 @@
             </td>
 
         </tr>
-        <tr>
-            <td style="width: 25%; height: 50px;">
-                Upload P.O. Copy
-            </td>
-            <td style="width:75%;" colspan="3">
-                <input type="file" style="width:100%"  />
-            </td>
-        </tr>
-        <tr>
-            <td style="width: 25%; height: 50px;">
-                Upload SLA Copy
-            </td>
-            <td style="width:75%;" colspan="3">
-                <input type="file" style="width:100%" />
-            </td>
-        </tr>
-        <tr>
 
-            <td style="width:25%;">
-                Upload Approval Copy
-            </td>
-            <td style="width:75%;" colspan="3">
-                <input type="file" style="width:100%" />
+
+        <tr style=" height: 50px; ">
+
+
+            <td align="left" style="width:25%; "> Upload File</td>
+
+            <td style="width: 75%;" colspan="3">
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="width:100%;" colspan="3">
+                            <input type="file" name="postedFile" id="FileUpload_Id" />
+                            <input type="submit" id="btnFileUpload" value="Upload" />
+
+                        </td>
+                    </tr>
+                    <tr><td colspan="3" style="height:10px;"></td></tr>
+                    <tr>
+                        <td>
+                            <table id="Files_Grid" style="width:100%;">
+                                <tr>
+                                    <td style="width:50%; font-weight:bold">File Name</td>
+                                    <td style="width: 25%; font-weight: bold"> Download</td>
+                                    <td style="width: 25%; font-weight: bold">Delete</td>
+                                </tr>
+                            </table>
+                        </td>
+
+                    </tr>
+
+                </table>
+
+
+
+
             </td>
         </tr>
 
+
         <tr>
             <td style="width:25%;">
-                Service Type Details
+                Service Type in Details
             </td>
             <td style="width:75%; " colspan="3">
-                @Html.TextAreaFor(x => x.Service_Type_Details, 8, 1, new { @style = " width :100%; " })
+                @Html.TextAreaFor(x => x.Service_Type_Details, 5, 1, new { @style = " width :100%; " })
             </td>
         </tr>
 
@@ -163,6 +176,7 @@
 
             <td align="left" style="width:25%;"></td>
         </tr>
+
     </table>
 
     }
@@ -189,7 +203,6 @@
 
 
         $('#Item_Make_id').change(function () {
-            $('#Item_Model_id').empty();
 
             $.ajax({
                 type: "POST",
@@ -207,6 +220,103 @@
         });
     });
 </script>
+
+
+
+<script type="text/javascript">
+    $(function () {
+
+
+        $('#btnFileUpload').click(function (event) {
+
+
+            if (window.FormData !== undefined) {
+
+                var fileUpload = $("#FileUpload_Id").get(0);
+                var files = fileUpload.files;
+
+                // Create FormData object
+                var fileData = new FormData();
+
+                // Looping over all files and add it to FormData object
+                for (var i = 0; i < files.length; i++) {
+                    fileData.append(files[i].name, files[i]);
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/SLA/FiliUpload",
+                    datatype: "Json",
+                    data: fileData,
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    success: function (response) {
+
+                        $("#Files_Grid tr").remove();
+
+                        markup = "<tr><th style='width: 50%;'> File Name </th> <th style='width: 25%;'> Download </th> <th style='width: 25%; text-align: center'> Delete </th> </tr>";
+                        tableBody = $("#Files_Grid tbody");
+                        tableBody.append(markup);
+
+
+                        if (response != null) {
+
+                            $.each(response, function (key, val) {
+
+                                markup = "<tr><td> " + val.File_Name + " </td> " +
+                                    "<td> " + val.File_Id + " </td> " +
+                                    "<td style=' text-align: center'>   <a href='javascript: ; ' onclick='DownloadFile('" + val.File_Id + "') > Download</a> </td></tr> "
+
+                                tableBody = $("#Files_Grid tbody");
+                                tableBody.append(markup);
+
+                            });
+                        }
+                    },
+                    error: function (err) {
+                        alert(err.statusText);
+                    }
+
+                });
+            }
+
+            event.preventDefault();
+
+        });
+    });
+</script>
+
+
+
+<script type="text/javascript">
+    function DownloadFile(fileId) {
+        $("#hfFileId").val(fileId);
+        $("#btnDownload")[0].click();
+    };
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
