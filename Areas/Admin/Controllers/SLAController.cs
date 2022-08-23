@@ -4,12 +4,14 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Filters;
 using IT_Hardware_Aug2021.Areas.Admin.BL_Admin;
 using IT_Hardware_Aug2021.Areas.Admin.Models;
-
+using System.Web.Http;
+using System.Buffers.Text;
 
 namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 {
@@ -254,8 +256,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return files;
         }
 
+
         [HttpPost]
-        public FileResult DownloadFile(string fileId)
+        public ContentResult DownloadFile(string fileId)
         {
             byte[] bytes;
             string fileName, contentType;
@@ -264,7 +267,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cmd.CommandText = "SELECT File_Name, File_Data, ContentType FROM File_table WHERE LTRIM(RTRIM(Id))= LTRIM(RTRIM(@Id))";
+                    cmd.CommandText = "select File_Id, File_table, File_Name, ContentType, File_Data from File_table WHERE LTRIM(RTRIM(File_Id))= LTRIM(RTRIM(@Id))";
                     cmd.Parameters.AddWithValue("@Id", fileId);
                     cmd.Connection = con;
                     con.Open();
@@ -279,8 +282,98 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 }
             }
 
+            string base64 = Convert.ToBase64String(bytes, 0, bytes.Length);
+
+            return Content(base64, contentType);
+        }
+
+
+        public JsonResult DeleteFile(string FileId)
+        {
+
+            string constr = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "delete from File_table where LTRIM(RTRIM(File_Id)) =LTRIM(RTRIM(@File_Id))";
+                using (SqlCommand cmd = new SqlCommand(query))
+                {
+                    cmd.Connection = con;
+                    cmd.Parameters.AddWithValue("@File_Id", FileId);               
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+
+
+            return Json(GetFiles(), JsonRequestBehavior.AllowGet);
+
+        }
+
+
+
+
+        public FileResult Download(string fileId)
+        {
+            
+
+            byte[] bytes;
+            string fileName, contentType;
+            string constr = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = "select File_Id, File_table, File_Name, ContentType, File_Data from File_table WHERE LTRIM(RTRIM(File_Id))= LTRIM(RTRIM(@Id))";
+                    cmd.Parameters.AddWithValue("@Id", fileId);
+                    cmd.Connection = con;
+                    con.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        sdr.Read();
+                        bytes = (byte[])sdr["File_Data"];
+                        contentType = sdr["ContentType"].ToString();
+                        fileName = sdr["File_Name"].ToString();
+                    }
+                    con.Close();
+                }
+            }
+
+
             return File(bytes, contentType, fileName);
         }
+
+
+        public byte[] filedown(string fileId)
+        {
+
+
+            byte[] bytes;
+            string fileName, contentType;
+            string constr = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = "select File_Id, File_table, File_Name, ContentType, File_Data from File_table WHERE LTRIM(RTRIM(File_Id))= LTRIM(RTRIM(@Id))";
+                    cmd.Parameters.AddWithValue("@Id", fileId);
+                    cmd.Connection = con;
+                    con.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        sdr.Read();
+                        bytes = (byte[])sdr["File_Data"];
+                        contentType = sdr["ContentType"].ToString();
+                        fileName = sdr["File_Name"].ToString();
+                    }
+                    con.Close();
+                }
+            }
+
+            return bytes;
+
+        }
+
 
     }
 }
