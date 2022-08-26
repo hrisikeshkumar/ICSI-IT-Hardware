@@ -41,8 +41,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             
             Mod_data.Vendor_List = BL_data.Vendor_List();
 
-            Mod_data.File_List = GetFiles();
-
 
             return View("~/Areas/Admin/Views/SLA/SLA_Create_Item.cshtml", Mod_data);
 
@@ -53,18 +51,57 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult SLA_CreateItem_Post(Mod_SLA Get_Data)
         {
+
             string Message = "";
             try
             {
-
+                string SLA_Id = string.Empty;
                 if (ModelState.IsValid)
                 {
                     BL_SLA save_data = new BL_SLA();
-                    int status = save_data.Save_SLA_data(Get_Data, "Add_new", "");
+                    int status = save_data.Save_SLA_data(Get_Data, "Add_new", "", out SLA_Id);
 
                     if (status > 0)
                     {
                         TempData["Message"] = String.Format("Data saved successfully");
+
+                        //var httpContext = HttpContext.Request.Files;
+
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            //HttpPostedFile httpPostedFile = Request.Files;
+
+                            var postedFile = Request.Files[i];
+
+                            if (postedFile != null)
+                            {
+
+                                byte[] bytes;
+                                using (BinaryReader br = new BinaryReader(postedFile.InputStream))
+                                {
+                                    bytes = br.ReadBytes(postedFile.ContentLength);
+                                }
+                                string constr = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                                using (SqlConnection con = new SqlConnection(constr))
+                                {
+                                    string query = "INSERT INTO File_table(File_Id,  File_Table, File_Ref_Id, File_Name, ContentType, File_Data) VALUES ( dbo.Get_Unique_File_Id(), 'SLA', @Ref_Id,   @Name, @ContentType, @Data)";
+                                    using (SqlCommand cmd = new SqlCommand(query))
+                                    {
+                                        cmd.Connection = con;
+                                        cmd.Parameters.AddWithValue("@Name", Path.GetFileName(postedFile.FileName));
+                                        cmd.Parameters.AddWithValue("@ContentType", postedFile.ContentType);
+                                        cmd.Parameters.AddWithValue("@Data", bytes);
+                                        cmd.Parameters.AddWithValue("@Ref_Id", SLA_Id);
+                                        con.Open();
+                                        cmd.ExecuteNonQuery();
+                                        con.Close();
+                                    }
+                                }
+
+
+                            }
+                        }
+
                     }
                     else
                     {
@@ -87,6 +124,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+
+
+
         //[Authorize(Roles = "SU, Admin, Manager")]
         public ActionResult Edit_SLA(string id)
         {
@@ -97,7 +137,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             Mod_data.Vendor_List = BL_data.Vendor_List();
 
-            Mod_data.File_List = GetFiles();
+            Mod_data.File_List = GetFiles_By_Id(Mod_data.SLA_Id);
 
 
             return View("~/Areas/Admin/Views/SLA/Edit_SLA.cshtml", Mod_data);
@@ -108,6 +148,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         public ActionResult Update_SLA(Mod_SLA Get_Data, string Item_id)
         {
             int status = 0;
+            string SLA_Id_I = string.Empty;
             try
             {
 
@@ -115,7 +156,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 {
                     BL_SLA Md_Asset = new BL_SLA();
 
-                    status = Md_Asset.Save_SLA_data(Get_Data, "Update", Item_id);
+                    status = Md_Asset.Save_SLA_data(Get_Data, "Update", Item_id,  out SLA_Id_I );
 
                     if (status > 0)
                     {
@@ -145,19 +186,19 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         //[Authorize(Roles = "SU, Admin, Manager")]
         public ActionResult Delete_SLA(Mod_SLA Get_Data, string id)
         {
-            int status = 0;
+           
             try
             {
 
                 if (ModelState.IsValid)
                 {
-
+                    string SLA_Id = string.Empty;
 
                     BL_SLA Md_Asset = new BL_SLA();
 
-                    status = Md_Asset.Save_SLA_data(Get_Data, "Delete", id);
+                    int status = Md_Asset.Save_SLA_data(Get_Data, "Delete", id, out SLA_Id);
 
-                    if (status < 1)
+                    if (status>0)
                     {
                         TempData["Message"] = String.Format("Data saved successfully");
                     }
@@ -178,6 +219,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+
         //protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
         //{
         //    if (filterContext.HttpContext.Request.IsAuthenticated)
@@ -195,11 +237,19 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         //}
 
 
+
+
+        //-----------------------------------  File Function ---------------------------------------------
+
+
+
         [HttpPost]
         public JsonResult FiliUpload()
         {
 
             HttpPostedFileBase postedFile = Request.Files[0];
+
+            string SLA_Id = Request.Form["SLA_Id"].ToString();
 
             byte[] bytes;
             using (BinaryReader br = new BinaryReader(postedFile.InputStream))
@@ -209,13 +259,14 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             string constr = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = "INSERT INTO File_table(File_Id, File_Table, File_Name, ContentType, File_Data) VALUES ( dbo.Get_Unique_File_Id(), 'SLA', @Name, @ContentType, @Data)";
+                string query = "INSERT INTO File_table(File_Id,  File_Table, File_Ref_Id, File_Name, ContentType, File_Data) VALUES ( dbo.Get_Unique_File_Id(), 'SLA', @Ref_Id,   @Name, @ContentType, @Data)";
                 using (SqlCommand cmd = new SqlCommand(query))
                 {
                     cmd.Connection = con;
                     cmd.Parameters.AddWithValue("@Name", Path.GetFileName(postedFile.FileName));
                     cmd.Parameters.AddWithValue("@ContentType", postedFile.ContentType);
                     cmd.Parameters.AddWithValue("@Data", bytes);
+                    cmd.Parameters.AddWithValue("@Ref_Id", SLA_Id);
                     con.Open();
                     cmd.ExecuteNonQuery();
                     con.Close();
@@ -223,19 +274,48 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             }
 
 
-            return Json(GetFiles(), JsonRequestBehavior.AllowGet);
+            return Json(GetFiles_By_Id(SLA_Id), JsonRequestBehavior.AllowGet);
 
         }
 
 
 
-        private static List<FileModel> GetFiles()
+        //private static List<FileModel> GetFiles()
+        //{
+        //    List<FileModel> files = new List<FileModel>();
+        //    string constr = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+        //    using (SqlConnection con = new SqlConnection(constr))
+        //    {
+        //        using (SqlCommand cmd = new SqlCommand("SELECT File_Id, File_Name FROM File_table"))
+        //        {
+        //            cmd.Connection = con;
+        //            con.Open();
+        //            using (SqlDataReader sdr = cmd.ExecuteReader())
+        //            {
+        //                while (sdr.Read())
+        //                {
+        //                    files.Add(new FileModel
+        //                    {
+        //                        File_Id = Convert.ToString(sdr["File_Id"]),
+        //                        File_Name = Convert.ToString(sdr["File_Name"])
+        //                    }) ;
+        //                }
+        //            }
+        //            con.Close();
+        //        }
+        //    }
+        //    return files;
+        //}
+
+
+
+        private static List<FileModel> GetFiles_By_Id(string SLA_Id)
         {
             List<FileModel> files = new List<FileModel>();
             string constr = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT File_Id, File_Name FROM File_table"))
+                using (SqlCommand cmd = new SqlCommand("SELECT File_Id, File_Name FROM File_table where  LTRIM(RTRIM(File_table))= 'SLA' and  LTRIM(RTRIM(File_Ref_Id))=LTRIM(RTRIM('" + SLA_Id + "')) "))
                 {
                     cmd.Connection = con;
                     con.Open();
@@ -247,7 +327,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                             {
                                 File_Id = Convert.ToString(sdr["File_Id"]),
                                 File_Name = Convert.ToString(sdr["File_Name"])
-                            }) ;
+                            });
                         }
                     }
                     con.Close();
@@ -257,38 +337,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-        [HttpPost]
-        public ContentResult DownloadFile(string fileId)
-        {
-            byte[] bytes;
-            string fileName, contentType;
-            string constr = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.CommandText = "select File_Id, File_table, File_Name, ContentType, File_Data from File_table WHERE LTRIM(RTRIM(File_Id))= LTRIM(RTRIM(@Id))";
-                    cmd.Parameters.AddWithValue("@Id", fileId);
-                    cmd.Connection = con;
-                    con.Open();
-                    using (SqlDataReader sdr = cmd.ExecuteReader())
-                    {
-                        sdr.Read();
-                        bytes = (byte[])sdr["File_Data"];
-                        contentType = sdr["ContentType"].ToString();
-                        fileName = sdr["File_Name"].ToString();
-                    }
-                    con.Close();
-                }
-            }
 
-            string base64 = Convert.ToBase64String(bytes, 0, bytes.Length);
-
-            return Content(base64, contentType);
-        }
-
-
-        public JsonResult DeleteFile(string FileId)
+        public JsonResult DeleteFile(string FileId, string RefId)
         {
 
             string constr = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
@@ -306,10 +356,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             }
 
 
-            return Json(GetFiles(), JsonRequestBehavior.AllowGet);
+            return Json(GetFiles_By_Id(RefId), JsonRequestBehavior.AllowGet);
 
         }
-
 
 
 
@@ -343,36 +392,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return File(bytes, contentType, fileName);
         }
 
-
-        public byte[] filedown(string fileId)
-        {
-
-
-            byte[] bytes;
-            string fileName, contentType;
-            string constr = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.CommandText = "select File_Id, File_table, File_Name, ContentType, File_Data from File_table WHERE LTRIM(RTRIM(File_Id))= LTRIM(RTRIM(@Id))";
-                    cmd.Parameters.AddWithValue("@Id", fileId);
-                    cmd.Connection = con;
-                    con.Open();
-                    using (SqlDataReader sdr = cmd.ExecuteReader())
-                    {
-                        sdr.Read();
-                        bytes = (byte[])sdr["File_Data"];
-                        contentType = sdr["ContentType"].ToString();
-                        fileName = sdr["File_Name"].ToString();
-                    }
-                    con.Close();
-                }
-            }
-
-            return bytes;
-
-        }
 
 
     }

@@ -338,8 +338,8 @@
     <Content Include="Areas\Admin\Views\Item_Issue\Item_Issue_Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\Item_Issue\Item_Issue_Details.cshtml" />
     <Content Include="Areas\Admin\Views\SLA\SLA_Details.cshtml" />
-    <Content Include="Areas\Admin\Views\SLA\SLA_Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\SLA\Edit_SLA.cshtml" />
+    <Content Include="Areas\Admin\Views\SLA\SLA_Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\Budget_Head\Edit_Budget_Head.cshtml" />
     <Content Include="Areas\Admin\Views\Budget_Head\Budget_Head_Create_Item.cshtml" />
     <Content Include="Areas\Admin\Views\Budget_Head\Budget_Head_Details.cshtml" />

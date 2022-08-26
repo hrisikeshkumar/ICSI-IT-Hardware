@@ -10,10 +10,12 @@
 
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+@*<script src="https://code.jquery.com/jquery-1.12.4.js"></script>*@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
 <link href="~/CSS/Final_Submit_Button.css" rel="stylesheet" />
+
 
 <script>
     $(function () {
@@ -26,7 +28,6 @@
         });
     });
 </script>
-
 
 <style type="text/css">
 
@@ -51,15 +52,16 @@
 
 <div style=" margin-top: -50px;  text-align: center; height: 50px; align-content: center; width: 100% " class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
-    <p style="font-size:large; padding-top:-5px; font-weight:400;">Enter New SLA</p>
+    <p style="font-size:large; padding-top:-5px; font-weight:400;">Edit SLA Data</p>
 
 </div>
 
 <div style=" align-content:center; width:100%" class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
 
-    @using (Html.BeginForm("SLA_CreateItem_Post", "SLA", FormMethod.Post))
+    @using (Html.BeginForm("SLA_CreateItem_Post", "SLA", FormMethod.Post, new { encType = "multipart/form-data" }))
     {
+
 
         <table class=" table-hover table-striped shadow " style="width:100%">
 
@@ -100,51 +102,22 @@
                 </td>
 
             </tr>
-
-
-            <tr style=" height: 50px; ">
-
-
-                <td align="left" style="width:25%; "> Upload File</td>
-
-                <td style="width: 75%;" colspan="3">
-                    <table style="width: 100%;">
-                        <tr>
-                            <td style="width:100%;" colspan="3">
-                                <input type="file" name="postedFile" id="FileUpload_Id" />
-                                <input type="submit" id="btnFileUpload" value="Upload" />
-                                <progress id="fileProgress" style="display: none"></progress>
-                                <span id="lblMessage" style="color: Green"></span>
-                            </td>
-                        </tr>
-                        <tr><td colspan="3" style="height:10px;"></td></tr>
-                        <tr>
-                            <td>
-                                <table id="Files_Grid" style="width:100%;">
-                                    <tr>
-                                        <td style="width:50%; font-weight:bold">File Name</td>
-                                        <td style="width: 25%; font-weight: bold"> Download</td>
-                                        <td style="width: 25%; font-weight: bold"> Delete</td>
-                                    </tr>
-                                </table>
-                            </td>
-
-                        </tr>
-
-                    </table>
-
-
-
+            <tr>
+                <td style="width: 25%; height: 50px;">
+                    Upload Related Files 
+                </td>
+                <td style="width:75%;" colspan="3">
+                    <input type="file" name="postedFile" multiple="multiple" />
                 </td>
             </tr>
-
+         
 
             <tr>
                 <td style="width:25%;">
-                    Service Type in Details
+                    Service Type Details
                 </td>
                 <td style="width:75%; " colspan="3">
-                    @Html.TextAreaFor(x => x.Service_Type_Details, 5, 1, new { @style = " width :100%; " })
+                    @Html.TextAreaFor(x => x.Service_Type_Details, 8, 1, new { @style = " width :100%; " })
                 </td>
             </tr>
 
@@ -175,11 +148,12 @@
 
                 <td align="left" style="width:25%;"></td>
             </tr>
-
         </table>
+
 
     }
 </div>
+
 
 
 @if (TempData["Message"] != null && TempData["Message"] != "" && TempData["Message"] != string.Empty)
@@ -196,12 +170,12 @@
 }
 
 
-
 <script type="text/javascript">
     $(function () {
 
 
         $('#Item_Make_id').change(function () {
+            $('#Item_Model_id').empty();
 
             $.ajax({
                 type: "POST",
@@ -219,190 +193,4 @@
         });
     });
 </script>
-
-
-
-<script type="text/javascript">
-    $(function () {
-
-        $('#btnFileUpload').click(function (event) {
-
-
-            if (window.FormData !== undefined) {
-
-                var fileUpload = $("#FileUpload_Id").get(0);
-                var files = fileUpload.files;
-
-                // Create FormData object
-                var fileData = new FormData();
-
-                // Looping over all files and add it to FormData object
-                for (var i = 0; i < files.length; i++) {
-                    fileData.append(files[i].name, files[i]);
-                }
-
-                $.ajax({
-                    type: "POST",
-                    url: "/Admin/SLA/FiliUpload",
-                    datatype: "Json",
-                    data: fileData,
-                    contentType: false, // Not to set any content header
-                    processData: false, // Not to process data
-                    success: function (response) {
-
-                        $("#Files_Grid tr").remove();
-
-                        markup = "<tr><th style='width: 50%;'> File Name </th> <th style='width: 25%;'> Download </th> <th style='width: 25%; text-align: center'> Delete </th> </tr>";
-                        tableBody = $("#Files_Grid tbody");
-                        tableBody.append(markup);
-
-
-                        if (response != null) {
-
-                            $.each(response, function (key, val) {
-
-                                markup = "<tr><td> " + val.File_Name + " </td> " +
-                                    "<td>  <input type='submit' value='Download' class='cssdownload' id='" + val.File_Id + "' > </input> </td> " +
-                                    "<td style=' text-align: center'>  <input type='submit' class='appDetails' id='" + val.File_Id + "' value='Delete' > </input> </td></tr> "
-
-                                tableBody = $("#Files_Grid tbody");
-                                tableBody.append(markup);
-
-                            });
-                        }
-                    },
-                    error: function (err) {
-                        alert(err.statusText);
-                    }
-
-                });
-            }
-
-            event.preventDefault();
-
-        });
-    });
-</script>
-
-
-<script type="text/javascript">
-    $(function () {
-
-        $(document).on("click", ".appDetails", function () {
-            var clickedBtnID = $(this).attr('id');
-
-            if (confirm('Are you sure you want to delete this?')) {
-
-                $.ajax({
-                    type: "POST",
-                    url: "/Admin/SLA/DeleteFile",
-                    datatype: "Json",
-                    data: { FileId: clickedBtnID },
-                    success: function (response) {
-
-
-                        $("#Files_Grid tr").remove();
-
-                        markup = "<tr><th style='width: 50%;'> File Name </th> <th style='width: 25%;'> Download </th> <th style='width: 25%; text-align: center'> Delete </th> </tr>";
-                        tableBody = $("#Files_Grid tbody");
-                        tableBody.append(markup);
-
-
-                        if (response != null) {
-
-                            $.each(response, function (key, val) {
-
-                                markup = "<tr><td> " + val.File_Name + " </td> " +
-                                    "<td>  <input type='button' value='Download' onclick='DownloadFile('" + val.File_Id + "')' /> </td> " +
-                                    "<td style=' text-align: center'>  <input type='submit' class='appDetails' id='" + val.File_Id + "' value='Delete' > </input> </td></tr> "
-
-                                tableBody = $("#Files_Grid tbody");
-                                tableBody.append(markup);
-
-                            });
-                        }
-
-
-                    },
-                    error: function (err) {
-                        alert(err.statusText);
-                    }
-
-                });
-
-            }
-
-            event.preventDefault();
-
-        });
-    });
-</script>
-
-
-@*------------------------------------  Large File --------------------------------------------------------------*@
-
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-
-@*---------------------------------------------------------------------------------------------------------------*@
-
-
-
-<script type="text/javascript">
-    $(document).on("click", ".cssdownload", function () {
-        var fileName = $(this).attr('id');
-
-       
-        window.location.href = "/Admin/SLA/Download?fileId="+fileName+"";
- 
-
-        event.preventDefault();
-    });
-
-
-    function Base64ToBytes(base64) {
-        var s = window.atob(base64);
-        var bytes = new Uint8Array(s.length);
-        for (var i = 0; i < s.length; i++) {
-            bytes[i] = s.charCodeAt(i);
-        }
-        return bytes;
-    };
-
-
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

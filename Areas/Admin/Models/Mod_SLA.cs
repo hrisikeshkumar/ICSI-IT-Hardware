@@ -28,6 +28,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public string Verfd_usr_id { get; set; }
         public DateTime? Verfd_date { get; set; }
 
+        public List<HttpPostedFileBase> All_Fies { get; set; }
         public List< FileModel> File_List { get; set; }
 
     }

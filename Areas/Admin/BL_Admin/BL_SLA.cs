@@ -56,7 +56,10 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                     BL_data.Vendor_id = Convert.ToString(dr["Vendor_ID"]);
 
-                    BL_data.Expiry_DT = Convert.ToDateTime(dr["Service_ST_DT"]);
+                    if (Convert.ToString(dr["Expiry_DT"]) != null && Convert.ToString(dr["Expiry_DT"]) != string.Empty && Convert.ToString(dr["Expiry_DT"]) !="")
+                    {
+                        BL_data.Expiry_DT = Convert.ToDateTime(dr["Expiry_DT"]);
+                    }
 
                     BL_data.Service_Type_Short = Convert.ToString(dr["Service_Type_Short"]);
 
@@ -69,9 +72,10 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             return current_data;
         }
 
-        public int Save_SLA_data(Mod_SLA Data, string type, string SLA_ID)
+        public int Save_SLA_data(Mod_SLA Data, string type, string SLA_ID , out string SLA_Id_Update)
         {
-            int status = 1;
+            int status = 0;
+            SLA_Id_Update = string.Empty;
             string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
             SqlConnection con = new SqlConnection(strcon);
             try
@@ -102,15 +106,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlParameter Service_Type_Details = new SqlParameter("@Service_Type_Details", Data.Service_Type_Details);
                 cmd.Parameters.Add(Service_Type_Details);
 
-                SqlParameter PO_Copy = new SqlParameter("@PO_Copy", Data.PO_Copy);
-                cmd.Parameters.Add(PO_Copy);
-
-                SqlParameter SLA_Copy = new SqlParameter("@SLA_Copy", Data.SLA_Copy);
-                cmd.Parameters.Add(SLA_Copy);
-
-                SqlParameter Approval_Copy = new SqlParameter("@Approval_Copy", Data.Approval_Copy);
-                cmd.Parameters.Add(Approval_Copy);
-
                 SqlParameter Service_ST_DT = new SqlParameter("@Service_ST_DT", Data.Service_ST_DT);
                 cmd.Parameters.Add(Service_ST_DT);
 
@@ -121,18 +116,41 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlParameter Remarks = new SqlParameter("@Remarks", Data.Remarks);
                 cmd.Parameters.Add(Remarks);
 
-                con.Open();
+                //con.Open();
 
-                status = cmd.ExecuteNonQuery();
+                //status = cmd.ExecuteNonQuery();
+
+
+
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                   
+                    sda.SelectCommand = cmd;
+                    using (DataTable dt = new DataTable())
+                    {
+                        sda.Fill(dt);
+                      
+                        if (dt.Rows.Count>0)
+                        {
+                            SLA_Id_Update = Convert.ToString(dt.Rows[0]["SLA_Id"]);
+                            status = Convert.ToInt32(dt.Rows[0]["Row_Effect"]);
+                        }
+                         
+
+                    }
+                }
+
 
 
 
             }
             catch (Exception ex) { status = -1; }
-            finally { con.Close(); }
+            finally {/* con.Close();*/ }
 
             return status;
         }
+
+
 
         public void Get_Data_By_ID(Mod_SLA Data, string SLA_Id)
         {
@@ -174,11 +192,16 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     Data.Vendor_id = Convert.ToString(dt_Comuter.Rows[0]["Vendor_id"]);
                     Data.Service_Type_Short = Convert.ToString(dt_Comuter.Rows[0]["Service_Type_Short"]);
                     Data.Service_Type_Details = Convert.ToString(dt_Comuter.Rows[0]["Service_Type_Details"]);
-                    Data.PO_Copy = Convert.ToString(dt_Comuter.Rows[0]["PO_Copy"]);
-                    Data.Approval_Copy = Convert.ToString(dt_Comuter.Rows[0]["Approval_Copy"]);
-                    Data.SLA_Copy = Convert.ToString(dt_Comuter.Rows[0]["SLA_Copy"]);
-                    Data.Service_ST_DT = Convert.ToDateTime(dt_Comuter.Rows[0]["Service_ST_DT"]).Date;
-                    Data.Expiry_DT = Convert.ToDateTime(dt_Comuter.Rows[0]["Expiry_DT"]).Date;
+
+                    if ( Convert.ToString( dt_Comuter.Rows[0]["Service_ST_DT"] )!= "" || Convert.ToString(dt_Comuter.Rows[0]["Service_ST_DT"]) != string.Empty)
+                    {
+                        Data.Service_ST_DT = Convert.ToDateTime(dt_Comuter.Rows[0]["Service_ST_DT"]).Date;
+                    }
+                    if (Convert.ToString(dt_Comuter.Rows[0]["Expiry_DT"]) != "" || Convert.ToString(dt_Comuter.Rows[0]["Expiry_DT"]) != string.Empty)
+                    {
+                        Data.Expiry_DT = Convert.ToDateTime(dt_Comuter.Rows[0]["Expiry_DT"]).Date;
+                    }
+
                     Data.Remarks = Convert.ToString(dt_Comuter.Rows[0]["Remarks"]);
 
                 }
@@ -187,7 +210,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             catch (Exception ex) { }
 
         }
-
 
 
 
@@ -234,9 +256,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
             return List_Item;
         }
-
-
-
 
 
     }
