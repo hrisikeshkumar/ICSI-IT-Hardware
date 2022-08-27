@@ -47,6 +47,66 @@
 </style>
 
 
+<style type="text/css">
+
+
+
+    .btn_download {
+        display: inline-block;
+        outline: 0;
+        cursor: pointer;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 10px;
+        vertical-align: middle;
+        border: 1px solid;
+        border-radius: 6px;
+        color: #ffffff;
+        background-color: #2ea44f;
+        border-color: #1b1f2326;
+        box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;
+        transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+        transition-property: color, background-color, border-color;
+    }
+
+        .btn_download:hover {
+            background-color: rgb(155 221 30 / 0.73);
+            border-color: #1b1f2326;
+            transition-duration: 0.1s;
+        }
+
+
+
+
+    .btn_delete {
+        display: inline-block;
+        outline: 0;
+        cursor: pointer;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 10px;
+        vertical-align: middle;
+        border: 1px solid;
+        border-radius: 6px;
+        color: #000000;
+        background-color: #f59191;
+        border-color: #1b1f2326;
+        box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;
+        transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+        transition-property: color, background-color, border-color;
+    }
+
+        .btn_delete:hover {
+            background-color: #f70c0c;
+            border-color: #1b1f2326;
+            transition-duration: 0.1s;
+        }
+
+
+</style>
+
 <div style=" margin-top: -50px;  text-align: center; height: 50px; align-content: center; width: 100% " class="card w-100 shadow p-3 mb-5 bg-white rounded">
 
     <p style="font-size:large; padding-top:-5px; font-weight:400;">Enter New SLA</p>
@@ -113,7 +173,7 @@
                         <tr>
                             <td style="width:100%;" colspan="3">
                                 <input type="file" name="postedFile" id="FileUpload_Id" />
-                                <input type="submit" id="btnFileUpload" value="Upload" />
+                                <input type="submit" id="btnFileUpload" class="btn_download" value="Upload" />
                                 <progress id="fileProgress" style="display: none"></progress>
                                 <span id="lblMessage" style="color: Green"></span>
                             </td>
@@ -135,10 +195,10 @@
                                                 @Html.DisplayFor(modelItem => item.File_Name)
                                             </td>
                                             <td>
-                                                <input type='submit' value='Download' class='cssdownload' id='@item.File_Id'/>
+                                                <input type='submit' value='Download' class='cssdownload btn_download' id='@item.File_Id'/>
                                             </td>
                                             <td>
-                                                <input type='submit' class='appDetails' id='@item.File_Id' value='Delete'/> 
+                                                <input type='submit' class='appDetails btn_delete' id='@item.File_Id' value='Delete'/> 
                                             </td>
                                            
                                         </tr>
@@ -292,8 +352,8 @@
                             $.each(response, function (key, val) {
 
                                 markup = "<tr><td> " + val.File_Name + " </td> " +
-                                    "<td>  <input type='submit' value='Download' class='cssdownload' id='" + val.File_Id + "' > </input> </td> " +
-                                    "<td style=' text-align: center'>  <input type='submit' class='appDetails' id='" + val.File_Id + "' value='Delete' > </input> </td></tr> "
+                                    "<td>  <input type='submit' value='Download' class='cssdownload btn_download' id='" + val.File_Id + "' > </input> </td> " +
+                                    "<td style=' text-align: center'>  <input type='submit' class='appDetails btn_delete' id='" + val.File_Id + "' value='Delete' > </input> </td></tr> "
 
                                 tableBody = $("#Files_Grid tbody");
                                 tableBody.append(markup);
@@ -345,8 +405,8 @@
                             $.each(response, function (key, val) {
 
                                 markup = "<tr><td> " + val.File_Name + " </td> " +
-                                    "<td>  <input type='button' value='Download' onclick='DownloadFile('" + val.File_Id + "')' /> </td> " +
-                                    "<td style=' text-align: center'>  <input type='submit' class='appDetails' id='" + val.File_Id + "' value='Delete' > </input> </td></tr> "
+                                    "<td>  <input type='submit' value='Download' class='cssdownload btn_download' id='" + val.File_Id + "' > </input> </td> " +
+                                    "<td style=' text-align: center'>  <input type='submit' class='appDetails btn_delete' id='" + val.File_Id + "' value='Delete' > </input> </td></tr> "
 
                                 tableBody = $("#Files_Grid tbody");
                                 tableBody.append(markup);
@@ -382,15 +442,6 @@
         event.preventDefault();
     });
 
-
-    function Base64ToBytes(base64) {
-        var s = window.atob(base64);
-        var bytes = new Uint8Array(s.length);
-        for (var i = 0; i < s.length; i++) {
-            bytes[i] = s.charCodeAt(i);
-        }
-        return bytes;
-    };
 
 
 </script>

@@ -32,6 +32,15 @@ namespace IT_Asset.Areas.Admin.Models
         public string Other_Dept_Remarks { get; set; }
         public string Completed_Status { get; set; }
         public bool Status { get; set; }
+
+        public List<File_List> Prop_Files { get; set; }
+
+    }
+
+    public class File_List
+    {
+        public string File_Id { get; set; }
+        public string File_Name { get; set; }
     }
 
     public class mod_Admin_Propsal_List
