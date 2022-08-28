@@ -11,6 +11,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public string Bud_Year { get; set; }
         public Boolean default_Bud { get; set; }
 
+        public string Update_UserId { get; set; }
+
         public List<Mod_Budget_Year> List_Bud_Year{get; set;}
     }
 

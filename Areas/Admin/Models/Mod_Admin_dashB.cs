@@ -33,6 +33,8 @@ namespace IT_Asset.Areas.Admin.Models
         public string Completed_Status { get; set; }
         public bool Status { get; set; }
 
+        public string Update_UserId { get; set; }
+
         public List<File_List> Prop_Files { get; set; }
 
     }

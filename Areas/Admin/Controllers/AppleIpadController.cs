@@ -45,9 +45,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             try
             {
 
+
                 if (ModelState.IsValid)
                 {
                     BL_AppleIpad save_data = new BL_AppleIpad();
+                    Get_Data.Create_usr_id = HttpContext.User.Identity.Name;
                     int status = save_data.Save_AppleIpad_data(Get_Data, "Add_new", "");
 
                     if (status > 0)
@@ -95,6 +97,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             int status = 0;
             try
             {
+                Get_Data.Create_usr_id = HttpContext.User.Identity.Name;
 
                 if (ModelState.IsValid)
                 {

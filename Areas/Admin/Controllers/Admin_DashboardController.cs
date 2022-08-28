@@ -19,6 +19,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult Admin_Dashboard()
         {
+            
 
             BL_Admin_DashB B_Layer = new BL_Admin_DashB();
 
@@ -84,10 +85,14 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             int status = 0;
             try
             {
+               
 
                 if (ModelState.IsValid)
                 {
                     BL_Admin_DashB B_Layer = new BL_Admin_DashB();
+
+
+                    Proposal_data.Update_UserId = HttpContext.User.Identity.Name;
 
                     status = B_Layer.Update_proposal(Proposal_data);
 

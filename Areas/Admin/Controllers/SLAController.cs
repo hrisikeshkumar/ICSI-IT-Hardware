@@ -55,6 +55,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             string Message = "";
             try
             {
+                Get_Data.Create_usr_id = HttpContext.User.Identity.Name;
                 string SLA_Id = string.Empty;
                 if (ModelState.IsValid)
                 {
@@ -151,7 +152,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             string SLA_Id_I = string.Empty;
             try
             {
-
+                Get_Data.Create_usr_id = HttpContext.User.Identity.Name;
                 if (ModelState.IsValid)
                 {
                     BL_SLA Md_Asset = new BL_SLA();
@@ -189,7 +190,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
            
             try
             {
-
+                Get_Data.Create_usr_id = HttpContext.User.Identity.Name;
                 if (ModelState.IsValid)
                 {
                     string SLA_Id = string.Empty;

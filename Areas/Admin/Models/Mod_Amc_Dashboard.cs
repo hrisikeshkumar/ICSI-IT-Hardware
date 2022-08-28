@@ -44,6 +44,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public string Item_SlNo { get; set; }
         public DateTime Warnt_Start_DT { get; set; }
         public DateTime Warnt_end_DT { get; set; }
+
+        public string Update_UserId { get; set; }
     }
 
     public class Mod_add_To_Amc
@@ -55,6 +57,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public DateTime AMC_Start_DT { get; set; }
         public DateTime AMC_End_DT { get; set; }
         public string Remarks { get; set; }
+
+        public string Update_UserId { get; set; }
         public List<SelectListItem> Vendor_List { get; set; }
 
     }
@@ -69,6 +73,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public string Vendor_name { get; set; }
         public DateTime AMC_End_Dt { get; set; }
         public DateTime Warranty_End_Dt { get; set; }
+
+        public string Update_UserId { get; set; }
+
     }
 
 
@@ -80,6 +87,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public List<SelectListItem> Vendor_List { get; set; }
         public DateTime Updated_AMC_Start_DT { get; set; }
         public DateTime Updated_AMC_End_DT { get; set; }
+
+        public string Update_UserId { get; set; }
+
         public List<Mod_Bulk_Amc_List> list_data { get; set; }
     }
 

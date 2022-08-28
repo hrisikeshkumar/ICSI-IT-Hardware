@@ -44,9 +44,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 string Message = "";
                 try
                 {
-
+                    Get_Data.Create_usr_id = HttpContext.User.Identity.Name;
                     if (ModelState.IsValid)
-                    {
+                        {
                         BL_Monitor save_data = new BL_Monitor();
                         int status = save_data.Save_Monitor_data(Get_Data, "Add_new", "");
 
@@ -93,7 +93,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 int status = 0;
                 try
                 {
-
+                    Get_Data.Create_usr_id = HttpContext.User.Identity.Name;
                     if (ModelState.IsValid)
                     {
                         BL_Monitor Md_Asset = new BL_Monitor();

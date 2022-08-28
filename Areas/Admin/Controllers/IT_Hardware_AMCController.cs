@@ -92,7 +92,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             int status = 0;
             try
             {
-
+                //Get_Data.Create_usr_id = HttpContext.User.Identity.Name;
                 if (ModelState.IsValid)
                 {
                     BL_Hardware_Amc Md_Asset = new BL_Hardware_Amc();
@@ -124,7 +124,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             int status = -1;
             try
             {
-
+                //data.user = HttpContext.User.Identity.Name;
                 if (ModelState.IsValid)
                 {
                     BL_Hardware_Amc Md_Asset = new BL_Hardware_Amc();

@@ -41,7 +41,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             string Message = "";
             try
             {
-
+                Get_Data.Create_usr_id = HttpContext.User.Identity.Name;
                 if (ModelState.IsValid)
                 {
                     BL_Item_Issue save_data = new BL_Item_Issue();

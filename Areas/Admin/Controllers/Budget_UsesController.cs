@@ -48,7 +48,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             string Message = "";
             try
             {
-
+                Get_Data.Create_User = HttpContext.User.Identity.Name;
                 if (ModelState.IsValid)
                 {
                     BL_Budget_Uses save_data = new BL_Budget_Uses();
@@ -101,7 +101,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             int status = 0;
             try
             {
-
+                Get_Data.Create_User = HttpContext.User.Identity.Name;
                 if (ModelState.IsValid)
                 {
                     BL_Budget_Uses Md_Asset = new BL_Budget_Uses();

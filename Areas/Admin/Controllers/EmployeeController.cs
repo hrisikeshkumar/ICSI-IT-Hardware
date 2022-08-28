@@ -48,7 +48,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             string Message = "";
             try
             {
-
+                Get_Data.Create_usr_id = HttpContext.User.Identity.Name;
                 if (ModelState.IsValid)
                 {
                     BL_Employee save_data = new BL_Employee();
@@ -102,7 +102,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             int status = 0;
             try
             {
-
+                Get_Data.Create_usr_id = HttpContext.User.Identity.Name;
                 if (ModelState.IsValid)
                 {
                     BL_Employee Md_Emp = new BL_Employee();

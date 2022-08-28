@@ -46,6 +46,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             string Message = "";
             try
             {
+                Get_Data.Create_usr_id = HttpContext.User.Identity.Name;
 
                 if (ModelState.IsValid)
                 {
@@ -95,7 +96,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             int status = 0;
             try
             {
-
+                Get_Data.Create_usr_id = HttpContext.User.Identity.Name;
                 if (ModelState.IsValid)
                 {
                     BL_Computer Md_Asset = new BL_Computer();
