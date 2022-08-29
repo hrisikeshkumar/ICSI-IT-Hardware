@@ -114,6 +114,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlParameter Asset_Type = new SqlParameter("@Asset_Type", "Desktop");
                 cmd.Parameters.Add(Asset_Type);
 
+
+                SqlParameter User_Id = new SqlParameter("@Create_Usr_Id", Data.Create_usr_id);
+                cmd.Parameters.Add(User_Id);
+
+
                 con.Open();
 
                 status = cmd.ExecuteNonQuery();

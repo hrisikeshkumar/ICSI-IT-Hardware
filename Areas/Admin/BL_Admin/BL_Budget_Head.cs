@@ -101,6 +101,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlParameter Remarks = new SqlParameter("@Remarks", Data.Remarks);
                 cmd.Parameters.Add(Remarks);
 
+                SqlParameter User_Id = new SqlParameter("@Create_Usr_Id", Data.Create_User);
+                cmd.Parameters.Add(User_Id);
+
                 con.Open();
 
                 status = cmd.ExecuteNonQuery();

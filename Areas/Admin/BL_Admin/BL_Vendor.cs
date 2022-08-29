@@ -13,8 +13,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
     public class BL_Vendor
     {
 
-
-
             public List<Mod_Vendor> Get_VendorData()
             {
 
@@ -99,12 +97,14 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     SqlParameter Remarks = new SqlParameter("@Remarks", Data.Remarks);
                     cmd.Parameters.Add(Remarks);
 
-                    
+
+                    SqlParameter User_Id = new SqlParameter("@Create_Usr_Id", Data.Create_usr_id);
+                    cmd.Parameters.Add(User_Id);
+
+
                     con.Open();
 
                     status = cmd.ExecuteNonQuery();
-
-                  
 
                 }
                 catch (Exception ex) { status = 1; }

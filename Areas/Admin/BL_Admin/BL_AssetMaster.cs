@@ -88,7 +88,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     cmd.Parameters.Add(Asset_Id);
                 }
 
-
                 SqlParameter Asset_make = new SqlParameter("@Item_Make", Data.Asset_make);
                 cmd.Parameters.Add(Asset_make);
 
@@ -97,6 +96,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 SqlParameter Asset_Type = new SqlParameter("@Item_Type", Data.Asset_Type);
                 cmd.Parameters.Add(Asset_Type);
+
+                SqlParameter User_Id = new SqlParameter("@Create_User", Data.Create_User);
+                cmd.Parameters.Add(User_Id);
 
                 con.Open();
 

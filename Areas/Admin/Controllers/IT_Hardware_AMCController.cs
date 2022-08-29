@@ -92,12 +92,12 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             int status = 0;
             try
             {
-                //Get_Data.Create_usr_id = HttpContext.User.Identity.Name;
+                string usr_id = HttpContext.User.Identity.Name;
                 if (ModelState.IsValid)
                 {
                     BL_Hardware_Amc Md_Asset = new BL_Hardware_Amc();
 
-                    status = Md_Asset.Remove_From_Amc(Item_Id);
+                    status = Md_Asset.Remove_From_Amc(Item_Id, usr_id);
 
                     if (status >0 )
                     {

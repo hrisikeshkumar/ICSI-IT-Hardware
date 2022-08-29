@@ -251,7 +251,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
         }
 
 
-        public int Remove_From_Amc(string Item_Id)
+        public int Remove_From_Amc(string Item_Id , string UserId)
         {
             int status = 1;
             string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
@@ -271,7 +271,10 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 cmd.Parameters.Add(Sql_Item_Id);
 
                 SqlParameter Sql_Type = new SqlParameter("@Type", "Remove_From_Amc");
-                cmd.Parameters.Add(Sql_Type);               
+                cmd.Parameters.Add(Sql_Type);
+
+                SqlParameter Sql_user = new SqlParameter("@Create_User", UserId);
+                cmd.Parameters.Add(Sql_user);
 
                 con.Open();
 
@@ -314,7 +317,12 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlParameter AMC_Vendor_Id = new SqlParameter("@AMC_Vendor_Id", data.AMC_Vendor_Id);
                 cmd.Parameters.Add(AMC_Vendor_Id);
 
-            
+
+                SqlParameter UserId = new SqlParameter("@Create_User", data.User_Id);
+                cmd.Parameters.Add(AMC_Vendor_Id);
+
+
+
                 con.Open();
 
                 status = cmd.ExecuteNonQuery();
@@ -432,6 +440,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 SqlParameter AMC_Vendor_Id = new SqlParameter("@Amc_All_Update", Dt_Update_data);
                 cmd.Parameters.Add(AMC_Vendor_Id);
+
+
+                SqlParameter UserId = new SqlParameter("@Create_User", data.User_Id);
+                cmd.Parameters.Add(AMC_Vendor_Id);
+
 
 
                 con.Open();

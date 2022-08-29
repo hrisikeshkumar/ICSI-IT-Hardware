@@ -197,12 +197,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                 SqlParameter sqlP_type = new SqlParameter("@Type", "Update_Status");
                 cmd.Parameters.Add(sqlP_type);
-
-               
+ 
                 SqlParameter Proposal_Id = new SqlParameter("@Proposal_Id", Proposal.Proposal_Id);
                 cmd.Parameters.Add(Proposal_Id);
-
-               
 
                 SqlParameter Dte_IT_Remarks = new SqlParameter("Dte_IT_Remarks", Proposal.Dte_IT_Remarks);
                 cmd.Parameters.Add(Dte_IT_Remarks);
@@ -222,13 +219,13 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlParameter Status = new SqlParameter("@Status",   Proposal.Status ==true? 1:0 );
                 cmd.Parameters.Add(Status);
 
-              
+                SqlParameter UserId = new SqlParameter("@UserId", Proposal.Update_UserId);
+                cmd.Parameters.Add(UserId);
 
 
                 con.Open();
 
                 status = cmd.ExecuteNonQuery();
-
 
 
             }

@@ -8,9 +8,7 @@ namespace IT_Asset.Areas.Admin.Models
     public class Mod_Admin_dashB
     {
         public Proposal_details Prop_detail { get; set; }
-
         public DateTime IT_Initiate_Date { get; set; }
-
         public List<mod_Admin_Propsal_List> List_Proposal { get; set; }
         public List<mod_Admin_Bill_Process_List> List_Bill_Process { get; set; }
         public List<mod_SLA_Expiary_List> List_SLA_Expiary { get; set; }

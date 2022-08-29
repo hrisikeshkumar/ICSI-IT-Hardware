@@ -124,11 +124,13 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 SqlParameter Entry_Date = new SqlParameter("@Processing_Date", Data.Processing_Date);
                 cmd.Parameters.Add(Entry_Date);
 
+                SqlParameter UserId = new SqlParameter("@Create_Usr_Id", Data.Create_User);
+                cmd.Parameters.Add(UserId);
+
 
                 con.Open();
 
                 status = cmd.ExecuteNonQuery();
-
 
 
             }

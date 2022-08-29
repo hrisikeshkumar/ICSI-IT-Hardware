@@ -71,7 +71,7 @@
 
             <thead>
                 <tr style="background-color: #b2f3b2;; font-weight: bold; ">
-                    <td style="width: 65%; font-weight:bold;"> <h5> Proposal Initiated </h5></td>
+                    <td style="width: 65%; font-weight:bold"> <h5> Proposal Initiated </h5></td>
                     <td style="width: 20%; font-weight: bold;"><h5>Initiate Date </h5></td>
                     <td style="width: 15%; font-weight: bold; text-align: center"> <h5>Status </h5></td>
 
@@ -85,15 +85,15 @@
                     <tr>
                         <td style="width:60%;">
                             <a href=""
-                               class=" " data-toggle="modal" data-target="#myModal2" data-status="@Item.Proposal_Id" id="@Item.Proposal_Id">
+                               class=" "   style="font-size:large"  data-toggle="modal" data-target="#myModal2" data-status="@Item.Proposal_Id" id="@Item.Proposal_Id">
                                 @Item.Utilization_Details
                             </a>
                         </td>
                         <td style="width:15%;">
-                            @Html.DisplayFor(modelitem => Item.IT_Initiate_Date, new { @class = "form-rounded", @style = " width :80%; " })
+                            @Html.DisplayFor(modelitem => Item.IT_Initiate_Date, new { @class = "form-rounded", @style = " width :80%; font-size:large " })
                         </td>
                         <td style="width: 15%; text-align: center">
-                            @Html.DisplayFor(modelitem => Item.Status, new { @class = "form-rounded", @style = " width :80%; " })
+                            @Html.DisplayFor(modelitem => Item.Status, new { @class = "form-rounded", @style = " width :80%; font-size:large" })
                         </td>
 
 
@@ -128,15 +128,15 @@
                     <tr>
                         <td style="width:60%;">
                             <a href=""
-                               class=" " data-toggle="modal" data-target="#myModal2" data-status="@Item.Proposal_Id" id="@Item.Proposal_Id">
+                               class=" "  style="font-size:large"  data-toggle="modal" data-target="#myModal2" data-status="@Item.Proposal_Id" id="@Item.Proposal_Id">
                                 @Item.Utilization_Details
                             </a>
                         </td>
                         <td style="width:15%;">
-                            @Html.DisplayFor(modelitem => Item.IT_Initiate_Date, new { @class = "form-rounded", @style = " width :80%; " })
+                            @Html.DisplayFor(modelitem => Item.IT_Initiate_Date, new { @class = "form-rounded", @style = " width :80%; font-size:large " })
                         </td>
                         <td style="width: 15%; text-align: center">
-                            @Html.DisplayFor(modelitem => Item.Status, new { @class = "form-rounded", @style = " width :80%; " })
+                            @Html.DisplayFor(modelitem => Item.Status, new { @class = "form-rounded", @style = " width :80%; font-size:large " })
                         </td>
 
 

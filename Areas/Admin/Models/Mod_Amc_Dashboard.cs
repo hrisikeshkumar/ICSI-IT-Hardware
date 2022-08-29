@@ -33,6 +33,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public List<SelectListItem> Vendor_List { get; set; }
         public DateTime AMC_Start_DT { get; set; }
         public DateTime AMC_End_DT { get; set; }
+
+        public string User_Id { get; set; }
+
         public List<Mod_List_Warranty_Amc> list_data { get; set; }
     }
 
@@ -88,7 +91,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public DateTime Updated_AMC_Start_DT { get; set; }
         public DateTime Updated_AMC_End_DT { get; set; }
 
-        public string Update_UserId { get; set; }
+        public string User_Id { get; set; }
 
         public List<Mod_Bulk_Amc_List> list_data { get; set; }
     }
