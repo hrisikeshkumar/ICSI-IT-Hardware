@@ -49,12 +49,12 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     if (status > 0)
                     {
-                        TempData["Message"] = String.Format("Data is not saved");
+                        TempData["Message"] = String.Format("Data save successfully");
                     }
                     else
                     {
 
-                        TempData["Message"] = String.Format("Data save successfully");
+                        TempData["Message"] = String.Format("Data is not saved");
                     }
                 }
                 else

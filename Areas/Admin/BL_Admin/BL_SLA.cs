@@ -56,6 +56,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                     BL_data.Vendor_id = Convert.ToString(dr["Vendor_ID"]);
 
+                    BL_data.Vendor_Name = Convert.ToString(dr["Vendor_name"]);
+
                     if (Convert.ToString(dr["Expiry_DT"]) != null && Convert.ToString(dr["Expiry_DT"]) != string.Empty && Convert.ToString(dr["Expiry_DT"]) !="")
                     {
                         BL_data.Expiry_DT = Convert.ToDateTime(dr["Expiry_DT"]);

@@ -14,6 +14,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public string SLA_Id { get; set; }
         [Required]
         public string Vendor_id { get; set; }
+
+        public string Vendor_Name { get; set; }
         public List<SelectListItem> Vendor_List { get; set; }
         [Required]
         public string Service_Type_Short { get; set; }

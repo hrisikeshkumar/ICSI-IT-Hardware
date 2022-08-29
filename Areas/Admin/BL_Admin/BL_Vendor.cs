@@ -66,7 +66,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
             public int Save_Vendor_data(Mod_Vendor Data, string type, string Vendor_ID)
             {
-                int status = 1;
+                int status = -1;
                 string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
                 SqlConnection con = new SqlConnection(strcon);
                 try
@@ -107,7 +107,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     status = cmd.ExecuteNonQuery();
 
                 }
-                catch (Exception ex) { status = 1; }
+                catch (Exception ex) { status = -1; }
                 finally { con.Close(); }
 
                 return status;
