@@ -13,8 +13,10 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
     {
 
         public string Item_id { get; set; }
+        [Required]
         public string Item_Make_id { get; set; }
         public List<SelectListItem> Item_Make_List { get; set; }
+        [Required]
         public string Item_Model_id { get; set; }
         public List<SelectListItem> Item_Model_List { get; set; }
         public string Item_Type { get; set; }
@@ -25,6 +27,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Models
         public int price { get; set; }
         [Required]
         public DateTime? Proc_date { get; set; }
+        [Required]
         public DateTime? Warnt_end_dt { get; set; }
         public string Create_usr_id { get; set; }
         public DateTime? Create_date { get; set; }

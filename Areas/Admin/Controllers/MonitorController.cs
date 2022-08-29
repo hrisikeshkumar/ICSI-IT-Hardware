@@ -46,7 +46,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 {
                     Get_Data.Create_usr_id = HttpContext.User.Identity.Name;
                     if (ModelState.IsValid)
-                        {
+                    {
                         BL_Monitor save_data = new BL_Monitor();
                         int status = save_data.Save_Monitor_data(Get_Data, "Add_new", "");
 
@@ -59,7 +59,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                             TempData["Message"] = String.Format("Data is not saved");
                         }
                     }
-                }
+                    else
+                    {
+                        TempData["Message"] = String.Format("Required Data are not Provided");
+                    }
+            }
                 catch (Exception ex)
                 {
 
@@ -109,7 +113,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                             TempData["Message"] = String.Format("Data is not saved");
                         }
                     }
-                }
+                    else
+                    {
+                        TempData["Message"] = String.Format("Required Data are not Provided");
+                    }
+            }
                 catch (Exception ex)
                 {
 

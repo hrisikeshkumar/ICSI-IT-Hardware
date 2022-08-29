@@ -45,6 +45,10 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                         TempData["Message"] = String.Format("Data is not saved");
                     }
                 }
+                else
+                {
+                    TempData["Message"] = String.Format("Required Data are not Provided");
+                }
             }
             catch (Exception ex)
             {
@@ -79,6 +83,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                         TempData["Message"] = String.Format("Data is not saved");
                     }
                 }
+                else
+                {
+                    TempData["Message"] = String.Format("Required Data are not Provided");
+                }
+
             }
             catch (Exception ex)
             {
