@@ -18,7 +18,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
     public class SLAController : Controller
     {
 
-        //[Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult SLA_Details()
         {
             BL_SLA com = new BL_SLA();
@@ -29,7 +29,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-        //[Authorize(Roles = "SU, Admin, Manager")]
+        [Authorize(Roles = "SU, Admin, Manager")]
         [HttpGet]
         public ActionResult SLA_Create_Item(string Message)
         {
@@ -47,7 +47,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-        //[Authorize(Roles = "SU, Admin, Manager")]
+        [Authorize(Roles = "SU, Admin, Manager")]
         [HttpPost]
         public ActionResult SLA_CreateItem_Post(Mod_SLA Get_Data)
         {
@@ -128,7 +128,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
 
 
-        //[Authorize(Roles = "SU, Admin, Manager")]
+        [Authorize(Roles = "SU, Admin, Manager")]
         public ActionResult Edit_SLA(string id)
         {
             BL_SLA BL_data = new BL_SLA();

@@ -48,6 +48,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 }
 
 
+
+
                 foreach (DataRow dr in dt_Comuter.Rows)
                 {
                     BL_data = new Mod_SLA();
@@ -73,6 +75,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
             return current_data;
         }
+
 
         public int Save_SLA_data(Mod_SLA Data, string type, string SLA_ID , out string SLA_Id_Update)
         {

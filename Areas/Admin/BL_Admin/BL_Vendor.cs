@@ -64,9 +64,11 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 return current_data;
             }
 
-            public int Save_Vendor_data(Mod_Vendor Data, string type, string Vendor_ID)
+            public int Save_Vendor_data(Mod_Vendor Data, string type, string Vendor_ID , out string Vendor_Id_Update)
             {
+                
                 int status = -1;
+                Vendor_Id_Update = string.Empty;
                 string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
                 SqlConnection con = new SqlConnection(strcon);
                 try
@@ -102,16 +104,31 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     cmd.Parameters.Add(User_Id);
 
 
-                    con.Open();
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
 
-                    status = cmd.ExecuteNonQuery();
+                        sda.SelectCommand = cmd;
+                        using (DataTable dt = new DataTable())
+                        {
+                            sda.Fill(dt);
+
+                            if (dt.Rows.Count > 0)
+                            {
+                                Vendor_Id_Update = Convert.ToString(dt.Rows[0]["Vendor_Id"]);
+                                status = Convert.ToInt32(dt.Rows[0]["Row_Effect"]);
+                            }
+
+                        }
+                    }
+
+
 
                 }
                 catch (Exception ex) { status = -1; }
-                finally { con.Close(); }
+                    finally { con.Close(); }
 
-                return status;
-            }
+                    return status;
+                }
 
             public Mod_Vendor Get_Data_By_ID(string Vendor_Id)
             {

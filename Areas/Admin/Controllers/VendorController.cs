@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -42,14 +45,54 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             try
             {
                 Get_Data.Create_usr_id = HttpContext.User.Identity.Name;
+                string Vendor_Id = string.Empty;
                 if (ModelState.IsValid)
                 {
                     BL_Vendor save_data = new BL_Vendor();
-                    int status = save_data.Save_Vendor_data(Get_Data, "Add_new", "");
+                    int status = save_data.Save_Vendor_data(Get_Data, "Add_new", "", out Vendor_Id);
 
                     if (status > 0)
                     {
                         TempData["Message"] = String.Format("Data save successfully");
+
+
+
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            //HttpPostedFile httpPostedFile = Request.Files;
+
+                            var postedFile = Request.Files[i];
+
+                            if (postedFile != null)
+                            {
+
+                                byte[] bytes;
+                                using (BinaryReader br = new BinaryReader(postedFile.InputStream))
+                                {
+                                    bytes = br.ReadBytes(postedFile.ContentLength);
+                                }
+                                string constr = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                                using (SqlConnection con = new SqlConnection(constr))
+                                {
+                                    string query = "INSERT INTO File_table(File_Id,  File_Table, File_Ref_Id, File_Name, ContentType, File_Data) VALUES ( dbo.Get_Unique_File_Id(), 'Vendor', @Ref_Id,   @Name, @ContentType, @Data)";
+                                    using (SqlCommand cmd = new SqlCommand(query))
+                                    {
+                                        cmd.Connection = con;
+                                        cmd.Parameters.AddWithValue("@Name", Path.GetFileName(postedFile.FileName));
+                                        cmd.Parameters.AddWithValue("@ContentType", postedFile.ContentType);
+                                        cmd.Parameters.AddWithValue("@Data", bytes);
+                                        cmd.Parameters.AddWithValue("@Ref_Id", Vendor_Id);
+                                        con.Open();
+                                        cmd.ExecuteNonQuery();
+                                        con.Close();
+                                    }
+                                }
+
+
+                            }
+                        }
+
+
                     }
                     else
                     {
@@ -79,6 +122,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             BL_Vendor Md_Com = new BL_Vendor();
             Mod_Vendor data = Md_Com.Get_Data_By_ID(id);
 
+            data.File_List = GetFiles_By_Id(id);
+
+
             return View("~/Areas/Admin/Views/Vendor/Edit_Vendor.cshtml", data);
         }
 
@@ -97,7 +143,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 {
                     BL_Vendor Md_Asset = new BL_Vendor();
 
-                    status = Md_Asset.Save_Vendor_data(Get_Data, "Update", Get_Data.Vendor_id);
+                    string out_param = string.Empty;
+
+                    status = Md_Asset.Save_Vendor_data(Get_Data, "Update", Get_Data.Vendor_id, out out_param);
 
                     if (status > 0)
                     {
@@ -124,7 +172,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-
         [Authorize(Roles = "SU, Admin, Manager")]
         public ActionResult Delete_Vendor(Mod_Vendor Get_Data, string id)
         {
@@ -138,7 +185,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     BL_Vendor Md_Asset = new BL_Vendor();
 
-                    status = Md_Asset.Save_Vendor_data(Get_Data, "Delete", id);
+                    string out_param = string.Empty;
+
+                    status = Md_Asset.Save_Vendor_data(Get_Data, "Delete", id,  out out_param);
 
                     if (status >0)
                     {
@@ -161,7 +210,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
-
         protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
         {
             if (filterContext.HttpContext.Request.IsAuthenticated)
@@ -177,6 +225,139 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 filterContext.Result = new RedirectResult("~/Log_In/Log_In");
             }
         }
+
+
+
+        [HttpPost]
+        public JsonResult FiliUpload()
+        {
+
+            HttpPostedFileBase postedFile = Request.Files[0];
+
+            string SLA_Id = Request.Form["SLA_Id"].ToString();
+
+            byte[] bytes;
+            using (BinaryReader br = new BinaryReader(postedFile.InputStream))
+            {
+                bytes = br.ReadBytes(postedFile.ContentLength);
+            }
+            string constr = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "INSERT INTO File_table(File_Id,  File_Table, File_Ref_Id, File_Name, ContentType, File_Data) VALUES ( dbo.Get_Unique_File_Id(), 'Vendor', @Ref_Id,   @Name, @ContentType, @Data)";
+                using (SqlCommand cmd = new SqlCommand(query))
+                {
+                    cmd.Connection = con;
+                    cmd.Parameters.AddWithValue("@Name", Path.GetFileName(postedFile.FileName));
+                    cmd.Parameters.AddWithValue("@ContentType", postedFile.ContentType);
+                    cmd.Parameters.AddWithValue("@Data", bytes);
+                    cmd.Parameters.AddWithValue("@Ref_Id", SLA_Id);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+
+
+            return Json(GetFiles_By_Id(SLA_Id), JsonRequestBehavior.AllowGet);
+
+        }
+
+
+
+        private static List<FileModel> GetFiles_By_Id(string SLA_Id)
+        {
+            List<FileModel> files = new List<FileModel>();
+            string constr = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT File_Id, File_Name FROM File_table where  LTRIM(RTRIM(File_table))= 'Vendor' and  LTRIM(RTRIM(File_Ref_Id))=LTRIM(RTRIM('" + SLA_Id + "')) "))
+                {
+                    cmd.Connection = con;
+                    con.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        while (sdr.Read())
+                        {
+                            files.Add(new FileModel
+                            {
+                                File_Id = Convert.ToString(sdr["File_Id"]),
+                                File_Name = Convert.ToString(sdr["File_Name"])
+                            });
+                        }
+                    }
+                    con.Close();
+                }
+            }
+            return files;
+        }
+
+
+
+        public JsonResult DeleteFile(string FileId, string RefId)
+        {
+
+            string constr = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "delete from File_table where LTRIM(RTRIM(File_Id)) =LTRIM(RTRIM(@File_Id))";
+                using (SqlCommand cmd = new SqlCommand(query))
+                {
+                    cmd.Connection = con;
+                    cmd.Parameters.AddWithValue("@File_Id", FileId);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+
+
+            return Json(GetFiles_By_Id(RefId), JsonRequestBehavior.AllowGet);
+
+        }
+
+
+
+        public FileResult Download(string fileId)
+        {
+
+
+            byte[] bytes;
+            string fileName, contentType;
+            string constr = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = "select File_Id, File_table, File_Name, ContentType, File_Data from File_table WHERE LTRIM(RTRIM(File_Id))= LTRIM(RTRIM(@Id))";
+                    cmd.Parameters.AddWithValue("@Id", fileId);
+                    cmd.Connection = con;
+                    con.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        sdr.Read();
+                        bytes = (byte[])sdr["File_Data"];
+                        contentType = sdr["ContentType"].ToString();
+                        fileName = sdr["File_Name"].ToString();
+                    }
+                    con.Close();
+                }
+            }
+
+
+            return File(bytes, contentType, fileName);
+        }
+
+
+
+
+
+
+
+
+
+
+
 
 
     }
