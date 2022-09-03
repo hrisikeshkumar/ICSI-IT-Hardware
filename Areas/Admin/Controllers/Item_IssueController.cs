@@ -220,5 +220,16 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
         }
 
 
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager")]
+        public JsonResult Search_Item(string SL_Num)
+        {
+
+            BL_Item_Issue com = new BL_Item_Issue();
+
+            return Json(com.Get_Item_By_Sl(SL_Num), JsonRequestBehavior.AllowGet);
+
+        }
+
+
     }
 }

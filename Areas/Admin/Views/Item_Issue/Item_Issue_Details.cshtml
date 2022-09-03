@@ -27,7 +27,7 @@
                         <!-- partial:index.partial.html -->
                         <div class="search__container">
 
-                            <input class="search__input" type="text" placeholder="Search">
+                            <input class="search__input" id="SL_Number" type="text" placeholder="Search  by Serial Number">
                         </div>
                     </div>
                 </div>
@@ -48,10 +48,13 @@
         </tr>
         <tr>
             <td colspan="2">
-                <table style="width:100%">
+                <table id="Bud_Uses_Grid" style="width:100%">
                     <tr>
                         <th>
                             Item Type
+                        </th>
+                        <th>
+                            Item Serial No.
                         </th>
                         <th>
                             Presently Issued
@@ -65,9 +68,7 @@
                         <th>
                             Issue Date
                         </th>
-                        <th>
-                            Action 
-                        </th>
+
                     </tr>
 
                     @foreach (var item in Model)
@@ -75,6 +76,9 @@
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Item_Type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Item_SerialNo)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Transfered_Emp_Name)
@@ -88,13 +92,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Issued_date)
                             </td>
-                            <td>
 
-                                @Html.ActionLink("Details", "Get_Detail", new { id = item.Item_Issue_Id }) |
-                                @Html.ActionLink("Edit", "Get_Detail", new { id = item.Item_Issue_Id }) |
-                                @Html.ActionLink("Delete", "Delete_Item_Issue", new { id = item.Item_Issue_Id })
-
-                            </td>
                         </tr>
                     }
 
@@ -115,13 +113,14 @@
         toastr.error("Error:" + Msg);
     };
 </script>
+
+
 @if (ViewBag.JavaScriptFunction != null)
 {
     <script type="text/javascript">
         @Html.Raw(ViewBag.JavaScriptFunction)
     </script>
 }
-
 
 
 @if (TempData["Message"] != null && TempData["Message"] != "" && TempData["Message"] != string.Empty)
@@ -136,4 +135,61 @@
     </script>
 
 }
+
+
+
+<script type="text/javascript">
+    $(function () {
+
+        $("#SL_Number").keyup(function () {
+            $("#Bud_Uses_Grid tr").remove();
+
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Item_Issue/Search_Item",
+                datatype: "Json",
+                data: { SL_Num: $('#SL_Number').val() },
+                success: function (response) {
+
+                    markup = "<tr><th style='width: 15%;'> Item Type </th> <th style='width: 15%;'>  Serial Number </th> <th style='width: 15%;'> Issued Employee </th> <th style='width: 15%; '> Designation </th>  <th style='width: 15%;'> Previous Employee </th>  <th style='width: 15%; '> Issued Date </th>  </tr>";
+                    tableBody = $("#Bud_Uses_Grid tbody");
+                    tableBody.append(markup);
+
+                    if (response != null) {
+                        //$.each(response.Bud_Uses_List[i], function (Budget_Uses_Id, Budget_Name, Budget_Amount, Budget_Type ) {
+                        $.each(response, function (key, val) {
+
+                            //var date = new Date(val.Issued_date);
+
+                            var date = new Date(parseInt(val.Issued_date.substr(6)));
+
+                            markup = "<tr><td> " + val.Item_Type + " </td> " +
+                                "<td> " + val.Item_SerialNo + " </td> " +
+                                "<td> " + val.Transfered_Emp_Name + " </td> " +
+                                "<td> " + val.Transfered_Emp_Designation + " </td> " +
+                                "<td> " + val.Previous_Emp_Name + " </td> " +
+                                "<td> " + date.toDateString() + " </td> </tr> "
+                            tableBody = $("#Bud_Uses_Grid tbody");
+                            tableBody.append(markup);
+
+
+
+                        });
+                    } else {
+                        alert("Something went wrong");
+                    }
+                },
+              
+
+            });
+
+        });
+    });
+
+</script>
+
+
+
+
+
 

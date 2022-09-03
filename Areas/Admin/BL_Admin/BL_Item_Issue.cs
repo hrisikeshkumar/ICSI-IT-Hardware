@@ -51,6 +51,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
                     BL_data.Item_Issue_Id = Convert.ToString(dr["Issue_Id"]);
 
+                    BL_data.Item_SerialNo = Convert.ToString(dr["Item_SlNo"]);
+
                     BL_data.Transfered_Emp_Name = Convert.ToString(dr["Emp_Name"]);
 
                     BL_data.Transfered_Emp_Designation = Convert.ToString(dr["Designation_name"]);
@@ -69,6 +71,70 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
             return current_data;
         }
+
+
+        public List<Mod_Item_Issue> Get_Item_By_Sl(string Sl_Num)
+        {
+
+            Mod_Item_Issue BL_data;
+            List<Mod_Item_Issue> current_data = new List<Mod_Item_Issue>();
+
+            try
+            {
+                DataTable dt_Comuter;
+                string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                SqlConnection con = new SqlConnection(strcon);
+
+
+                using (SqlCommand cmd = new SqlCommand("sp_Item_Issue"))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = con;
+                    SqlParameter sqlP_type = new SqlParameter("@Type", "Get_By_SL");
+                    cmd.Parameters.Add(sqlP_type);
+                    SqlParameter Sl_No = new SqlParameter("@Item_Id", Sl_Num);
+                    cmd.Parameters.Add(Sl_No);
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        sda.SelectCommand = cmd;
+                        using (DataTable dt = new DataTable())
+                        {
+                            sda.Fill(dt);
+                            dt_Comuter = dt;
+                        }
+                    }
+                }
+
+
+                foreach (DataRow dr in dt_Comuter.Rows)
+                {
+                    BL_data = new Mod_Item_Issue();
+
+                    BL_data.Item_Issue_Id = Convert.ToString(dr["Issue_Id"]);
+
+                    BL_data.Item_SerialNo = Convert.ToString(dr["Item_SlNo"]);
+
+                    BL_data.Transfered_Emp_Name = Convert.ToString(dr["Emp_Name"]);
+
+                    BL_data.Transfered_Emp_Designation = Convert.ToString(dr["Designation_name"]);
+
+                    BL_data.Previous_Emp_Name = Convert.ToString(dr["Prev_Emp_Name"]);
+
+                    BL_data.Issued_date = Convert.ToDateTime(dr["Item_Issue_date"]);
+
+                    BL_data.Item_Type = Convert.ToString(dr["Asset_Type"]);
+
+                    current_data.Add(BL_data);
+                }
+
+            }
+            catch (Exception ex) { }
+
+            return current_data;
+        }
+
 
         public int Save_Item_Issue_data(Mod_Item_Issue Data, string type, string Issued_Id)
         {
@@ -334,6 +400,9 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
             return List_Item;
         }
+
+
+
 
 
     }

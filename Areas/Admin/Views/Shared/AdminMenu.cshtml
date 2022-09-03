@@ -167,7 +167,7 @@
             <li> <a href="@Url.Action("Item_Issue_Details", null, new { area = string.Empty, controller = "Item_Issue" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-compass"></i> </span> Issue Item To Employees</a>  </li>
             <li> <a href="@Url.Action("Shift_Item_Details", null, new { area = string.Empty, controller = "Shift_Item" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-compass"></i> </span> Shift Item To Other Company</a>  </li>
             <li> <a href="@Url.Action("Amc_DashBoard", null, new { area = string.Empty, controller = "IT_Hardware_AMC" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-compass"></i> </span> IT Hardware AMC Details</a>  </li>
-            <li> <a href="@Url.Action("Proposal_Details", null, new { area = string.Empty, controller = "Proposal_Initiated" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-compass"></i> </span> IT Hardware AMC Details</a>  </li>
+           
 
             <li class="has-child">
                 <span class="its-parent">
@@ -238,8 +238,7 @@
                 </ul>
             </li>
 
-            <li> <a href="@Url.Action("Approval_Details", null, new { area = string.Empty, controller = "Approval" }, Request.Url.Scheme)"> <span class="icon"> <i class="zmdi zmdi-compass"></i> </span> Approval</a>  </li>
-
+         
             <li class="has-child">
                 <span class="its-parent">
                     <span class="icon">
@@ -247,8 +246,8 @@
                     </span>Reports
                 </span>
                 <ul class="its-children">
-                    <li> <a href="#1"> Stock Report </a></li>
-                    <li> <a href="#1"> Items Movement Report</a></li>
+                    <li> <a href="@Url.Action("OtherItem_Details", null, new { area = string.Empty, controller = "Stock_Report" }, Request.Url.Scheme)"> Mislenious Items</a> </li>
+                    <li> <a href="@Url.Action("OtherItem_Details", null, new { area = string.Empty, controller = "Stock_Report" }, Request.Url.Scheme)"> Mislenious Items</a> </li>
 
                 </ul>
             </li>
