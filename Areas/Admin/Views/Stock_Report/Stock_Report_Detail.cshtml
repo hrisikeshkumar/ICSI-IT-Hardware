@@ -18,25 +18,73 @@
 </style>
 
 
+
+<style type="text/css">
+    .button_cls {
+        background: #1AAB8A;
+        color: #fff;
+        border: none;
+        position: relative;
+        height: 25px;
+        font-size: 1em;
+        padding: 0 2em;
+        cursor: pointer;
+        transition: 800ms ease all;
+        outline: none;
+    }
+
+        .button_cls:hover {
+            background: #fff;
+            color: #1AAB8A;
+        }
+
+        .button_cls:before, button:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 2px;
+            width: 0;
+            background: #1AAB8A;
+            transition: 400ms ease all;
+        }
+
+        .button_cls:after {
+            right: inherit;
+            top: inherit;
+            left: 0;
+            bottom: 0;
+        }
+
+        .button_cls:hover:before, button:hover:after {
+            width: 100%;
+            transition: 800ms ease all;
+        }
+</style>
+
+
+
+
 <div style=" align-content:center; width:100%" class="card w-100 shadow p-3 mb-5 bg-white rounded">
     <table class=" table-hover table-striped shadow " style="width:100%">
 
+       
         <tr>
             <td colspan="2" style="text-align:center">
-                <h3>  Stock Report </h3>
+                <h3> Stock Report </h3>
             </td>
         </tr>
         <tr>
-            <td colspan="2" style="height:10px;">
+            <td colspan="2" style="height:20px;">
             </td>
         </tr>
         <tr>
             <td colspan="2">
 
-                @using (Html.BeginForm("Post_Stock_Report", "Stock_Report", FormMethod.Post))
+                @using (Html.BeginForm("Inventary_Report", "Stock_Report", FormMethod.Post))
                 {
 
-                    <table style="width:90%">
+                    <table style="width:100%;">
                         <tr>
                             <td style="width:30%;">
                                 Stock Type
@@ -68,7 +116,7 @@
                             <td style="width:30%;">
                                 Report Type
                             </td>
-                            <td style="width:70%;">
+                            <td style="width: 70%; text-align: center;">
 
                                 @Html.DropDownList("Report_Type", new List<SelectListItem>
                                     {
@@ -106,7 +154,7 @@
                     </table>
 
                 }
-                </td>
+            </td>
 
         </tr>
 
