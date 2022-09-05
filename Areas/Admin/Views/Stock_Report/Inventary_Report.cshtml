@@ -22,7 +22,7 @@
     <tr>
         <td colspan="10">
             <div id="Grid" style="width:100%;">
-                <table   cellpadding="5" cellspacing="0" style="width:100%;  border: 1px solid #ccc;font-size: 9pt;">
+                <table cellpadding="5" cellspacing="0" style="width:100%;  border: 1px solid #ccc;font-size: 9pt;">
                     <tr>
 
 
@@ -61,10 +61,10 @@
                         </tr>
                     }
                 </table>
-                </div>
+            </div>
         </td>
     </tr>
-  
+
 
     <tr>
         <td colspan="10" style="height:50px;">
@@ -75,18 +75,36 @@
             @using (Html.BeginForm("Export", "Stock_Report", FormMethod.Post))
             {
                 <input type="hidden" name="GridHtml" />
-                <input type="submit" id="btnSubmit" value="Print" />
+                <input type="submit" id="btnSubmit" value="Print To Pdf" />
             }
-            </td>
+
+            <input type="submit" id="btnExport" value="Export To Excel" />
+        </td>
     </tr>
 
 </table>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript">
-        $(function () {
-            $("#btnSubmit").click(function () {
-                $("input[name='GridHtml']").val($("#Grid").html());
+    $(function () {
+        $("#btnSubmit").click(function () {
+            $("input[name='GridHtml']").val($("#Grid").html());
+        });
+    });
+
+</script>
+
+
+<script src="~/js/table2excel.js"></script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnExport").click(function () {
+            $("#Grid").table2excel({
+                filename: "StockReport.xls"
             });
         });
+    });
 </script>
+

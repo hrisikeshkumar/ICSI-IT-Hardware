@@ -282,6 +282,7 @@
     <Content Include="js\jquery.hsmenu.min.js" />
     <Content Include="js\jquery.min.js" />
     <Content Include="js\main.js" />
+    <Content Include="js\table2excel.js" />
     <Content Include="js\Validation\jquery.validate.js" />
     <Content Include="js\Validation\jquery.validate.min.js" />
     <Content Include="js\Validation\jquery.validate.unobtrusive.js" />
