@@ -22,6 +22,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Employee/Employee_Details.cshtml", Emp_List);
         }
 
+
+
         [Authorize(Roles = "SU, Admin")]
         [HttpGet]
         public ActionResult Create_Employee(string Message)
@@ -39,6 +41,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Employee/Create_Employee.cshtml", Mod_emp);
 
         }
+
+
 
         [Authorize(Roles = "SU, Admin")]
         [HttpPost]
@@ -79,6 +83,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return RedirectToAction("Create_Employee", "Employee");
         }
 
+
         [Authorize(Roles = "SU, Admin")]
         public ActionResult Edit_Employee(string id)
         {
@@ -95,8 +100,10 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Employee/Edit_Employee.cshtml", Mod_emp);
         }
 
+
+
         [Authorize(Roles = "SU, Admin")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
         public ActionResult Update_Employee(Mod_Employee Get_Data)
         {
             int status = 0;
@@ -109,7 +116,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
                     status = Md_Emp.Save_Employee_data(Get_Data, "Update");
 
-                    if (status == 1)
+                    if (status > 0)
                     {
                         TempData["Message"] = String.Format("Data have saved successfully");
                     }
@@ -126,8 +133,10 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             }
 
-            return RedirectToAction("Update_Employee", "Employee");
+            return RedirectToAction("Employee_Details", "Employee");
         }
+
+
 
         [Authorize(Roles = "SU, Admin")]
         public ActionResult Delete_Employee(Mod_Employee Get_Data)
@@ -163,6 +172,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
             return RedirectToAction("Employee_Details", "Employee");
         }
+
+
 
         [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public JsonResult Get_Designation(string Emp_Type)

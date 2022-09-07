@@ -323,6 +323,8 @@
             var button = $(e.relatedTarget) // Button that triggered the modal
             var proposal_id = button.data('status') // Extract info from data-* attributes
 
+            $("#Files_Grid tr").remove();
+
             $.ajax({
                 type: "POST",
                 url: "/Admin/Admin_Dashboard/Get_Proposal_Detail_for_Modal",
@@ -338,7 +340,11 @@
                         $('#Prop_detail_Purchase_Remarks').val(response.Prop_detail.Purchase_Remarks);
                         $('#Prop_detail_Other_Dept_Remarks').val(response.Prop_detail.Other_Dept_Remarks);
 
+                        markup = "  <tr> <th style='width: 70%; text-align: left; border: 1px solid black; height: 30px; background-color: #ffcc00 '> File Name </th> " +
+                            "<th style='width: 30%; text-align: center; border: 1px solid black; background-color: #ffcc00 '> Download </th> </tr> "
 
+                        tableBody = $("#Files_Grid tbody");
+                        tableBody.append(markup);
 
                         $.each(response.Prop_detail.Prop_Files, function (key, val) {
 

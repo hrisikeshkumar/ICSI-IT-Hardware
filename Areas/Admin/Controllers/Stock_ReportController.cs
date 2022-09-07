@@ -15,13 +15,14 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 {
     public class Stock_ReportController : Controller
     {
-        
+
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult Stock_Report_Detail()
         {
             return View("~/Areas/Admin/Views/Stock_Report/Stock_Report_Detail.cshtml");
         }
 
-
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult Inventary_Report(string Item_Type , string Report_Type)
         {
 
@@ -34,12 +35,13 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             return View("~/Areas/Admin/Views/Stock_Report/Inventary_Report.cshtml", Model);
         }
 
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult Budget_Report_Detail()
         {
             return View("~/Areas/Admin/Views/Stock_Report/Budget_Report_Detail.cshtml");
         }
 
-
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public ActionResult Post_Budget_Report(string Budget_Year, string Budget_Head, string Report_Type)
         {
             return View();
@@ -47,6 +49,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
+        [Authorize(Roles = "SU, Admin, Manager, InventoryManager, FmsEngineer, ServerEngineer")]
         public FileResult Export(string GridHtml)
         {
             using (MemoryStream stream = new System.IO.MemoryStream())
