@@ -253,7 +253,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
         public int Remove_From_Amc(string Item_Id , string UserId)
         {
-            int status = 1;
+            int status = -1;
             string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
             SqlConnection con = new SqlConnection(strcon);
             try
@@ -319,7 +319,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
 
                 SqlParameter UserId = new SqlParameter("@Create_User", data.User_Id);
-                cmd.Parameters.Add(AMC_Vendor_Id);
+                cmd.Parameters.Add(UserId);
 
 
 
@@ -443,7 +443,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
 
                 SqlParameter UserId = new SqlParameter("@Create_User", data.User_Id);
-                cmd.Parameters.Add(AMC_Vendor_Id);
+                cmd.Parameters.Add(UserId);
 
 
 

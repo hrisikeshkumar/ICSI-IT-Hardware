@@ -124,7 +124,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             int status = -1;
             try
             {
-                //data.user = HttpContext.User.Identity.Name;
+                data.User_Id = HttpContext.User.Identity.Name;
                 if (ModelState.IsValid)
                 {
                     BL_Hardware_Amc Md_Asset = new BL_Hardware_Amc();
@@ -146,7 +146,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
                 TempData["Message"] = string.Format("ShowFailure();");
             }
 
-            return RedirectToAction("Find_Warranty_Expired", "IT_Hardware_AMC", new { AssetTypes = data.Asset_Type });
+            return RedirectToAction("Amc_DashBoard", "IT_Hardware_AMC", new { AssetTypes = data.Asset_Type });
 
         }
 
@@ -178,7 +178,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.Controllers
             int status = 0;
             try
             {
-
+                mod_Data.User_Id = HttpContext.User.Identity.Name;
                 if (ModelState.IsValid)
                 {
                     BL_Hardware_Amc Md_Asset = new BL_Hardware_Amc();
