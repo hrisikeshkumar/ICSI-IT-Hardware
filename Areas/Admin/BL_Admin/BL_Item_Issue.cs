@@ -391,6 +391,8 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                     item.Transfered_Custady_Id = Convert.ToString(dr["Unique_Id"]);
                     item.Transfered_Emp_Name = Convert.ToString(dr["Emp_Name"]);
                     item.Transfered_Emp_Designation = Convert.ToString(dr["Designation_name"]);
+                    item.Transfered_Emp_Dept = Convert.ToString(dr["Dept_name"]);
+                    item.Transfered_Emp_Location = Convert.ToString(dr["Emp_Location"]);
 
                     List_Item.Add(item);
                 }
