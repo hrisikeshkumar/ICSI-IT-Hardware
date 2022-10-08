@@ -387,7 +387,6 @@
     <Content Include="Areas\Admin\Views\Stock_Report\Stock_Report_Detail.cshtml" />
     <Content Include="Areas\Admin\Views\Stock_Report\Budget_Report_Detail.cshtml" />
     <Content Include="Areas\Admin\Views\Stock_Report\Inventary_Report.cshtml" />
-    <None Include="Properties\PublishProfiles\rajaonprewebapp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -418,6 +417,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />

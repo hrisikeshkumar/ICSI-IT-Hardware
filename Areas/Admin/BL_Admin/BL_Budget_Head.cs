@@ -67,7 +67,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
 
         public int Save_Budget_data(Mod_Budget Data, string type, string Budget_Head_ID)
         {
-            int status = 1;
+            int status = -1;
             string strcon = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
             SqlConnection con = new SqlConnection(strcon);
             try
@@ -107,7 +107,6 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
                 con.Open();
 
                 status = cmd.ExecuteNonQuery();
-
 
 
             }

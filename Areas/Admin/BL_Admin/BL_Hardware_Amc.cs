@@ -129,6 +129,7 @@ namespace IT_Hardware_Aug2021.Areas.Admin.BL_Admin
             List<mod_AMC_Warranty_List> Data = new List<mod_AMC_Warranty_List>();
             try
             {
+
                 if (List_Type == "AMC")
                 {
                     List_Type = "Get_Item_in_AMC";

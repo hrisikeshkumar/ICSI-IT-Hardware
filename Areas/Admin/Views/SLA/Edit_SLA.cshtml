@@ -9,9 +9,90 @@
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
 <link href="~/CSS/Final_Submit_Button.css" rel="stylesheet" />
+
+
+
+
+<script type="text/javascript">
+    var isShift = false;
+    var seperator = "/";
+    window.onload = function () {
+        //Reference the Table.
+        var tblForm = document.getElementById("tblForm");
+
+        //Reference all INPUT elements in the Table.
+        var inputs = document.getElementsByTagName("input");
+
+        //Loop through all INPUT elements.
+        for (var i = 0; i < inputs.length; i++) {
+            //Check whether the INPUT element is TextBox.
+            if (inputs[i].type == "text") {
+                //Check whether Date Format Validation is required.
+                if (inputs[i].className.indexOf("date-format") > 0) {
+
+                    //Set Max Length.
+                    inputs[i].setAttribute("maxlength", 10);
+
+                    //Only allow Numeric Keys.
+                    inputs[i].onkeydown = function (e) {
+                        return IsNumeric(this, e.keyCode);
+                    };
+
+                    //Validate Date as User types.
+                    inputs[i].onkeyup = function (e) {
+                        ValidateDateFormat(this, e.keyCode);
+                    };
+                }
+            }
+        }
+    };
+
+    function IsNumeric(input, keyCode) {
+        if (keyCode == 16) {
+            isShift = true;
+        }
+        //Allow only Numeric Keys.
+        if (((keyCode >= 48 && keyCode <= 57) || keyCode == 8 || keyCode <= 37 || keyCode <= 39 || (keyCode >= 96 && keyCode <= 105)) && isShift == false) {
+            if ((input.value.length == 2 || input.value.length == 5) && keyCode != 8) {
+                input.value += seperator;
+            }
+
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+
+    function ValidateDateFormat(input, keyCode) {
+        var dateString = input.value;
+        if (keyCode == 16) {
+            isShift = false;
+        }
+        var regex = /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
+
+        //Check whether valid dd/MM/yyyy Date Format.
+        if (regex.test(dateString) || dateString.length == 0) {
+            ShowHideError(input, "none");
+        } else {
+            ShowHideError(input, "block");
+        }
+    };
+
+    function ShowHideError(textbox, display) {
+        var row = textbox.parentNode.parentNode;
+        var errorMsg = row.getElementsByTagName("span")[0];
+        if (errorMsg != null) {
+            errorMsg.style.display = display;
+        }
+    };
+</script>
+
+
+
+
+
 
 <script>
     $(function () {
@@ -103,8 +184,6 @@
             border-color: #1b1f2326;
             transition-duration: 0.1s;
         }
-
-
 </style>
 
 <div style=" margin-top: -50px;  text-align: center; height: 50px; align-content: center; width: 100% " class="card w-100 shadow p-3 mb-5 bg-white rounded">
@@ -124,7 +203,7 @@
             <tr>
                 <td style="width:25%; height:50px;">
                     Vendor Name
-                    @Html.HiddenFor(x=>x.SLA_Id)
+                    @Html.HiddenFor(x => x.SLA_Id)
                 </td>
                 <td style="width:75%;" colspan="3">
 
@@ -150,14 +229,14 @@
                     Service Start Date
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Service_ST_DT, new { @class = "dateclass form-rounded", @style = " width :80%; " })
+                    @Html.TextBoxFor(x => x.Service_ST_DT, new { @class = "dateclass form-rounded date-format", @style = " width :80%; " })
                 </td>
 
                 <td style="width:25%;">
                     Expiry Date
                 </td>
                 <td style="width:25%;">
-                    @Html.TextBoxFor(x => x.Expiry_DT, new { @class = "dateclass form-rounded", @style = " width :80%; " })
+                    @Html.TextBoxFor(x => x.Expiry_DT, new { @class = "dateclass form-rounded date-format", @style = " width :80%; " })
                 </td>
 
             </tr>
@@ -195,12 +274,12 @@
                                                 @Html.DisplayFor(modelItem => item.File_Name)
                                             </td>
                                             <td>
-                                                <input type='submit' value='Download' class='cssdownload btn_download' id='@item.File_Id'/>
+                                                <input type='submit' value='Download' class='cssdownload btn_download' id='@item.File_Id' />
                                             </td>
                                             <td>
-                                                <input type='submit' class='appDetails btn_delete' id='@item.File_Id' value='Delete'/> 
+                                                <input type='submit' class='appDetails btn_delete' id='@item.File_Id' value='Delete' />
                                             </td>
-                                           
+
                                         </tr>
                                     }
 
@@ -330,12 +409,12 @@
                 }
 
                 fileData.append('SLA_Id', fileRefId);
-           
+
                 $.ajax({
                     type: "POST",
                     url: "/Admin/SLA/FiliUpload",
                     datatype: "Json",
-                    data:  fileData,
+                    data: fileData,
                     contentType: false, // Not to set any content header
                     processData: false, // Not to process data
                     success: function (response) {
